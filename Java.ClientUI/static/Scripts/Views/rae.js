@@ -345,6 +345,11 @@ class ReceiptsAndExpensesJS {
      * Created by: NVMANH (22/01/2019)
      */
     beforeOpenDetail() {
+        $('.text-required').removeClass('required-border');	
+        $('.text-required').next('.error-box').remove();
+        $('.combobox').removeClass('border-red');
+        $('.mcombobox').removeClass('error-box');
+        $('.combobox').removeAttr('title');
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};
@@ -621,7 +626,7 @@ class ReceiptsAndExpensesJS {
             if (data.refNoFinance != '') {
                 $.ajax({
                     method:"post",
-                    url: MISA.Config.paymentUrl  + "/addRef",
+                    url: MISA.Config.paymentUrl + "/addRef",
                     contentType: "application/json; charset=utf-8",
                     // beforeSend:function(xhr){
                     //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));

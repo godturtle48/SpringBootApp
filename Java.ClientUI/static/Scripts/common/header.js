@@ -16,7 +16,9 @@ var headerJS = Object.create({
                 commonJS.showNotice("Tính năng này đang xây dựng");
                 break;
             case "Logout":
-                commonJS.showNotice("Tính năng này đang xây dựng");
+                // commonJS.showNotice("Tính năng này đang xây dựng");
+                localStorage.setItem("authenCookie","");
+                window.location.href="/";
                 break;
             default:
         }
