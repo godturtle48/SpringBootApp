@@ -53,20 +53,7 @@
     		<artifactId>jjwt</artifactId>
     		<version>0.6.0</version>
 		</dependency>	
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
-	<dependency>
-	    <groupId>org.hibernate</groupId>
-	    <artifactId>hibernate-search-orm</artifactId>
-	    <version>5.11.0.Final</version>
-	</dependency>
-	
-	
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-engine -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-search-engine</artifactId>
-		    <version>5.11.0.Final</version>
-		</dependency>
+
 			
 
   

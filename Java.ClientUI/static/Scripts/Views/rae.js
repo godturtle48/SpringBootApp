@@ -1,26 +1,26 @@
 
-// $(document).ready(function(){
-//     if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-//         $.ajax({
-//             method: "GET",
-//             url:MISA.Config.loginUrl+"/api/home",
-//             beforeSend: function(xhr) {
-//                   xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-//             },
-//             success: function(data, status, xhr){
-//                 $('#user-info').text((data.email).split("@")[0]);
-//                 //ajax goi company
-//             },
-//             error: function(err, stt, xhr){
-//                 window.location.href="/login.html";
-//             }
-//         })  
-//     }
-//     else{
-//         window.location.href="/login.html";
-//     }
+$(document).ready(function(){
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
+            success: function(data, status, xhr){
+                $('#user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+        window.location.href="/";
+    }
     
-// })
+})
 var fakeData = [];
 var totalRecord = 0;
 var totalPage = 0;
@@ -1160,228 +1160,38 @@ function deleteRef(){
 /*
 *filter ========================
 */
-
-// $('input[fieldname="postedDate"], input[fieldname="refDate"]').keyup(function sendData(){
-//     var columnName = $(this).attr("fieldname");
-//     var postedDatefilter = ($(this).val()).split("/");
-//     console.log(postedDatefilter);
-//     var data = JSON.stringify({"data": postedDatefilter[2] + "-" + postedDatefilter[1] + "-" + postedDatefilter[0],
-//                                 "order":"1",
-//                                 "columnName": columnName});
-//     console.log(data);
-//     if(postedDatefilter != null && postedDatefilter != ''){
-//         $.ajax({
-//             method:"post",
-//             url:MISA.Config.paymentUrl + "/filterDate",
-//             contentType: "application/json; charset=utf-8;",
-//             beforeSend: function(xhr){
-//                 xhr.setRequestHeader("keyCompany", "company1");
-//             },
-//             data: data,
-//             success: function(result) {
-//                 var payment=result;
-//                 fakeData = [];
-//                 var total = $('#inputTotalRecord').val();
-//                 for(i = 0; i < total; i++){
-//                     if(payment[i] == null) break;
-//                     fakeData.push({ID : payment[i].refID,
-//                                     PostedDate : convertDate(payment[i].postedDate),
-//                                     RefDate : convertDate(payment[i].refDate),
-//                                     RefNo : payment[i].refNoFinance,
-//                                     JournalMemo : payment[i].journalMemo,
-//                                     RefTypeName : payment[i].ref.refTypeName,
-//                                     TotalAmount : payment[i].totalAmountOC,
-//                                     AccountObjectName : payment[i].accountObjectName,
-//                                     ReasonTypeName : payment[i].journalMemo,
-//                                     CashBookPostedDate : convertDate(payment[i].createdDate),
-//                                     RefNoFiance : payment[i].refNoFinance,
-//                                     DepartmentName : payment[i].accountObjectName
-
-//                              });
-//                 }
-//                 console.log(fakeData);
-//                 raeJS.buildDataIntoTable(fakeData);
-//             }
-//         })
-//     }
-//     else{
-//         $('#btnRefresh').trigger('click');
-//     }
-// })
-
-// $('input[fieldname="totalAmount"]').keyup(function(){
-//     var columnName = $(this).attr("fieldname");
-//     var data = JSON.stringify({"data": $(this).val(),
-//                                 "order":"0",
-//                                 "columnName": columnName});
-//     console.log(data);
-//     if($(this).val() != null && $(this).val() != ''){
-//         $.ajax({
-//             method:"post",
-//             url:MISA.Config.paymentUrl + "/filterNumber",
-//             contentType: "application/json; charset=utf-8;",
-//             beforeSend: function(xhr){
-//                 xhr.setRequestHeader("keyCompany", "company2");
-//             },
-//             data: data,
-//             success: function(result) {
-//                 var payment=result;
-//                 fakeData = [];
-//                 var total = $('#inputTotalRecord').val();
-//                 for(i = 0; i < total; i++){
-//                     if(payment[i] == null) break;
-//                     fakeData.push({ID : payment[i].refID,
-//                                     PostedDate : convertDate(payment[i].postedDate),
-//                                     RefDate : convertDate(payment[i].refDate),
-//                                     RefNo : payment[i].refNoFinance,
-//                                     JournalMemo : payment[i].journalMemo,
-//                                     RefTypeName : payment[i].ref.refTypeName,
-//                                     TotalAmount : payment[i].totalAmountOC,
-//                                     AccountObjectName : payment[i].accountObjectName,
-//                                     ReasonTypeName : payment[i].journalMemo,
-//                                     CashBookPostedDate : convertDate(payment[i].createdDate),
-//                                     RefNoFiance : payment[i].refNoFinance,
-//                                     DepartmentName : payment[i].accountObjectName
-
-//                              });
-//                 }
-//                 console.log(fakeData);
-//                 raeJS.buildDataIntoTable(fakeData);
-//             }
-//         })
-//     }
-//     else{
-//         $('#btnRefresh').trigger('click');
-//     }
-// })
-
-// $('input[fieldname="refNoFinance"], input[fieldname="accountObjectName"], input[fieldname="reasonTypeID"]').keyup(function(){
-//     var columnName = $(this).attr("fieldname");
-//     var data = JSON.stringify({"data": $(this).val(),
-//                                 "order":"0",
-//                                 "columnName": columnName});
-//     console.log(data);
-//     if($(this).val() != null && $(this).val() != ''){
-//         $.ajax({
-//             method:"post",
-//             url:MISA.Config.paymentUrl + "/filterExactlyStr",
-//             contentType: "application/json; charset=utf-8;",
-//             beforeSend: function(xhr){
-//                 xhr.setRequestHeader("keyCompany", "company2");
-//             },
-//             data: data,
-//             success: function(result) {
-//                 console.log(result);
-//                 var payment=result;
-//                 fakeData = [];
-//                 var total = $('#inputTotalRecord').val();
-//                 for(i = 0; i < total; i++){
-//                     if(payment[i] == null) break;
-//                     fakeData.push({ID : payment[i].refID,
-//                                     PostedDate : convertDate(payment[i].postedDate),
-//                                     RefDate : convertDate(payment[i].refDate),
-//                                     RefNo : payment[i].refNoFinance,
-//                                     JournalMemo : payment[i].journalMemo,
-//                                     RefTypeName : payment[i].ref.refTypeName,
-//                                     TotalAmount : payment[i].totalAmountOC,
-//                                     AccountObjectName : payment[i].accountObjectName,
-//                                     ReasonTypeName : payment[i].journalMemo,
-//                                     CashBookPostedDate : convertDate(payment[i].createdDate),
-//                                     RefNoFiance : payment[i].refNoFinance,
-//                                     DepartmentName : payment[i].accountObjectName
-
-//                              });
-//                 }
-//                 console.log(fakeData);
-//                 raeJS.buildDataIntoTable(fakeData);
-//             }
-//         })
-//     }
-//     else{
-//         $('#btnRefresh').trigger('click');
-//     }
-// })
-
-// $('input[fieldname="refTypeName"]').keyup(function(){
-//     // var columnName = $(this).attr("fieldname");
-//     var data = JSON.stringify({"data": $(this).val()});
-//                                 // "order":"0",
-//                                 // "columnName": columnName});
-//     console.log(data);
-//     if($(this).val() != null && $(this).val() != ''){
-//         $.ajax({
-//             method:"post",
-//             url:MISA.Config.paymentUrl + "/filterRef",
-//             contentType: "application/json; charset=utf-8;",
-//             beforeSend: function(xhr){
-//                 xhr.setRequestHeader("keyCompany", "company2");
-//             },
-//             data: data,
-//             success: function(result) {
-//                 var payment=result;
-//                 fakeData = [];
-//                 var total = $('#inputTotalRecord').val();
-               
-//                 for(i = 0; i < total; i++){
-//                     if(payment[i] == null) break;
-//                     fakeData.push({ID : payment[i].refID,
-//                                     PostedDate : convertDate(payment[i].postedDate),
-//                                     RefDate : convertDate(payment[i].refDate),
-//                                     RefNo : payment[i].refNoFinance,
-//                                     JournalMemo : payment[i].journalMemo,
-//                                     // RefTypeName : payment[i].ref.refTypeName,
-//                                     RefTypeName: "thu",
-//                                     TotalAmount : payment[i].totalAmountOC,
-//                                     AccountObjectName : payment[i].accountObjectName,
-//                                     ReasonTypeName : payment[i].journalMemo,
-//                                     CashBookPostedDate : convertDate(payment[i].createdDate),
-//                                     RefNoFiance : payment[i].refNoFinance,
-//                                     DepartmentName : payment[i].accountObjectName
-
-//                              });
-//                 }
-//                 console.log(fakeData);
-//                 raeJS.buildDataIntoTable(fakeData);
-//             }
-//         })
-//     }
-//     else{
-//         $('#btnRefresh').trigger('click');
-//     }
-// })
-
 //filter multi input
 //byQuan
-$('input[elementtype="filterInput"]').keyup(function(){
+$('input[elementtype="filterInput"]').blur(function(){
     var dataFilter=[];
     $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
-        if($(this).val() != null && $(this).val() != ""){
-            dataFilter.push({"dataToFilter":$(this).val(), "columnName": $(this).attr("fieldname")});
-            // dataFilter += '{'+"dataToFilter:" + $(this).val() +','
-            //                 + "columnName:" + $(this).attr("fieldname") + '},';
+        if($(this).val() != ""){
+            var columnName = $(this).attr("fieldname");
+            var dataToFilter = $(this).val();
+            if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
+                var dateRevert = dataToFilter.split("/");
+                dataToFilter = dateRevert[2] + "-" + dateRevert[1] + "-" + dateRevert[0];
+            }
+            dataFilter.push({columnName: columnName, dataToFilter: dataToFilter});
         }
     })
-    // dataFilter = dataFilter.substring(0, dataFilter.length - 1);
-    // dataFilter = '[' + dataFilter + ']';
-    // console.log(dataFilter);
-    // var data = {"dataFilter":dataFilter};
-    console.log(dataFilter);
-    
-    // var data=JSON.parse(dataFilter);
-    if(dataFilter!=null){
+
+    if(dataFilter!=null && dataFilter !=""){
             $.ajax({
                     method: "post",
                     url: MISA.Config.paymentUrl + "/filter",
                     contentType:"application/json; charset:utf-8;",
+                    dataType: 'text',
                     beforeSend: function(xhr){
                         xhr.setRequestHeader("keyCompany", "company2");
                     },
                     data: JSON.stringify(dataFilter),
-                    success: function(result, status, xhr){
-                        console.log(result);
-                            var payment=result;
+                    success: function(response, status, xhr){
+                        var res = JSON.parse(response);
+                            var payment=res.result;
                             fakeData = [];
                             var total = $('#inputTotalRecord').val();
+                            $('#totalRecord').text(res.totalRecord);
                             for(i = 0; i < total; i++){
                                 if(payment[i] == null) break;
                                 fakeData.push({ID : payment[i].refID,
@@ -1399,7 +1209,6 @@ $('input[elementtype="filterInput"]').keyup(function(){
 
                                          });
                             }
-                            console.log(fakeData);
                             raeJS.buildDataIntoTable(fakeData);
 
                     },
