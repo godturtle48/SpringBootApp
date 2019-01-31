@@ -345,11 +345,6 @@ class ReceiptsAndExpensesJS {
      * Created by: NVMANH (22/01/2019)
      */
     beforeOpenDetail() {
-        $('.text-required').removeClass('required-border');	
-        $('.text-required').next('.error-box').remove();
-        $('.combobox').removeClass('border-red');
-        $('.mcombobox').removeClass('error-box');
-        $('.combobox').removeAttr('title');
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};

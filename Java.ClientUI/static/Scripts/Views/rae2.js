@@ -626,7 +626,7 @@ class ReceiptsAndExpensesJS {
             if (data.refNoFinance != '') {
                 $.ajax({
                     method:"post",
-                    url: MISA.Config.paymentUrl + "/addRef",
+                    url: MISA.Config.paymentUrl  + "/addRef",
                     contentType: "application/json; charset=utf-8",
                     // beforeSend:function(xhr){
                     //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
@@ -980,11 +980,6 @@ class ReceiptsAndExpensesJS {
     };
 
     btnCancel_OnClick(event) {
-        $('.text-required').removeClass('required-border');	
-        $('.text-required').next('.error-box').remove();
-        $('.combobox').removeClass('border-red');
-        $('.mcombobox').removeClass('error-box');
-        $('.combobox').removeAttr('title');
         this.DetailForm.Close();
     };
 
