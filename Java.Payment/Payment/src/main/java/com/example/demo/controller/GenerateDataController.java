@@ -120,7 +120,7 @@ public class GenerateDataController {
 		
 		String[]	accountObjectNames= {"C MISA","FPT","MSR","SME","DARR","DARR"};	
 		String[]	createdBys= {"Hoàng","Hà","Nam","Hiếu","Hùng","Ngọc"};	
-		List<PaymentReceipt> payments=payService.getPaymentReceiptOfCompany("company1");
+		List<PaymentReceipt> payments=payService.getPaymentReceiptOfCompany(keyCompany);
 		if(payments==null) {
 			return "fails";
 		}
