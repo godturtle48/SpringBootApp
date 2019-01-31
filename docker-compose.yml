@@ -1,0 +1,64 @@
+version: "2"
+networks: 
+ sme-network:    
+services:
+###########################################
+## MySQL: The database used by SMEAuthenAPI
+########################################### 
+  authen-db:
+    container_name: db_container
+    image: mariadb:10.4
+    networks:
+      - sme-network
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: misasme
+    volumes:
+      - /var/data/mariadb:/var/lib/mariadb
+    ports:
+    - "13306:3306"
+    - "33060:33060"
+
+
+#########################################
+################ Authent
+######################################### 
+  authent-api:
+    image: 10.0.6.27:50000/javateam/java_authent_api
+    container_name: authent_container
+    build: ./Java.Authentication/register
+    networks:
+      - sme-network
+    depends_on:
+      - authen-db
+    ports:
+      - "9001:80"
+      - "9002:8080"
+
+#########################################
+################ Payment
+######################################### 
+  payment-api:
+    image: 10.0.6.27:50000/javateam/java_payment_api
+    container_name: payment_container
+    build: ./Java.Payment/Payment
+    networks:
+      - sme-network
+    depends_on:
+      - authen-db
+    ports:
+      - "9003:80"
+      - "9004:8080"
+
+#########################################
+################ UI
+######################################### 
+  app-ui:
+    image: 10.0.6.27:50000/javateam/java_ui
+    container_name: ui_container
+    build: ./Java.ClientUI
+    ports:
+      - "9000:80"
+
+
