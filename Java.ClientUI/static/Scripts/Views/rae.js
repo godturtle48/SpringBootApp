@@ -12,12 +12,12 @@ $(document).ready(function(){
                 //ajax goi company
             },
             error: function(err, stt, xhr){
-                window.location.href="/login.html";
+                window.location.href="/";
             }
         })  
     }
     else{
-        window.location.href="/login.html";
+        window.location.href="/";
     }
     
 })
