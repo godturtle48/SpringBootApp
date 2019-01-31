@@ -33,18 +33,18 @@ public class FilterController {
 	@Autowired
 	FilterService filterService;
 
-//	@CrossOrigin	
+	@CrossOrigin	
 	@PostMapping(value="/filter")
-	public List<PaymentReceipt> Filter(@RequestBody List<FormFilter> dataFilter, HttpServletRequest httpSvlRes){
+	public Map<Object,Object> Filter(@RequestBody List<FormFilter> FormFilters, HttpServletRequest httpSvlRes){
 		String keyCompanyString = (String)httpSvlRes.getHeader("keyCompany");
-		for(FormFilter formFilter : dataFilter) {
-			System.out.println(formFilter.getColum());
-		}
-		System.out.println(dataFilter);
-		System.out.println(dataFilter.get(0));
-		
-		return filterService.filter(dataFilter);
+		Map<Object,Object> map = new HashMap<>();
+		List<PaymentReceipt> listRes = filterService.filter(FormFilters);
+		map.put("result", listRes);
+		map.put("totalRecord", listRes.size());
+		return map;
 	}
+
+
 	
 	@PostMapping(value="/filterDate")
 	public List<PaymentReceipt> filterDate(@RequestBody Map<String, String> dateData, HttpServletRequest httpSvlRes) {

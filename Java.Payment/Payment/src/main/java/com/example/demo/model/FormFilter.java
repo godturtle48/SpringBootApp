@@ -1,19 +1,20 @@
 package com.example.demo.model;
 
 public class FormFilter {
-	private String dataTofilter;
-	private String colum;
-	public String getDataTofilter() {
-		return dataTofilter;
+	private String dataToFilter;
+	private String columnName;
+	public String getDataToFilter() {
+		return dataToFilter;
 	}
-	public void setDataTofilter(String dataTofilter) {
-		this.dataTofilter = dataTofilter;
+	public void setDataToFilter(String dataToFilter) {
+		this.dataToFilter = dataToFilter;
 	}
-	public String getColum() {
-		return colum;
+	public String getColumnName() {
+		return columnName;
 	}
-	public void setColum(String colum) {
-		this.colum = colum;
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
 	}
+
 	
 }

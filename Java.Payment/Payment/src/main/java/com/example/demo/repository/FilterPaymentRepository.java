@@ -144,13 +144,77 @@ public class FilterPaymentRepository {
 		// TODO Auto-generated method stub
 		Session session = SimpleCorsFilter.sessionFactory.openSession();
 		String qrString="select * from PaymentReceipt WHERE ";
+		
+		int last = 0;
 		if(dataFilter.size() > 1) {
-			for(int i = 0; i < dataFilter.size(); i++) {
-				qrString += dataFilter.get(i).getColum() + " >= " + dataFilter.get(i).getDataTofilter() + " AND ";
+			last = dataFilter.size()-1;
+			for(int i = 0; i < dataFilter.size()-1; i++) {
+				if(dataFilter.get(i).getColumnName().equals("createdDate")
+						||dataFilter.get(i).getColumnName().equals("postedDate")
+						||dataFilter.get(i).getColumnName().equals("modifiedDate")
+						||dataFilter.get(i).getColumnName().equals("refDate")) {
+					qrString = qrString + dataFilter.get(i).getColumnName() + " >= '" + java.sql.Date.valueOf(dataFilter.get(i).getDataToFilter()) + "' AND ";
+
+				}
+				else if(dataFilter.get(i).getColumnName().equals("refNoFinance")) {
+					qrString = qrString + dataFilter.get(i).getColumnName() + " = '" + dataFilter.get(i).getDataToFilter() + "' AND ";
+
+				}
+				else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
+					qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' AND ";
+				}
+				else {
+					qrString = qrString + dataFilter.get(i).getColumnName() + " >= '" + dataFilter.get(i).getDataToFilter() + "' AND ";
+
+				}
 			}
-			qrString += dataFilter.get(dataFilter.size()-1).getColum() + " >= " + dataFilter.get(dataFilter.size()-1).getDataTofilter();
+			if(dataFilter.get(last).getColumnName().equals("createdDate")
+					||dataFilter.get(last).getColumnName().equals("postedDate")
+					||dataFilter.get(last).getColumnName().equals("modifiedDate")
+					||dataFilter.get(last).getColumnName().equals("refDate")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + java.sql.Date.valueOf(dataFilter.get(last).getDataToFilter()) + "' ";
+
+			}
+			else if(dataFilter.get(last).getColumnName().equals("refNoFinance")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " = '" + dataFilter.get(last).getDataToFilter() + "' ";
+			}
+			else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' ";
+			}
+			else {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + dataFilter.get(last).getDataToFilter() + "' ";
+
+			}
 		}
-		List<PaymentReceipt> listFilteReceipts = session.createSQLQuery(qrString).getResultList();
+		else {
+			if(dataFilter.get(last).getColumnName().equals("createdDate")
+					||dataFilter.get(last).getColumnName().equals("postedDate")
+					||dataFilter.get(last).getColumnName().equals("modifiedDate")
+					||dataFilter.get(last).getColumnName().equals("refDate")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + java.sql.Date.valueOf(dataFilter.get(last).getDataToFilter()) + "'";
+
+			}
+			else if(dataFilter.get(last).getColumnName().equals("refNoFinance")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " = '" + dataFilter.get(last).getDataToFilter() + "'";
+
+			}
+			else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' ";
+			}
+			else {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + dataFilter.get(last).getDataToFilter() + "'";
+
+			}
+		}
+		System.out.println("query: "+qrString);
+		List<PaymentReceipt> listFilteReceipts = null;
+		try {
+			listFilteReceipts = session.createSQLQuery(qrString).addEntity(PaymentReceipt.class).getResultList();
+
+		}catch(Exception e) {
+			System.out.println("typing");
+			return listFilteReceipts;
+		}
 		return listFilteReceipts;
 	}
 	
