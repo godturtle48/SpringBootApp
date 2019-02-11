@@ -3,7 +3,8 @@ package com.example.demo.controller;
 
 
 import java.sql.Date;
-import java.sql.Ref;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.InvoiceDetailService;
 import com.example.demo.Service.PaymentReceiptService;
 import com.example.demo.Service.RefTypeService;
-import com.example.demo.configAuthen.Authenticate;
 import com.example.demo.model.InvoiceDetail;
 import com.example.demo.model.PaymentReceipt;
 import com.example.demo.model.RefType;
@@ -48,11 +48,49 @@ public class GenerateDataController {
 	public String paymnet(@PathVariable String keyCompany,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		List<RefType> ref=refService.findAll();
 		Random rand=new Random();
-		String[]	accountObjectAddresss= {"CTCP MISA","tap doan FPT","CT MSR","CT MSE","CT SME","CT DARR"};	
-		String[]	accountObjectContactNames= {"misa@Gmail.com","group@Gmail.com","contact@Gmail.com","hoa@Gmail.com","manager@Gmail.com","stresy@Gmail.com"};	
+		String[] accountObjectID = {"CTY MISA", 
+									"CTY DIENLUC", 
+									"CTY HONGHA", 
+									"CTY LANTAN", 
+									"CTY LANTAN",
+									"CTY MINHHUONG",
+									"CTY PHUVINH",
+									"CTY SONGCONG",
+									"CTY THIENTAN",
+									"HNMAI"};
+		String[]	accountObjectAddresss= {"Tòa nhà Technosoft, Phố Duy Tân, Dịch Vọng Hậu, Cầu Giấy, Hà Nội", 
+											"1078 Nguyễn Trãi, Thanh Xuân, Hà Nội", 
+											"1078 Phố Huế, Hoàn Kiếm, Hà Nội", 
+											"1254 Lê Lai, Ba Đình, Hà Nội", 
+											"1251 Nguyễn Khánh Toàn, Cầu Giấy, Hà Nội",
+											"3021 Kim Mã, Ba Đình, Hà Nội",
+											"2548 Tràng Thi, Hoàn Kiếm, Hà Nội",
+											"2014 Nguyễn Văn Cừ, Long Biên, Hà Nội",
+											"2310 Láng Hạ, Đống Đa, Hà Nội",
+											"1234 Đại Cồ Việt, Hai Bà Trưng, Hà Nội"};	
+		String[]	accountObjectContactNames= {"misa@Gmail.com",
+												"group@Gmail.com",
+												"contact@Gmail.com",
+												"hoa@Gmail.com",
+												"manager@Gmail.com",
+												"stresy@Gmail.com"};
 		
-		String[]	accountObjectNames= {"C MISA","FPT","MSR","SME","DARR","DARR"};	
-		String[]	createdBys= {"Hoàng","Hà","Nam","Hiếu","Hùng","Ngọc"};	
+		String[]	accountObjectNames= {"Công ty cổ phần MISA", 
+										"Công ty điện lực Hà Nội", 
+										"Công ty TNHH Hồng Hà", 
+										"Công ty TNHH Lan Tân", 
+										"Công ty TNHH Minh Anh",
+										"Công ty TNHH Minh Hương",
+										"Công ty TNHH Phú Vinh",
+										"Công ty vận tải Sông Công",
+										"Công ty cổ phần Thiên Tân",
+										"Hoàng Ngọc Mai"};	
+		String[]	createdBys= {"Hoàng",
+								"Hà",
+								"Nam",
+								"Hiếu",
+								"Hùng",
+								"Ngọc"};	
 		//year
 		ArrayList<Integer> year = new ArrayList<Integer>();
 		year.add(2017);
@@ -71,11 +109,15 @@ public class GenerateDataController {
 		date.add(date3);
 		date.add(date4);
 		date.add(date5);
-		String[]	jornalMemoArr= {"Chi thu tiền điện","Chi phí đào tạo",
-										"Mua thiết bị mới",
-										"Lì xì Dev",
-										"Mua cà phê",
-										"Suất ăn trưa"};
+		String[]	jornalMemoArr= {"Chi thu tiền điện",
+									"Chi phí đào tạo",
+									"Mua thiết bị mới",
+									"Lì xì Dev",
+									"Mua cà phê",
+									"Suất ăn trưa",
+									"Tạm ứng cho nhân viên",
+									"Gửi tiền vào ngân hàng",
+									"Chi khác"};
 			for(int i=1;i<1000;i++) {
 				PaymentReceipt payment=new PaymentReceipt();
 				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(5)]);
@@ -115,12 +157,12 @@ public class GenerateDataController {
 		
 		
 		Random rand=new Random();
-		String[]	accountObjectAddresss= {"CTCP MISA","tap doan FPT","CT MSR","CT MSE","CT SME","CT DARR"};	
-		String[]	accountObjectContactNames= {"misa@Gmail.com","group@Gmail.com","contact@Gmail.com","hoa@Gmail.com","manager@Gmail.com","stresy@Gmail.com"};	
-		
-		String[]	accountObjectNames= {"C MISA","FPT","MSR","SME","DARR","DARR"};	
-		String[]	createdBys= {"Hoàng","Hà","Nam","Hiếu","Hùng","Ngọc"};	
+
 		List<PaymentReceipt> payments=payService.getPaymentReceiptOfCompany(keyCompany);
+		String[]	jornalMemoArr= {"Rút tiền gửi về nộp quỹ",
+									"Thu hoàn thuế GTGT",
+									"Thu hoàn ứng sau khi quyết toán tạm ứng nhân viên",
+									"Thu khác"};
 		if(payments==null) {
 			return "fails";
 		}
