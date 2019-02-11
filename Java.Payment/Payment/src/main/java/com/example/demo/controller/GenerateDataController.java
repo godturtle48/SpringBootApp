@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,8 @@ public class GenerateDataController {
 	InvoiceDetailService invoiceService;
 	@RequestMapping("/ref")
 	public String ref() {
-		RefType ref=new RefType(1,"thu");
-		RefType ref2=new RefType(2,"chi");
+		RefType ref=new RefType(1,"Thu");
+		RefType ref2=new RefType(2,"Chi");
 		refService.Save(ref);
 		refService.Save(ref2);
 		return "ref";
@@ -120,20 +121,20 @@ public class GenerateDataController {
 									"Chi khác"};
 			for(int i=1;i<1000;i++) {
 				PaymentReceipt payment=new PaymentReceipt();
-				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(5)]);
-				payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(5)]);
-				payment.setAccountObjectID("accountObjectID"+i%10);
-				payment.setAccountObjectName(accountObjectNames[rand.nextInt(5)]);
-				payment.setCreatedBy(createdBys[rand.nextInt(6)]);
-				payment.setCreatedDate(date.get(rand.nextInt(5)));
+				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(accountObjectAddresss.length)]);
+				payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
+				payment.setAccountObjectID(accountObjectID[rand.nextInt(accountObjectID.length)]);
+				payment.setAccountObjectName(accountObjectNames[rand.nextInt(accountObjectNames.length)]);
+				payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
+				payment.setCreatedDate(date.get(rand.nextInt(date.size())));
 				payment.setDocumentInclude("documentInclude"+i%100+".doc");
-				payment.setEditVersion(date.get(rand.nextInt(5)));
-				payment.setJournalMemo(jornalMemoArr[rand.nextInt(6)]);
+				payment.setEditVersion(date.get(rand.nextInt(date.size())));
+				payment.setJournalMemo(jornalMemoArr[rand.nextInt(jornalMemoArr.length)]);
 				payment.setKeyCompany(keyCompany);
-				payment.setModifiedBy(createdBys[rand.nextInt(6)]);
-				payment.setModifiedDate(date.get(rand.nextInt(5)));
-				payment.setPostedDate(date.get(rand.nextInt(5)));
-				payment.setRefDate(date.get(rand.nextInt(5)));
+				payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
+				payment.setModifiedDate(date.get(rand.nextInt(date.size())));
+				payment.setPostedDate(date.get(rand.nextInt(date.size())));
+				payment.setRefDate(date.get(rand.nextInt(date.size())));
 				payment.setRefNoFinance("CT"+i);
 				payment.setRefOrdef(i);
 				payment.setTotalAmount(Double.valueOf(0.0));
@@ -155,7 +156,7 @@ public class GenerateDataController {
 	@RequestMapping("/invoice:{keyCompany}")
 	public String invoice(@PathVariable String keyCompany,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		
-		
+		List<RefType> ref2=refService.findAll();
 		Random rand=new Random();
 
 		List<PaymentReceipt> payments=payService.getPaymentReceiptOfCompany(keyCompany);
