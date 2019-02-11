@@ -597,8 +597,8 @@ class ReceiptsAndExpensesJS {
             //        "accountObjectID": "accountObjectID5",
             //        "sortOrder": 425
             var refTypeID = this.RefType; 
-            var refTypeName = "thu";
-            if(refTypeID == 2) refTypeName = "chi";
+            var refTypeName = "Thu";
+            if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
             //test data
             var x=$('input[dataindex="RefDate"]').val();
@@ -905,8 +905,8 @@ class ReceiptsAndExpensesJS {
          //        "accountObjectID": "accountObjectID5",
          //        "sortOrder": 425
         var refTypeID = this.RefType; 
-        var refTypeName = "thu";
-        if(refTypeID == 2) refTypeName = "chi";
+        var refTypeName = "Thu";
+        if(refTypeID == 2) refTypeName = "Chi";
         var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
         //test data
         var data = {"ref":ref,
