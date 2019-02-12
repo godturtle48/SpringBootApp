@@ -224,7 +224,7 @@ class ReceiptsAndExpensesJS {
 
     initEvents() {
         $('#tblCustomerList').on('click', { scope: '#tbodyRAE tr' }, this.rowRAE_OnClick.bind());
-        $(document).on('dblclick', '#tbodyRAE tr', this.btnAdd_OnClick.bind(this));
+        $(document).on('dblclick', '#tbodyRAE tr', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
 
@@ -233,6 +233,7 @@ class ReceiptsAndExpensesJS {
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
         $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
+        //???how to know if it is expense or receipt?
         $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
