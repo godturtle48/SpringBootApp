@@ -124,6 +124,16 @@ public class GenerateDataController {
 											"Thu hoàn thuế GTGT",
 											"Thu hoàn ứng sau khi quyết toán tạm ứng nhân viên",
 											"Thu khác"};
+		String[]	descriptionArr= {"Chi thu tiền điện",
+				"Chi phí đào tạo",
+				"Mua thiết bị mới",
+				"Lì xì Dev",
+				"Mua cà phê",
+				"Suất ăn trưa",
+				"Tạm ứng cho nhân viên",
+				"Gửi tiền vào ngân hàng",
+				"Chi khác"};
+                
 			for(int i=1;i<1000;i++) {
 				PaymentReceipt payment=new PaymentReceipt();
 				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(accountObjectAddresss.length)]);
@@ -135,6 +145,7 @@ public class GenerateDataController {
 				payment.setDocumentInclude("documentInclude"+i%100+".doc");
 				payment.setEditVersion(date.get(rand.nextInt(date.size())));
 				payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
+				payment.setDescription(descriptionArr[rand.nextInt(descriptionArr.length)]);
 				payment.setKeyCompany(keyCompany);
 				payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
 				payment.setModifiedDate(date.get(rand.nextInt(date.size())));
