@@ -163,6 +163,9 @@ public class FilterPaymentRepository {
 				else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
 					qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' AND ";
 				}
+				else if(dataFilter.get(last).getColumnName().equals("reftypeID")) {
+					qrString = qrString + dataFilter.get(i).getColumnName() + " = " + dataFilter.get(i).getDataToFilter() + " AND ";
+				}
 				else {
 					qrString = qrString + dataFilter.get(i).getColumnName() + " >= '" + dataFilter.get(i).getDataToFilter() + "' AND ";
 
@@ -181,9 +184,11 @@ public class FilterPaymentRepository {
 			else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
 				qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' ";
 			}
+			else if(dataFilter.get(last).getColumnName().equals("reftypeID")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " = " + dataFilter.get(last).getDataToFilter();
+			}
 			else {
 				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + dataFilter.get(last).getDataToFilter() + "' ";
-
 			}
 		}
 		else {
@@ -200,6 +205,9 @@ public class FilterPaymentRepository {
 			}
 			else if(dataFilter.get(last).getColumnName().equals("journalMemo")) {
 				qrString = qrString + dataFilter.get(last).getColumnName() + " LIKE BINARY '%" + dataFilter.get(last).getDataToFilter() + "%' ";
+			}
+			else if(dataFilter.get(last).getColumnName().equals("reftypeID")) {
+				qrString = qrString + dataFilter.get(last).getColumnName() + " = " + dataFilter.get(last).getDataToFilter();
 			}
 			else {
 				qrString = qrString + dataFilter.get(last).getColumnName() + " >= '" + dataFilter.get(last).getDataToFilter() + "'";

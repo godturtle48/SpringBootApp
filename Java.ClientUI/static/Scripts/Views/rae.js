@@ -8,7 +8,7 @@ $(document).ready(function(){
                   xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
             },
             success: function(data, status, xhr){
-                $('#user-info').text((data.email).split("@")[0]);
+                $('.user-info').text((data.email).split("@")[0]);
                 //ajax goi company
             },
             error: function(err, stt, xhr){
@@ -1175,10 +1175,14 @@ $('input[elementtype="filterInput"]').blur(function(){
                 var dateRevert = dataToFilter.split("/");
                 dataToFilter = dateRevert[2] + "-" + dateRevert[1] + "-" + dateRevert[0];
             }
+            else if(columnName == "refTypeName"){
+                columnName = "reftypeID";
+                dataToFilter = (dataToFilter == "thu") ? 1 : 2;
+            }
             dataFilter.push({columnName: columnName, dataToFilter: dataToFilter});
         }
     })
-
+    console.log(dataFilter);
     if(dataFilter!=null && dataFilter !=""){
             $.ajax({
                     method: "post",
