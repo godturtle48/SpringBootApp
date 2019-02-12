@@ -43,22 +43,23 @@ public class GenerateDataController {
 		refService.Save(ref2);
 		return "ref";
 	}
-
+	static int randNumber;
+	static String[] accountObjectID = {"CTY MISA", 
+										"CTY DIENLUC", 
+										"CTY HONGHA", 
+										"CTY LANTAN", 
+										"CTY LANTAN",
+										"CTY MINHHUONG",
+										"CTY PHUVINH",
+										"CTY SONGCONG",
+										"CTY THIENTAN",
+										"HNMAI"};
 	
 	@RequestMapping("/payment:{keyCompany}")
 	public String paymnet(@PathVariable String keyCompany,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		List<RefType> ref=refService.findAll();
 		Random rand=new Random();
-		String[] accountObjectID = {"CTY MISA", 
-									"CTY DIENLUC", 
-									"CTY HONGHA", 
-									"CTY LANTAN", 
-									"CTY LANTAN",
-									"CTY MINHHUONG",
-									"CTY PHUVINH",
-									"CTY SONGCONG",
-									"CTY THIENTAN",
-									"HNMAI"};
+		
 		String[]	accountObjectAddresss= {"Tòa nhà Technosoft, Phố Duy Tân, Dịch Vọng Hậu, Cầu Giấy, Hà Nội", 
 											"1078 Nguyễn Trãi, Thanh Xuân, Hà Nội", 
 											"1078 Phố Huế, Hoàn Kiếm, Hà Nội", 
@@ -110,7 +111,7 @@ public class GenerateDataController {
 		date.add(date3);
 		date.add(date4);
 		date.add(date5);
-		String[]	jornalMemoArr= {"Chi thu tiền điện",
+		String[]	jornalMemoArrPayment= {"Chi thu tiền điện",
 									"Chi phí đào tạo",
 									"Mua thiết bị mới",
 									"Lì xì Dev",
@@ -119,17 +120,21 @@ public class GenerateDataController {
 									"Tạm ứng cho nhân viên",
 									"Gửi tiền vào ngân hàng",
 									"Chi khác"};
+		String[]	jornalMemoArrReceipt= {"Rút tiền gửi về nộp quỹ",
+											"Thu hoàn thuế GTGT",
+											"Thu hoàn ứng sau khi quyết toán tạm ứng nhân viên",
+											"Thu khác"};
 			for(int i=1;i<1000;i++) {
 				PaymentReceipt payment=new PaymentReceipt();
 				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(accountObjectAddresss.length)]);
 				payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
-				payment.setAccountObjectID(accountObjectID[rand.nextInt(accountObjectID.length)]);
+				payment.setAccountObjectID(GenerateDataController.accountObjectID[rand.nextInt(GenerateDataController.accountObjectID.length)]);
 				payment.setAccountObjectName(accountObjectNames[rand.nextInt(accountObjectNames.length)]);
 				payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
 				payment.setCreatedDate(date.get(rand.nextInt(date.size())));
 				payment.setDocumentInclude("documentInclude"+i%100+".doc");
 				payment.setEditVersion(date.get(rand.nextInt(date.size())));
-				payment.setJournalMemo(jornalMemoArr[rand.nextInt(jornalMemoArr.length)]);
+				payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
 				payment.setKeyCompany(keyCompany);
 				payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
 				payment.setModifiedDate(date.get(rand.nextInt(date.size())));
@@ -156,20 +161,16 @@ public class GenerateDataController {
 	@RequestMapping("/invoice:{keyCompany}")
 	public String invoice(@PathVariable String keyCompany,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		
-		List<RefType> ref2=refService.findAll();
 		Random rand=new Random();
 
 		List<PaymentReceipt> payments=payService.getPaymentReceiptOfCompany(keyCompany);
-		String[]	jornalMemoArr= {"Rút tiền gửi về nộp quỹ",
-									"Thu hoàn thuế GTGT",
-									"Thu hoàn ứng sau khi quyết toán tạm ứng nhân viên",
-									"Thu khác"};
+	
 		if(payments==null) {
 			return "fails";
 		}
 		for(int i=0;i<1000;i++) {
 			InvoiceDetail invoice=new InvoiceDetail();
-			invoice.setAccountObjectID("accountObjectID"+i%10);
+			invoice.setAccountObjectID(GenerateDataController.accountObjectID[rand.nextInt(GenerateDataController.accountObjectID.length)]);
 			invoice.setAmount(Double.valueOf(1000+i/100));
 			invoice.setAmountOC(Double.valueOf(1000+i/1000));
 			invoice.setDiscription("Trả lương nhân viên tháng"+(i%12+1));

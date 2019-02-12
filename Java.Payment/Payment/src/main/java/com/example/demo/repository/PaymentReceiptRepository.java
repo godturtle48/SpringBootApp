@@ -61,7 +61,7 @@ public class PaymentReceiptRepository {
 		List<PaymentReceipt> lst=new ArrayList<>();
 		try {
 //			 tx = session.beginTransaction();
-			String sql = "SELECT * FROM paymentreceipt WHERE refTypeID = :refTypeID";
+			String sql = "SELECT * FROM PaymentReceipt WHERE refTypeID = :refTypeID";
 			lst= session.createSQLQuery(sql).addEntity(PaymentReceipt.class).setParameter("refTypeID", refTypeID).getResultList();
 			//tx.commit();
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class PaymentReceiptRepository {
 		List<PaymentReceipt> lst=new ArrayList<>();
 		try {
 //			 tx = session.beginTransaction();
-			String sql = "SELECT * FROM paymentreceipt WHERE keyCompany = :keyCompany";
+			String sql = "SELECT * FROM PaymentReceipt WHERE keyCompany = :keyCompany";
 			lst= session.createSQLQuery(sql).addEntity(PaymentReceipt.class).setParameter("keyCompany", keyCompany).getResultList();
 			//tx.commit();
 		} catch (Exception e) {
