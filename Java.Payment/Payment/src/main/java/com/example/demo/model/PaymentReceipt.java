@@ -88,6 +88,8 @@ public class PaymentReceipt {
 //	 @Field(name="journalMemo",index=org.hibernate.search.annotations.Index.YES, analyze=Analyze.NO, store=Store.YES)
 	@Column(name="journalMemo")
 	private String journalMemo;
+	@Column(name="description")
+	private String description;
 	private String documentInclude;
 	private Double exchangeRate;
 	
@@ -194,6 +196,13 @@ public class PaymentReceipt {
 	}
 	public void setJournalMemo(String journalMemo) {
 		this.journalMemo = journalMemo;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getDocumentInclude() {
 		return documentInclude;
