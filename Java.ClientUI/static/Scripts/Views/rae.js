@@ -585,11 +585,6 @@ class ReceiptsAndExpensesJS {
      * thay đổi giao diện form trước khi mở
      */
     detailFormOnBeforeOpen(args) {
-        // debugger;
-        // if (args[0].data.refType !== undefined) {
-        //     var refType = args[0].data.refType;
-        //     this.RefType = refType;
-        // }
         if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
@@ -636,11 +631,8 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
-
-        //che độ them
+        /// Editing Mode
         if(this.editMode ==1){
-            // console.log(refType);
-            // alert('btnSave_OnClick');
             var invoices = [];
             $('#tbodyRAEDetail-popup').find('tr').each(function(){
                 invoices.push({
@@ -661,27 +653,26 @@ class ReceiptsAndExpensesJS {
             var refTypeName = "Thu";
             if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-            //test data
-            var x=$('input[dataindex="RefDate"]').val();
+            let dateNow = new Date($.now()); //get current time for modifiedDate
             var data = {"ref":ref,
                 "invoices":invoices,
-                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),
-                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),
-                "refNoFinance": $('input[dataindex="RefNo"]').val(),
-                "accountObjectID": $('#txtAccountObjectCode').val(),
-                "accountObjectName": $('#txtAccountObjectName').val(),
-                "accountObjectAddress": $('#txtAddress').val(),
-                "accountObjectContactName": $('#txtContactName').val(),
-                "reasonTypeID": $('#txtReason').val(),
-                "journalMemo": $('#txtReasonName').val(),
-                "documentInclude": "documentInclude3.doc",
-                "exchangeRate": null,
-                "editVersion": new Date(),
-                "refOrdef": totalRecord + 1,
-                "createdDate": new Date(),
-                "createdBy": "Chu Hải Nam",
-                "modifiedDate":new Date(),
-                "modifiedBy": "Nguyễn Đình Quân"
+                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
+                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
+                "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
+                "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
+                "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
+                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh
+                "accountObjectContactName": $('#txtContactName').val(),                         //Người nộp/nhận
+                "reasonTypeID": $('#txtReason').val(),                                          //ID lý do
+                "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
+                "documentInclude": "documentInclude3.doc",                                  //useless?
+                "exchangeRate": null,                                                       //useless?
+                "editVersion": "version" + dateNow,                                         //useless?
+                "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
+                "createdDate": new Date(),                                                  //useless?
+                "createdBy": "created Person",                                              //useless?
+                "modifiedDate": dateNow,                                                        //modifiedDate for sorting record
+                "modifiedBy": "modified Person"                                             //useless?
             };
             console.log(data);
             if (data.refNoFinance != '') {
@@ -695,7 +686,7 @@ class ReceiptsAndExpensesJS {
                     data: JSON.stringify(data),
                     success: function(result, txtStatus, xhr){
                         console.log(result);
-                        //prepend master
+                        ////// prepend latest added record to master ---------- PROBLEM: must be refreshed
                         if(!result.error){
                             $('#tbodyRAE').prepend(
                                 '<tr indexref="" class="">'
@@ -969,27 +960,27 @@ class ReceiptsAndExpensesJS {
         var refTypeName = "Thu";
         if(refTypeID == 2) refTypeName = "Chi";
         var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-        //test data
-        var data = {"ref":ref,
-           "invoices":invoices,
-           "refDate":convertDateToAdd($('input[dataindex="RefDate"]').val()),
-           "postedDate":convertDateToAdd($('input[dataindex="PostedDate"]').val()),
-           "refNoFinance": $('input[dataindex="RefNo"]').val(),
-           "accountObjectID": $('#txtAccountObjectCode').val(),
-           "accountObjectName": $('#txtAccountObjectName').val(),
-           "accountObjectAddress": $('#txtAddress').val(),
-           "accountObjectContactName": $('#txtContactName').val(),
-           "reasonTypeID": $('#txtReason').val(),
-           "journalMemo": $('#txtReasonName').val(),
-           "documentInclude": "documentInclude3.doc",
-           "exchangeRate": null,
-           "editVersion": new Date(),
-           "refOrdef": totalRecord + 1,
-           "createdDate": new Date(),
-           "createdBy": "Trần Thị Huyền",
-           "modifiedDate":new Date(),
-           "modifiedBy": "Nguyễn Đình Quân"
-        };
+        let dateNow = new Date($.now()); //get current time for modifiedDate
+            var data = {"ref":ref,
+                "invoices":invoices,
+                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
+                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
+                "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
+                "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
+                "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
+                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh
+                "accountObjectContactName": $('#txtContactName').val(),                         //Người nộp/nhận
+                "reasonTypeID": $('#txtReason').val(),                                          //ID lý do
+                "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
+                "documentInclude": "documentInclude3.doc",                                  //useless?
+                "exchangeRate": null,                                                       //useless?
+                "editVersion": "version" + dateNow,                                         //useless?
+                "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
+                "createdDate": new Date(),                                                  //useless?
+                "createdBy": "created Person",                                              //useless?
+                "modifiedDate": dateNow,                                                        //modifiedDate for sorting record
+                "modifiedBy": "modified Person"                                             //useless?
+            };
         $.ajax({
             method:"post",
             url: MISA.Config.paymentUrl + "/addRef",
@@ -1071,7 +1062,6 @@ class ReceiptsAndExpensesJS {
         } else {
             this.RefType = 2;
         }
-        debugger;
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
@@ -1313,7 +1303,6 @@ $('input[elementtype="filterInput"]').blur(function(){
         var number = $(this).html();
        $("#inputTotalRecord").val(number);
        $("#inputTotalRecord").val(number+"");
-       debugger;
        getPageHome();
        raeJS.buildDataIntoTable(fakeData);
     })
@@ -1351,7 +1340,6 @@ $('input[elementtype="filterInput"]').blur(function(){
         if(+recentPage < +totalPage){
             $('#currentPage').val(Number(recentPage)+Number(1));
             getPage();
-            debugger;
             raeJS.buildDataIntoTable(fakeData);
             checkTbar();
         }
