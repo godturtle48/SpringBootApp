@@ -30,7 +30,14 @@ var indexInvoiceGlobal=0;
 //invoicesGlobal chứa dữ liệu của server
 var invoicesGlobal=[];
 var RefUpdate={};
+
+
 /////////////
+/*
+    showDetail()
+    This function show Detail box for add, edit, duplicate Expense or Receipt Ref
+*/
+
 var showDetail=function(){
     var RAEDetail=[];
     //vị trí bản ghi trong sessionStorage
@@ -81,7 +88,10 @@ var showDetail=function(){
     });
 }
 
-///////////////=================
+/*
+    getPageHome()
+    This function is for Paging 25 50 100
+*/
 
 var getPageHome = function() {
     // code ajax
@@ -154,6 +164,12 @@ var getPageHome = function() {
 		}
 	})
 }
+
+/*
+    getPage()
+    This function is for Paging from users input
+*/
+
 var getPage = function() {
 	totalPage = 0;
 	// code ajax
@@ -205,6 +221,12 @@ var getPage = function() {
 	})
 }
 
+/**
+ *  //editMode = 1 : Adding Mode (clear detail table)
+    //editMode = 2 : Editing Mode (send request to get data and build form)
+    //editMode = 3 : Duplicating Mode
+    //RefType = 1 Receipt ,= 2 Expense
+ */
 
 class ReceiptsAndExpensesJS {
     constructor() {
@@ -233,7 +255,7 @@ class ReceiptsAndExpensesJS {
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
         $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
-        $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
+        $('#btnEdit').on('click', { }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
@@ -244,7 +266,7 @@ class ReceiptsAndExpensesJS {
         
     };
 
-/*
+    /*
      * Thực hiện load page
      * Created by: TTHuyen (26/01/2019)
      */
@@ -259,6 +281,8 @@ class ReceiptsAndExpensesJS {
             this.buildDataIntoTable(fakeData);
         }
     }
+
+
     /*
      * Thực hiện load dữ liệu màn hình danh sách.
      * Created by: NVMANH (22/01/2019)
@@ -283,7 +307,7 @@ class ReceiptsAndExpensesJS {
         })
         data.forEach(function (item, index) {
             var htmlItem = [];
-            htmlItem.push('<tr indexRef=' + index + ' class="{0}">'.format(index % 2 === 0 ? '' : 'row-highlight'));
+            htmlItem.push('<tr indexRef="{0}" class="{1}" refTypeName={2}  >'.format(index, index % 2 === 0 ? '' : 'row-highlight', item.RefTypeName));
             fieldData.forEach(function (valueField, indexField) {
                 if (indexField === 7 || indexField === 1) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-center"));
                 else if (indexField === 4) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-right"));
@@ -523,6 +547,7 @@ class ReceiptsAndExpensesJS {
 
 
     // Chọn 1 bản ghi trong danh sách:
+    // show loading effect in Detail box
     rowRAE_OnClick() {
         commonJS.showMask($('.frmCustomerDetail .rae-detail-box'));
         setTimeout(function () {
@@ -535,15 +560,12 @@ class ReceiptsAndExpensesJS {
 
     /*
      * Event double click a row in tbodyRAE  ---- Viewing Mode
-     */
+    */
 
-     //editMode = 1 : Adding Mode (clear detail table)
-     //editMode = 2: Editing Mode (send request to get data and build form)
-     //RefType = 1 Receipt = 2 Expense
      rowRAE_OnDblClick() {
         this.editMode = 2;
         //identify receipt or expense
-        if ($('.rowSelected').attr('refType') == 1) {
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
             this.RefType = 1;
         } else {
             this.RefType = 2;
@@ -551,11 +573,11 @@ class ReceiptsAndExpensesJS {
         this.detailFormOnBeforeOpen(arguments);
         $('#btnSave').attr('disabled', true);
         $('#frmRAEDetail input').attr('disabled', true);
-        $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail #addtr').attr('disabled', true);
         $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
         $('.combobox-arrow-select').hide();
         this.DetailForm.Show();
+        $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail .detail-info input').attr('disabled', true);
     };
 
@@ -563,18 +585,21 @@ class ReceiptsAndExpensesJS {
      * thay đổi giao diện form trước khi mở
      */
     detailFormOnBeforeOpen(args) {
-        if (args[0].data.refType !== undefined) {
-            var refType = args[0].data.refType;
-            this.RefType = refType;
-        }
+        // debugger;
+        // if (args[0].data.refType !== undefined) {
+        //     var refType = args[0].data.refType;
+        //     this.RefType = refType;
+        // }
         if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
             $('#lblReason').text('Lý do thu');
+            $('#lblAccountObjectContactName').text('Người nộp');
             $('#lblEmployee').text('Nhân viên thu');
         } else {
             $("span.ui-dialog-title").text('Phiếu chi');
             $('.title-form-detail').text('Phiếu chi');
+            $('#lblAccountObjectContactName').text('Người nhận');
             $('#lblReason').text('Lý do chi');
             $('#lblEmployee').text('Nhân viên chi');
         }
@@ -595,6 +620,11 @@ class ReceiptsAndExpensesJS {
 
     btnEdit_OnClick() {
         this.editMode = 2;
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
+            this.RefType = 1;
+        } else {
+            this.RefType = 2;
+        }
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
@@ -1036,10 +1066,16 @@ class ReceiptsAndExpensesJS {
     btnDuplicate_OnClick(event){
         //editMode=3 chế độ  duplicate
         this.editMode = 3;
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
+            this.RefType = 1;
+        } else {
+            this.RefType = 2;
+        }
+        debugger;
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-    //  this.detailFormOnBeforeOpen(arguments);
+        this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
     } 
     /* -------------------------------------------------------------------
@@ -1080,6 +1116,7 @@ class ReceiptsAndExpensesJS {
         $('#frmRAEDetail input').val(null);
         $('button[disabled="disabled"]').removeAttr('disabled');
         $('#frmRAEDetail input').removeAttr('disabled');
+        $('button[role="removeInvoice"]').attr('disabled', false);
         $('.text-required').removeClass('required-border');	
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
