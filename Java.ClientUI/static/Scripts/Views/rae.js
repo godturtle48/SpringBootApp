@@ -227,7 +227,6 @@ class ReceiptsAndExpensesJS {
         $(document).on('dblclick', '#tbodyRAE tr', this.btnAdd_OnClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
-
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
@@ -237,7 +236,7 @@ class ReceiptsAndExpensesJS {
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
-        
+        $('#btnPause').on('click', this.btnPause_OnClick.bind(this));
         $('#tbarRefresh').on('click', this.tbarRefresh_OnClick.bind(this));
         $('#currentPage').on('keyup', this.currentPage_OnChange.bind(this));
         // $('.record-select-item').on('click', this.size_OnChange.bind(this));
@@ -991,7 +990,13 @@ class ReceiptsAndExpensesJS {
     btnHelp_OnClick(event) {
         alert('btnHelp_OnClick');
     };
-
+    /* -------------------------------------------------------------------
+     * Nhấn button Hoãn
+     * Created by: NVLAM (14/02/2018)
+     */
+    btnPause_OnClick(event) {
+        this.DetailForm.Close();
+    }
     btnRefresh_OnClick(event){
         fakeData = [];
         getPageHome();
