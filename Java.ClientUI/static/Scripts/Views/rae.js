@@ -90,7 +90,8 @@ var showDetail=function(){
 
 /*
     getPageHome()
-    This function is for Paging 25 50 100
+    This function is for Home Paging 25 50 100
+    //Hàm láy trả về size bản ghi đầu tiên và tổng số bản ghi có
 */
 
 var getPageHome = function() {
@@ -167,7 +168,7 @@ var getPageHome = function() {
 
 /*
     getPage()
-    This function is for Paging from users input
+    This function is for Paging from users input or button next page
 */
 
 var getPage = function() {
@@ -221,7 +222,7 @@ var getPage = function() {
 	})
 }
 
-/**
+/** Notes:
  *  //editMode = 1 : Adding Mode (clear detail table)
     //editMode = 2 : Editing Mode (send request to get data and build form)
     //editMode = 3 : Duplicating Mode
@@ -356,7 +357,6 @@ class ReceiptsAndExpensesJS {
             })
             htmlItem.push('</tr>');
             table.prepend(htmlItem.join(""));
-
         });
 
         // Chọn dòng đầu tiên:
@@ -374,6 +374,7 @@ class ReceiptsAndExpensesJS {
         $('.combobox').removeClass('border-red');
         $('.mcombobox').removeClass('error-box');
         $('.combobox').removeAttr('title');
+        debugger;
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};
@@ -391,21 +392,21 @@ class ReceiptsAndExpensesJS {
                 AccountObjectNumber: raeRef.accountObjectID,
                 AccountObjectCode: raeRef.accountObjectID,
                 AccountObjectName: raeRef.accountObjectName,
-                AccountObjectType: 2,
-                Address: raeRef.accountObjectName,
-                ContactName: "Phạm Văn Thịnh",
-                ReasonID: 1,
-                RefType: 1,
+                AccountObjectType: 2,                       //??
+                Address: raeRef.accountObjectAddress,          
+                ContactName: raeRef.accountObjectContactName,
+                ReasonID: 1,                                //??
+                RefType: raeRef.ref.refTypeID,
                 ReasonName: raeRef.journalMemo,
-                Description: "Rút tiền gửi về nộp quỹ",
-                EmployeeName:raeRef.modifiedBy,
+                Description: raeRef.invoices.discription,
+                EmployeeName:raeRef.modifiedBy,             //??
                 PostedDate: convertDate(raeRef.postedDate),
                 RefDate: convertDate(raeRef.refDate),
                 RefNo: raeRef.refNoFinance,
-
+                // modifiedDate: raeRef.modifiedDate
             }
             
-            // Bind thông tin dữ liệu master:
+            // Bind thông tin dữ liệu master (for editing mode)
             var dataIndexs = $('input[dataindex]');
             if (dataIndexs && dataIndexs.length > 0) {
                 $.each(dataIndexs, function (index, item) {
@@ -418,7 +419,7 @@ class ReceiptsAndExpensesJS {
                     }
                 });
             }
-        // Bind thông tin dữ liệu detail:
+        // Bind thông tin dữ liệu detail (for editing mode)
         var invoices=raeRef.invoices;
         indexInvoiceGlobal=0;
         if(invoices==null){
@@ -426,19 +427,20 @@ class ReceiptsAndExpensesJS {
             return;
         }
         invoicesGlobal=invoices;
+        //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
         invoices.forEach(function(invoice,index){
             var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
                         <td style="display:inline-flex;">
                             <button role="removeInvoice" class="btn btn-danger">x</button>
-                            <input fileDataInvoice="journalMemo" value="${raeRef.journalMemo}">
+                            <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
-                        <td><input fileDataInvoice=""  value="3221"></td>
-                        <td><input fileDataInvoice="" value="1112"></td>
+                        <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                        <td><input fileDataInvoice="" value="${invoice.amount}"></td>
                         <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value=""></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectID}"></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectName}"></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectAddress}"></td>
+                        <td><input fileDataInvoice="" value="Mã thống kê (updating...)"></td>
                         </tr>`;
             $('#tbodyRAEDetail-popup').append(div);
             $('button[role="removeInvoice"]').on('click', function(){
@@ -653,7 +655,7 @@ class ReceiptsAndExpensesJS {
             var refTypeName = "Thu";
             if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-            let dateNow = new Date($.now()); //get current time for modifiedDate
+            debugger;
             var data = {"ref":ref,
                 "invoices":invoices,
                 "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
@@ -661,17 +663,17 @@ class ReceiptsAndExpensesJS {
                 "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
                 "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
                 "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
-                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh
+                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh    (địa chỉ)
                 "accountObjectContactName": $('#txtContactName').val(),                         //Người nộp/nhận
                 "reasonTypeID": $('#txtReason').val(),                                          //ID lý do
                 "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
                 "documentInclude": "documentInclude3.doc",                                  //useless?
                 "exchangeRate": null,                                                       //useless?
-                "editVersion": "version" + dateNow,                                         //useless?
+                "editVersion": new Date(),                                         //useless?
                 "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
                 "createdDate": new Date(),                                                  //useless?
                 "createdBy": "created Person",                                              //useless?
-                "modifiedDate": dateNow,                                                        //modifiedDate for sorting record
+                "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
                 "modifiedBy": "modified Person"                                             //useless?
             };
             console.log(data);
@@ -732,7 +734,7 @@ class ReceiptsAndExpensesJS {
                 $('.text-required').trigger('blur');
                 commonJS.showFailMsg("Thêm hóa đơn không thành công");
             }
-        }else if(this.editMode ==2){
+        }else if(this.editMode == 2){                 ///////btnSave for edit
             //che do sửa
             //xet du  lieu tu bien chua invoicesGlobal
             //invoicesData dữ liệu đc gửi lên
@@ -787,8 +789,7 @@ class ReceiptsAndExpensesJS {
                 return;
             }
 
-
-    
+            ///////////////Assign new data
             RefUpdate.refDate=convertDateToAdd($('input[dataindex="RefDate"]').val());
             RefUpdate.postedDate= convertDateToAdd($('input[dataindex="PostedDate"]').val());
             RefUpdate.refNoFinance= $('input[dataindex="RefNo"]').val();
@@ -801,8 +802,7 @@ class ReceiptsAndExpensesJS {
             RefUpdate.editVersion=new Date();
             RefUpdate.modifiedDate=new Date();
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
-            RefUpdate.invoices=invoicesData;
-          
+            RefUpdate.invoices=invoicesData;       
         
 
             $.ajax({
@@ -828,7 +828,7 @@ class ReceiptsAndExpensesJS {
                     commonJS.showFailMsg("Sửa hóa đơn không thành công");
                 }
             })
-        }else if(this.editMode ==3){
+        }else if(this.editMode ==3){                ///////btnSave for duplicate
             var invoicesData=[]; 
             var sortOrder=0;
             if(RefUpdate==null){
@@ -878,6 +878,8 @@ class ReceiptsAndExpensesJS {
                 commonJS.showFailMsg("Không được bỏ trống");
                 return;
             }
+
+            ///////////////Assign new data
             RefUpdate.refID="";
             RefUpdate.refDate=convertDateToAdd($('input[dataindex="RefDate"]').val());
             RefUpdate.postedDate= convertDateToAdd($('input[dataindex="PostedDate"]').val());
@@ -895,7 +897,6 @@ class ReceiptsAndExpensesJS {
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
             RefUpdate.invoices=invoicesData;
           
-
             $.ajax({
                 method:"post",
                 url: MISA.Config.paymentUrl + "/addRef",
@@ -960,7 +961,6 @@ class ReceiptsAndExpensesJS {
         var refTypeName = "Thu";
         if(refTypeID == 2) refTypeName = "Chi";
         var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-        let dateNow = new Date($.now()); //get current time for modifiedDate
             var data = {"ref":ref,
                 "invoices":invoices,
                 "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
@@ -974,11 +974,11 @@ class ReceiptsAndExpensesJS {
                 "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
                 "documentInclude": "documentInclude3.doc",                                  //useless?
                 "exchangeRate": null,                                                       //useless?
-                "editVersion": "version" + dateNow,                                         //useless?
+                "editVersion": new Date(),                                         //useless?
                 "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
                 "createdDate": new Date(),                                                  //useless?
                 "createdBy": "created Person",                                              //useless?
-                "modifiedDate": dateNow,                                                        //modifiedDate for sorting record
+                "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
                 "modifiedBy": "modified Person"                                             //useless?
             };
         $.ajax({
