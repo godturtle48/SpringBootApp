@@ -224,7 +224,7 @@ class ReceiptsAndExpensesJS {
 
     initEvents() {
         $('#tblCustomerList').on('click', { scope: '#tbodyRAE tr' }, this.rowRAE_OnClick.bind());
-        $(document).on('dblclick', '#tbodyRAE tr', this.btnAdd_OnClick.bind(this));
+        $(document).on('dblclick', '#tbodyRAE tr', {},  this.rowRAE_OnDblClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
 
@@ -533,10 +533,41 @@ class ReceiptsAndExpensesJS {
         }, 300)
     };
 
+    /*
+     * Event double click a row in tbodyRAE  ---- Viewing Mode
+     */
+
+     //editMode = 1 : Adding Mode (clear detail table)
+     //editMode = 2: Editing Mode (send request to get data and build form)
+     //RefType = 1 Receipt = 2 Expense
+     rowRAE_OnDblClick() {
+        this.editMode = 2;
+        //identify receipt or expense
+        if ($('.rowSelected').attr('refType') == 1) {
+            this.RefType = 1;
+        } else {
+            this.RefType = 2;
+        }
+        this.detailFormOnBeforeOpen(arguments);
+        $('#btnSave').attr('disabled', true);
+        $('#frmRAEDetail input').attr('disabled', true);
+        $('button[role="removeInvoice"]').attr('disabled', true);
+        $('#frmRAEDetail #addtr').attr('disabled', true);
+        $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
+        $('.combobox-arrow-select').hide();
+        this.DetailForm.Show();
+        $('#frmRAEDetail .detail-info input').attr('disabled', true);
+    };
+
+    /*
+     * thay đổi giao diện form trước khi mở
+     */
     detailFormOnBeforeOpen(args) {
-        var refType = args[0].data.refType;
-        this.RefType = refType;
-        if (refType == enumeration.RefType.Receipt) {
+        if (args[0].data.refType !== undefined) {
+            var refType = args[0].data.refType;
+            this.RefType = refType;
+        }
+        if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
             $('#lblReason').text('Lý do thu');
@@ -1047,8 +1078,12 @@ class ReceiptsAndExpensesJS {
     };
     beforeCloseDialog() {
         $('#frmRAEDetail input').val(null);
+        $('button[disabled="disabled"]').removeAttr('disabled');
+        $('#frmRAEDetail input').removeAttr('disabled');
         $('.text-required').removeClass('required-border');	
-		$('.text-required').next('.error-box').remove();
+        $('.text-required').removeClass('required-border');	
+        $('.text-required').next('.error-box').remove();
+        $('.combobox-arrow-select').show();
     }
 }
 
