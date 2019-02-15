@@ -1,26 +1,26 @@
 
-$(document).ready(function(){
-    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-        $.ajax({
-            method: "GET",
-            url:MISA.Config.loginUrl+"/api/home",
-            beforeSend: function(xhr) {
-                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-            },
-            success: function(data, status, xhr){
-                $('.user-info').text((data.email).split("@")[0]);
-                //ajax goi company
-            },
-            error: function(err, stt, xhr){
-                window.location.href="/";
-            }
-        })  
-    }
-    else{
-        window.location.href="/";
-    }
+// $(document).ready(function(){
+//     if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+//         $.ajax({
+//             method: "GET",
+//             url:MISA.Config.loginUrl+"/api/home",
+//             beforeSend: function(xhr) {
+//                   xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+//             },
+//             success: function(data, status, xhr){
+//                 $('.user-info').text((data.email).split("@")[0]);
+//                 //ajax goi company
+//             },
+//             error: function(err, stt, xhr){
+//                 window.location.href="/";
+//             }
+//         })  
+//     }
+//     else{
+//         window.location.href="/";
+//     }
     
-})
+// })
 var fakeData = [];
 var totalRecord = 0;
 var totalPage = 0;
@@ -588,6 +588,13 @@ class ReceiptsAndExpensesJS {
         $('#tbodyRAEDetail-popup').empty();
         $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+        $.ajax({
+            method:"get",
+            url: MISA.Config.paymentUrl + "/getRefNoFinance",
+            success: function(data){
+                $('input[dataindex="RefNo"]').val(data);            
+            }
+        });
         indexInvoiceGlobal=0;
         invoicesGlobal=[];
     };
@@ -1045,6 +1052,13 @@ class ReceiptsAndExpensesJS {
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
     //  this.detailFormOnBeforeOpen(arguments);
+        $.ajax({
+            method:"get",
+            url: MISA.Config.paymentUrl + "/getRefNoFinance",
+            success: function(data){
+                $('input[dataindex="RefNo"]').val(data);            
+            }
+        });
         this.DetailForm.Show();
     } 
     /* -------------------------------------------------------------------
