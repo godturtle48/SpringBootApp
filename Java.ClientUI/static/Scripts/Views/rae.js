@@ -92,6 +92,7 @@ var showDetail=function(){
     getPageHome()
     This function is for Home Paging 25 50 100
     //Hàm láy trả về size bản ghi đầu tiên và tổng số bản ghi có
+    //This function return fakeData to buildDataIntoTable() func. Change attributes in fakeData to change info displayed in Table Master
 */
 
 var getPageHome = function() {
@@ -124,17 +125,17 @@ var getPageHome = function() {
 			for (var i = 0; i < payment.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : convertDate(payment[i].postedDate),
+					PostedDate : convertDate(payment[i].postedDate),                    
 					RefDate : convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
-					JournalMemo : payment[i].journalMemo,
+					JournalMemo : payment[i].journalMemo,                               //Diễn giải   ??? What JournalMemo
 					RefTypeName : payment[i].ref.refTypeName,
-					TotalAmount : payment[i].totalAmountOC,
+					TotalAmount : payment[i].totalAmountOC,                             //Số tiền    
 					AccountObjectName : payment[i].accountObjectName,
-					ReasonTypeName : payment[i].journalMemo,
+					ReasonTypeName : payment[i].journalMemo,                            //Lý do thu/chi
 					CashBookPostedDate : convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
-					DepartmentName : payment[i].accountObjectName
+					DepartmentName : payment[i].accountObjectAddress
 				})
             }
         
@@ -373,7 +374,6 @@ class ReceiptsAndExpensesJS {
         $('.combobox').removeClass('border-red');
         $('.mcombobox').removeClass('error-box');
         $('.combobox').removeAttr('title');
-        debugger;
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};
