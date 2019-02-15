@@ -21,9 +21,6 @@
 //     }
     
 // })
-$(document).ready(function(){
-    if($(".rowSelected").find("td:eq(8)").text().toLowerCase() == 'thu') ;
-})
 var fakeData = [];
 var totalRecord = 0;
 var totalPage = 0;
