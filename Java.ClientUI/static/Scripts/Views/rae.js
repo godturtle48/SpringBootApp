@@ -30,26 +30,33 @@ var indexInvoiceGlobal=0;
 //invoicesGlobal chứa dữ liệu của server
 var invoicesGlobal=[];
 var RefUpdate={};
+
+
 /////////////
+/*
+    showDetail()
+    This function show Detail box for add, edit, duplicate Expense or Receipt Ref
+*/
+
 var showDetail=function(){
     var RAEDetail=[];
     //vị trí bản ghi trong sessionStorage
     var indexRef= $('.rowSelected').attr("indexref");
-    var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+    var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
     if(indexRef==null) return;
-    var raeRef=refData[parseInt(indexRef)];
+    var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
     var invoices=raeRef.invoices;
     // Lấy Detail từ Service:
     invoices.forEach(function(invoice){
         var detail = {
-            JournalMemo:raeRef.journalMemo,
-            CreditAmount: '3221',
-            DebitAmount: 1112,
-            TotalAmount: invoice.amountOC,
-            AccountObject: invoice.accountObjectID,
-            AccountObjectName: invoice.accountObjectID,
-            DepartmentName: invoice.accountObjectID,
-            StatisCode: "",
+            JournalMemo:invoice.discription,                                //Diễn giải
+            CreditAmount: invoice.amount,                                   //TK Có
+            DebitAmount: 0,                                                 //TK Nợ
+            TotalAmount: invoice.amountOC,                                  //Số tiền
+            AccountObject: raeRef.accountObjectID,                          //Mã đối tượng (CTY MISA)
+            AccountObjectName: raeRef.accountObjectName,                    //Tên đối tượng (Công ty cổ phần MIS)
+            DepartmentName: raeRef.accountObjectAddress,                        //Đơn vị
+            StatisCode: "Mã thống kê",                                      //Mã thống kê
         } 
         RAEDetail.push(detail);
     })
@@ -81,7 +88,11 @@ var showDetail=function(){
     });
 }
 
-///////////////=================
+/*
+    getPageHome()
+    This function is for Home Paging 25 50 100
+    //Hàm láy trả về size bản ghi đầu tiên và tổng số bản ghi có
+*/
 
 var getPageHome = function() {
     // code ajax
@@ -154,6 +165,12 @@ var getPageHome = function() {
 		}
 	})
 }
+
+/*
+    getPage()
+    This function is for Paging from users input or button next page
+*/
+
 var getPage = function() {
 	totalPage = 0;
 	// code ajax
@@ -205,6 +222,12 @@ var getPage = function() {
 	})
 }
 
+/** Notes:
+ *  //editMode = 1 : Adding Mode (clear detail table)
+    //editMode = 2 : Editing Mode (send request to get data and build form)
+    //editMode = 3 : Duplicating Mode
+    //RefType = 1 Receipt ,= 2 Expense
+ */
 
 class ReceiptsAndExpensesJS {
     constructor() {
@@ -223,7 +246,6 @@ class ReceiptsAndExpensesJS {
     };
 
     initEvents() {
-        var refType_selected = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == "thu") ? 1 : 2;
         $('#tblCustomerList').on('click', { scope: '#tbodyRAE tr' }, this.rowRAE_OnClick.bind());
         $(document).on('dblclick', '#tbodyRAE tr', {},  this.rowRAE_OnDblClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
@@ -233,7 +255,7 @@ class ReceiptsAndExpensesJS {
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
         $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
-        $('#btnEdit').on('click', { refType: refType_selected }, this.btnEdit_OnClick.bind(this));
+        $('#btnEdit').on('click', { }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
@@ -244,7 +266,7 @@ class ReceiptsAndExpensesJS {
         
     };
 
-/*
+    /*
      * Thực hiện load page
      * Created by: TTHuyen (26/01/2019)
      */
@@ -259,6 +281,8 @@ class ReceiptsAndExpensesJS {
             this.buildDataIntoTable(fakeData);
         }
     }
+
+
     /*
      * Thực hiện load dữ liệu màn hình danh sách.
      * Created by: NVMANH (22/01/2019)
@@ -283,7 +307,7 @@ class ReceiptsAndExpensesJS {
         })
         data.forEach(function (item, index) {
             var htmlItem = [];
-            htmlItem.push('<tr indexRef=' + index + ' class="{0}">'.format(index % 2 === 0 ? '' : 'row-highlight'));
+            htmlItem.push('<tr indexRef="{0}" class="{1}" refTypeName={2}  >'.format(index, index % 2 === 0 ? '' : 'row-highlight', item.RefTypeName));
             fieldData.forEach(function (valueField, indexField) {
                 if (indexField === 7 || indexField === 1) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-center"));
                 else if (indexField === 4) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-right"));
@@ -332,7 +356,6 @@ class ReceiptsAndExpensesJS {
             })
             htmlItem.push('</tr>');
             table.prepend(htmlItem.join(""));
-
         });
 
         // Chọn dòng đầu tiên:
@@ -350,6 +373,7 @@ class ReceiptsAndExpensesJS {
         $('.combobox').removeClass('border-red');
         $('.mcombobox').removeClass('error-box');
         $('.combobox').removeAttr('title');
+        debugger;
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};
@@ -367,21 +391,21 @@ class ReceiptsAndExpensesJS {
                 AccountObjectNumber: raeRef.accountObjectID,
                 AccountObjectCode: raeRef.accountObjectID,
                 AccountObjectName: raeRef.accountObjectName,
-                AccountObjectType: 2,
-                Address: raeRef.accountObjectName,
-                ContactName: "Phạm Văn Thịnh",
-                ReasonID: 1,
-                RefType: 1,
+                AccountObjectType: 2,                       //??
+                Address: raeRef.accountObjectAddress,          
+                ContactName: raeRef.accountObjectContactName,
+                ReasonID: 1,                                //??
+                RefType: raeRef.ref.refTypeID,
                 ReasonName: raeRef.journalMemo,
-                Description: "Rút tiền gửi về nộp quỹ",
-                EmployeeName:raeRef.modifiedBy,
+                Description: raeRef.invoices.discription,
+                EmployeeName:raeRef.modifiedBy,             //??
                 PostedDate: convertDate(raeRef.postedDate),
                 RefDate: convertDate(raeRef.refDate),
                 RefNo: raeRef.refNoFinance,
-
+                modifiedDate: raeRef.modifiedDate
             }
             
-            // Bind thông tin dữ liệu master:
+            // Bind thông tin dữ liệu master (for editing mode)
             var dataIndexs = $('input[dataindex]');
             if (dataIndexs && dataIndexs.length > 0) {
                 $.each(dataIndexs, function (index, item) {
@@ -394,7 +418,7 @@ class ReceiptsAndExpensesJS {
                     }
                 });
             }
-        // Bind thông tin dữ liệu detail:
+        // Bind thông tin dữ liệu detail (for editing mode)
         var invoices=raeRef.invoices;
         indexInvoiceGlobal=0;
         if(invoices==null){
@@ -402,19 +426,20 @@ class ReceiptsAndExpensesJS {
             return;
         }
         invoicesGlobal=invoices;
+        //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
         invoices.forEach(function(invoice,index){
             var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
                         <td style="display:inline-flex;">
                             <button role="removeInvoice" class="btn btn-danger">x</button>
-                            <input fileDataInvoice="journalMemo" value="${raeRef.journalMemo}">
+                            <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
-                        <td><input fileDataInvoice=""  value="3221"></td>
-                        <td><input fileDataInvoice="" value="1112"></td>
+                        <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                        <td><input fileDataInvoice="" value="${invoice.amount}"></td>
                         <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value=""></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectID}"></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectName}"></td>
+                        <td><input fileDataInvoice="" value="${raeRef.accountObjectAddress}"></td>
+                        <td><input fileDataInvoice="" value="Mã thống kê (updating...)"></td>
                         </tr>`;
             $('#tbodyRAEDetail-popup').append(div);
             $('button[role="removeInvoice"]').on('click', function(){
@@ -451,17 +476,18 @@ class ReceiptsAndExpensesJS {
                 AccountObjectNumber: raeRef.accountObjectID,
                 AccountObjectCode: raeRef.accountObjectID,
                 AccountObjectName: raeRef.accountObjectName,
-                AccountObjectType: 2,
-                Address: raeRef.accountObjectName,
-                ContactName: "Phạm Văn Thịnh",
-                ReasonID: 1,
-                RefType: 1,
+                AccountObjectType: 2,                       //??
+                Address: raeRef.accountObjectAddress,          
+                ContactName: raeRef.accountObjectContactName,
+                ReasonID: 1,                                //??
+                RefType: raeRef.ref.refTypeID,
                 ReasonName: raeRef.journalMemo,
-                Description: "Rút tiền gửi về nộp quỹ",
-                EmployeeName:raeRef.modifiedBy,
-                PostedDate:convertDate(raeRef.postedDate),
+                Description: raeRef.invoices.discription,
+                EmployeeName:raeRef.modifiedBy,             //??
+                PostedDate: convertDate(raeRef.postedDate),
                 RefDate: convertDate(raeRef.refDate),
-                RefNo: "",
+                RefNo: raeRef.refNoFinance,
+                modifiedDate: raeRef.modifiedDate
 
             }
             // Bind thông tin dữ liệu master:
@@ -488,16 +514,16 @@ class ReceiptsAndExpensesJS {
             invoices.forEach(function(invoice,index){
                 var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
                             <td style="display:inline-flex;">
-                                <button class="btn btn-danger" role="removeInvoice">x</button>
-                                <input fileDataInvoice="journalMemo" value="${raeRef.journalMemo}">
+                                <button role="removeInvoice" class="btn btn-danger">x</button>
+                                <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                             </td>
-                            <td><input fileDataInvoice=""  value="3221"></td>
-                            <td><input fileDataInvoice="" value="1112"></td>
+                            <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                            <td><input fileDataInvoice="" value="${invoice.amount}"></td>
                             <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value=""></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectID}"></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectName}"></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectAddress}"></td>
+                            <td><input fileDataInvoice="" value="Mã thống kê (updating...)"></td>
                             </tr>`;
                 $('#tbodyRAEDetail-popup').append(div);
                 $('button[role="removeInvoice"]').on('click', function(){
@@ -523,6 +549,7 @@ class ReceiptsAndExpensesJS {
 
 
     // Chọn 1 bản ghi trong danh sách:
+    // show loading effect in Detail box
     rowRAE_OnClick() {
         commonJS.showMask($('.frmCustomerDetail .rae-detail-box'));
         setTimeout(function () {
@@ -535,17 +562,12 @@ class ReceiptsAndExpensesJS {
 
     /*
      * Event double click a row in tbodyRAE  ---- Viewing Mode
-     */
+    */
 
-     //editMode = 1 : Adding Mode (clear detail table)
-     //editMode = 2: Editing Mode (send request to get data and build form)
-     //RefType = 1 Receipt = 2 Expense
      rowRAE_OnDblClick() {
         this.editMode = 2;
         //identify receipt or expense
-        var refTypeName_select = $(".rowSelected").find("td:eq(8)").text();
-        var refTypeID_select = (refTypeName_select == "thu") ? 1 : 2;
-        if ($('.rowSelected').attr('refType') == 1) {
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
             this.RefType = 1;
         } else {
             this.RefType = 2;
@@ -553,11 +575,11 @@ class ReceiptsAndExpensesJS {
         this.detailFormOnBeforeOpen(arguments);
         $('#btnSave').attr('disabled', true);
         $('#frmRAEDetail input').attr('disabled', true);
-        $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail #addtr').attr('disabled', true);
         $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
         $('.combobox-arrow-select').hide();
         this.DetailForm.Show();
+        $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail .detail-info input').attr('disabled', true);
     };
 
@@ -565,18 +587,16 @@ class ReceiptsAndExpensesJS {
      * thay đổi giao diện form trước khi mở
      */
     detailFormOnBeforeOpen(args) {
-        if (args[0].data.refType !== undefined) {
-            var refType = args[0].data.refType;
-            this.RefType = refType;
-        }
         if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
             $('#lblReason').text('Lý do thu');
+            $('#lblAccountObjectContactName').text('Người nộp');
             $('#lblEmployee').text('Nhân viên thu');
         } else {
             $("span.ui-dialog-title").text('Phiếu chi');
             $('.title-form-detail').text('Phiếu chi');
+            $('#lblAccountObjectContactName').text('Người nhận');
             $('#lblReason').text('Lý do chi');
             $('#lblEmployee').text('Nhân viên chi');
         }
@@ -586,6 +606,7 @@ class ReceiptsAndExpensesJS {
      */
     btnAdd_OnClick() {
         this.editMode = 1;
+        this.RefType = arguments[0].data.refType;
         this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
         $('#tbodyRAEDetail-popup').empty();
@@ -600,7 +621,6 @@ class ReceiptsAndExpensesJS {
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
             success: function(data){
-                debugger;
                 $('input[dataindex="RefNo"]').val(infix + data);  
             }
         });
@@ -610,10 +630,15 @@ class ReceiptsAndExpensesJS {
 
     btnEdit_OnClick() {
         this.editMode = 2;
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
+            this.RefType = 1;
+        } else {
+            this.RefType = 2;
+        }
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-        arguments[0].data.refType = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == "thu") ? 1 : 2;
+        // arguments[0].data.refType = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == "thu") ? 1 : 2;
         this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
     };
@@ -622,11 +647,8 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
-
-        //che độ them
+        /// Editing Mode
         if(this.editMode ==1){
-            // console.log(refType);
-            // alert('btnSave_OnClick');
             var invoices = [];
             $('#tbodyRAEDetail-popup').find('tr').each(function(){
                 invoices.push({
@@ -647,27 +669,25 @@ class ReceiptsAndExpensesJS {
             var refTypeName = "Thu";
             if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-            //test data
-            var x=$('input[dataindex="RefDate"]').val();
             var data = {"ref":ref,
                 "invoices":invoices,
-                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),
-                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),
-                "refNoFinance": $('input[dataindex="RefNo"]').val(),
-                "accountObjectID": $('#txtAccountObjectCode').val(),
-                "accountObjectName": $('#txtAccountObjectName').val(),
-                "accountObjectAddress": $('#txtAddress').val(),
-                "accountObjectContactName": $('#txtContactName').val(),
-                "reasonTypeID": $('#txtReason').val(),
-                "journalMemo": $('#txtReasonName').val(),
-                "documentInclude": "documentInclude3.doc",
-                "exchangeRate": null,
-                "editVersion": new Date(),
-                "refOrdef": totalRecord + 1,
-                "createdDate": new Date(),
-                "createdBy": "Chu Hải Nam",
-                "modifiedDate":new Date(),
-                "modifiedBy": "Nguyễn Đình Quân"
+                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
+                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
+                "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
+                "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
+                "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
+                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh    (địa chỉ)
+                "accountObjectContactName": $('#txtContactName').val(),                         //Người nộp/nhận
+                "reasonTypeID": $('#txtReason').val(),                                          //ID lý do
+                "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
+                "documentInclude": "documentInclude3.doc",                                  //useless?
+                "exchangeRate": null,                                                       //useless?
+                "editVersion": new Date(),                                         //useless?
+                "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
+                "createdDate": new Date(),                                                  //useless?
+                "createdBy": "created Person",                                              //useless?
+                "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
+                "modifiedBy": "modified Person"                                             //useless?
             };
             console.log(data);
             if (data.refNoFinance != '') {
@@ -681,7 +701,7 @@ class ReceiptsAndExpensesJS {
                     data: JSON.stringify(data),
                     success: function(result, txtStatus, xhr){
                         console.log(result);
-                        //prepend master
+                        ////// prepend latest added record to master ---------- PROBLEM: must be refreshed
                         if(!result.error){
                             $('#tbodyRAE').prepend(
                                 '<tr indexref="" class="">'
@@ -727,7 +747,7 @@ class ReceiptsAndExpensesJS {
                 $('.text-required').trigger('blur');
                 commonJS.showFailMsg("Thêm hóa đơn không thành công");
             }
-        }else if(this.editMode ==2){
+        }else if(this.editMode == 2){                 ///////btnSave for edit
             //che do sửa
             //xet du  lieu tu bien chua invoicesGlobal
             //invoicesData dữ liệu đc gửi lên
@@ -781,8 +801,7 @@ class ReceiptsAndExpensesJS {
                 return;
             }
 
-
-    
+            ///////////////Assign new data
             RefUpdate.refDate=convertDateToAdd($('input[dataindex="RefDate"]').val());
             RefUpdate.postedDate= convertDateToAdd($('input[dataindex="PostedDate"]').val());
             RefUpdate.refNoFinance= $('input[dataindex="RefNo"]').val();
@@ -795,8 +814,7 @@ class ReceiptsAndExpensesJS {
             RefUpdate.editVersion=new Date();
             RefUpdate.modifiedDate=new Date();
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
-            RefUpdate.invoices=invoicesData;
-          
+            RefUpdate.invoices=invoicesData;       
         
 
             $.ajax({
@@ -822,7 +840,7 @@ class ReceiptsAndExpensesJS {
                     commonJS.showFailMsg("Sửa hóa đơn không thành công");
                 }
             })
-        }else if(this.editMode ==3){
+        }else if(this.editMode ==3){                ///////btnSave for duplicate
             var invoicesData=[]; 
             var sortOrder=0;
             if(RefUpdate==null){
@@ -872,6 +890,8 @@ class ReceiptsAndExpensesJS {
                 commonJS.showFailMsg("Không được bỏ trống");
                 return;
             }
+
+            ///////////////Assign new data
             RefUpdate.refID="";
             RefUpdate.refDate=convertDateToAdd($('input[dataindex="RefDate"]').val());
             RefUpdate.postedDate= convertDateToAdd($('input[dataindex="PostedDate"]').val());
@@ -889,7 +909,6 @@ class ReceiptsAndExpensesJS {
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
             RefUpdate.invoices=invoicesData;
           
-
             $.ajax({
                 method:"post",
                 url: MISA.Config.paymentUrl + "/addRef",
@@ -954,27 +973,26 @@ class ReceiptsAndExpensesJS {
         var refTypeName = "Thu";
         if(refTypeID == 2) refTypeName = "Chi";
         var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-        //test data
-        var data = {"ref":ref,
-           "invoices":invoices,
-           "refDate":convertDateToAdd($('input[dataindex="RefDate"]').val()),
-           "postedDate":convertDateToAdd($('input[dataindex="PostedDate"]').val()),
-           "refNoFinance": $('input[dataindex="RefNo"]').val(),
-           "accountObjectID": $('#txtAccountObjectCode').val(),
-           "accountObjectName": $('#txtAccountObjectName').val(),
-           "accountObjectAddress": $('#txtAddress').val(),
-           "accountObjectContactName": $('#txtContactName').val(),
-           "reasonTypeID": $('#txtReason').val(),
-           "journalMemo": $('#txtReasonName').val(),
-           "documentInclude": "documentInclude3.doc",
-           "exchangeRate": null,
-           "editVersion": new Date(),
-           "refOrdef": totalRecord + 1,
-           "createdDate": new Date(),
-           "createdBy": "Trần Thị Huyền",
-           "modifiedDate":new Date(),
-           "modifiedBy": "Nguyễn Đình Quân"
-        };
+            var data = {"ref":ref,
+                "invoices":invoices,
+                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
+                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
+                "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
+                "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
+                "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
+                "accountObjectAddress": $('#txtAddress').val(),                                 //Chi nhánh
+                "accountObjectContactName": $('#txtContactName').val(),                         //Người nộp/nhận
+                "reasonTypeID": $('#txtReason').val(),                                          //ID lý do
+                "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
+                "documentInclude": "documentInclude3.doc",                                  //useless?
+                "exchangeRate": null,                                                       //useless?
+                "editVersion": new Date(),                                         //useless?
+                "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
+                "createdDate": new Date(),                                                  //useless?
+                "createdBy": "created Person",                                              //useless?
+                "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
+                "modifiedBy": "modified Person"                                             //useless?
+            };
         $.ajax({
             method:"post",
             url: MISA.Config.paymentUrl + "/addRef",
@@ -1057,9 +1075,16 @@ class ReceiptsAndExpensesJS {
     btnDuplicate_OnClick(event){
         //editMode=3 chế độ  duplicate
         this.editMode = 3;
+        if ($('.rowSelected').attr('refTypeName') == "Thu") {
+            this.RefType = 1;
+        } else {
+            this.RefType = 2;
+        }
         $('#tbodyRAEDetail-popup').empty();
-        var refType_selected = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == 'thu') ? 1 : 2;
-        this.RefType = refType_selected;
+        // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+        // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+        this.detailFormOnBeforeOpen(arguments);
+        var refType_selected = this.RefType;
         $.ajax({
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
@@ -1070,11 +1095,7 @@ class ReceiptsAndExpensesJS {
                     $('input[dataindex="RefNo"]').val("PC"+data);          
             }
         });  
-        var  argument1 = [];
-        argument1.push({
-            data:{refType:refType_selected}
-        });
-        this.detailFormOnBeforeOpen(argument1);
+
         this.DetailForm.Show();
     } 
     /* -------------------------------------------------------------------
@@ -1115,6 +1136,7 @@ class ReceiptsAndExpensesJS {
         $('#frmRAEDetail input').val(null);
         $('button[disabled="disabled"]').removeAttr('disabled');
         $('#frmRAEDetail input').removeAttr('disabled');
+        $('button[role="removeInvoice"]').attr('disabled', false);
         $('.text-required').removeClass('required-border');	
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
@@ -1311,7 +1333,6 @@ $('input[elementtype="filterInput"]').blur(function(){
         var number = $(this).html();
        $("#inputTotalRecord").val(number);
        $("#inputTotalRecord").val(number+"");
-       debugger;
        getPageHome();
        raeJS.buildDataIntoTable(fakeData);
     })
@@ -1349,7 +1370,6 @@ $('input[elementtype="filterInput"]').blur(function(){
         if(+recentPage < +totalPage){
             $('#currentPage').val(Number(recentPage)+Number(1));
             getPage();
-            debugger;
             raeJS.buildDataIntoTable(fakeData);
             checkTbar();
         }
