@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -283,15 +284,24 @@ public class PaymentReceiptController {
 			 return paymentService.search(nameSearch, keyCompany);
 		 }
 
-
-		
-//	
-//		    @RequestMapping(value = "/search", method = RequestMethod.GET)
-//		    public List<PaymentReceipt> search(@RequestParam(value = "keyword") String keyword) {
-//		    	List<PaymentReceipt> lst= paymentService.searchJounalMeno(keyword);
-//		        return lst;
-//		    }
-
-
+		@GetMapping("/getRefNoFinance")
+		public String getRefNoFinance() {
+			String refNoFinance = "";
+			Integer numPaymentReceipt = paymentService.getRefNoFinance();
+			do {
+				numPaymentReceipt += 1;
+				String postFixString = "";
+				if(numPaymentReceipt.toString().length() < 9) {
+					int addNum = 9 - numPaymentReceipt.toString().length();		
+					for(int i = 0; i < addNum; i++) {
+						postFixString += "0";
+					}
+				}
+				postFixString += numPaymentReceipt.toString();
+				refNoFinance += postFixString;
+			} while(paymentService.ifRefNoFinanceExist(refNoFinance));
+			
+			return refNoFinance;
+		}
 
 }

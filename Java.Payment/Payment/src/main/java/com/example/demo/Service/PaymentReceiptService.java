@@ -111,6 +111,14 @@ public class PaymentReceiptService {
     	}
     	return payments;
     }
+	public Integer getRefNoFinance() {
+		// TODO Auto-generated method stub
+		return paymentReceiptRepository.getRefNoFinance();
+	}
+	public boolean ifRefNoFinanceExist(String refNoFinance) {
+		// TODO Auto-generated method stub
+		return paymentReceiptRepository.ifRefNoFinanceExist(refNoFinance);
+	}
 	
     
 //    public List<PaymentReceipt> searchJounalMeno(String keyword){
