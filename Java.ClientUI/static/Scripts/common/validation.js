@@ -14,7 +14,7 @@ var validationJS = Object.create({
             $(this).parent().addClass('wrap-control');
             var nextElement = $(this).next();
             if (!$(nextElement).hasClass('error-box')) {
-                $(this).after('<div class="error-box">*</div>');
+                $(this).after('<div class="error-box"></div>');
             }
             return false;
         } else {
