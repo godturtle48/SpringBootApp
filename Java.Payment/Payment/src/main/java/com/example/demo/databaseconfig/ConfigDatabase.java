@@ -26,7 +26,7 @@ public class ConfigDatabase {
 		  configuration.setProperty("hibernate.connection.driver_class",
 			      "org.mariadb.jdbc.Driver");
 			  configuration.setProperty("hibernate.connection.url",
-			      "jdbc:mariadb://localhost:3306/"+nameDB+"?createDatabaseIfNotExist=" + traceWithActiveSpanOnly);
+			      "jdbc:mariadb://db_container:3306/"+nameDB+"?createDatabaseIfNotExist=" + traceWithActiveSpanOnly);
 			  configuration.setProperty("hibernate.connection.username", "root");
 			  configuration.setProperty("hibernate.connection.password", "misasme");
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
