@@ -42,21 +42,21 @@ var showDetail=function(){
     var RAEDetail=[];
     //vị trí bản ghi trong sessionStorage
     var indexRef= $('.rowSelected').attr("indexref");
-    var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+    var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
     if(indexRef==null) return;
-    var raeRef=refData[parseInt(indexRef)];
+    var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
     var invoices=raeRef.invoices;
     // Lấy Detail từ Service:
     invoices.forEach(function(invoice){
         var detail = {
-            JournalMemo:raeRef.journalMemo,
-            CreditAmount: invoice.amount,
-            DebitAmount: 0,
-            TotalAmount: invoice.amountOC,
-            AccountObject: raeRef.accountObjectID,
-            AccountObjectName: raeRef.accountObjectName,
-            DepartmentName: invoice.accountObjectID,        //Đơn vị
-            StatisCode: "Mã thống kê",                      //Mã thống kê
+            JournalMemo:invoice.discription,                                //Diễn giải
+            CreditAmount: invoice.amount,                                   //TK Có
+            DebitAmount: 0,                                                 //TK Nợ
+            TotalAmount: invoice.amountOC,                                  //Số tiền
+            AccountObject: raeRef.accountObjectID,                          //Mã đối tượng (CTY MISA)
+            AccountObjectName: raeRef.accountObjectName,                    //Tên đối tượng (Công ty cổ phần MIS)
+            DepartmentName: raeRef.accountObjectAddress,                        //Đơn vị
+            StatisCode: "Mã thống kê",                                      //Mã thống kê
         } 
         RAEDetail.push(detail);
     })
