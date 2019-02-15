@@ -17,7 +17,7 @@ public class ComboBoxRepository {
 		// TODO Auto-generated method stub
 		Session session = SimpleCorsFilter.sessionFactory.openSession();
 		session.beginTransaction();
-		String qrString="select accountObjectID, accountObjectName, accountObjectAddress, createdBy, journalMemo, description "
+		String qrString="select distinct accountObjectID, accountObjectName, accountObjectAddress, createdBy, journalMemo, description "
 				+ "from PaymentReceipt Where reftypeID = 2";
 		Query query = session.createSQLQuery(qrString);	
 		query.setFirstResult(1);
@@ -33,7 +33,7 @@ public class ComboBoxRepository {
 		// TODO Auto-generated method stub
 		Session session = SimpleCorsFilter.sessionFactory.openSession();
 		session.beginTransaction();
-		String qrString="select accountObjectID, accountObjectName, accountObjectAddress, createdBy, journalMemo, description "
+		String qrString="select distinct accountObjectID, accountObjectName, accountObjectAddress, createdBy, journalMemo, description "
 				+ "from PaymentReceipt Where reftypeID = 1";
 		Query query = session.createSQLQuery(qrString);	
 		query.setFirstResult(1);
