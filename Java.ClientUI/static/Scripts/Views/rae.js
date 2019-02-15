@@ -50,13 +50,13 @@ var showDetail=function(){
     invoices.forEach(function(invoice){
         var detail = {
             JournalMemo:raeRef.journalMemo,
-            CreditAmount: '3221',
-            DebitAmount: 1112,
+            CreditAmount: invoice.amount,
+            DebitAmount: 0,
             TotalAmount: invoice.amountOC,
-            AccountObject: invoice.accountObjectID,
-            AccountObjectName: invoice.accountObjectID,
-            DepartmentName: invoice.accountObjectID,
-            StatisCode: "",
+            AccountObject: raeRef.accountObjectID,
+            AccountObjectName: raeRef.accountObjectName,
+            DepartmentName: invoice.accountObjectID,        //Đơn vị
+            StatisCode: "Mã thống kê",                      //Mã thống kê
         } 
         RAEDetail.push(detail);
     })
@@ -402,7 +402,7 @@ class ReceiptsAndExpensesJS {
                 PostedDate: convertDate(raeRef.postedDate),
                 RefDate: convertDate(raeRef.refDate),
                 RefNo: raeRef.refNoFinance,
-                // modifiedDate: raeRef.modifiedDate
+                modifiedDate: raeRef.modifiedDate
             }
             
             // Bind thông tin dữ liệu master (for editing mode)
@@ -476,17 +476,18 @@ class ReceiptsAndExpensesJS {
                 AccountObjectNumber: raeRef.accountObjectID,
                 AccountObjectCode: raeRef.accountObjectID,
                 AccountObjectName: raeRef.accountObjectName,
-                AccountObjectType: 2,
-                Address: raeRef.accountObjectName,
-                ContactName: "Phạm Văn Thịnh",
-                ReasonID: 1,
-                RefType: 1,
+                AccountObjectType: 2,                       //??
+                Address: raeRef.accountObjectAddress,          
+                ContactName: raeRef.accountObjectContactName,
+                ReasonID: 1,                                //??
+                RefType: raeRef.ref.refTypeID,
                 ReasonName: raeRef.journalMemo,
-                Description: "Rút tiền gửi về nộp quỹ",
-                EmployeeName:raeRef.modifiedBy,
-                PostedDate:convertDate(raeRef.postedDate),
+                Description: raeRef.invoices.discription,
+                EmployeeName:raeRef.modifiedBy,             //??
+                PostedDate: convertDate(raeRef.postedDate),
                 RefDate: convertDate(raeRef.refDate),
-                RefNo: "",
+                RefNo: raeRef.refNoFinance,
+                modifiedDate: raeRef.modifiedDate
 
             }
             // Bind thông tin dữ liệu master:
@@ -513,16 +514,16 @@ class ReceiptsAndExpensesJS {
             invoices.forEach(function(invoice,index){
                 var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
                             <td style="display:inline-flex;">
-                                <button class="btn btn-danger" role="removeInvoice">x</button>
-                                <input fileDataInvoice="journalMemo" value="${raeRef.journalMemo}">
+                                <button role="removeInvoice" class="btn btn-danger">x</button>
+                                <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                             </td>
-                            <td><input fileDataInvoice=""  value="3221"></td>
-                            <td><input fileDataInvoice="" value="1112"></td>
+                            <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                            <td><input fileDataInvoice="" value="${invoice.amount}"></td>
                             <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                            <td><input fileDataInvoice="" value=""></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectID}"></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectName}"></td>
+                            <td><input fileDataInvoice="" value="${raeRef.accountObjectAddress}"></td>
+                            <td><input fileDataInvoice="" value="Mã thống kê (updating...)"></td>
                             </tr>`;
                 $('#tbodyRAEDetail-popup').append(div);
                 $('button[role="removeInvoice"]').on('click', function(){
@@ -605,6 +606,7 @@ class ReceiptsAndExpensesJS {
      */
     btnAdd_OnClick() {
         this.editMode = 1;
+        this.RefType = arguments[0].data.refType;
         this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
         $('#tbodyRAEDetail-popup').empty();
@@ -619,7 +621,6 @@ class ReceiptsAndExpensesJS {
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
             success: function(data){
-                debugger;
                 $('input[dataindex="RefNo"]').val(infix + data);  
             }
         });
@@ -668,7 +669,6 @@ class ReceiptsAndExpensesJS {
             var refTypeName = "Thu";
             if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
-            debugger;
             var data = {"ref":ref,
                 "invoices":invoices,
                 "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
