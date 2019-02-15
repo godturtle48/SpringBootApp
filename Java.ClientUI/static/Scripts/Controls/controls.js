@@ -233,6 +233,12 @@ var controlJs = Object.create({
             }
         } else if (sender.keyCode === 13) {
             $(this).trigger("click");
+            if (sender.target.parentElement.parentElement.getAttribute('entity') === "AccountObject") {
+                $('#txtReason').focus();
+            }
+            if (sender.target.parentElement.parentElement.getAttribute('entity') === "Reason") {
+                $('input[dataindex="RefNo"]').focus();
+            }
         }
     },
     /* ---------------------------------------------------------------------------------------------
@@ -258,6 +264,12 @@ class Button {
             eventName = eventName;
         }
         switch (commandName) {
+            case 'Previous':
+                html = html = html.format('fas', 'fa-arrow-left', 'Trước');
+                break;
+            case 'Next':
+                html = html = html.format('fas', 'fa-arrow-right', 'Sau');
+                break;
             case 'Save':
                 html = html.format('far','fa-save', 'Cất');
                 break;
@@ -277,6 +289,12 @@ class Button {
                 break;
         }
         this.id = id;
+        if (commandName === 'Previous') {
+            this.class = 'btn btn-primary';
+        }
+        if (commandName === 'Next') {
+            this.class = 'btn btn-primary';
+        }
         if (commandName === 'Save') {
             this.class = 'btn btn-success';
         }
@@ -323,7 +341,9 @@ class FormPopup {
         }
         if (!buttons) {
             buttons =
-                [new Button(me, 75, 'Save'),
+                [ new Button(me, 75, 'Previous'),
+                new Button(me, 75, 'Next'),
+                new Button(me, 75, 'Save'),
                 new Button(me, 120, 'SaveAdd'),
                 new Button(me, 75, 'Cancel'),
                 new Button(me, 75, 'Help'),
@@ -352,6 +372,12 @@ class FormPopup {
     };
     Close() {
         this.Form.dialog('close');
+    };
+    btnPrevious_OnClick() {
+        alert('Previous');
+    };
+    btnNext_OnClick() {
+        alert('Next');
     };
     btnSave_OnClick() {
         alert('Save');

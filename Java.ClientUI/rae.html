@@ -454,10 +454,10 @@
                                                 <th id='column-header-1' style="flex:1;" fieldData="JournalMemo" DataType="Text" class="gridPanel-header-item-title no-border-left width-200">
                                                     Diễn giải<div id='column-header-1-sizer'></div>
                                                 </th>
-                                                <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150">
-                                                    TK Nợ<div id='column-header-2-sizer'></div>
+                                                <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản nợ">
+                                                    TK Nợ <div id='column-header-2-sizer'></div>
                                                 </th>
-                                                <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                                                <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản có">
                                                     TK Có<div id='column-header-3-sizer'></div>
                                                 </th>
                                                 <th id='column-header-4' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
@@ -593,10 +593,10 @@
                             <th id='column-header-1' style="flex:1;" fieldData="JournalMemo" DataType="Text" class="gridPanel-header-item-title no-border-left width-200">
                                 Diễn giải<div id='column-header-1-sizer'></div>
                             </th>
-                            <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                            <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản nợ">
                                 TK Nợ<div id='column-header-2-sizer'></div>
                             </th>
-                            <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                            <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản có">
                                 TK Có<div id='column-header-3-sizer'></div>
                             </th>
                             <th id='column-header-4' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
@@ -629,8 +629,8 @@
     </div>
     <script src="./static/Scripts/lib/jquery-3.2.1.min.js"></script>
     <script src="./static/Scripts/lib/jquery-ui.js"></script>
-    <script src="./static/Scripts/lib/bootstrap.min.js"></script>
     <script src="./static/Scripts/lib/popper.min.js"></script>
+    <script src="./static/Scripts/lib/bootstrap.min.js"></script>
     <script src="./static/Scripts/common/data.js"></script>
     <script src="./static/Scripts/common/enum.js"></script>
     <script src="./static/Scripts/common/validation.js"></script>
@@ -640,6 +640,10 @@
     <!-- <script src="./static/Scripts/Views/login.js"></script> -->
     <script src="./static/Scripts/Views/config.js"></script>
     <script src="./static/Scripts/Views/rae.js"></script>
-
+    <script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
 </body>
 </html>
