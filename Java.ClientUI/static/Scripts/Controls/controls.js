@@ -8,8 +8,8 @@
     })
     $('body').on('blur', '.mcombobox[controlType="ComboboxData"] input[controltype="inputCombobox"]', controlJs.inputCombobox_OnBlur);
     $('body').on('click', '.mcombobox[controlType="ComboboxData"] .trigger-loadData', controlJs.showDataSelection);
-
     $('body').on('keydown', '[controlType="ComboboxData"] input[controltype="inputCombobox"]', controlJs.inputCombobox_OnKeyDown);
+    $('body').on('keydown', '[controlType="ComboboxData"] .combobox-data-item', controlJs.comboboxDataItem_OnKeyUp);
     $('body').on('click', '[controlType="ComboboxData"] .combobox-data-item', controlJs.comboboxDataItem_OnSelect);
 })
 
@@ -98,6 +98,7 @@ var controlJs = Object.create({
             };
         }
         controlJs.setComboboxErrorStyle(comboboxElement, existData);
+        $()
     },
 
     /* ---------------------------------------------------------------------------------------------
@@ -152,7 +153,7 @@ var controlJs = Object.create({
             // Thực hiện lấy dữ liệu:
             comboboxBoundListElement = $('<div class="comboboxData-boundlist hide-if-outside"></div>');
             $.each(data, function (index, item) {
-                var itemHTML = '<div class="combobox-data-item" item-value="{1}" >{0}</div>';
+                var itemHTML = '<div class="combobox-data-item" item-value="{1}" tabindex="-1">{0}</div>';
                 $(comboboxBoundListElement).append(itemHTML.format(item[dataIndex], item[valueField]));
                 $(itemHTML).data("data", item);
             })
@@ -175,7 +176,6 @@ var controlJs = Object.create({
         comboboxBoundListElement.css('left', offsetComboboxElement.left.toString() + 'px');
         comboboxBoundListElement.toggle();
         comboboxBoundListElement.children().first().focus();
-        $('#txtCustomerName').focus();
         event.stopPropagation();
     },
 
@@ -203,7 +203,38 @@ var controlJs = Object.create({
             controlJs.showDataSelection(sender);
         }
     },
-
+    /*----------------------------------------------------------------------------------------------
+     * Chọn item trong combobox bằng phím di chuyển lên xuống
+     * Author: NVLAM (15/02/2019)
+     */
+    comboboxDataItem_OnKeyUp: function (sender) {
+        if (sender.keyCode === 38) {
+            if (sender.target.previousElementSibling !== null) {
+                sender.target.previousElementSibling.focus();
+            } else {
+                sender.target.parentElement.parentElement.firstElementChild.focus();
+                sender.target.parentElement.parentElement.firstElementChild.value = dataInput;
+                if (sender.target.parentElement.parentElement.getAttribute('entity') === "AccountObject") {
+                    $('#txtAccountObjectName').val("");
+                    $('#txtAddress').val("");
+                    $('#txtAccountDebit').val("");
+                    $('#txtContactName').val("");
+                } else {
+                    $('#txtJournalMemo').val("");
+                    $('#txtEmployeeName').val("");
+                }
+            }
+        } else if (sender.keyCode === 40) {
+            if (sender.target.nextElementSibling !== null) {
+                sender.target.nextElementSibling.focus();
+            }
+            else {
+                sender.target.parentElement.firstElementChild.focus();
+            }
+        } else if (sender.keyCode === 13) {
+            $(this).trigger("click");
+        }
+    },
     /* ---------------------------------------------------------------------------------------------
      * set vị trí của data hiển thị:
      * Author: NVMANH (14/05/2018)
@@ -220,7 +251,7 @@ var controlJs = Object.create({
 
 class Button {
     constructor(scope, width, commandName, eventHandler) {
-        var eventName = 'btn{0}_OnClick'.format(commandName),
+        var eventName = '   {0}_OnClick'.format(commandName),
             id = 'btn{0}'.format(commandName),
             html = '<div class="btn-customer-16-body"><i class="btn-customer-icon-16 {0} {1}"></i><div class="btn-customer-text">{2}</div></div>';
         if (eventHandler) {
@@ -305,6 +336,7 @@ class FormPopup {
             width: width ? width : 680,
             dialogClass: 'form-customerDetail',
             modal: showModal ? showModal : true,
+            hide: "drop",
             buttons: buttons,
             close: function () {
                 //me.formRegister[0].reset();
@@ -332,7 +364,7 @@ class FormPopup {
     };
     btnHelp_OnClick() {
         alert('Help');
-    }
+    };
     btnPause_OnClick() {
         this.Form.dialog('close');
     }

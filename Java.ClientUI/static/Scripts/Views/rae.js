@@ -1,24 +1,24 @@
 
 $(document).ready(function(){
-    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-        $.ajax({
-            method: "GET",
-            url:MISA.Config.loginUrl+"/api/home",
-            beforeSend: function(xhr) {
-                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-            },
-            success: function(data, status, xhr){
-                $('.user-info').text((data.email).split("@")[0]);
-                //ajax goi company
-            },
-            error: function(err, stt, xhr){
-                window.location.href="/";
-            }
-        })  
-    }
-    else{
-        window.location.href="/";
-    }
+    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+    //     $.ajax({
+    //         method: "GET",
+    //         url:MISA.Config.loginUrl+"/api/home",
+    //         beforeSend: function(xhr) {
+    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+    //         },
+    //         success: function(data, status, xhr){
+    //             $('.user-info').text((data.email).split("@")[0]);
+    //             //ajax goi company
+    //         },
+    //         error: function(err, stt, xhr){
+    //             window.location.href="/";
+    //         }
+    //     })  
+    // }
+    // else{
+    //     window.location.href="/";
+    // }
     
 })
 var fakeData = [];
@@ -72,7 +72,10 @@ var showDetail=function(){
         fieldData.forEach(function (valueField, indexField) {
             if (indexField === 0) {
                 htmlItem.push('<td class="no-border-left" >{0}</td>'.format(item[valueField]));
-            } else {
+            } else if (indexField === 3) {
+                htmlItem.push('<td class="text-right" >{0}</td>'.format(Number(item[valueField]).formatMoney()));
+            }
+            else {
                 htmlItem.push('<td>{0}</td>'.format(item[valueField]));
             }
         })
@@ -232,11 +235,11 @@ class ReceiptsAndExpensesJS {
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
         $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
+        $(document).on('click', '#btnPause', this.btnPause_OnClick.bind(this));
         $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
-        $('#btnPause').on('click', this.btnPause_OnClick.bind(this));
         $('#tbarRefresh').on('click', this.tbarRefresh_OnClick.bind(this));
         $('#currentPage').on('keyup', this.currentPage_OnChange.bind(this));
         // $('.record-select-item').on('click', this.size_OnChange.bind(this));
@@ -285,7 +288,7 @@ class ReceiptsAndExpensesJS {
             htmlItem.push('<tr indexRef=' + index + ' class="{0}">'.format(index % 2 === 0 ? '' : 'row-highlight'));
             fieldData.forEach(function (valueField, indexField) {
                 if (indexField === 7 || indexField === 1) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-center"));
-                else if (indexField === 4) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-right"));
+                else if (indexField === 4) htmlItem.push('<td class="{1}">{0}</td>'.format(Number(item[valueField]).formatMoney(),"text-right"));
                 else if (indexField === 0) {
                     htmlItem.push('<td class="no-border-left {1}" >{0}</td>'.format(item[valueField],"text-center"));
                 } else {
@@ -409,7 +412,7 @@ class ReceiptsAndExpensesJS {
                         </td>
                         <td><input fileDataInvoice=""  value="3221"></td>
                         <td><input fileDataInvoice="" value="1112"></td>
-                        <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
+                        <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
@@ -492,7 +495,7 @@ class ReceiptsAndExpensesJS {
                             </td>
                             <td><input fileDataInvoice=""  value="3221"></td>
                             <td><input fileDataInvoice="" value="1112"></td>
-                            <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
+                            <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
                             <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                             <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                             <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
@@ -597,8 +600,13 @@ class ReceiptsAndExpensesJS {
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-        this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
+        this.detailFormOnBeforeOpen(arguments);
+        $('input[dataindex="RefNo"]').attr('disabled', true);
+        $('#tbodyRAEDetail-popup input').attr('disabled',true);
+        debugger
+        $('#tbodyRAEDetail-popup td:first-child input').attr('disabled',false);
+        // $('#tbodyRAEDetail-popup input:first-child').attr('disabled',false);
     };
 
     /**
@@ -1070,6 +1078,7 @@ class ReceiptsAndExpensesJS {
             $('#txtContactName').val(account.ContactName);
         }
 
+
     };
     reasonItem_OnSelect() {
         // Lấy thông tin đối tượng được chọn:
@@ -1099,22 +1108,18 @@ $(document).ready(function () {
     
     //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
     //raeJS.btnAdd_OnClick();
-
     $('#arrow-combo-trigger').click(function(){
         $('#numberRecordSelection').show();
         event.stopPropagation() ;
     })
-
-   
-
-
+    
     $('#addtr').on('click', function(){
         //them moi status =3
         $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
                         +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
                         +'<td><input></td>'
                         +'<td><input></td>'
-                        +'<td><input></td>'
+                        +'<td class="text-right"><input></td>'
                         +'<td><input></td>'
                         +'<td><input></td>'
                         +'<td><input></td>'
@@ -1138,6 +1143,10 @@ $(document).ready(function () {
         "status": 3}
         invoicesGlobal.push(voiceNew);
     })
+
+    // $( "#txtAccountObjectCode").autocomplete({
+    //     source: dataResource.AccountObject.AccountObjectCode
+    // });
 })
 
 ///////ham convertData de hien thi chuan theo nguoi dung
@@ -1359,4 +1368,3 @@ $('input[elementtype="filterInput"]').blur(function(){
             checkTbar();
         }
     })
-
