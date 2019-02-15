@@ -239,6 +239,9 @@ class Button {
             case 'Help':
                 html = html.format('far','fa-question-circle', 'Giúp');
                 break;
+            case 'Pause':
+                html = html.format('fas','fa-pause', 'Hoãn');
+                break;
             default:
                 break;
         }
@@ -253,7 +256,10 @@ class Button {
             this.class = 'btn btn-danger';
         }
         if (commandName === 'Help') {
-            this.class = 'btn btn-info btnHelp';
+            this.class = 'btn btn-info';
+        }
+        if (commandName === 'Pause') {
+            this.class = 'btn btn-warning';
         }
         // this.class = (commandName === 'Help' ? 'btn-customer btnHelp' : 'btn-customer');
         this.width = width + 'px';
@@ -289,7 +295,8 @@ class FormPopup {
                 [new Button(me, 75, 'Save'),
                 new Button(me, 120, 'SaveAdd'),
                 new Button(me, 75, 'Cancel'),
-                new Button(me, 75, 'Help')
+                new Button(me, 75, 'Help'),
+                new Button(me, 75, 'Pause')
                 ]
         }
         this.Form = $(selectorDetailHTML).dialog({
@@ -325,6 +332,9 @@ class FormPopup {
     };
     btnHelp_OnClick() {
         alert('Help');
+    }
+    btnPause_OnClick() {
+        this.Form.dialog('close');
     }
 }
 
