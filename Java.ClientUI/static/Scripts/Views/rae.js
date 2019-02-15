@@ -302,21 +302,6 @@ class ReceiptsAndExpensesJS {
         /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-<<<<<<< HEAD
-        $('#btnEdit').on('click', { }, this.btnEdit_OnClick.bind(this));
-        $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
-        $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
-        $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
-
-        ////handle button on frmRAEDetail (form Detail)
-        $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
-        $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
-        $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
-        $(document).on('click', '#btnPause', this.btnPause_OnClick.bind(this));
-        $(document).on('click', '#btnHelp', this.btnHelp_OnClick.bind(this));
-        
-        ////handle button on bottomToolbar
-=======
         $(document).on('keyup', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyUp);
         $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
         $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
@@ -328,7 +313,6 @@ class ReceiptsAndExpensesJS {
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
->>>>>>> dbd388546f7a7c36f3fc80a2eb87dee94a42432d
         $('#tbarRefresh').on('click', this.tbarRefresh_OnClick.bind(this));
         $('#currentPage').on('keyup', this.currentPage_OnChange.bind(this));
         // $('.record-select-item').on('click', this.size_OnChange.bind(this));
@@ -500,15 +484,6 @@ class ReceiptsAndExpensesJS {
                             <button role="removeInvoice" class="btn btn-danger">x</button>
                             <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
-<<<<<<< HEAD
-                        <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.amount}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.amountOC}"></td>
-                        <td><input fileDataInvoice="" value="${raeRef.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${raeRef.accountObjectName}"></td>
-                        <td><input fileDataInvoice="" value="${raeRef.accountObjectAddress}"></td>
-                        <td><input fileDataInvoice="" value="Mã thống kê (updating...)"></td>
-=======
                         <td><input fileDataInvoice=""  value="3221"></td>
                         <td><input fileDataInvoice="" value="1112"></td>
                         <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
@@ -516,7 +491,6 @@ class ReceiptsAndExpensesJS {
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
                         <td><input fileDataInvoice="" value=""></td>
->>>>>>> dbd388546f7a7c36f3fc80a2eb87dee94a42432d
                         </tr>`;
             $('#tbodyRAEDetail-popup').append(div);
             $('button[role="removeInvoice"]').on('click', function(){
