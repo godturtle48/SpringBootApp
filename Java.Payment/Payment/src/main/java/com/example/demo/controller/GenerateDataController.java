@@ -70,12 +70,14 @@ public class GenerateDataController {
 											"2014 Nguyễn Văn Cừ, Long Biên, Hà Nội",
 											"2310 Láng Hạ, Đống Đa, Hà Nội",
 											"1234 Đại Cồ Việt, Hai Bà Trưng, Hà Nội"};	
-		String[]	accountObjectContactNames= {"misa@Gmail.com",
-												"group@Gmail.com",
-												"contact@Gmail.com",
-												"hoa@Gmail.com",
-												"manager@Gmail.com",
-												"stresy@Gmail.com"};
+		String[]	accountObjectContactNames= {"Nguyễn Kim Ngọc",
+												"Nguyễn Hữu Thắng",
+												"Hà Đức Phú",
+												"Nguyễn Phan Mỹ Linh",
+												"Phạm Thị Mai Phương",
+												"Hà Thị Hằng",
+												"Phạm Thục Trinh",
+												"Vũ Ngọc Mai"};
 		
 		String[]	accountObjectNames= {"Công ty cổ phần MISA", 
 										"Công ty điện lực Hà Nội", 
@@ -87,12 +89,12 @@ public class GenerateDataController {
 										"Công ty vận tải Sông Công",
 										"Công ty cổ phần Thiên Tân",
 										"Hoàng Ngọc Mai"};	
-		String[]	createdBys= {"Hoàng",
-								"Hà",
-								"Nam",
-								"Hiếu",
-								"Hùng",
-								"Ngọc"};	
+		String[]	createdBys= {"Nguyễn Đình Quân",
+								"Nguyễn Công Thành",
+								"Đoàn Văn Quân",
+								"Nguyễn Văn Lâm",
+								"Trần Thị Huyền",
+								"Nguyễn Thế Chí Dũng"};	
 		//year
 		ArrayList<Integer> year = new ArrayList<Integer>();
 		year.add(2017);
