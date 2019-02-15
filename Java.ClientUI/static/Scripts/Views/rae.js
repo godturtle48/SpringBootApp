@@ -92,6 +92,7 @@ var showDetail=function(){
     getPageHome()
     This function is for Home Paging 25 50 100
     //Hàm láy trả về size bản ghi đầu tiên và tổng số bản ghi có
+    //This function return fakeData to buildDataIntoTable() func. Change attributes in fakeData to change info displayed in Table Master
 */
 
 var getPageHome = function() {
@@ -124,17 +125,17 @@ var getPageHome = function() {
 			for (var i = 0; i < payment.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : convertDate(payment[i].postedDate),
+					PostedDate : convertDate(payment[i].postedDate),                    
 					RefDate : convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
-					JournalMemo : payment[i].journalMemo,
+					JournalMemo : payment[i].journalMemo,                               //Diễn giải   ??? What JournalMemo
 					RefTypeName : payment[i].ref.refTypeName,
-					TotalAmount : payment[i].totalAmountOC,
+					TotalAmount : payment[i].totalAmountOC,                             //Số tiền    
 					AccountObjectName : payment[i].accountObjectName,
-					ReasonTypeName : payment[i].journalMemo,
+					ReasonTypeName : payment[i].journalMemo,                            //Lý do thu/chi
 					CashBookPostedDate : convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
-					DepartmentName : payment[i].accountObjectName
+					DepartmentName : payment[i].accountObjectAddress
 				})
             }
         
@@ -246,24 +247,31 @@ class ReceiptsAndExpensesJS {
     };
 
     initEvents() {
+        /////handle click from users
         $('#tblCustomerList').on('click', { scope: '#tbodyRAE tr' }, this.rowRAE_OnClick.bind());
         $(document).on('dblclick', '#tbodyRAE tr', {},  this.rowRAE_OnDblClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
+
+        /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-        $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
-        $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
-        $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
         $('#btnEdit').on('click', { }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
-        $('#btnPause').on('click', this.btnPause_OnClick.bind(this));
+
+        ////handle button on frmRAEDetail (form Detail)
+        $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
+        $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
+        $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
+        $(document).on('click', '#btnPause', this.btnPause_OnClick.bind(this));
+        $(document).on('click', '#btnHelp', this.btnHelp_OnClick.bind(this));
+        
+        ////handle button on bottomToolbar
         $('#tbarRefresh').on('click', this.tbarRefresh_OnClick.bind(this));
         $('#currentPage').on('keyup', this.currentPage_OnChange.bind(this));
         // $('.record-select-item').on('click', this.size_OnChange.bind(this));
-        
     };
 
     /*
@@ -373,7 +381,6 @@ class ReceiptsAndExpensesJS {
         $('.combobox').removeClass('border-red');
         $('.mcombobox').removeClass('error-box');
         $('.combobox').removeAttr('title');
-        debugger;
         if (raeJS.editMode == 2) {
         //sua
             RefUpdate={};
@@ -574,6 +581,7 @@ class ReceiptsAndExpensesJS {
         }
         this.detailFormOnBeforeOpen(arguments);
         $('#btnSave').attr('disabled', true);
+        $('#btnPause').attr('disabled', true);
         $('#frmRAEDetail input').attr('disabled', true);
         $('#frmRAEDetail #addtr').attr('disabled', true);
         $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
@@ -1053,14 +1061,32 @@ class ReceiptsAndExpensesJS {
     };
 
     btnHelp_OnClick(event) {
-        alert('btnHelp_OnClick');
+        commonJS.showSuccessMsg("Tính năng đang được xây dựng");
     };
     /* -------------------------------------------------------------------
      * Nhấn button Hoãn
      * Created by: NVLAM (14/02/2018)
      */
     btnPause_OnClick(event) {
-        this.DetailForm.Close();
+        //check if Pause or Continue
+        if ($('#btnPause .btn-customer-text').text() == "Hoãn") {
+            //if Pause: disable all input and button and change text to Tiep tuc
+            $('#btnSave').attr('disabled', true);
+            $('#frmRAEDetail input').attr('disabled', true);
+            $('#frmRAEDetail #addtr').attr('disabled', true);
+            $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
+            $('.combobox-arrow-select').hide();
+            $('button[role="removeInvoice"]').attr('disabled', true);
+            $('#frmRAEDetail .detail-info input').attr('disabled', true);
+            $('#btnPause .btn-customer-text').text('Tiếp tục');
+        } else {
+            //if Continue: enable all and change text
+            $('button[disabled="disabled"]').removeAttr('disabled');
+            $('#frmRAEDetail input').removeAttr('disabled');
+            $('button[role="removeInvoice"]').attr('disabled', false);
+            $('.combobox-arrow-select').show();
+            $('#btnPause .btn-customer-text').text('Hoãn');
+        }
     }
     btnRefresh_OnClick(event){
         fakeData = [];
