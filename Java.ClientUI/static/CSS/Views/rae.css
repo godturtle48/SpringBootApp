@@ -57,7 +57,9 @@
     margin-top: 8px;
     border-radius: 5px;
 }
-
+    .detail-info td {
+        padding: 0px;
+    }
 .detail-info .rae-detail-title {
     width: 90px
 }

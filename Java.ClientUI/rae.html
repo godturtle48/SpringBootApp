@@ -454,10 +454,10 @@
                                                 <th id='column-header-1' style="flex:1;" fieldData="JournalMemo" DataType="Text" class="gridPanel-header-item-title no-border-left width-200">
                                                     Diễn giải<div id='column-header-1-sizer'></div>
                                                 </th>
-                                                <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150">
-                                                    TK Nợ<div id='column-header-2-sizer'></div>
+                                                <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản nợ">
+                                                    TK Nợ <div id='column-header-2-sizer'></div>
                                                 </th>
-                                                <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                                                <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản có">
                                                     TK Có<div id='column-header-3-sizer'></div>
                                                 </th>
                                                 <th id='column-header-4' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
@@ -508,7 +508,7 @@
                             <div class="col-md-4">
                                 <div class="mcombobox" dataindex="AccountObjectCode" valueField="AccountObjectCode" controltype="ComboboxData" >
                                     <div entity="AccountObject" controltype="ComboboxData" class="cls-wrapControl-combobox combobox" style="width: 100%">
-                                        <input type="text" id="txtAccountObjectCode" controltype="inputCombobox" name="AccountObjectCode" dataindex="AccountObjectCode" value=""  data-type="text" required>
+                                        <input type="text" id="txtAccountObjectCode" controltype="inputCombobox" name="AccountObjectCode" dataindex="AccountObjectCode" value=""  data-type="text" required autocomplete="off">
                                         <div class="combobox-arrow-select trigger-loadData"></div>
                                     </div>
                                     <div class="comboboxData-boundlist hide-if-outside" style="top: 483.297px; width: 281px; left: 862px; display: none;">
@@ -531,7 +531,7 @@
                             <div class="col-md-4">
                                 <div class="mcombobox" dataindex="ReasonName" valueField="ReasonID" controltype="ComboboxData">
                                     <div entity="Reason" controltype="ComboboxData" class="cls-wrapControl-combobox combobox" style="width: 100%">
-                                        <input type="text" id="txtReason" controltype="inputCombobox" name="CustomerGroupParent" dataindex="ReasonName" value=""  data-type="data" required>
+                                        <input type="text" id="txtReason" controltype="inputCombobox" name="CustomerGroupParent" dataindex="ReasonName" value=""  data-type="data" required autocomplete="off">
                                         <div class="combobox-arrow-select trigger-loadData"></div>
                                     </div>
                                     <div class="comboboxData-boundlist hide-if-outside" style="top: 483.297px; width: 281px; left: 862px; display: none;">
@@ -593,10 +593,10 @@
                             <th id='column-header-1' style="flex:1;" fieldData="JournalMemo" DataType="Text" class="gridPanel-header-item-title no-border-left width-200">
                                 Diễn giải<div id='column-header-1-sizer'></div>
                             </th>
-                            <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                            <th id='column-header-2' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản nợ">
                                 TK Nợ<div id='column-header-2-sizer'></div>
                             </th>
-                            <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                            <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150" data-toggle="tooltip" title="Tài khoản có">
                                 TK Có<div id='column-header-3-sizer'></div>
                             </th>
                             <th id='column-header-4' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
@@ -629,8 +629,8 @@
     </div>
     <script src="./static/Scripts/lib/jquery-3.2.1.min.js"></script>
     <script src="./static/Scripts/lib/jquery-ui.js"></script>
-    <script src="./static/Scripts/lib/bootstrap.min.js"></script>
     <script src="./static/Scripts/lib/popper.min.js"></script>
+    <script src="./static/Scripts/lib/bootstrap.min.js"></script>
     <script src="./static/Scripts/common/data.js"></script>
     <script src="./static/Scripts/common/enum.js"></script>
     <script src="./static/Scripts/common/validation.js"></script>
@@ -640,6 +640,10 @@
     <!-- <script src="./static/Scripts/Views/login.js"></script> -->
     <script src="./static/Scripts/Views/config.js"></script>
     <script src="./static/Scripts/Views/rae.js"></script>
-
+    <script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
 </body>
 </html>
