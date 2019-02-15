@@ -268,6 +268,33 @@ public class PaymentReceiptRepository {
 		  session.close(); 
 		return 1;
 	}
+
+	public Integer getRefNoFinance() {
+		// TODO Auto-generated method stub
+		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		try {
+			return session.createSQLQuery("select * from PaymentReceipt").getResultList().size();
+		}
+		catch(NullPointerException e) {
+			return 0;
+		}
+	}
+
+	public boolean ifRefNoFinanceExist(String refNoFinance_gen) {
+		// TODO Auto-generated method stub
+		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		try {
+			if(session.createQuery("from PaymentReceipt where refNoFinance = :refNoFinance_gen")
+					.setParameter("refNoFinance_gen", refNoFinance_gen).getResultList().size() != 0) {
+				return true;
+			}
+		}
+		catch (NullPointerException e) {
+			// TODO: handle exception
+			return true;
+		}
+		return false;
+	}
 	
 	
 	//search
