@@ -7,7 +7,7 @@ $(document).ready(function(){
         url: MISA.Config.paymentUrlServer + "/loadComboboxAddPayment",
         success: function(res){
             // AccountObjectData = res;
-            console.log(res);
+            // console.log(res);
             for (var i = 0; i < res.length; i++) {                     
                 (function () {                        
                     dataResource.AccountObject.push({                            
