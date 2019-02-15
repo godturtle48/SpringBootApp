@@ -286,7 +286,7 @@ public class PaymentReceiptController {
 
 		@GetMapping("/getRefNoFinance")
 		public String getRefNoFinance() {
-			String refNoFinance = "MCT";
+			String refNoFinance = "";
 			Integer numPaymentReceipt = paymentService.getRefNoFinance();
 			do {
 				numPaymentReceipt += 1;

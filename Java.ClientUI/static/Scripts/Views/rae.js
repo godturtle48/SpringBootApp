@@ -223,6 +223,7 @@ class ReceiptsAndExpensesJS {
     };
 
     initEvents() {
+        var refType_selected = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == "thu") ? 1 : 2;
         $('#tblCustomerList').on('click', { scope: '#tbodyRAE tr' }, this.rowRAE_OnClick.bind());
         $(document).on('dblclick', '#tbodyRAE tr', {},  this.rowRAE_OnDblClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
@@ -232,7 +233,7 @@ class ReceiptsAndExpensesJS {
         $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
         $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
-        $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
+        $('#btnEdit').on('click', { refType: refType_selected }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
@@ -542,6 +543,8 @@ class ReceiptsAndExpensesJS {
      rowRAE_OnDblClick() {
         this.editMode = 2;
         //identify receipt or expense
+        var refTypeName_select = $(".rowSelected").find("td:eq(8)").text();
+        var refTypeID_select = (refTypeName_select == "thu") ? 1 : 2;
         if ($('.rowSelected').attr('refType') == 1) {
             this.RefType = 1;
         } else {
@@ -588,11 +591,17 @@ class ReceiptsAndExpensesJS {
         $('#tbodyRAEDetail-popup').empty();
         $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+        //Ajax lấy số chứng từ tự sinh để thêm hoặc nhân bản 
+        var infix = "PC"
+        if(this.RefType == 1){
+            infix = "PT";
+        }
         $.ajax({
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
             success: function(data){
-                $('input[dataindex="RefNo"]').val(data);            
+                debugger;
+                $('input[dataindex="RefNo"]').val(infix + data);  
             }
         });
         indexInvoiceGlobal=0;
@@ -604,6 +613,7 @@ class ReceiptsAndExpensesJS {
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+        arguments[0].data.refType = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == "thu") ? 1 : 2;
         this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
     };
@@ -633,7 +643,7 @@ class ReceiptsAndExpensesJS {
             //        "amount": 1004,
             //        "accountObjectID": "accountObjectID5",
             //        "sortOrder": 425
-            var refTypeID = this.RefType; 
+            var refTypeID = this.RefType;
             var refTypeName = "Thu";
             if(refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
@@ -721,7 +731,6 @@ class ReceiptsAndExpensesJS {
             //che do sửa
             //xet du  lieu tu bien chua invoicesGlobal
             //invoicesData dữ liệu đc gửi lên
-
             var invoicesData=[]; 
             var sortOrder=0;
             if(RefUpdate==null){
@@ -1049,16 +1058,23 @@ class ReceiptsAndExpensesJS {
         //editMode=3 chế độ  duplicate
         this.editMode = 3;
         $('#tbodyRAEDetail-popup').empty();
-        // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-        // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-    //  this.detailFormOnBeforeOpen(arguments);
+        var refType_selected = ($(".rowSelected").find("td:eq(8)").text().toLowerCase() == 'thu') ? 1 : 2;
+        this.RefType = refType_selected;
         $.ajax({
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
             success: function(data){
-                $('input[dataindex="RefNo"]').val(data);            
+                if(refType_selected == 1)
+                    $('input[dataindex="RefNo"]').val("PT"+data);    
+                else
+                    $('input[dataindex="RefNo"]').val("PC"+data);          
             }
+        });  
+        var  argument1 = [];
+        argument1.push({
+            data:{refType:refType_selected}
         });
+        this.detailFormOnBeforeOpen(argument1);
         this.DetailForm.Show();
     } 
     /* -------------------------------------------------------------------
