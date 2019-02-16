@@ -101,21 +101,39 @@ textarea {
 }
 
 .btn-primary {
-    background-color: #2baaed;
-    border-color: #2baaed;
+    color: #2baaed;
+    background-color: #fff;
+    border: none;
 }
-
+    .btn-primary:disabled,.btn-success:disabled,.btn-warning:disabled,.btn-info:disabled,.btn-warning:disabled  {
+        color: grey;
+        border:none;
+        background-color: #fff;
+    }
 .btn-warning {
-    background-color: #FFC36F;
-    border-color: #FFC36F;
-    color: #fff;
+    color: #FFC36F;
+    background-color: #fff;
+    border: none;
 }
-
+    .btn-warning:hover {
+        color: #fff;    
+    }
 .btn-success {
-    background-color: #31CC54;
-    border-color: #31CC54;
+    color: #31CC54;
+    background-color: #fff;
+    border: none;
 }
-
+.btn-danger {
+    color: #dc3545;
+    background-color: #fff;
+    border: none;
+}
+.btn-info {
+    color: #17a2b8;
+    background-color: #fff;
+    border: none;
+}
+   
 button[role="removeInvoice"] {
     position:relative; 
     left: 0px;
