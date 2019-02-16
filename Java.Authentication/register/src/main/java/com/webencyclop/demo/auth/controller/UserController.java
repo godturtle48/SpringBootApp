@@ -46,6 +46,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -55,6 +56,8 @@ import com.webencyclop.demo.form.*;
 public class UserController<E> {
 	private static final String ERROR_MESSAGE = "error1";
 	
+	@Autowired
+    BCryptPasswordEncoder encoder;
 	@Autowired
 	UserRepository userRepository;
 	@Autowired

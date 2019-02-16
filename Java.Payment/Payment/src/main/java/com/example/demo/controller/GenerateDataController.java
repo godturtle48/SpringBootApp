@@ -186,7 +186,7 @@ public class GenerateDataController {
 			invoice.setAccountObjectID(GenerateDataController.accountObjectID[rand.nextInt(GenerateDataController.accountObjectID.length)]);
 			invoice.setAmount(Double.valueOf(1000+i/100));
 			invoice.setAmountOC(Double.valueOf(1000+i/1000));
-			invoice.setDiscription("Trả lương nhân viên tháng"+(i%12+1));
+			invoice.setDiscription("Trả lương nhân viên tháng "+(i%12+1));
 			invoice.setPayment(payments.get(rand.nextInt(payments.size())));
 			invoice.setSortOrder(i);
 		invoiceService.save(invoice);
