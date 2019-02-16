@@ -2,11 +2,11 @@
 $(document).ready(function () {
     $(document).click(commonJS.setHideOnClickOutSide);
     $(document).on('click', 'table tbody tr', commonJS.rowTable_OnClick);
-    $('#box-triggerWrap').on('click','#arrow-combo-trigger',function() {
-       
-        $('#numberRecordSelection').toggle();
-        event.stopPropagation();
-    })
+    // $('#arrow-combo-trigger').click(function() {
+    //     debugger
+    //     $('#numberRecordSelection').toggle();
+    //     event.stopPropagation();
+    // })
     $('#box-triggerWrap').on('click','.record-select-item',function() {
         var value = $(this).attr('item-value');
          $('#box-triggerWrap').find('input').val(value);
@@ -69,12 +69,11 @@ var commonJS = {
      */
     showConfirm: function (msg, confirmCallBack) {
         if (!$('body').find('#message-box').length) {
-            var html = '<div id="message-box">' +
+            var html = '<div id="message-box" title="Cảnh báo">' +
                 msg +
                 '</div >';
             $('body').append(html);
         }
-
         $(function () {
             $("#message-box").dialog({
                 modal: true,
@@ -101,7 +100,10 @@ var commonJS = {
                     }
                 }
             });
-           
+            // $('span#ui-id-2').html('Cảnh báo');
+            $('[aria-labelledby="ui-id-2"].ui-dialog .ui-dialog-content').css('top','0px');
+            $('[aria-labelledby="ui-id-2"].ui-dialog .ui-dialog-buttonpane').css('top','0px');
+            $('[aria-labelledby="ui-id-2"].ui-dialog .ui-dialog-buttonpane').css('float','right');
         });
     },
 

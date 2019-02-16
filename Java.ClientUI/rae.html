@@ -278,7 +278,7 @@
                                             <tr id="filterElement">
                                                 <th class="no-border-left">
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="postedDate" />
                                                         </div>
@@ -286,7 +286,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="refDate" />
                                                         </div>
@@ -294,7 +294,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="refNoFinance" />
                                                         </div>
@@ -302,7 +302,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="journalMemo" />
                                                         </div>
@@ -310,7 +310,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="totalAmount" />
                                                         </div>
@@ -318,7 +318,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="accountObjectName" />
                                                         </div>
@@ -326,7 +326,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="reasonTypeID" />
                                                         </div>
@@ -334,7 +334,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="postedDate" />
                                                         </div>
@@ -342,7 +342,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="refTypeName" />
                                                         </div>
@@ -351,7 +351,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="refNoFinance" />
                                                         </div>
@@ -359,7 +359,7 @@
                                                 </th>
                                                 <th>
                                                     <div class="gridPanel-header-item-filter">
-                                                        <a class="btn-select-filter" style="font-weight: normal">∗</a>
+                                                        <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
                                                             <input elementtype="filterInput" fieldname="accountObjectName" />
                                                         </div>
@@ -492,6 +492,52 @@
 
     <!--Form chi tiết sử dụng cho Thêm, sửa, xóa-->
     <div id="frmRAEDetail" title="Phiếu thu">
+            <!-- <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button type="button" id="btnPrevious" class="btn btn-primary" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 fas fa-arrow-left"></i>
+                            <div class="btn-customer-text">Trước</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnNext" class="btn btn-primary" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 fas fa-arrow-right"></i>
+                            <div class="btn-customer-text">Sau</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnSave" class="btn btn-success" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 far fa-save"></i>
+                            <div class="btn-customer-text">Cất</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnSaveAdd" class="btn btn-success" style="width: 120px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 fas  fa-file-medical"></i>
+                            <div class="btn-customer-text">Cất và thêm</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnCancel" class="btn btn-danger" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 fas fa-ban"></i>
+                            <div class="btn-customer-text">Hủy bỏ</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnHelp" class="btn btn-info" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 far fa-question-circle"></i>
+                            <div class="btn-customer-text">Giúp</div>
+                        </div>
+                    </button>
+                    <button type="button" id="btnPause" class="btn btn-warning" style="width: 75px;">
+                        <div class="btn-customer-16-body">
+                            <i class="btn-customer-icon-16 fas fa-pause"></i>
+                            <div class="btn-customer-text">Hoãn</div>
+                        </div>
+                    </button>
+                </div>
+            </div> -->
         <!--Tiêu đề form-->
         <div class="title-form-detail">
             Thu tiền gửi
