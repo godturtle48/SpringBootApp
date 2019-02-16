@@ -14,6 +14,7 @@ import com.webencyclop.demo.auth.exception.InvalidRequestException;
 import com.webencyclop.demo.auth.middlewares.Authenticate;
 import com.webencyclop.demo.auth.util.JwtUtil;
 import com.webencyclop.demo.auth.util.ValidateUtil;
+import com.webencyclop.demo.model.ChangePassword;
 import com.webencyclop.demo.model.Company;
 import com.webencyclop.demo.model.Role;
 import com.webencyclop.demo.model.User;
@@ -45,6 +46,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -54,6 +56,8 @@ import com.webencyclop.demo.form.*;
 public class UserController<E> {
 	private static final String ERROR_MESSAGE = "error1";
 	
+	@Autowired
+    BCryptPasswordEncoder encoder;
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
@@ -236,5 +240,19 @@ public class UserController<E> {
 		}	
 
 	}
+	
+	@PostMapping(value="api/changePassword")
+    public String changePassword(@RequestBody ChangePassword changePassword, HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse) {
+        Authenticate.Auth(httpServletRequest, httpServletResponse);
+        String email = (String) httpServletRequest.getAttribute("email");
+        String password = changePassword.getOldPassword();
+        if(userSvIml.isUser(email, password)) {
+            User user = userRepository.findByContactEmail(email);
+            user.setPassword(encoder.encode(changePassword.getNewPassword()));
+            userRepository.save(user);
+        }
+        return "success";
+    }
 
 }
