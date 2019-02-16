@@ -24,11 +24,6 @@ $(document).ready(function(){
 $(document).ready(function () {  
     //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
     //raeJS.btnAdd_OnClick();
-    $('#arrow-combo-trigger').click(function(){
-        $('#numberRecordSelection').show();
-        event.stopPropagation() ;
-    })
-    
     $('#addtr').on('click', function(){
         //them moi status =3
         $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
@@ -59,7 +54,27 @@ $(document).ready(function () {
         "status": 3}
         invoicesGlobal.push(voiceNew);
     })
-
+    $('.fa-calendar-alt').click(function(){ 
+        $(this).siblings().first().focus();
+    })
+    $(document).keydown(function(event){
+        var currentRow = $('.rowSelected');
+        switch (event.keyCode) {
+            //Mũi tên xuống
+            case 40:
+                raeJS.selectRow(currentRow.next());
+                $(".rowSelected").trigger("click");
+                return false;
+            //Mũi tên lên
+            case 38:
+                raeJS.selectRow(currentRow.prev());
+                $(".rowSelected").trigger("click");
+                return false;
+            case 13:
+                event.preventDefault();
+                $(".rowSelected").trigger('dblclick');
+        }
+    })
     // $( "#txtAccountObjectCode").autocomplete({
     //     source: dataResource.AccountObject.AccountObjectCode
     // });
@@ -114,6 +129,8 @@ var showDetail=function(){
         htmlItem.push('<tr class="{0}">'.format(index % 2 === 0 ? '' : 'row-highlight'));
         fieldData.forEach(function (valueField, indexField) {
             if (indexField === 0) {
+                htmlItem.push('<td class="no-border-left" >{0}</td>'.format(item[valueField]));
+            } else if (indexField === 1 || indexField === 7){
                 htmlItem.push('<td class="no-border-left" >{0}</td>'.format(item[valueField]));
             } else if (indexField === 3) {
                 htmlItem.push('<td class="text-right" >{0}</td>'.format(Number(item[valueField]).formatMoney()));
@@ -275,17 +292,19 @@ class ReceiptsAndExpensesJS {
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-        $(document).on('keyup', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyUp);
-        $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
-        $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
-        $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
-        $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
-        $(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
+        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown);
+        // $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
+        // $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
+        // $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
+        // $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
+        //$(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
         $(document).on('click', '#btnPause', this.btnPause_OnClick.bind(this));
         $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
         $('#btnRefresh').on('click', this.btnRefresh_OnClick.bind(this));
+
+        //$(document).on('click','#frmRAEDetail #btnCancel', function(){alert(1)});
         $('#tbarRefresh').on('click', this.tbarRefresh_OnClick.bind(this));
         $('#currentPage').on('keyup', this.currentPage_OnChange.bind(this));
         // $('.record-select-item').on('click', this.size_OnChange.bind(this));
@@ -632,20 +651,32 @@ class ReceiptsAndExpensesJS {
      * Created bt: NVLAM (15/02/2019)
      */
     btnNext_OnClick(){
-        $('.rowSelected').prev().addClass('rowSelected');
-        $('.rowSelected').last().removeClass('rowSelected'); 
-        this.DetailForm.Close();
-        $('.rowSelected').trigger('dblclick');  
+        var currentRow = $('.rowSelected');
+        if (!$('#tbodyRAE').children().first().hasClass('rowSelected')){
+            raeJS.selectRow(currentRow.prev());
+            this.DetailForm.Close();
+            $('.rowSelected').trigger('dblclick');
+        } else {
+            $('.tbar-page-prev').trigger('click');
+            this.DetailForm.Close();
+            $('.rowSelected').trigger('dblclick');
+        }
     }
     /* ----------------------------------------------------------------------------
      * Nút chuyển đến chứng từ gần nhất trong quá khứ
      * Created bt: NVLAM (15/02/2019)
      */
     btnPrevious_OnClick(){
-        $('.rowSelected').next().addClass('rowSelected');
-        $('.rowSelected').first().removeClass('rowSelected'); 
-        this.DetailForm.Close();
-        $('.rowSelected').trigger('dblclick');  
+        var currentRow = $('.rowSelected');
+        if (!$('#tbodyRAE').children().last().hasClass('rowSelected')){
+            raeJS.selectRow(currentRow.next());
+            this.DetailForm.Close();
+            $('.rowSelected').trigger('dblclick');  
+            } else {
+                $('.tbar-page-next').trigger('click');
+                this.DetailForm.Close();
+                $('.rowSelected').trigger('dblclick');
+            }
     }
 
     /**
@@ -673,7 +704,6 @@ class ReceiptsAndExpensesJS {
         this.detailFormOnBeforeOpen(arguments);
         $('input[dataindex="RefNo"]').attr('disabled', true);
         $('#tbodyRAEDetail-popup input').attr('disabled',true);
-        debugger
         $('#tbodyRAEDetail-popup td:first-child input').attr('disabled',false);
         // $('#tbodyRAEDetail-popup input:first-child').attr('disabled',false);
     };
@@ -1152,13 +1182,45 @@ class ReceiptsAndExpensesJS {
      * Phím tắt trong form
      * Created by NVLAM (15/02/2019)
      */
-    dialog_OnKeyUp(sender) {
+    dialog_OnKeyDown(sender) {
         if(sender.keyCode === 37){
-            debugger
             $('#btnPrevious').trigger('click');
         };
         if(sender.keyCode === 39){
             $('#btnNext').trigger('click');
+        }
+    }
+        /* ------------------------------------------------------------------------
+     * Tính năng chọn dòng
+     * Created bt: NVLAM (16/02/2019)
+     */
+    selectRow(newRow) {
+        newRow = $(newRow);
+ 
+        // Thoát ra nếu không có hàng nào mới
+        if (newRow.length === 0) return;
+ 
+        // Bỏ chọn dòng trước đó
+        var oldRow = $('.rowSelected');
+        oldRow.removeClass('rowSelected');
+ 
+        // Chọn một dòng mới
+        newRow.addClass('rowSelected');
+ 
+        var rowTop = newRow.position().top;
+        var rowBottom = rowTop + newRow.height();
+        var $table = $('.cls-gridPanel');
+        var tableHeight = $table.height();
+        var currentScroll = $table.scrollTop();
+ 
+        if (rowTop < 0) {
+            // Cuộn lên trên
+            $('.cls-gridPanel').scrollTop(currentScroll + rowTop);
+        }
+        else if (rowBottom > tableHeight) {
+            // Cuộn xuống dưới
+            var scrollAmount = rowBottom - tableHeight + 17;
+            $('.cls-gridPanel').scrollTop(currentScroll + scrollAmount);
         }
     }
 }
@@ -1170,6 +1232,8 @@ class ReceiptsAndExpensesJS {
         day = date.getDate();
         month = date.getMonth()+1;
         year = date.getFullYear();
+        if (day < 10) day = "0" + day;
+        if (month < 10) month = "0" + month;
         return day + "/" + month + "/" + year;
     };
 
@@ -1293,14 +1357,13 @@ class ReceiptsAndExpensesJS {
      *  Created by: NVLAM (28/01/2019)
      */
     $('#arrow-combo-trigger').click(function(){
-        $('#numberRecordSelection').show();
+        $('#numberRecordSelection').toggle();
         event.stopPropagation() ;
     })
     $(document).on('click','.record-select-item',function(){
         var number = $(this).html();
        $("#inputTotalRecord").val(number);
        $("#inputTotalRecord").val(number+"");
-       debugger;
        getPageHome();
        raeJS.buildDataIntoTable(fakeData);
     })
@@ -1333,12 +1396,12 @@ class ReceiptsAndExpensesJS {
     checkTbar();
     //Sang trang tiếp thep
     $('.tbar-page-next').click(function(){
+        $('.cls-gridPanel').scrollTop(0);
         var recentPage = $('#currentPage').val();
         var totalPage = $('#totalPage').html();
         if(+recentPage < +totalPage){
             $('#currentPage').val(Number(recentPage)+Number(1));
             getPage();
-            debugger;
             raeJS.buildDataIntoTable(fakeData);
             checkTbar();
         }
@@ -1346,6 +1409,7 @@ class ReceiptsAndExpensesJS {
     
     //Về trang trước
     $('.tbar-page-prev').click(function(){
+        $('.cls-gridPanel').scrollTop(0);
         var recentPage = $('#currentPage').val();
         var totalPage = $('#totalPage').html();
         if(+recentPage > 1){
@@ -1358,6 +1422,7 @@ class ReceiptsAndExpensesJS {
     
     //Chuyển đến trang cuối cùng
     $('.tbar-page-last').click(function(){
+        $('.cls-gridPanel').scrollTop(0);
         var recentPage = $('#currentPage').val();
         var totalPage = $('#totalPage').html();
         if(+recentPage < +totalPage){
@@ -1370,6 +1435,7 @@ class ReceiptsAndExpensesJS {
     
     //Chuyển đến trang đầu tiên
     $('.tbar-page-first').click(function(){
+        $('.cls-gridPanel').scrollTop(0);
         var recentPage = $('#currentPage').val();
         if(+recentPage > 1){
             $('#currentPage').val(Number(1));

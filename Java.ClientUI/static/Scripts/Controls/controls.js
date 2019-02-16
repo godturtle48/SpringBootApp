@@ -151,6 +151,7 @@ var controlJs = Object.create({
         }
         if (comboboxBoundListElement.length === 1) {
             // Thực hiện lấy dữ liệu:
+            debugger
             comboboxBoundListElement = $('<div class="comboboxData-boundlist hide-if-outside"></div>');
             $.each(data, function (index, item) {
                 var itemHTML = '<div class="combobox-data-item" item-value="{1}" tabindex="-1">{0}</div>';
@@ -175,8 +176,8 @@ var controlJs = Object.create({
         comboboxBoundListElement.css('width', widthCombobox.toString() + 'px');
         comboboxBoundListElement.css('left', offsetComboboxElement.left.toString() + 'px');
         comboboxBoundListElement.toggle();
-        comboboxBoundListElement.children().first().focus();
         event.stopPropagation();
+        comboboxBoundListElement.children().first().focus();
     },
 
 
@@ -240,6 +241,7 @@ var controlJs = Object.create({
                 $('input[dataindex="RefNo"]').focus();
             }
         }
+        event.stopPropagation();
     },
     /* ---------------------------------------------------------------------------------------------
      * set vị trí của data hiển thị:
@@ -257,7 +259,7 @@ var controlJs = Object.create({
 
 class Button {
     constructor(scope, width, commandName, eventHandler) {
-        var eventName = '   {0}_OnClick'.format(commandName),
+        var eventName = 'btn{0}_OnClick'.format(commandName),
             id = 'btn{0}'.format(commandName),
             html = '<div class="btn-customer-16-body"><i class="btn-customer-icon-16 {0} {1}"></i><div class="btn-customer-text">{2}</div></div>';
         if (eventHandler) {
@@ -303,6 +305,7 @@ class Button {
         }
         if (commandName === 'Cancel') {
             this.class = 'btn btn-danger';
+
         }
         if (commandName === 'Help') {
             this.class = 'btn btn-info';
@@ -316,7 +319,10 @@ class Button {
         //$('#' + this.id).bind('click', scope[eventName].bind(scope));
         //$('#' + this.id).bind('click', scope[eventName].bind(scope));
         //$('#' + this.id).click(scope[eventName].bind(scope));
-        //this.click = scope[eventName];
+        if(scope[eventName]){
+            this.click = scope[eventName].bind(scope);
+        }
+        
     }
 }
 
@@ -356,7 +362,8 @@ class FormPopup {
             width: width ? width : 680,
             dialogClass: 'form-customerDetail',
             modal: showModal ? showModal : true,
-            hide: "drop",
+            // hide: "drop",
+            resizable: false,
             buttons: buttons,
             close: function () {
                 //me.formRegister[0].reset();
