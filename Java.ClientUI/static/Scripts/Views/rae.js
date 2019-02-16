@@ -484,12 +484,12 @@ class ReceiptsAndExpensesJS {
                             <button role="removeInvoice" class="btn btn-danger">x</button>
                             <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
-                        <td><input fileDataInvoice=""  value="3221"></td>
-                        <td><input fileDataInvoice="" value="1112"></td>
+                        <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                        <td><input fileDataInvoice="" value="${invoice.amount}"></td>
                         <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
                         <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
+                        <td><input fileDataInvoice="" value="${invoice.accountObjectName}"></td>
+                        <td><input fileDataInvoice="" value="${invoice.accountObjectAddress}"></td>
                         <td><input fileDataInvoice="" value=""></td>
                         </tr>`;
             $('#tbodyRAEDetail-popup').append(div);
