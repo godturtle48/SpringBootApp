@@ -7,6 +7,8 @@ $(document).ready(function () {
     //     $('#numberRecordSelection').toggle();
     //     event.stopPropagation();
     // })
+    $('[data-toggle="tooltip"]').tooltip(); 
+    $('.loading-page').fadeOut('slow');
     $('#box-triggerWrap').on('click','.record-select-item',function() {
         var value = $(this).attr('item-value');
          $('#box-triggerWrap').find('input').val(value);
