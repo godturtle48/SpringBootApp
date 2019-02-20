@@ -151,7 +151,6 @@ var controlJs = Object.create({
         }
         if (comboboxBoundListElement.length === 1) {
             // Thực hiện lấy dữ liệu:
-            debugger
             comboboxBoundListElement = $('<div class="comboboxData-boundlist hide-if-outside"></div>');
             $.each(data, function (index, item) {
                 var itemHTML = '<div class="combobox-data-item" item-value="{1}" tabindex="-1">{0}</div>';
@@ -371,6 +370,7 @@ class FormPopup {
             resizable: false,
             buttons: buttons,
             close: function () {
+                // $(document).on('keydown');
                 //me.formRegister[0].reset();
                 //$(window).lockscroll(false);
             },

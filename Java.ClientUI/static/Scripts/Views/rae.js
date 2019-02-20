@@ -47,7 +47,7 @@ $(document).ready(function(){
             invoicesGlobal[index].status=2;//danh dau bi xoa
             $(this).parents('tr').remove();
         });
-        $('#tbodyRAEDetail-popup tr').children().first().children().last().focus();
+        $('#tbodyRAEDetail-popup').children().last().children().first().children().last().focus();
         //them moi vao 
         indexInvoiceGlobal++;
         var voiceNew={
@@ -313,6 +313,7 @@ class ReceiptsAndExpensesJS {
         // $(document).on('click', '#btnSaveAdd', this.btnSaveAdd_OnClick.bind(this));
         //$(document).on('click', '#btnCancel', this.btnCancel_OnClick.bind(this));
         $(document).on('click', '#btnPause', this.btnPause_OnClick.bind(this));
+        // $('.ui-dialog-buttonpane').on('keyup',this.btn_OnKeyUp.bind(this));
         $('#btnEdit').on('click', { refType: enumeration.RefType.Expense }, this.btnEdit_OnClick.bind(this));
         $('#btnDelete').on('click', this.btnDelete_OnClick.bind(this));
         $('#btnDuplicate').on('click', this.btnDuplicate_OnClick.bind(this));
@@ -426,6 +427,7 @@ class ReceiptsAndExpensesJS {
      * Created by: NVMANH (22/01/2019)
      */
     beforeOpenDetail() {
+        $(document).off('keydown');
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');
@@ -599,7 +601,7 @@ class ReceiptsAndExpensesJS {
             //focus vao 
             $('input[dataindex="RefNo"]').focus();
         }
-
+        
     };
 
 
@@ -631,11 +633,13 @@ class ReceiptsAndExpensesJS {
         }
         this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
+        // $('#btnCancel').focus();
         $('#btnSave').attr('disabled', true);
         $('#frmRAEDetail input').attr('disabled', true);
         $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail #addtr').attr('disabled', true);
         $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
+        $('.ui-dialog-buttonset #btnPause').attr('disabled', true);
         $('#frmRAEDetail .detail-info input').attr('disabled', 'disabled');
         $('.combobox-arrow-select').hide();
         $('#btnQuickEdit').attr('disabled',true);
@@ -667,6 +671,17 @@ class ReceiptsAndExpensesJS {
             $('#lblEmployee').text('Nhân viên chi');
         }
     };
+    /*--------------------------------------------
+     * Chức năng enter kích hoạt nút đang focus
+     * Created by: NVLAM (20/02/2019)
+     */
+    // btn_OnKeyUp (event) {
+    //     debugger
+    //     if(event.keyCode === 13) {
+    //         $(this).trigger('click');
+    //     }
+    // }
+
     /* ----------------------------------------------------------------------------
      * Nút trở về chứng từ gần nhất trong tương lai
      * Created bt: NVLAM (15/02/2019)
