@@ -73,6 +73,7 @@
     width: 100%;
     overflow: auto;
     height: 223px;
+    position: relative;
 }
 
 .toolbar {
@@ -677,6 +678,7 @@ input[controltype="inputCombobox"]{
     margin-top: 2px;
     position: sticky;
     left: 0px;
+    bottom: 0px;
 }
 #tbodyRAEDetail-popup input {
     width: 100%;

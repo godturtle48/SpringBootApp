@@ -151,7 +151,6 @@ var controlJs = Object.create({
         }
         if (comboboxBoundListElement.length === 1) {
             // Thực hiện lấy dữ liệu:
-            debugger
             comboboxBoundListElement = $('<div class="comboboxData-boundlist hide-if-outside"></div>');
             $.each(data, function (index, item) {
                 var itemHTML = '<div class="combobox-data-item" item-value="{1}" tabindex="-1">{0}</div>';
@@ -278,6 +277,8 @@ class Button {
             case 'SaveAdd':
                 html = html.format('fas',' fa-file-medical', 'Cất và thêm');
                 break;
+            case 'QuickEdit':
+                html = html.format('fas','fa-edit','Sửa nhanh')
             case 'Cancel':
                 html = html.format('fas','fa-ban', 'Hủy bỏ');
                 break;
@@ -303,9 +304,11 @@ class Button {
         if (commandName === 'SaveAdd') {
             this.class = 'btn btn-success';
         }
+        if (commandName === 'QuickEdit') {
+            this.class = 'btn btn-primary';
+        }
         if (commandName === 'Cancel') {
             this.class = 'btn btn-danger';
-
         }
         if (commandName === 'Help') {
             this.class = 'btn btn-info';
@@ -351,6 +354,7 @@ class FormPopup {
                 new Button(me, 75, 'Next'),
                 new Button(me, 75, 'Save'),
                 new Button(me, 120, 'SaveAdd'),
+                new Button(me, 110, 'QuickEdit'),
                 new Button(me, 75, 'Cancel'),
                 new Button(me, 75, 'Help'),
                 new Button(me, 75, 'Pause')
@@ -366,6 +370,7 @@ class FormPopup {
             resizable: false,
             buttons: buttons,
             close: function () {
+                // $(document).on('keydown');
                 //me.formRegister[0].reset();
                 //$(window).lockscroll(false);
             },
@@ -391,6 +396,9 @@ class FormPopup {
     };
     btnSaveAdd_OnClick() {
         alert('SaveAdd');
+    };
+    btnQuickEdit_OnClick() {
+        alert('QuickEdit');
     };
     btnCancel_OnClick() {
         this.Form.dialog('close');
