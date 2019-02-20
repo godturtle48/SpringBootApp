@@ -17,71 +17,85 @@ $(document).ready(function(){
     //     })  
     // }
     // else{
-    //     window.location.href="/";
-    // }
-    
-})
-$(document).ready(function () {  
-    //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
-    //raeJS.btnAdd_OnClick();
-    $('#addtr').on('click', function(){
-        //them moi status =3
-        $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
-                        +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
-                        +'<td><input></td>'
-                        +'<td><input></td>'
-                        +'<td class="text-right"><input></td>'
-                        +'<td><input></td>'
-                        +'<td><input></td>'
-                        +'<td><input></td>'
-                        +'<td><input></td>'
-                    +'</tr>');
-        $('button[role="removeInvoice"]').on('click', function(){
-           //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
-            var index=$(this).parents('tr').attr("indexInvoice");
+        //     window.location.href="/";
+        // }
+        
+    })
+    $(document).ready(function () {  
+        //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
+        //raeJS.btnAdd_OnClick();
+        $('#addtr').on('keydown', function() {
+            if (event.keyCode === 13) {
+                $('#addtr').trigger('click');
+            }
+        })
+        $('#addtr').on('click', function(){
+            //them moi status =3
+            $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
+            +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
+            +'<td><input></td>'
+            +'<td><input></td>'
+            +'<td class="text-right"><input></td>'
+            +'<td><input></td>'
+            +'<td><input></td>'
+            +'<td><input></td>'
+            +'<td><input></td>'
+            +'</tr>');
+            $('button[role="removeInvoice"]').on('click', function(){
+                //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
+                var index=$(this).parents('tr').attr("indexInvoice");
             invoicesGlobal[index].status=2;//danh dau bi xoa
             $(this).parents('tr').remove();
         });
+        $('#tbodyRAEDetail-popup tr').children().first().children().last().focus();
         //them moi vao 
         indexInvoiceGlobal++;
         var voiceNew={
-        "refDetailID": "",
-        "discription": "",
-        "amountOC": 0,
-        "amount": 0,
-        "accountObjectID": "",
-        "sortOrder": 0,
-        "status": 3}
-        invoicesGlobal.push(voiceNew);
-    })
-    $('.fa-calendar-alt').click(function(){ 
-        $(this).siblings().first().focus();
-    })
-    $(document).keydown(function(event){
-        var currentRow = $('.rowSelected');
-        switch (event.keyCode) {
-            //Mũi tên xuống
-            case 40:
+            "refDetailID": "",
+            "discription": "",
+            "amountOC": 0,
+            "amount": 0,
+            "accountObjectID": "",
+            "sortOrder": 0,
+            "status": 3}
+            invoicesGlobal.push(voiceNew);
+            var addtrPosition = $('#addtr').position().top + $('#addtr').height() + 27;
+            var $table = $('#frmRAEDetail .rae-detail-box');
+            var tableHeight = $table.height();
+            var currentScroll = $table.scrollTop();
+            if (addtrPosition > tableHeight) {
+                var scrollAmount = addtrPosition - tableHeight + 27;
+                $('#frmRAEDetail .rae-detail-box').scrollTop(currentScroll + scrollAmount);
+            }
+        })
+        $('.fa-calendar-alt').click(function(){ 
+            $(this).siblings().first().focus();
+        })
+        $(document).keydown(function(event){
+            var currentRow = $('.rowSelected');
+            switch (event.keyCode) {
+                //Mũi tên xuống
+                case 40:
                 raeJS.selectRow(currentRow.next());
                 $(".rowSelected").trigger("click");
                 return false;
-            //Mũi tên lên
-            case 38:
+                //Mũi tên lên
+                case 38:
                 raeJS.selectRow(currentRow.prev());
                 $(".rowSelected").trigger("click");
                 return false;
-            case 13:
+                case 13:
                 event.preventDefault();
                 $(".rowSelected").trigger('dblclick');
-        }
-    })
-    // $( "#txtAccountObjectCode").autocomplete({
-    //     source: dataResource.AccountObject.AccountObjectCode
-    // });
-})
-var fakeData = [];
-var totalRecord = 0;
-var totalPage = 0;
+            }
+        })
+        // $( "#txtAccountObjectCode").autocomplete({
+            //     source: dataResource.AccountObject.AccountObjectCode
+            // });
+        })
+        var fakeData = [];
+        var totalRecord = 0;
+        var totalPage = 0;
 var endRecord = 0;
 var startRecord = 1;
 var indexInvoiceGlobal=0;
@@ -615,21 +629,28 @@ class ReceiptsAndExpensesJS {
         } else {
             this.RefType = 2;
         }
+        this.detailFormOnBeforeOpen(arguments);
+        this.DetailForm.Show();
         $('#btnSave').attr('disabled', true);
         $('#frmRAEDetail input').attr('disabled', true);
         $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail #addtr').attr('disabled', true);
         $('.ui-dialog-buttonset #btnSaveAdd').attr('disabled', true);
+        $('#frmRAEDetail .detail-info input').attr('disabled', 'disabled');
         $('.combobox-arrow-select').hide();
-        $('#frmRAEDetail .detail-info input').attr('disabled', true);
-        this.detailFormOnBeforeOpen(arguments);
-        this.DetailForm.Show();
+        $('#btnQuickEdit').attr('disabled',true);
     };
 
     /*
      * thay đổi giao diện form trước khi mở
      */
     detailFormOnBeforeOpen(args) {
+        if($('#tbodyRAE').children().first().hasClass('rowSelected') && $('#currentPage').val() == 1) {
+            $('#btnNext').attr('disabled',true);
+        }
+        if($('#tbodyRAE').children().last().hasClass('rowSelected') && $('#currentPage').val() == $('#totalPage').html()) {
+            $('#btnPrevious').attr('disabled',true);
+        }
         if (args[0].data.refType !== undefined) {
             var refType = args[0].data.refType;
             this.RefType = refType;
@@ -652,6 +673,9 @@ class ReceiptsAndExpensesJS {
      */
     btnNext_OnClick(){
         var currentRow = $('.rowSelected');
+        if($('#tbodyRAE').children().first().hasClass('rowSelected') && $('#currentPage').val() == 1) {
+            $('#btnNext').attr('disabled',true);
+        }
         if (!$('#tbodyRAE').children().first().hasClass('rowSelected')){
             raeJS.selectRow(currentRow.prev());
             this.DetailForm.Close();
@@ -688,6 +712,7 @@ class ReceiptsAndExpensesJS {
         $('#btnPrevious').attr('disabled','true');
         $('#btnNext').attr('disabled','true');
         $('#tbodyRAEDetail-popup').empty();
+        $('#btnQuickEdit').attr('disabled',true);
         $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         indexInvoiceGlobal=0;
@@ -708,6 +733,18 @@ class ReceiptsAndExpensesJS {
         // $('#tbodyRAEDetail-popup input:first-child').attr('disabled',false);
     };
 
+    /*-------------------------------------------------------------
+     * Nút sửa nhanh
+     * Created by NVLAM (20/02/2019)
+     */
+    btnQuickEdit_OnClick() {
+        this.editMode = 2;
+        $('.combobox-arrow-select').hide();
+        $('#txtAccountObjectCode').attr('disabled', true);
+        $('#txtReason').attr('disabled', true);
+        $('#PostedDate').attr('disabled',true);
+        $('#RefDate').attr('disabled',true);
+    }
     /**
      * Thực hiện CẤT:
      */
@@ -1135,6 +1172,7 @@ class ReceiptsAndExpensesJS {
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
     //  this.detailFormOnBeforeOpen(arguments);
         this.DetailForm.Show();
+        $('#btnQuickEdit').attr('disabled',true);
     } 
     /* -------------------------------------------------------------------
     * Nhấn button  tbarRefresh
@@ -1190,7 +1228,7 @@ class ReceiptsAndExpensesJS {
             $('#btnNext').trigger('click');
         }
     }
-        /* ------------------------------------------------------------------------
+    /* ------------------------------------------------------------------------
      * Tính năng chọn dòng
      * Created bt: NVLAM (16/02/2019)
      */
@@ -1212,7 +1250,6 @@ class ReceiptsAndExpensesJS {
         var $table = $('.cls-gridPanel');
         var tableHeight = $table.height();
         var currentScroll = $table.scrollTop();
- 
         if (rowTop < 0) {
             // Cuộn lên trên
             $('.cls-gridPanel').scrollTop(currentScroll + rowTop);
@@ -1225,7 +1262,7 @@ class ReceiptsAndExpensesJS {
     }
 }
 
-    var raeJS = new ReceiptsAndExpensesJS();
+var raeJS = new ReceiptsAndExpensesJS();
     ///////ham convertData de hien thi chuan theo nguoi dung
     function convertDate(date) {
         date = new Date(date);

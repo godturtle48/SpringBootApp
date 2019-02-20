@@ -105,7 +105,7 @@ textarea {
     background-color: #fff;
     border: none;
 }
-    .btn-primary:disabled,.btn-success:disabled,.btn-warning:disabled,.btn-info:disabled,.btn-warning:disabled  {
+    .btn-primary:disabled,.btn-success:disabled,.btn-warning:disabled,.btn-info:disabled,.btn-danger:disabled  {
         color: grey;
         border:none;
         background-color: #fff;
