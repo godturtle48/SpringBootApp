@@ -71,24 +71,6 @@ $(document).ready(function(){
         $('.fa-calendar-alt').click(function(){ 
             $(this).siblings().first().focus();
         })
-        $(document).keydown(function(event){
-            var currentRow = $('.rowSelected');
-            switch (event.keyCode) {
-                //Mũi tên xuống
-                case 40:
-                raeJS.selectRow(currentRow.next());
-                $(".rowSelected").trigger("click");
-                return false;
-                //Mũi tên lên
-                case 38:
-                raeJS.selectRow(currentRow.prev());
-                $(".rowSelected").trigger("click");
-                return false;
-                case 13:
-                event.preventDefault();
-                $(".rowSelected").trigger('dblclick');
-            }
-        })
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
@@ -96,12 +78,12 @@ $(document).ready(function(){
         var fakeData = [];
         var totalRecord = 0;
         var totalPage = 0;
-var endRecord = 0;
-var startRecord = 1;
-var indexInvoiceGlobal=0;
-//invoicesGlobal chứa dữ liệu của server
-var invoicesGlobal=[];
-var RefUpdate={};
+        var endRecord = 0;
+        var startRecord = 1;
+        var indexInvoiceGlobal=0;
+        //invoicesGlobal chứa dữ liệu của server
+        var invoicesGlobal=[];
+        var RefUpdate={};
 
 
 /////////////
@@ -329,7 +311,7 @@ class ReceiptsAndExpensesJS {
         $(document).on('dblclick', '#tbodyRAE tr', {},  this.rowRAE_OnDblClick.bind(this));
         //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, this.btnAdd_OnClick.bind(this));
         //$('#btnAdd').click(this.btnAdd_OnClick.bind(this));
-
+        $(document).on('keydown',this.keyDownRowSelect.bind(this));
         /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
@@ -454,7 +436,7 @@ class ReceiptsAndExpensesJS {
      * Created by: NVMANH (22/01/2019)
      */
     beforeOpenDetail() {
-        $(document).off('keydown');
+        $(document).off('keydown', this.keyDownRowSelect);
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');
@@ -672,6 +654,7 @@ class ReceiptsAndExpensesJS {
         $('button[role="removeInvoice"]').attr('disabled', true);
         $('#frmRAEDetail .detail-info input').attr('disabled', true);
         $('#btnQuickEdit').attr('disabled',true);
+        $('.ui-dialog').focus();
     };
 
     /*
@@ -1258,22 +1241,43 @@ class ReceiptsAndExpensesJS {
         $('#tbodyRAEDetail-popup').empty();
         // $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         // $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
-        this.detailFormOnBeforeOpen(arguments);
         var refType_selected = this.RefType;
         $.ajax({
             method:"get",
             url: MISA.Config.paymentUrl + "/getRefNoFinance",
             success: function(data){
                 if(refType_selected == 1)
-                    $('input[dataindex="RefNo"]').val("PT"+data);    
+                $('input[dataindex="RefNo"]').val("PT"+data);    
                 else
-                    $('input[dataindex="RefNo"]').val("PC"+data);          
+                $('input[dataindex="RefNo"]').val("PC"+data);          
             }
         });  
-
         this.DetailForm.Show();
+        this.detailFormOnBeforeOpen(refType_selected);
         $('#btnQuickEdit').attr('disabled',true);
     } 
+    /*------------------------------------------------
+     * Di chuyển lên xuống dòng bằng phím mũi tên và chọn dòng bằng enter
+     * Created bt: NVLAM (21/02/2019)
+     */
+    keyDownRowSelect() {
+        var currentRow = $('.rowSelected');
+        switch (event.keyCode) {
+            //Mũi tên xuống
+            case 40:
+            raeJS.selectRow(currentRow.next());
+            $(".rowSelected").trigger("click");
+            return false;
+            //Mũi tên lên
+            case 38:
+            raeJS.selectRow(currentRow.prev());
+            $(".rowSelected").trigger("click");
+            return false;
+            case 13:
+            event.preventDefault();
+            $(".rowSelected").trigger('dblclick');
+        }
+    }
     /* -------------------------------------------------------------------
     * Nhấn button  tbarRefresh
     * Created by: Huyen (20/05/2018)
@@ -1318,7 +1322,7 @@ class ReceiptsAndExpensesJS {
         $('.combobox-arrow-select').show();
     }
     /*------------------------------------------------------------------
-     * Phím tắt trong form
+     * Phím tắt trước sau trong form
      * Created by NVLAM (15/02/2019)
      */
     dialog_OnKeyDown(sender) {
@@ -1337,23 +1341,26 @@ class ReceiptsAndExpensesJS {
         newRow = $(newRow);
  
         // Thoát ra nếu không có hàng nào mới
-        if (newRow.length === 0) return;
- 
+        if (newRow.length === 0) {
+            if (event.keyCode === 38) $('.cls-gridPanel').scrollTop(0);
+            return;
+        }
         // Bỏ chọn dòng trước đó
         var oldRow = $('.rowSelected');
         oldRow.removeClass('rowSelected');
  
         // Chọn một dòng mới
         newRow.addClass('rowSelected');
- 
+        debugger
         var rowTop = newRow.position().top;
         var rowBottom = rowTop + newRow.height();
         var $table = $('.cls-gridPanel');
         var tableHeight = $table.height();
         var currentScroll = $table.scrollTop();
-        if (rowTop < 0) {
+        var theadHeight = $('.cls-gridPanel thead').height();
+        if (rowTop < theadHeight) {
             // Cuộn lên trên
-            $('.cls-gridPanel').scrollTop(currentScroll + rowTop);
+            $('.cls-gridPanel').scrollTop(currentScroll - (theadHeight - rowTop));
         }
         else if (rowBottom > tableHeight) {
             // Cuộn xuống dưới
