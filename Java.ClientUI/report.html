@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./static/Contents/Icons/misa-sme-icon-min.png">
+    <link href="./static/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="./static/CSS/jquery-ui.css" rel="stylesheet" />
+    <link href="./static/CSS/common/jquery-ui-custom.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/animation.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/glyphicon.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
+    <link href="./static/CSS/common/main.css" rel="stylesheet" />
+    <link href="./static/CSS/common/control.css" rel="stylesheet" />
+    <link href="./static/CSS/common/common.css" rel="stylesheet" />
+    <link href="./static/CSS/common/combobox.css" rel="stylesheet" />
+    <link href="./static/CSS/Views/header.css" rel="stylesheet" />
+    <link href="./static/CSS/common/panelSubMenu.css" rel="stylesheet"/>
+    <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
+    <link href="./static/CSS/Views/report.css" rel="stylesheet" />
+    <title>Báo cáo</title>
+</head>
+<body>
+    <div class="loading-page"></div>
+    <div id="wraper">
+        <div id="header">
+            <div style="width: 200px">
+                <a href="index.html">
+                    <div class="page-content logo" style="width: 200px">
+                    </div>
+                </a>
+            </div>
+            <div class="header-user-info">
+                <div class="user-info-box">
+                    <span class="avatar-user"></span>
+                    <span class="user-info">
+                    </span>
+                </div>
+                <div class="user-menu-box hide-if-outside">
+                    <div id="btnChangePassword" command="ChangePassword" class="user-menu-item">Thay đổi mật khẩu</div>
+                    <div id="btnLogout" command="Logout" class="user-menu-item">Đăng xuất</div>
+                </div>
+            </div>
+        </div>
+        <div class="register-content">
+            <div class="main-nav">
+                <ul class="menu-parent">
+                    <li class="menu-parent-li-first">
+                        <a href="#index" title="Tổng quan" class="">
+                            <table class="li-menu-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cls-icon-menu-parent">
+                                            <div class="cls-icon-menu cls-index">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                            </div>
+                                        </td>
+                                        <td class="cls-text-menu-right">Bàn làm việc</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    </li>
+                    <li class="menu-has-children-close">
+                        <a href="#index" title="Tổng quan" class="">
+                            <table class="li-menu-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cls-icon-menu-parent">
+                                            <div class="cls-icon-menu cls-report">
+                                                <i class="fas fa-money-check-alt"></i>
+                                            </div>
+                                        </td>
+                                        <td class="cls-text-menu-right">Quỹ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                        <div class="wrap-menu-children" style="display: none;">
+                            <ul class="menu-children">
+                                <li class="menu-children-li-first" id="menu-item-report-revenue">
+                                    <a href="#report-revenue" title="Bán hàng">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-text-menu-right">Bán hàng</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                                <li class="" id="menu-item-report-purchase">
+                                    <a href="#report-purchase" title="Mua hàng">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-text-menu-right">Mua hàng</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                                <li class=""  id="menu-item-report-stock">
+                                    <a href="#report-stock" title="Kho">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-text-menu-right">Kho</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                                <li class=""  id="menu-item-report-dept">
+                                    <a href="#report-dept" title="Công nợ">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent">                                                      
+                                                    </td>
+                                                    <td class="cls-text-menu-right">Hóa đơn điện tử</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                                <li class=""  id="menu-item-report-monetaryflow">
+                                    <a href="#report-monetaryflow" title="Quỹ tiền">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-text-menu-right">Quỹ tiền</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                                <li class="" id="menu-item-report-profit">
+                                    <a href="#report-profit" title="Lợi nhuận">
+                                        <table class="li-menu-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-text-menu-right">Tiền lương</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#index" title="Tổng quan" class="">
+                            <table class="li-menu-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cls-icon-menu-parent">
+                                            <div class="cls-icon-menu cls-discount">
+                                                <i class="fas fa-receipt"></i>
+                                            </div>
+                                        </td>
+                                        <td class="cls-text-menu-right">Hóa đơn điện tử</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    </li>
+                    <li id="menu-item-dictionary">
+                        <a title="Danh mục" class="">
+                            <table class="li-menu-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cls-icon-menu-parent">
+                                            <div class="cls-icon-menu cls-dictionary">
+                                                <i class="fas fa-file-alt"></i>
+                                            </div>
+                                        </td>
+                                        <td class="cls-text-menu-right">Quản lý hóa đơn</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#index" title="Tổng quan" class="">
+                            <table class="li-menu-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cls-icon-menu-parent">
+                                            <div class="cls-icon-menu cls-setting">
+                                                <i class="fas fa-tools"></i>
+                                            </div>
+                                        </td>
+                                        <td class="cls-text-menu-right">Công cụ, dụng cụ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-container">
+                <div class="report-section">
+                    <div class="cls-contenet-header">
+                        <div class="cls-navigation-breadcrumb cls-padding-8">
+                            <span class="breadcrumb-children-last">
+                                <i class="far fa-chart-bar"></i>
+                                <span>Báo cáo</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row header-report-section" style="font-family: Lato;">
+                            <div class="col-6">
+                                <div class="report-name">Báo cáo thu chi</div>
+                            </div>
+                            <div class="col-6 text-right">
+                                <select name="" id="yearReport">
+                                    <option value="">2018</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row top-section-report">
+                            <div class="col-6">
+                                <div class="company-info">
+                                    <div class="company-name">Công ty TNHH XYZ</div>
+                                    <div class="company-address">Tầng 9 Technosoft, Duy Tân, Cầu Giấy, Hà Nội</div>
+                                </div>
+                            </div>
+                            <div class="col-3"></div>
+                            <div class="col-3 text-right">
+                                <div class="report-example text-center">
+                                    <b>Mẫu số S04a-DNN</b><br>
+                                <i>(Ban hành theo Thông tư số 133/2016/TT-BTC<br>
+                                Ngày 26/08/2016 của Bộ Tài chính)</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="content-title">
+                                    Sổ kế toán chi tiết quỹ tiền mặt
+                                </div>
+                                <div class="description-title">
+                                    <div class="account">
+                                        <span>Tài khoản</span>
+                                        <span class="account-number">111</span>
+                                    </div>
+                                    <div class="currency">
+                                        <span>Loại tiền</span>
+                                        <span class="currency-type">VND</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="report-table table-responsive">
+                                    <table id="tblReportHeader" class="bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="gridPanel-header-item-title width-150 no-border-left" rowspan="2">Ngày ghi sổ</th>
+                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Ngày chứng từ</th>
+                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số phiếu thu</th>
+                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số phiếu chi</th>
+                                                <th class="gridPanel-header-item-title width-200" rowspan="2">Diễn giải</th>
+                                                <th class="gridPanel-header-item-title width-100" rowspan="2">Tài khoản</th>
+                                                <th class="gridPanel-header-item-title width-100" rowspan="2">TK đối ứng</th>
+                                                <th class="gridPanel-header-item-title" colspan="2">Số phát sinh</th>
+                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số tồn</th>
+                                                <th class="gridPanel-header-item-title width-200" rowspan="2">Người nhận/ Người nộp</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="gridPanel-header-item-title width-150" >Nợ</th>
+                                                <th class="gridPanel-header-item-title width-150" >Có</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                            <tr>
+                                                <td colspan="7" class="no-border-left text-right">Tổng cộng:</td>
+                                                <td class="total-earn width-150"></td>
+                                                <td class="total-pay width-150"></td>
+                                                <td class="total-money width-150"></td>
+                                                <td class="width-200"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- <table id="tblListPayment" class="bordered">
+                                        <tr>
+                                            <td colspan="7">Tổng cộng:</td>
+                                            <td class="total-earn width-150"></td>
+                                            <td class="total-pay width-150"></td>
+                                            <td class="total-money width-150"></td>
+                                            <td class="width-200"></td>
+                                        </tr>
+                                    </table> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <div id="printBtn">
+                                    <button class="btn btn-primary">In hóa đơn</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./static/Scripts/lib/jquery-3.2.1.min.js"></script>
+    <script src="./static/Scripts/lib/jquery-ui.js"></script>
+    <script src="./static/Scripts/lib/popper.min.js"></script>
+    <script src="./static/Scripts/lib/bootstrap.min.js"></script>
+    <script src="./static/Scripts/common/data.js"></script>
+    <script src="./static/Scripts/common/enum.js"></script>
+    <script src="./static/Scripts/common/validation.js"></script>
+    <script src="./static/Scripts/common/common.js"></script>
+    <script src="./static/Scripts/Controls/controls.js"></script>
+    <script src="./static/Scripts/common/header.js"></script>
+    <script src="./static/Scripts/Views/config.js"></script>
+</body>
+</html>
