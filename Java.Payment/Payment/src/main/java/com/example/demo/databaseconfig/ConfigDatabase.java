@@ -32,7 +32,7 @@ public class ConfigDatabase {
 			  configuration.setProperty("hibernate.connection.username", "root");
 			  configuration.setProperty("hibernate.connection.password", "12345");
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-			  configuration.setProperty("hibernate.hbm2ddl.auto",auto);
+			  configuration.setProperty("hibernate.hbm2ddl.auto","create");
 			  configuration.setProperty("hibernate.show_sql", "false");
 			  configuration.setProperty("hibernate.connection.pool_size", "100");
 			  configuration.setProperty("hibernate.connection.characterEncoding", "utf8");

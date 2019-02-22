@@ -370,7 +370,8 @@ class FormPopup {
             resizable: false,
             buttons: buttons,
             close: function () {
-                // $(document).on('keydown');
+                debugger
+                $(document).on('keydown', raeJS.keyDownRowSelect);
                 //me.formRegister[0].reset();
                 //$(window).lockscroll(false);
             },

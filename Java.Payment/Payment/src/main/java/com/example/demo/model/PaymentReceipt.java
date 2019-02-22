@@ -77,7 +77,6 @@ public class PaymentReceipt {
 	private String refNoFinance;
 	@NotNull
 	private Integer isPostedFinance;
-	
 	private String accountObjectID;
 	private String accountObjectName;
 	private String accountObjectAddress;

@@ -159,7 +159,14 @@ tbody {
     /*overflow-y: auto;*/
     overflow: auto;
 }
-
+.gridHeader th {
+    position: sticky;
+    top: 0px;
+}
+#filterElement th {
+    position: sticky;
+    top: 28px;
+}
 .gridPanel-header {
     position: absolute;
     right: 0px;
@@ -570,7 +577,6 @@ table#tblCustomerList {
         background-color: #ededed;
         font-weight: normal;
     }
-
     table#tblCustomerList td {
         white-space: nowrap;
     }
