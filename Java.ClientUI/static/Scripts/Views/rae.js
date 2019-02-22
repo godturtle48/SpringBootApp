@@ -1420,15 +1420,6 @@ var raeJS = new ReceiptsAndExpensesJS();
                 }
             })
     }
-    /*-----------------------------------------------------------
-     *  Hiệu ứng khi click vào menu bên trái
-     *  Created by: NVLAM (28/01/2019)
-     */
-    $('.li-menu-table').click(function(){
-        $('.li-menu-table').removeClass('rowSelected');
-        $('.li-menu-table tr').removeClass('rowSelected');
-        $(this).addClass('rowSelected');
-    })
 
     /*
     *filter ========================

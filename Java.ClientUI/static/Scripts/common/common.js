@@ -7,6 +7,15 @@ $(document).ready(function () {
     //     $('#numberRecordSelection').toggle();
     //     event.stopPropagation();
     // })
+    /*-----------------------------------------------------------
+     *  Hiệu ứng khi click vào menu bên trái
+     *  Created by: NVLAM (28/01/2019)
+     */
+    $('.li-menu-table').click(function(){
+        $('.li-menu-table').removeClass('rowSelected');
+        $('.li-menu-table tr').removeClass('rowSelected');
+        $(this).children().children().first().css('background-color','#0072bc');
+    })
     $('[data-toggle="tooltip"]').tooltip(); 
     $('.loading-page').fadeOut('slow');
     $('#box-triggerWrap').on('click','.record-select-item',function() {
