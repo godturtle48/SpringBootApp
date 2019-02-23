@@ -82,3 +82,6 @@ td{
     border:1px solid #ccc;
     background-color:#fafafa;
 }
+.li-menu-table tr:hover {
+    background-color: #0072bc;
+}

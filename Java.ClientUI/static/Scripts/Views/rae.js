@@ -884,7 +884,7 @@ class ReceiptsAndExpensesJS {
                             commonJS.showFailMsg("Thêm hóa đơn không thành công");
                             $('.ui-dialog-titlebar-close').trigger('click');
                             $('.tbar-refresh').trigger('click');
-                            commonJS.showSuccessMsg('Thêm hóa đơn thành công');
+                            // commonJS.showSuccessMsg('Thêm hóa đơn thành công');
                         }
                         
                     },
@@ -1416,19 +1416,10 @@ var raeJS = new ReceiptsAndExpensesJS();
 
                 error: function(err){
                     console.log(err);
-                    alert("Xóa hóa đơn không thành công");
+                    // alert("Xóa hóa đơn không thành công");
                 }
             })
     }
-    /*-----------------------------------------------------------
-     *  Hiệu ứng khi click vào menu bên trái
-     *  Created by: NVLAM (28/01/2019)
-     */
-    $('.li-menu-table').click(function(){
-        $('.li-menu-table').removeClass('rowSelected');
-        $('.li-menu-table tr').removeClass('rowSelected');
-        $(this).addClass('rowSelected');
-    })
 
     /*
     *filter ========================

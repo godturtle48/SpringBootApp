@@ -11,15 +11,15 @@
     <link href="./static/CSS/lib/glyphicon.css" rel="stylesheet" />
     <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
     <link href="./static/CSS/Views/login.css" rel="stylesheet" />
-    <link href="./static/CSS/Views/control.css" rel="stylesheet" />
     <link href="./static/CSS/common/main.css" rel="stylesheet" />
     <link href="./static/CSS/common/control.css" rel="stylesheet" />
     <link href="./static/CSS/common/combobox.css" rel="stylesheet" />
+    <link href="./static/CSS/common/common.css" rel="stylesheet" />
     <link href="./static/CSS/Views/header.css" rel="stylesheet" />
     <link href="./static/CSS/common/panelSubMenu.css" rel="stylesheet" />
     <link href="./static/CSS/Views/rae.css" rel="stylesheet" />
     <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./static/CSS/lib/all.min.css">
+    <link  href="./static/CSS/lib/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="loading-page"></div>
@@ -52,7 +52,9 @@
                                 <tbody>
                                     <tr>
                                         <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-index"></div>
+                                            <div class="cls-icon-menu cls-index">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                            </div>
                                         </td>
                                         <td class="cls-text-menu-right">Bàn làm việc</td>
                                     </tr>
@@ -66,7 +68,9 @@
                                 <tbody>
                                     <tr>
                                         <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-report"></div>
+                                            <div class="cls-icon-menu cls-report">
+                                                <i class="fas fa-money-check-alt"></i>
+                                            </div>
                                         </td>
                                         <td class="cls-text-menu-right">Quỹ</td>
                                     </tr>
@@ -75,7 +79,7 @@
                         </a>
                         <div class="wrap-menu-children" style="display: none;">
                             <ul class="menu-children">
-                                <li class="menu-children-li-first" style="" id="menu-item-report-revenue">
+                                <li class="menu-children-li-first" id="menu-item-report-revenue">
                                     <a href="#report-revenue" title="Bán hàng">
                                         <table class="li-menu-table">
                                             <tbody>
@@ -87,7 +91,7 @@
                                         </table>
                                     </a>
                                 </li>
-                                <li class="" style="" id="menu-item-report-purchase">
+                                <li class="" id="menu-item-report-purchase">
                                     <a href="#report-purchase" title="Mua hàng">
                                         <table class="li-menu-table">
                                             <tbody>
@@ -99,7 +103,7 @@
                                         </table>
                                     </a>
                                 </li>
-                                <li class="" style="" id="menu-item-report-stock">
+                                <li class=""  id="menu-item-report-stock">
                                     <a href="#report-stock" title="Kho">
                                         <table class="li-menu-table">
                                             <tbody>
@@ -111,19 +115,20 @@
                                         </table>
                                     </a>
                                 </li>
-                                <li class="" style="" id="menu-item-report-dept">
+                                <li class=""  id="menu-item-report-dept">
                                     <a href="#report-dept" title="Công nợ">
                                         <table class="li-menu-table">
                                             <tbody>
                                                 <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
+                                                    <td class="cls-icon-menu-parent">                                                      
+                                                    </td>
                                                     <td class="cls-text-menu-right">Hóa đơn điện tử</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </a>
                                 </li>
-                                <li class="" style="" id="menu-item-report-monetaryflow">
+                                <li class=""  id="menu-item-report-monetaryflow">
                                     <a href="#report-monetaryflow" title="Quỹ tiền">
                                         <table class="li-menu-table">
                                             <tbody>
@@ -135,7 +140,7 @@
                                         </table>
                                     </a>
                                 </li>
-                                <li class="" style="" id="menu-item-report-profit">
+                                <li class="" id="menu-item-report-profit">
                                     <a href="#report-profit" title="Lợi nhuận">
                                         <table class="li-menu-table">
                                             <tbody>
@@ -156,7 +161,9 @@
                                 <tbody>
                                     <tr>
                                         <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-discount"></div>
+                                            <div class="cls-icon-menu cls-discount">
+                                                <i class="fas fa-receipt"></i>
+                                            </div>
                                         </td>
                                         <td class="cls-text-menu-right">Hóa đơn điện tử</td>
                                     </tr>
@@ -170,7 +177,9 @@
                                 <tbody>
                                     <tr>
                                         <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-dictionary"></div>
+                                            <div class="cls-icon-menu cls-dictionary">
+                                                <i class="fas fa-file-alt"></i>
+                                            </div>
                                         </td>
                                         <td class="cls-text-menu-right">Quản lý hóa đơn</td>
                                     </tr>
@@ -184,7 +193,9 @@
                                 <tbody>
                                     <tr>
                                         <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-setting"></div>
+                                            <div class="cls-icon-menu cls-setting">
+                                                <i class="fas fa-tools"></i>
+                                            </div>
                                         </td>
                                         <td class="cls-text-menu-right">Công cụ, dụng cụ</td>
                                     </tr>
@@ -200,7 +211,10 @@
                         <div>
                             <div class="cls-contenet-header">
                                 <div class="cls-navigation-breadcrumb cls-padding-8">
-                                    <span class="breadcrumb-children-last">Thu, chi tiền</span>
+                                    <span class="breadcrumb-children-last">
+                                        <i class="fa fa-book"></i>
+                                        <span>Thu, chi tiền</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="frmCustomerList">
@@ -281,7 +295,7 @@
                                                     <div class="gridPanel-header-item-filter">
                                                         <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
-                                                            <input elementtype="filterInput" fieldname="postedDate" />
+                                                            <input elementtype="filterInput" fieldname="postedDate" placeholder="dd/mm/yy"/>
                                                         </div>
                                                     </div>
                                                 </th>
@@ -289,7 +303,7 @@
                                                     <div class="gridPanel-header-item-filter">
                                                         <a class="btn-select-filter" style="font-weight: normal">>=</a>
                                                         <div class="input-filter">
-                                                            <input elementtype="filterInput" fieldname="refDate" />
+                                                            <input elementtype="filterInput" fieldname="refDate" placeholder="dd/mm/yy"/>
                                                         </div>
                                                     </div>
                                                 </th>
