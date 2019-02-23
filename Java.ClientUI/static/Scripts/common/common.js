@@ -123,11 +123,11 @@ var commonJS = {
      * Created by: NVMANH (03/03/2018)
      */
     showSuccessMsg: function (msg) {
-        $('body').append('<div class="msg-success alert alert-success" style="display:none; position:fixed; top: 10px; left: 45%; height: 50px; width: auto; line-height: 25px; font-size: 15px;z-index: 999">'+msg+'</div>');
-        $('.msg-success').slideDown(500);
+        $('body').append('<div class="msg-success alert">'+msg+'</div>');
+        $('.msg-success').animate({top:'0px'});
         setTimeout(function () {
-            $('.msg-success').slideUp(500);
-        }, 2000);
+            $('.msg-success').animate({top:'-52px'});
+        }, 3000);
         
     },
 
@@ -136,11 +136,12 @@ var commonJS = {
      * Created by: NVLAM (25/01/2019)
      */
     showFailMsg: function (msg) {
-        $('body').append('<div class="msg-fail alert alert-danger" style="display:none; position:fixed; top: 10px; left: 45%; z-index: 999">'+msg+'</div>');
-        $('.msg-fail').slideDown(500);
+        $('body').append('<div class="msg-fail alert">'+msg+'</div>');
+        // $('.msg-fail').show();
+        $('.msg-fail').animate({top:'0px'});
         setTimeout(function () {
-            $('.msg-fail').slideUp(500);
-        }, 2000);
+            $('.msg-fail').animate({top:'-52px'});
+        }, 3000);
 
     },
 

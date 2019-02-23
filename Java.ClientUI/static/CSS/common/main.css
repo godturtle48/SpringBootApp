@@ -445,6 +445,7 @@ table tr {
                 height: 40px;
                 text-decoration: none;
                 color: #fff;
+                transition: all .2s;
                 /* border-bottom: 1px solid #314e73;
                 border-top: 1px solid #ADC7E7; */
             }
