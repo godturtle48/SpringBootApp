@@ -11,7 +11,7 @@ $(document).ready(function(){
 				//ajax goi company
 				$.ajax({
 					method:"GET",
-					url:MISA.Config.loginUrlServer+"/api/getCompanyUser",
+					url:MISA.Config.loginUrl+"/api/getCompanyUser",
 					beforeSend: function(xhr){
 						xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
 					},
@@ -54,7 +54,7 @@ $('#addBtn').click(function(){
 	let totalCompany = Number(localStorage.getItem("totalCompany"));
 	$.ajax({
 		method: "POST",
-		url: MISA.Config.loginUrlServer+"/api/addCompany",
+		url: MISA.Config.loginUrl+"/api/addCompany",
 		contentType:"application/json",
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));

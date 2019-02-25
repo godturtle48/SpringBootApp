@@ -25,7 +25,7 @@ services:
 ################ Authent
 ######################################### 
   authent-api:
-    image: 10.0.6.27:50000/javateam/java_authent_api:4.2
+    image: 10.0.6.27:50000/javateam/java_authent_api:4.6
     container_name: authent_container
     build: ./Java.Authentication/register
     networks:
@@ -40,7 +40,7 @@ services:
 ################ Payment
 ######################################### 
   payment-api:
-    image: 10.0.6.27:50000/javateam/java_payment_api:4.2
+    image: 10.0.6.27:50000/javateam/java_payment_api:4.6
     container_name: payment_container
     build: ./Java.Payment/Payment
     networks:
@@ -55,7 +55,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:4.2
+    image: 10.0.6.27:50000/javateam/java_ui:4.7
     container_name: ui_container
     build: ./Java.ClientUI
     ports:

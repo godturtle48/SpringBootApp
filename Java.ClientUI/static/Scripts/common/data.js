@@ -4,7 +4,7 @@ var Reason = [];
 $(document).ready(function(){
     $.ajax({
         method: 'get',
-        url: MISA.Config.paymentUrlServer + "/loadComboboxAddPayment",
+        url: MISA.Config.paymentUrl + "/loadComboboxAddPayment",
         success: function(res){
             // AccountObjectData = res;
             // console.log(res);
@@ -34,7 +34,7 @@ $(document).ready(function(){
     });
     $.ajax({
         method: 'get',
-        url: MISA.Config.paymentUrlServer + "/loadComboboxAddReceipt",
+        url: MISA.Config.paymentUrl + "/loadComboboxAddReceipt",
         success: function(res){
             AccountObjectData = res;
             // console.log(AccountObjectData);

@@ -10,7 +10,6 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -135,31 +134,50 @@ public class GenerateDataController {
 				"Tạm ứng cho nhân viên",
 				"Gửi tiền vào ngân hàng",
 				"Chi khác"};
-                
-			for(int i=1;i<1000;i++) {
-				PaymentReceipt payment=new PaymentReceipt();
-				payment.setAccountObjectAddress(accountObjectAddresss[rand.nextInt(accountObjectAddresss.length)]);
-				payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
-				payment.setAccountObjectID(GenerateDataController.accountObjectID[rand.nextInt(GenerateDataController.accountObjectID.length)]);
-				payment.setAccountObjectName(accountObjectNames[rand.nextInt(accountObjectNames.length)]);
-				payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
-				payment.setCreatedDate(date.get(rand.nextInt(date.size())));
-				payment.setDocumentInclude("documentInclude"+i%100+".doc");
-				payment.setEditVersion(date.get(rand.nextInt(date.size())));
-				payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
-				payment.setDescription(descriptionArr[rand.nextInt(descriptionArr.length)]);
-				payment.setKeyCompany(keyCompany);
-				payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
-				payment.setModifiedDate(date.get(rand.nextInt(date.size())));
-				payment.setPostedDate(date.get(rand.nextInt(date.size())));
-				payment.setRefDate(date.get(rand.nextInt(date.size())));
-				payment.setRefNoFinance("CT"+i);
-				payment.setRefOrdef(i);
-				payment.setTotalAmount(Double.valueOf(0.0));
-				payment.setTotalAmountOC(Double.valueOf(2000.0 + rand.nextInt(1000)));
-				payment.setRef(ref.get(i%2));
-				payment.setPostedFinance(Integer.valueOf(1));
-				payService.save(payment);
+             
+			int length = GenerateDataController.accountObjectID.length;
+			for(int i=1;i<100000;++i) {
+				try {
+					int tmpIndex = rand.nextInt(length);
+					PaymentReceipt payment=new PaymentReceipt();
+					payment.setAccountObjectAddress(accountObjectAddresss[tmpIndex]);
+					payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
+					payment.setAccountObjectID(GenerateDataController.accountObjectID[tmpIndex]);
+					payment.setAccountObjectName(accountObjectNames[tmpIndex]);
+					payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
+					payment.setCreatedDate(date.get(rand.nextInt(date.size())));
+					payment.setDocumentInclude("documentInclude"+i%100+".doc");
+					payment.setEditVersion(date.get(rand.nextInt(date.size())));
+					payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
+					payment.setDescription(descriptionArr[rand.nextInt(descriptionArr.length)]);
+					payment.setKeyCompany(keyCompany);
+					payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
+					payment.setModifiedDate(date.get(rand.nextInt(date.size())));
+					payment.setPostedDate(date.get(rand.nextInt(date.size())));
+					payment.setRefDate(date.get(rand.nextInt(date.size())));
+					payment.setRefNoFinance("CT"+i);
+					payment.setRefOrdef(i);
+					payment.setTotalAmount(Double.valueOf(0.0));
+					payment.setTotalAmountOC(Double.valueOf(2000.0 + rand.nextInt(1000)));
+					payment.setRef(ref.get(i%2));
+					payment.setPostedFinance(Integer.valueOf(1));
+					payService.save(payment);
+					
+					for (int j = 1; j <= rand.nextInt(3) + 1; j++) {
+						InvoiceDetail invoice=new InvoiceDetail();
+						invoice.setAccountObjectID(GenerateDataController.accountObjectID[tmpIndex]);
+						invoice.setAmount(Double.valueOf(1000+i/100));
+						invoice.setAmountOC(Double.valueOf(1000+i/1000));
+						invoice.setDiscription(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
+						invoice.setPayment(payment);
+						invoice.setSortOrder(i);
+						invoiceService.save(invoice);
+					}
+					Thread.sleep(2);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		return "payment";
 
@@ -181,7 +199,7 @@ public class GenerateDataController {
 		if(payments==null) {
 			return "fails";
 		}
-		for(int i=0;i<1000;i++) {
+		for(int i=0;i<100000;i++) {
 			InvoiceDetail invoice=new InvoiceDetail();
 			invoice.setAccountObjectID(GenerateDataController.accountObjectID[rand.nextInt(GenerateDataController.accountObjectID.length)]);
 			invoice.setAmount(Double.valueOf(1000+i/100));
