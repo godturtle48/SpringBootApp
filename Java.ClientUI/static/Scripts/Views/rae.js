@@ -165,7 +165,9 @@ var getPageHome = function() {
 		url : MISA.Config.paymentUrl + "/getAllPage_Size:" + size,
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader('authorization', localStorage
-					.getItem("authenCookie"));
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader('keycompany', localStorage
+					.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
@@ -243,7 +245,9 @@ var getPage = function() {
 		url : MISA.Config.paymentUrl + "/getPage/page:" + page + "_size:" + size,
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader('authorization', localStorage
-					.getItem("authenCookie"));
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader('keycompany', localStorage
+					.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
@@ -1451,7 +1455,8 @@ var raeJS = new ReceiptsAndExpensesJS();
                         contentType:"application/json; charset:utf-8;",
                         dataType: 'text',
                         beforeSend: function(xhr){
-                            xhr.setRequestHeader("keyCompany", "company2");
+                            // xhr.setRequestHeader("keyCompany", "company2");
+                            xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
                         },
                         data: JSON.stringify(dataFilter),
                         success: function(response, status, xhr){

@@ -1,57 +1,57 @@
 version: "2"
 networks: 
  sme-network:
-  # external: true    
+  external: true    
 services:
-###########################################
-## MySQL: The database used by SMEAuthenAPI
-########################################### 
-  authen-db:
-    container_name: db_container
-    image: mariadb:10.4
-    networks:
-      - sme-network
-    restart: always
-    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
-    environment:
-      MYSQL_ROOT_PASSWORD: misasme
-    volumes:
-      - /var/data/mariadb:/var/lib/mariadb
-    ports:
-    - "13306:3306"
-    - "33060:33060"
-###########################################
-## RabbitMQ
-########################################### 
-  rabbit1:
-    image: "rabbitmq:3-management"
-    networks:
-      - sme-network
-    hostname: "rabbit1"
-    restart: always
-    environment:
-      # RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "guest"
-      RABBITMQ_DEFAULT_PASS: "guest"
-      # RABBITMQ_DEFAULT_VHOST: "/"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    # labels:
-    #   NAME: "rabbitmq1"
-    # volumes:
-    #   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
-###########################################
-## MongoDB
-########################################### 
-  payment-receipt-db:
-      container_name: java_payment_receipt_db
-      image: mongo
-      restart: always
-      networks:
-        - sme-network
-      ports:
-        - "27117:27017"
+# ###########################################
+# ## MySQL: The database used by SMEAuthenAPI
+# ########################################### 
+#   authen-db:
+#     container_name: db_container
+#     image: mariadb:10.4
+#     networks:
+#       - sme-network
+#     restart: always
+#     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
+#     environment:
+#       MYSQL_ROOT_PASSWORD: misasme
+#     volumes:
+#       - /var/data/mariadb:/var/lib/mariadb
+#     ports:
+#     - "13306:3306"
+#     - "33060:33060"
+# ###########################################
+# ## RabbitMQ
+# ########################################### 
+#   rabbit1:
+#     image: "rabbitmq:3-management"
+#     networks:
+#       - sme-network
+#     hostname: "rabbit1"
+#     restart: always
+#     environment:
+#       # RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+#       RABBITMQ_DEFAULT_USER: "guest"
+#       RABBITMQ_DEFAULT_PASS: "guest"
+#       # RABBITMQ_DEFAULT_VHOST: "/"
+#     ports:
+#       - "5672:5672"
+#       - "15672:15672"
+#     # labels:
+#     #   NAME: "rabbitmq1"
+#     # volumes:
+#     #   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+# ###########################################
+# ## MongoDB
+# ########################################### 
+#   payment-receipt-db:
+#       container_name: java_payment_receipt_db
+#       image: mongo
+#       restart: always
+#       networks:
+#         - sme-network
+#       ports:
+#         - "27117:27017"
 #########################################
 ################ Authent
 ######################################### 
@@ -62,9 +62,9 @@ services:
     restart: always
     networks:
       - sme-network
-    depends_on:
-      - authen-db
-      - rabbit1
+    # depends_on:
+      # - authen-db
+      # - rabbit1
     ports:
       - "9101:80"
       - "9102:8080"
@@ -78,9 +78,9 @@ services:
     restart: always
     networks:
       - sme-network
-    depends_on:
-      - authen-db
-      - rabbit1
+    # depends_on:
+    #   - authen-db
+    #   - rabbit1
     ports:
       - "9001:80"
       - "9002:8080"
@@ -109,10 +109,10 @@ services:
     restart: always
     networks:
       - sme-network
-    depends_on:
-      - authen-db
-      - payment-receipt-db
-      - rabbit1
+    # depends_on:
+    #   - authen-db
+    #   - payment-receipt-db
+    #   - rabbit1
     ports:
       - "9003:80"
       - "9004:8080"
