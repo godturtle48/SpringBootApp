@@ -334,7 +334,7 @@ html {
     justify-content: center;
     /*display: flex;
     display: -webkit-flex;*/
-    /*padding: 60px 0;*/
+    padding-top: calc(50vh - 430px);
 }
 
 .transparent {
@@ -573,7 +573,6 @@ html {
         font-weight: bold !important;
         font-family: Roboto,Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
         text-align: center !important;
-        line-height: 45px !important;
         padding-left: 50px !important;
         padding-right: 50px !important;
         text-transform: uppercase;
@@ -989,7 +988,7 @@ html {
 
 .page-content {
     width: 800px;
-    /*margin: 0 auto;*/
+    margin: 0 auto;
 }
 
 /*CSS Container*/
