@@ -1,12 +1,12 @@
 package com.example.demo.query.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.RefTypeCommand;
@@ -38,9 +38,9 @@ public class PaymentReceiptView {
 	
 	
 	private List<InvoiceDetailCommand> invoices;
-	
-	private  Date refDate;
-	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date refDate;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date postedDate;
 
 	private String refNoFinance;
@@ -62,13 +62,15 @@ public class PaymentReceiptView {
 	private Double totalAmountOC;
 
 	private Double totalAmount;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date editVersion;
 	
 	private Integer refOrdef;
-
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date createdDate;
 	private String createdBy;
-	private Timestamp modifiedDate;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date modifiedDate;
 	private String modifiedBy;
 	public String getRefID() {
 		return refID;
@@ -208,10 +210,10 @@ public class PaymentReceiptView {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Timestamp getModifiedDate() {
+	public Date getModifiedDate() {
 		return modifiedDate;
 	}
-	public void setModifiedDate(Timestamp modifiedDate) {
+	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 	public String getModifiedBy() {

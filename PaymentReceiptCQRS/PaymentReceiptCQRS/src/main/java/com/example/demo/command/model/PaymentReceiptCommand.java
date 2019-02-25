@@ -80,7 +80,7 @@ public class PaymentReceiptCommand {
 	private Date createdDate;
 	private String createdBy;
 	@Column(name="modifiedDate")
-	private Timestamp modifiedDate;
+	private Date modifiedDate;
 	private String modifiedBy;
 	
 	
@@ -244,10 +244,10 @@ public class PaymentReceiptCommand {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Timestamp getModifiedDate() {
+	public Date getModifiedDate() {
 		return modifiedDate;
 	}
-	public void setModifiedDate(Timestamp modifiedDate) {
+	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 	public String getModifiedBy() {
@@ -287,7 +287,6 @@ public class PaymentReceiptCommand {
 		obj.put("createdBy", createdBy);
 		obj.put("modifiedDate", modifiedDate);
 		obj.put("modifiedBy", modifiedBy);
-		obj.put("modifiedDate", modifiedDate);
 		obj.put("version", version);
 		
 		

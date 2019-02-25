@@ -45,7 +45,7 @@ public class PaymentReceiptQueryController {
 	}
 	
 	
-	
+
 	@RequestMapping("/getPage/page:{page}_size:{size}")
 	public List<PaymentReceiptView> get(@PathVariable("page") long page,@PathVariable("size") int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		System.out.println(page);
