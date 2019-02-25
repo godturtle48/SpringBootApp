@@ -38,7 +38,7 @@ public class PaymentMessageQueue {
 	public static void produceMsg(String msg){
 	    try {
 			channel.basicPublish("Payment.exchange", "Payment.routingkey", null, msg.getBytes("UTF-8"));
-			System.out.println("Config Service send message: " + msg);
+//			System.out.println("Config Service send message: " + msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
