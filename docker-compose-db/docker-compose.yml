@@ -1,0 +1,56 @@
+version: '2'
+
+networks:
+  sme-network:
+    external: true
+
+services:
+###########################################
+## MySQL: The database used by SMEAuthenAPI
+########################################### 
+  authen-db:
+    container_name: db_container
+    image: mariadb:10.4
+    networks:
+      - sme-network
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: misasme
+    volumes:
+      - /var/data/mariadb:/var/lib/mariadb
+    ports:
+    - "13306:3306"
+    - "33060:33060"
+###########################################
+## RabbitMQ
+########################################### 
+  rabbit1:
+    image: "rabbitmq:3-management"
+    networks:
+      - sme-network
+    hostname: "rabbit1"
+    restart: always
+    environment:
+      # RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      # RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    # labels:
+    #   NAME: "rabbitmq1"
+    # volumes:
+    #   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+###########################################
+## MongoDB
+########################################### 
+  payment-receipt-db:
+    container_name: java_payment_receipt_db
+    image: mongo
+    restart: always
+    networks:
+      - sme-network
+    ports:
+      - "27117:27017"

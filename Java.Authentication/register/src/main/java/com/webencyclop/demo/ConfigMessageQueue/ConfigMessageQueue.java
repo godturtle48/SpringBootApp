@@ -7,7 +7,9 @@ import java.util.concurrent.TimeoutException;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 //cmd :rabbitmq-plugins enable rabbitmq_management --online
 @Component
@@ -17,7 +19,7 @@ public class ConfigMessageQueue {
 	
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("localhost");	
+	    factory.setHost("rabbit1");	
 	    factory.setPort(5672);
 	    factory.setUsername("guest");
 	    factory.setPassword("guest");

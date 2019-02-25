@@ -1,6 +1,7 @@
 version: "2"
 networks: 
- sme-network:    
+ sme-network:
+  # external: true    
 services:
 ###########################################
 ## MySQL: The database used by SMEAuthenAPI
@@ -19,8 +20,54 @@ services:
     ports:
     - "13306:3306"
     - "33060:33060"
-
-
+###########################################
+## RabbitMQ
+########################################### 
+  rabbit1:
+    image: "rabbitmq:3-management"
+    networks:
+      - sme-network
+    hostname: "rabbit1"
+    restart: always
+    environment:
+      # RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      # RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    # labels:
+    #   NAME: "rabbitmq1"
+    # volumes:
+    #   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+###########################################
+## MongoDB
+########################################### 
+  payment-receipt-db:
+      container_name: java_payment_receipt_db
+      image: mongo
+      restart: always
+      networks:
+        - sme-network
+      ports:
+        - "27117:27017"
+#########################################
+################ Authent
+######################################### 
+  config-api:
+    image: 10.0.6.27:50000/javateam/java_config_api:4.6
+    container_name: config_container
+    build: ./Java.Config/config
+    restart: always
+    networks:
+      - sme-network
+    depends_on:
+      - authen-db
+      - rabbit1
+    ports:
+      - "9101:80"
+      - "9102:8080"
 #########################################
 ################ Authent
 ######################################### 
@@ -28,25 +75,44 @@ services:
     image: 10.0.6.27:50000/javateam/java_authent_api:4.6
     container_name: authent_container
     build: ./Java.Authentication/register
+    restart: always
     networks:
       - sme-network
     depends_on:
       - authen-db
+      - rabbit1
     ports:
       - "9001:80"
       - "9002:8080"
 
+# #########################################
+# ################ Payment
+# ######################################### 
+#   payment-api:
+#     image: 10.0.6.27:50000/javateam/java_payment_api:4.6
+#     container_name: payment_container
+#     build: ./Java.Payment/Payment
+#     networks:
+#       - sme-network
+#     depends_on:
+#       - authen-db
+#     ports:
+#       - "9003:80"
+#       - "9004:8080"
 #########################################
 ################ Payment
 ######################################### 
   payment-api:
     image: 10.0.6.27:50000/javateam/java_payment_api:4.6
     container_name: payment_container
-    build: ./Java.Payment/Payment
+    build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
+    restart: always
     networks:
       - sme-network
     depends_on:
       - authen-db
+      - payment-receipt-db
+      - rabbit1
     ports:
       - "9003:80"
       - "9004:8080"
@@ -55,10 +121,10 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:4.7
+    image: 10.0.6.27:50000/javateam/java_ui:4.6
+    restart: always
     container_name: ui_container
     build: ./Java.ClientUI
     ports:
       - "9000:80"
-
 
