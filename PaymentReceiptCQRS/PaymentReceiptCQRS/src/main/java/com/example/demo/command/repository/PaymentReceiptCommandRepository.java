@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.config.SimpleCorsFilter;
+import com.example.demo.configmessagequeue.TenantInfo;
 
 
 
@@ -19,8 +20,8 @@ public class PaymentReceiptCommandRepository {
 	
 
 
-	public PaymentReceiptCommand getPaymentReceiptById(String id) {
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+	public PaymentReceiptCommand getPaymentReceiptById(String id, String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		PaymentReceiptCommand payment=null;
 		Transaction tx=null;
 		try {
@@ -35,9 +36,9 @@ public class PaymentReceiptCommandRepository {
 		return payment;
 	}
 	
-	public List<PaymentReceiptCommand> getAll(){
+	public List<PaymentReceiptCommand> getAll(String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
@@ -53,9 +54,9 @@ public class PaymentReceiptCommandRepository {
 	
 	}
 	
-	public List<PaymentReceiptCommand> getPaymentReceiptByRefType(int refTypeID){
+	public List<PaymentReceiptCommand> getPaymentReceiptByRefType(int refTypeID, String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
@@ -72,9 +73,9 @@ public class PaymentReceiptCommandRepository {
 	
 	}
 	
-	public List<PaymentReceiptCommand> getPaymentReceiptOfCompany(String keyCompany){
+	public List<PaymentReceiptCommand> getPaymentReceiptOfCompany(String keyCompany, String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
@@ -92,8 +93,8 @@ public class PaymentReceiptCommandRepository {
 	}
 	
 	
-	public long count(String keyCompany) {
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+	public long count(String keyCompany, String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		long result=0;
 		try {
@@ -110,9 +111,9 @@ public class PaymentReceiptCommandRepository {
 		return result;
 	}
 	
-	public List<PaymentReceiptCommand> getPaymentReceiptOfCompanyPage(String keyCompany,long index,int size){
+	public List<PaymentReceiptCommand> getPaymentReceiptOfCompanyPage(String keyCompany,long index,int size, String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
@@ -135,9 +136,9 @@ public class PaymentReceiptCommandRepository {
 	
 	
 
-	public int  save(PaymentReceiptCommand paymentReceipt) {
+	public int  save(PaymentReceiptCommand paymentReceipt, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 
 		try {
@@ -164,9 +165,9 @@ public class PaymentReceiptCommandRepository {
 	
 	
 	
-	public int  update(PaymentReceiptCommand paymentReceipt) {
+	public int  update(PaymentReceiptCommand paymentReceipt, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		int result=0;
 		try {
@@ -206,9 +207,9 @@ public class PaymentReceiptCommandRepository {
 		 return 1;
 	}
 	
-	public int  delete(PaymentReceiptCommand paymentReceipt) {
+	public int  delete(PaymentReceiptCommand paymentReceipt, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		
 		try {
@@ -229,9 +230,9 @@ public class PaymentReceiptCommandRepository {
 		return 1;
 	}
 
-	public Integer getRefNoFinance() {
+	public Integer getRefNoFinance(String keydatabase) {
 		// TODO Auto-generated method stub
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		try {
 			return session.createSQLQuery("select * from PaymentReceipt").getResultList().size();
 		}
@@ -240,9 +241,9 @@ public class PaymentReceiptCommandRepository {
 		}
 	}
 
-	public boolean ifRefNoFinanceExist(String refNoFinance_gen) {
+	public boolean ifRefNoFinanceExist(String refNoFinance_gen, String keydatabase) {
 		// TODO Auto-generated method stub
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		try {
 			if(session.createQuery("from PaymentReceipt where refNoFinance = :refNoFinance_gen")
 					.setParameter("refNoFinance_gen", refNoFinance_gen).getResultList().size() != 0) {

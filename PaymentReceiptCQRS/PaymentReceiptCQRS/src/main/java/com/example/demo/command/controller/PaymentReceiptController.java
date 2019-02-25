@@ -45,8 +45,8 @@ public class PaymentReceiptController {
 	@PostMapping("/addRef")
 	public Map<String, Object> addRef(@RequestBody PaymentReceiptCommand payment,HttpServletRequest httpServletRequest){
 		Map<String, Object> map=new HashMap<String, Object>();
-		
-		String keyCompany= "company1";
+		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
+		String keyCompany= httpServletRequest.getHeader("keycompany");
 		double totalAmountReturn = 0;
 		if(payment.getRef()==null) {
 			
@@ -69,9 +69,9 @@ public class PaymentReceiptController {
 		
 		payment.setKeyCompany(keyCompany);
 		payment.setCreatedDate(new Date(new java.util.Date().getTime()));
-		RefTypeCommand ref=refTypeService.findByID(payment.getRef().getRefTypeID());
+		RefTypeCommand ref=refTypeService.findByID(payment.getRef().getRefTypeID(), keydatabase);
 		if(ref==null) {
-			refTypeService.Save(payment.getRef());
+			refTypeService.Save(payment.getRef(), keydatabase);
 		}else {
 			payment.setRef(ref);
 		}
@@ -115,7 +115,7 @@ public class PaymentReceiptController {
 		
 		//Xét version cho payment la trang thai them =0;
 		payment.setVersion(Integer.valueOf(0));
-		int status=paymentService.save(payment);
+		int status=paymentService.save(payment, keydatabase);
 		if(status==1) {
 			//send sang rabbitmq
 			MessageFormat command=new MessageFormat(EventType.CREATE,payment);
@@ -129,7 +129,9 @@ public class PaymentReceiptController {
 	
 		//sua Ref
 		@PostMapping("/updateRef")
-		public Map<String, Object> updateRef(@RequestBody PaymentReceiptCommand payment){
+		public Map<String, Object> updateRef(@RequestBody PaymentReceiptCommand payment,HttpServletRequest httpServletRequest){
+			String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
+			String keyCompany= httpServletRequest.getHeader("keycompany");
 				Map<String, Object> map=new HashMap<String, Object>();
 				if(payment.getRefID()==null) {
 					map.put("error", "Không tìm được payment");
@@ -157,15 +159,15 @@ public class PaymentReceiptController {
 					payment.setPostedFinance(Integer.valueOf(0));
 				}
 				
-				RefTypeCommand ref=refTypeService.findByID(payment.getRef().getRefTypeID());
+				RefTypeCommand ref=refTypeService.findByID(payment.getRef().getRefTypeID(),keydatabase);
 				if(ref==null) {
-					refTypeService.Save(payment.getRef());
+					refTypeService.Save(payment.getRef(),keydatabase);
 				}else {
 					payment.setRef(ref);
 				}
 				
 				
-				PaymentReceiptCommand paymentOld=paymentService.findByID(payment.getRefID());
+				PaymentReceiptCommand paymentOld=paymentService.findByID(payment.getRefID(),keydatabase);
 				if(paymentOld==null) {
 					map.put("error", "Không tìm được payment");
 					return map;
@@ -213,7 +215,7 @@ public class PaymentReceiptController {
 				//set tăng version lên
 				payment.setVersion(Integer.valueOf(paymentOld.getVersion().intValue()+1));
 				
-			int status=paymentService.update(payment);
+			int status=paymentService.update(payment,keydatabase);
 			if(status==1) {
 				
 				//send sang rabbitmq
@@ -229,19 +231,20 @@ public class PaymentReceiptController {
 		
 		//xoa
 		@PostMapping("/deleteRef")
-		public Map<String, Object> deleteRef(@RequestBody PaymentReceiptCommand payment){
+		public Map<String, Object> deleteRef(@RequestBody PaymentReceiptCommand payment,HttpServletRequest httpServletRequest){
+			String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
 				Map<String, Object> map=new HashMap<String, Object>();
 				if(payment.getRefID()==null) {
 					map.put("error", "Không tìm được payment");
 					return map;
 				}
-				PaymentReceiptCommand paymentOld=paymentService.findByID(payment.getRefID());
+				PaymentReceiptCommand paymentOld=paymentService.findByID(payment.getRefID(),keydatabase);
 				if(paymentOld==null) {
 					map.put("error", "Không tìm được payment");
 					return map;
 				}
 				
-			int status=paymentService.delete(payment);
+			int status=paymentService.delete(payment,keydatabase);
 			if(status==1) {
 				MessageFormat command=new MessageFormat(EventType.DELETE,paymentOld);
 				CommandMessageQueue.produceMsg(command.toString());

@@ -14,22 +14,22 @@ public class RefTypeCommandService {
 	
 	@Autowired
 	RefTypeCommandRepository refTypeRepository;
-	public int Save(RefTypeCommand refType) {
-		return refTypeRepository.save(refType);
+	public int Save(RefTypeCommand refType,String keydatabase) {
+		return refTypeRepository.save(refType, keydatabase);
 	}
 	
-	public int delete(RefTypeCommand refType) {
-		return refTypeRepository.delete(refType);
+	public int delete(RefTypeCommand refType,String keydatabase) {
+		return refTypeRepository.delete(refType, keydatabase);
 	}
 	
-	public int update(RefTypeCommand refType) {
-		return refTypeRepository.update(refType);
+	public int update(RefTypeCommand refType,String keydatabase) {
+		return refTypeRepository.update(refType, keydatabase);
 	}
-	public RefTypeCommand findByID(int id) {
-		return refTypeRepository.getRefTypeById(id);
+	public RefTypeCommand findByID(int id,String keydatabase) {
+		return refTypeRepository.getRefTypeById(id, keydatabase);
 	}
 	
-	public List<RefTypeCommand> findAll() {
-		return refTypeRepository.getAll();
+	public List<RefTypeCommand> findAll(String keydatabase) {
+		return refTypeRepository.getAll(keydatabase);
 	}
 }

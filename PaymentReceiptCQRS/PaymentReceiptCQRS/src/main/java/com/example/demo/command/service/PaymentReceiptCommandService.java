@@ -12,11 +12,11 @@ public class PaymentReceiptCommandService {
 	@Autowired
 	PaymentReceiptCommandRepository paymentReceiptRepository;
 	
-	public int save(PaymentReceiptCommand paymentReceipt) {
-		return paymentReceiptRepository.save(paymentReceipt);
+	public int save(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		return paymentReceiptRepository.save(paymentReceipt, keydatabase);
 	}
-	public int delete(PaymentReceiptCommand paymentReceipt) {
-		return paymentReceiptRepository.delete(paymentReceipt);
+	public int delete(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		return paymentReceiptRepository.delete(paymentReceipt, keydatabase);
 	}
 //	public List<PaymentReceipt> getPaymentReceiptOfCompany(String keyCompany){
 //		return paymentReceiptRepository.getPaymentReceiptOfCompany(keyCompany);
@@ -32,12 +32,12 @@ public class PaymentReceiptCommandService {
 //		return paymentReceiptRepository.count(keyCompany);
 //	}
 	
-	public int update(PaymentReceiptCommand paymentReceipt) {
-		return paymentReceiptRepository.update(paymentReceipt);
+	public int update(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		return paymentReceiptRepository.update(paymentReceipt, keydatabase);
 	}
 	
-	public PaymentReceiptCommand findByID(String id) {
-		return paymentReceiptRepository.getPaymentReceiptById(id);
+	public PaymentReceiptCommand findByID(String id,String keydatabase) {
+		return paymentReceiptRepository.getPaymentReceiptById(id, keydatabase);
 	}
 
 

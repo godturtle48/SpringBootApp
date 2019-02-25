@@ -9,14 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.command.model.RefTypeCommand;
 import com.example.demo.config.SimpleCorsFilter;
+import com.example.demo.configmessagequeue.TenantInfo;
 
 
 @Repository
 public class RefTypeCommandRepository {
 
 	
-	public RefTypeCommand getRefTypeById(int id) {
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+	public RefTypeCommand getRefTypeById(int id, String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		RefTypeCommand refType=null;
 		Transaction tx=null;
 		try {
@@ -31,9 +32,9 @@ public class RefTypeCommandRepository {
 		return refType;
 	}
 	
-	public List<RefTypeCommand> getAll(){
+	public List<RefTypeCommand> getAll(String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		List<RefTypeCommand> lst=new ArrayList<>();
 		try {
@@ -50,9 +51,9 @@ public class RefTypeCommandRepository {
 	}
 	
 	
-	public int  update(RefTypeCommand refType) {
+	public int  update(RefTypeCommand refType, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 	
 		try {
@@ -69,9 +70,9 @@ public class RefTypeCommandRepository {
 		 session.close();
 		 return 1;
 	}
-	public int  save(RefTypeCommand refType) {
+	public int  save(RefTypeCommand refType, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		
 		try {
@@ -87,8 +88,8 @@ public class RefTypeCommandRepository {
 		  session.close(); 
 		return 1;
 	}
-	public int  delete(RefTypeCommand refType) {
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+	public int  delete(RefTypeCommand refType, String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 	
 		try {

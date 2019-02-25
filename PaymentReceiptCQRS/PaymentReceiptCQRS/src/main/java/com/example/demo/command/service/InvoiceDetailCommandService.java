@@ -14,23 +14,23 @@ public class InvoiceDetailCommandService {
 	@Autowired
 	InvoiceDetailCommandRepository invoiceDetailRepository;
 	
-	public int save(InvoiceDetailCommand invoiceDetail) {
-		return invoiceDetailRepository.save(invoiceDetail);
+	public int save(InvoiceDetailCommand invoiceDetail,String keydatabase) {
+		return invoiceDetailRepository.save(invoiceDetail, keydatabase);
 	}
-	public int delete(InvoiceDetailCommand invoiceDetail,String paymentID) {
-		return invoiceDetailRepository.delete(invoiceDetail,paymentID);
-	}
-	
-	public int update(InvoiceDetailCommand invoiceDetail) {
-		return invoiceDetailRepository.update(invoiceDetail);
+	public int delete(InvoiceDetailCommand invoiceDetail,String paymentID,String keydatabase) {
+		return invoiceDetailRepository.delete(invoiceDetail,paymentID, keydatabase);
 	}
 	
-	public InvoiceDetailCommand findByID(String id) {
-		return invoiceDetailRepository.getInvoiceById(id);
+	public int update(InvoiceDetailCommand invoiceDetail,String keydatabase) {
+		return invoiceDetailRepository.update(invoiceDetail, keydatabase);
 	}
 	
-	public List<InvoiceDetailCommand> findByPaymentID(String paymentID){
-		return invoiceDetailRepository.getInvoicesByPaymentID(paymentID);
+	public InvoiceDetailCommand findByID(String id,String keydatabase) {
+		return invoiceDetailRepository.getInvoiceById(id, keydatabase);
+	}
+	
+	public List<InvoiceDetailCommand> findByPaymentID(String paymentID,String keydatabase){
+		return invoiceDetailRepository.getInvoicesByPaymentID(paymentID, keydatabase);
 	}
 	
 }

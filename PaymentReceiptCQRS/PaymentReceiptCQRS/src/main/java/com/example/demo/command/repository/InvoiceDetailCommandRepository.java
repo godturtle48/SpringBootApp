@@ -12,12 +12,13 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.config.SimpleCorsFilter;
+import com.example.demo.configmessagequeue.TenantInfo;
 
 @Repository
 public class InvoiceDetailCommandRepository {
 
-	public InvoiceDetailCommand getInvoiceById(String id) {
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+	public InvoiceDetailCommand getInvoiceById(String id, String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		InvoiceDetailCommand invoice=null;
 		Transaction tx=null;
 		try {
@@ -32,9 +33,9 @@ public class InvoiceDetailCommandRepository {
 		return invoice;
 	}
 	
-	public List<InvoiceDetailCommand> getAll(){
+	public List<InvoiceDetailCommand> getAll(String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		InvoiceDetailCommand invoice=null;
 		Transaction tx=null;
 		List<InvoiceDetailCommand> lst=new ArrayList<>();
@@ -51,9 +52,9 @@ public class InvoiceDetailCommandRepository {
 	
 	}
 	
-	public List<InvoiceDetailCommand> getInvoicesByPaymentID(String PaymentID){
+	public List<InvoiceDetailCommand> getInvoicesByPaymentID(String PaymentID, String keydatabase){
 		
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		InvoiceDetailCommand invoice=null;
 		Transaction tx=null;
 		List<InvoiceDetailCommand> lst=new ArrayList<>();
@@ -70,9 +71,9 @@ public class InvoiceDetailCommandRepository {
 		return lst;
 	
 	}
-	public int  update(InvoiceDetailCommand invoice) {
+	public int  update(InvoiceDetailCommand invoice, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 	
 		try {
@@ -100,9 +101,9 @@ public class InvoiceDetailCommandRepository {
 		  session.close(); 
 		return 1;
 	}
-	public int  save(InvoiceDetailCommand invoice) {
+	public int  save(InvoiceDetailCommand invoice, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		int result=0;
 		try {
@@ -127,9 +128,9 @@ public class InvoiceDetailCommandRepository {
 		session.close(); 
 		return 1;
 	}
-	public int  delete(InvoiceDetailCommand invoice,String paymentID) {
+	public int  delete(InvoiceDetailCommand invoice,String paymentID, String keydatabase) {
 
-		Session session=SimpleCorsFilter.sessionFactory.openSession();
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		Transaction tx=null;
 		int result=0;
 		try {
