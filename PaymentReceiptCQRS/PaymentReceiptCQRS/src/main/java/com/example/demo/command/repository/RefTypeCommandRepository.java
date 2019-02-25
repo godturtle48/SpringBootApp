@@ -39,7 +39,7 @@ public class RefTypeCommandRepository {
 		List<RefTypeCommand> lst=new ArrayList<>();
 		try {
 			//	tx = session.beginTransaction();
-			lst = session.createQuery("FROM RefType").list(); 
+			lst = session.createQuery("FROM RefTypeCommand").list(); 
 			//tx.commit();
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
@@ -58,7 +58,7 @@ public class RefTypeCommandRepository {
 	
 		try {
 			 tx = session.beginTransaction();
-			 session.update("RefType", refType);
+			 session.update("RefTypeCommand", refType);
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class RefTypeCommandRepository {
 	
 		try {
 			 tx = session.beginTransaction();
-			 session.createQuery("delete from PaymentReceipt where ref.refTypeID=:refTypeID")
+			 session.createQuery("delete from PaymentReceiptCommand where ref.refTypeID=:refTypeID")
 					 .setParameter("refTypeID", refType.getRefTypeID()).executeUpdate(); 
 			 session.delete(refType);
 			

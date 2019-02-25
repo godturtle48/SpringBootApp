@@ -23,9 +23,9 @@ public class ConfigDatabaseForThisService {
 			  configuration.setProperty("hibernate.connection.url",
 			      "jdbc:mariadb://localhost:3306/config?createDatabaseIfNotExist=true");
 			  configuration.setProperty("hibernate.connection.username", "root");
-			  configuration.setProperty("hibernate.connection.password", "12345678");
+			  configuration.setProperty("hibernate.connection.password", "12345");
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-			  configuration.setProperty("hibernate.hbm2ddl.auto","update");
+			  configuration.setProperty("hibernate.hbm2ddl.auto","create");
 			  configuration.setProperty("hibernate.show_sql", "false");
 			  configuration.setProperty("hibernate.connection.pool_size", "100");
 			  configuration.setProperty("hibernate.connection.characterEncoding", "utf8");

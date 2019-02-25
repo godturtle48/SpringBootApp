@@ -34,7 +34,7 @@ public class TestController {
 	public String genarate(){
 		int numServer=1;
 		for (int i=0;i<numServer;i++) {
-			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("localhost",""+(3306+i),"root","12345678");
+			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("localhost",""+(3306+i),"root","12345");
 			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) return "FAIL";
 		}
 		return "OK";

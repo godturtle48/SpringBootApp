@@ -27,7 +27,7 @@ public class PaymentReceiptQueryController {
 	@RequestMapping("/getAllPage_Size:{size}")
 	public Map<String, Object> getAllPage(@PathVariable("size")int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 //		Authenticate.Auth(httpServletRequest, httpServletResponse); 
-		String keyCompany= "company1";
+		String keyCompany= httpServletRequest.getHeader("keycompany");
 		System.out.println("size:"+size);
 		long totalPage = 0;
 		Map<String, Object> map = new HashMap<>();
@@ -51,7 +51,7 @@ public class PaymentReceiptQueryController {
 		System.out.println(page);
 		System.out.println(size);
 
-		String keyCompany= "company1";
+		String keyCompany= httpServletRequest.getHeader("keycompany");
 
 		long countRecord =  paymentService.countByKeyCompany(keyCompany);
 		

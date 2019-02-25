@@ -33,11 +33,12 @@ public class GenerateData {
 	@Autowired
 	InvoiceDetailCommandService invoiceService;
 	@RequestMapping("/ref")
-	public String ref() {
+	public String ref(HttpServletRequest httpServletRequest) {
+		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
 		RefTypeCommand ref=new RefTypeCommand(1,"Thu");
 		RefTypeCommand ref2=new RefTypeCommand(2,"Chi");
-		refTypeService.Save(ref);
-		refTypeService.Save(ref2);
+		refTypeService.Save(ref,keydatabase);
+		refTypeService.Save(ref2,keydatabase);
 		return "ref";
 	}
 	
@@ -53,9 +54,12 @@ public class GenerateData {
 										"CTY THIENTAN",
 										"HNMAI"};
 	
-	@RequestMapping("/payment:{keyCompany}")
-	public String paymnet(@PathVariable String keyCompany,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
-		List<RefTypeCommand> ref=refTypeService.findAll();
+	@RequestMapping("/payment")
+	public String paymnet(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+		
+		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		List<RefTypeCommand> ref=refTypeService.findAll(keydatabase);
 		Random rand=new Random();
 		
 		String[]	accountObjectAddresss= {"Tòa nhà Technosoft, Phố Duy Tân, Dịch Vọng Hậu, Cầu Giấy, Hà Nội", 
@@ -135,7 +139,7 @@ public class GenerateData {
 				"Chi khác"};
              
 			int length = GenerateData.accountObjectID.length;
-			for(int i=1;i<100000;++i) {
+			for(int i=1;i<100;++i) {
 				try {
 					int tmpIndex = rand.nextInt(length);
 				
@@ -143,7 +147,7 @@ public class GenerateData {
 					List<InvoiceDetailCommand> invoices=new ArrayList<>();
 					for (int j = 1; j <= rand.nextInt(3) + 1; j++) {
 						InvoiceDetailCommand invoice=new InvoiceDetailCommand();
-						invoice.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
+//						invoice.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
 						invoice.setAmount(Double.valueOf(1000+i/100));
 						invoice.setAmountOC(Double.valueOf(1000+i/1000));
 						invoice.setDiscription(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
@@ -173,7 +177,7 @@ public class GenerateData {
 					payment.setRef(ref.get(i%2));
 					payment.setPostedFinance(Integer.valueOf(1));
 					payment.setInvoices(invoices);
-					paymentService.save(payment);
+					paymentService.save(payment,keydatabase);
 					
 					
 					Thread.sleep(2);

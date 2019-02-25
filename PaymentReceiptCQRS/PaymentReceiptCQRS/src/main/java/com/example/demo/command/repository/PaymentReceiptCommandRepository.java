@@ -11,6 +11,9 @@ import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.config.SimpleCorsFilter;
 import com.example.demo.configmessagequeue.TenantInfo;
+import com.example.demo.rabbidmq.CreateMessageQueue;
+import com.example.demo.rabbidmq.EventType;
+import com.example.demo.rabbidmq.MessageFormat;
 
 
 
@@ -152,6 +155,9 @@ public class PaymentReceiptCommandRepository {
 				 } 
 			 }
 			 
+				//send sang rabbitmq
+				MessageFormat command=new MessageFormat(EventType.CREATE,paymentReceipt);
+				CreateMessageQueue.produceMsg(command.toString());
 			tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();

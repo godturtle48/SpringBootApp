@@ -117,9 +117,7 @@ public class PaymentReceiptController {
 		payment.setVersion(Integer.valueOf(0));
 		int status=paymentService.save(payment, keydatabase);
 		if(status==1) {
-			//send sang rabbitmq
-			MessageFormat command=new MessageFormat(EventType.CREATE,payment);
-			CreateMessageQueue.produceMsg(command.toString());
+		
 			map.put("message", "success!");
 		}
 		else map.put("error", "fail!");
