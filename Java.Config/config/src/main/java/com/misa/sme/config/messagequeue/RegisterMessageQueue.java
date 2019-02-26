@@ -57,9 +57,10 @@ public class RegisterMessageQueue {
 
 							 if(scaleService.createCompany(userId, keycompany)) {
 								 channel.basicAck(deliveryTag, false);
-							 }else {
-								 System.out.println("create database for company : fail");
 							 }
+//							 else {
+//								 System.out.println("create database for company : fail");
+//							 }
 		                 }
 		                 catch(Exception e) {
 		                	 e.printStackTrace();
