@@ -145,7 +145,7 @@ public class GenerateData {
 				
 					PaymentReceiptCommand payment=new PaymentReceiptCommand();
 					List<InvoiceDetailCommand> invoices=new ArrayList<>();
-					for (int j = 1; j <= rand.nextInt(3) + 1; j++) {
+					for (int j = 1; j <= 5 + 1; j++) {
 						InvoiceDetailCommand invoice=new InvoiceDetailCommand();
 //						invoice.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
 						invoice.setAmount(Double.valueOf(1000+i/100));

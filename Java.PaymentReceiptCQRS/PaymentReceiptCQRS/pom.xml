@@ -80,9 +80,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>smejava-paymentreceiptc-cqrs</finalName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

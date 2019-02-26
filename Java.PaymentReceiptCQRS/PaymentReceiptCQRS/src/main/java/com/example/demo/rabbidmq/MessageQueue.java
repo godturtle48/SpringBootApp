@@ -27,7 +27,7 @@ public class MessageQueue {
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
 	    // config rabbitmq address
-	    factory.setHost("rabbit1");	
+	    factory.setHost("localhost");	
 	    factory.setPort(5672);
 	    factory.setUsername("guest");
 	    factory.setPassword("guest");
