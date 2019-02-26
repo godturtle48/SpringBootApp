@@ -2,6 +2,8 @@ package com.misa.sme.config.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,13 +31,19 @@ public class TestController {
 	PaymentDatabaseOfUserService paymentDatabaseOfUserService;
 	@Autowired
 	PaymentDatabaseScale paymentDatabaseScale;
+	private final Logger logger = LoggerFactory.getLogger(TestController.class);
 	
 	@RequestMapping("/genarate-server")
 	public String genarate(){
 		int numServer=1;
 		for (int i=0;i<numServer;i++) {
 			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("db_container",""+(3306+i),"root","misasme");
-			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) return "FAIL";
+			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) {
+				logger.error("ERROR: Can't create database server info");
+				return "FAIL";
+			}else {
+				logger.info("INFO: Create database server info --> success: "+paymentDatabaseServerInfo1);
+			}
 		}
 		return "OK";
 	}

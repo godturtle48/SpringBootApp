@@ -41,6 +41,7 @@ td {
 .btn-primary {
 	background-color: #2baaed;
 	border-color: #2baaed;
+	color: #fff !important;
 }
 
 .btn-warning {
@@ -52,6 +53,7 @@ td {
 .btn-success {
 	background-color: #31CC54;
 	border-color: #31CC54;
+	color: #fff !important;
 }
 .add-section {
 	padding-top: 20px;

@@ -52,11 +52,11 @@ services:
 #         - sme-network
 #       ports:
 #         - "27117:27017"
-#########################################
-################ Authent
-######################################### 
+########################################
+############### Authent
+######################################## 
   config-api:
-    image: 10.0.6.27:50000/javateam/java_config_api:4.6
+    image: 10.0.6.27:50000/javateam/java_config_api:5.0
     container_name: config_container
     build: ./Java.Config/config
     restart: always
@@ -72,7 +72,7 @@ services:
 ################ Authent
 ######################################### 
   authent-api:
-    image: 10.0.6.27:50000/javateam/java_authent_api:4.6
+    image: 10.0.6.27:50000/javateam/java_authent_api:5.0
     container_name: authent_container
     build: ./Java.Authentication/register
     restart: always
@@ -103,7 +103,7 @@ services:
 ################ Payment
 ######################################### 
   payment-api:
-    image: 10.0.6.27:50000/javateam/java_payment_api:4.6
+    image: 10.0.6.27:50000/javateam/java_payment_api:5.0
     container_name: payment_container
     build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
     restart: always
@@ -121,7 +121,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:4.6
+    image: 10.0.6.27:50000/javateam/java_ui:5.0
     restart: always
     container_name: ui_container
     build: ./Java.ClientUI

@@ -1,8 +1,11 @@
 package com.misa.sme.config.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.misa.sme.config.controller.TestController;
 import com.misa.sme.config.messagequeue.PaymentMessageContent;
 import com.misa.sme.config.messagequeue.PaymentMessageQueue;
 import com.misa.sme.config.model.PaymentDatabaseInfo;
@@ -22,7 +25,8 @@ public class PaymentDatabaseScale {
 	PaymentDatabaseServerInfoRepository paymentDatabaseServerInfoRepository;
 	private static final int MAX_DATABASE_PER_SERVER=5;
 	private static final int MAX_COMPANY_PER_SERVER=100000;
-	
+	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+
 	public boolean createCompany(String userId,String keycompany) {
 		/*
 		 * Kiem tra : db < so Server
@@ -92,11 +96,13 @@ public class PaymentDatabaseScale {
 				sendCompanyConfig(paymentDatabaseOfUser);
 				return true;
 			}
+			logger.error("ERROR: Can't create company or database info");
 			return false;
 		}
 	}
 	
 	private static void sendCompanyConfig(PaymentDatabaseOfUser paymentDatabaseOfUser) {
+		logger.info("INFO: Create company --> success :"+paymentDatabaseOfUser);
 		String msg=new PaymentMessageContent(
 				1,
 				paymentDatabaseOfUser,
@@ -106,6 +112,7 @@ public class PaymentDatabaseScale {
 	}
 	
 	private static void sendDatabaseConfig(PaymentDatabaseInfo paymentDatabaseInfo) {
+		logger.info("INFO: Create database --> success :"+ paymentDatabaseInfo);
 		String msg=new PaymentMessageContent(
 				2,
 				null,
