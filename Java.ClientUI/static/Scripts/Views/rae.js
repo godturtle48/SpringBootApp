@@ -164,10 +164,8 @@ var getPageHome = function() {
 		method : "GET",
 		url : MISA.Config.paymentUrl + "/getAllPage_Size:" + size,
 		beforeSend : function(xhr) {
-			xhr.setRequestHeader('authorization', localStorage
-                    .getItem("authenCookie"));
-            xhr.setRequestHeader('keycompany', localStorage
-					.getItem("workCompanyID"));
+			xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
+            xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {

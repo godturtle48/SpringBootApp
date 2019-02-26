@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+		debugger;
 		$.ajax({
 			method: "GET",
 			url:MISA.Config.loginUrl+"/api/home",
@@ -29,11 +30,12 @@ $(document).ready(function(){
 				})
 			},
 			error: function(err, stt, xhr){
-				window.location.href="/";
+				window.location.href="/index.html";
 			}
 		})	
 	}
 	else{
+		debugger;
 		window.location.href="/";
 	}
 	//get Enter addBtn
@@ -85,6 +87,7 @@ $('#addBtn').click(function(){
 	                    +'</tr>')
 	              initGoToWorkspaceOncClickEvent();
 			}
+
 		},
 		error: function(data, txtStatus, xhr){
 			if(data.status == 406){
