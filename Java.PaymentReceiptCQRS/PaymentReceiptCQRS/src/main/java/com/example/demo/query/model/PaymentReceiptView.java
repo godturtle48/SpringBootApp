@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Id;
 
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,9 +31,7 @@ public class PaymentReceiptView {
 	public void setId(String id) {
 		this.id = id;
 	}
-	@Indexed
 	private String refID;
-	@Indexed
 	private String keyCompany;
 
 	private RefTypeCommand ref;
@@ -72,7 +69,6 @@ public class PaymentReceiptView {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date createdDate;
 	private String createdBy;
-	@Indexed
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date modifiedDate;
 	private String modifiedBy;
