@@ -33,9 +33,9 @@ public class PaymentReceiptView {
 	public void setId(String id) {
 		this.id = id;
 	}
-	@Indexed
+//	@Indexed
 	private String refID;
-	@Indexed
+//	@Indexed
 	private String keyCompany;
 
 	private RefTypeCommand ref;
@@ -73,7 +73,7 @@ public class PaymentReceiptView {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date createdDate;
 	private String createdBy;
-	@Indexed
+//	@Indexed
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date modifiedDate;
 	private String modifiedBy;
