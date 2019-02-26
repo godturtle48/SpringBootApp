@@ -2,6 +2,9 @@ package com.example.demo.query.service;
 
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.query.model.FilterModel;
 import com.example.demo.query.model.PaymentReceiptView;
 import com.example.demo.query.repository.PaymentReceiptViewRepository;
 
@@ -91,4 +95,115 @@ public class PaymentReceiptViewService {
 	public PaymentReceiptView findByRefID(String refID) {
 		return paymentRepository.findByRefID(refID);
 	}
+	
+	//filter By any column
+	public List<PaymentReceiptView> getFilterPaymentReceipt(String keyCompany, List<FilterModel> filterData ){
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		Query query = new Query();
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		int numFieldFilter = filterData.size();
+		for(int i = 0; i < numFieldFilter; i++) {
+			if(filterData.get(i).getDataType().equals("date")) {
+				try {
+					if(filterData.get(i).getArrange() == 1) {
+						query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+								.gte(dateFormatter.parse(filterData.get(i).getDataFilter())));
+					}
+					else {
+						query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+								.lte(dateFormatter.parse(filterData.get(i).getDataFilter())));
+					}
+					
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if(filterData.get(i).getDataType().equals("String")){
+					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+										.regex("/" + filterData.get(i).getDataFilter() + "/"));
+			}
+			else {
+				if(filterData.get(i).getArrange() == 1) {
+					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+								.gte(filterData.get(i).getDataFilter()));
+				}
+				else {
+					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+							.lte(filterData.get(i).getDataFilter()));
+				}
+			}
+		}
+		List<PaymentReceiptView> filterResult = mongoTemplate.find(query, PaymentReceiptView.class);
+		return filterResult;
+	}
+	/*
+	 * Generate refNoFinance automatic
+	 * refTypeID = 1 => Receipt(PT)
+	 * refTypeID = 2 => Payment(PC)
+	 */
+	
+	public String generateRefNoFinace(int refTypeID, String keyCompany) {
+		//Count number Ref of company belong to Type
+		Query query = new Query();
+		String generateRefNoFinance = (refTypeID == 1) ? "PT" : "PC";
+		query.addCriteria(Criteria.where("ref.refTypeID").is(refTypeID));
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		Integer countNumRef = mongoTemplate.find(query, PaymentReceiptView.class).size() + 1;//Number ref of this type
+		
+		//RefNo String generrate returned
+		
+		Integer lengCount = countNumRef.toString().length();
+		if(lengCount < 10){
+			String appendZero = "";
+			for(int i = 0; i < 10 - lengCount; i++){
+				appendZero += "0";
+			}
+			generateRefNoFinance += appendZero + countNumRef.toString();
+			
+			while(IfRefNoFinanceExist(generateRefNoFinance, keyCompany)) {
+				countNumRef++;
+				lengCount = countNumRef.toString().length();
+				if(lengCount < 10){
+					appendZero = "";
+					for(int i = 0; i < 10 - lengCount; i++){
+						appendZero += "0";
+					}
+					generateRefNoFinance += appendZero + countNumRef.toString();
+				}
+				else{
+					while(IfRefNoFinanceExist(generateRefNoFinance, keyCompany)) {
+						countNumRef++;
+					}
+					generateRefNoFinance += countNumRef.toString();
+				}
+			}
+		}
+		else{
+			while(IfRefNoFinanceExist(generateRefNoFinance, keyCompany)) {
+				countNumRef++;
+			}
+			generateRefNoFinance += countNumRef.toString();
+		}
+		return generateRefNoFinance;
+		
+	}
+	
+	//Check if RefNoFinance exist
+	public boolean IfRefNoFinanceExist(String refNoFinance, String keyCompany) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		query.addCriteria(Criteria.where("refNoFinance").is(refNoFinance));
+		List<PaymentReceiptView> list = mongoTemplate.find(query, PaymentReceiptView.class);
+		try {
+			if(list.size() == 0) return false;
+		}
+		catch(NullPointerException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
 }

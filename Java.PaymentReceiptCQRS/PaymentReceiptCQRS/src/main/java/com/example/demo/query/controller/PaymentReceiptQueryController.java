@@ -8,11 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.command.model.PaymentReceiptCommand;
+import com.example.demo.query.model.FilterModel;
 import com.example.demo.query.model.PaymentReceiptView;
 import com.example.demo.query.service.PaymentReceiptViewService;
 
@@ -64,4 +70,16 @@ public class PaymentReceiptQueryController {
 		
 	}
 	
+	@RequestMapping("/generateRefNoFinance:{refTypeID}")
+	public String generateRefNoFinance(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		return paymentService.generateRefNoFinace(refTypeID, keyCompany);
+	}
+	
+	@PostMapping("/filterPaymentReceipt")
+	public List<PaymentReceiptView> filterPaymentReceipt(List<FilterModel> filterData, HttpServletRequest httpServletRequest){
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		return paymentService.getFilterPaymentReceipt(keyCompany, filterData);
+	}
 }
