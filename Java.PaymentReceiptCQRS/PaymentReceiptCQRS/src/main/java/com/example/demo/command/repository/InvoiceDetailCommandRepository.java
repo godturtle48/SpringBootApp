@@ -41,7 +41,7 @@ public class InvoiceDetailCommandRepository {
 		List<InvoiceDetailCommand> lst=new ArrayList<>();
 		try {
 			//	tx = session.beginTransaction();
-			lst = session.createQuery("FROM InvoiceDetail").list(); 
+			lst = session.createQuery("FROM InvoiceDetailCommand").list(); 
 			//tx.commit();
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
@@ -60,7 +60,7 @@ public class InvoiceDetailCommandRepository {
 		List<InvoiceDetailCommand> lst=new ArrayList<>();
 		try {
 //			 tx = session.beginTransaction();
-			String sql = " FROM InvoiceDetail WHERE payment.refID = :refID";
+			String sql = " FROM InvoiceDetailCommand WHERE payment.refID = :refID";
 			lst= session.createQuery(sql).setParameter("refID", PaymentID).list();
 			//tx.commit();
 		} catch (Exception e) {
@@ -81,13 +81,13 @@ public class InvoiceDetailCommandRepository {
 			 session.update(invoice);
 			 //update lai payment
 			 Double amount=0.0;
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetailCommand where payment.refID=:refID")
 						.setParameter("refID",invoice.getPayment().getRefID()).uniqueResult(); 
 				if(obj!=null)
 					amount=((Double)obj).doubleValue();
 				PaymentReceiptCommand payment=session.get(PaymentReceiptCommand.class,invoice.getPayment().getRefID());
 				payment.setTotalAmountOC(amount);
-				session.update("PaymentReceipt", payment);
+				session.update("PaymentReceiptCommand", payment);
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -110,13 +110,13 @@ public class InvoiceDetailCommandRepository {
 			 tx = session.beginTransaction();
 			 session.save(invoice);
 			 Double amount=0.0;
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetailCommand where payment.refID=:refID")
 						.setParameter("refID",invoice.getPayment().getRefID()).uniqueResult(); 
 				if(obj!=null)
 					amount=((Double)obj).doubleValue();
 				PaymentReceiptCommand payment=session.get(PaymentReceiptCommand.class,invoice.getPayment().getRefID());
 				payment.setTotalAmountOC(amount);
-				session.update("PaymentReceipt", payment);
+				session.update("PaymentReceiptCommand", payment);
 			 
 			tx.commit();
 		} catch (Exception e) {
@@ -138,14 +138,14 @@ public class InvoiceDetailCommandRepository {
 			 session.delete(invoice);
 			 Double amount=0.0;
 			 PaymentReceiptCommand payment=session.get(PaymentReceiptCommand.class,paymentID);
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetailCommand where payment.refID=:refID")
 						.setParameter("refID",paymentID)
 						.uniqueResult(); 
 				if(obj!=null)
 					amount=((Double)obj).doubleValue();
 				
 				payment.setTotalAmountOC(payment.getTotalAmountOC()-invoice.getAmountOC());
-				session.update("PaymentReceipt", payment);
+				session.update("PaymentReceiptCommand", payment);
 				
 			
 			 tx.commit();

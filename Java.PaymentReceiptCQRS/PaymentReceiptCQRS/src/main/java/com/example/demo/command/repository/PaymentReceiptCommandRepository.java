@@ -46,7 +46,7 @@ public class PaymentReceiptCommandRepository {
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
 			//	tx = session.beginTransaction();
-			lst = session.createQuery("FROM PaymentReceipt").list(); 
+			lst = session.createQuery("FROM PaymentReceiptCommand").list(); 
 			//tx.commit();
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
@@ -64,7 +64,7 @@ public class PaymentReceiptCommandRepository {
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
 //			 tx = session.beginTransaction();
-			String sql = "SELECT * FROM PaymentReceipt WHERE refTypeID = :refTypeID";
+			String sql = "SELECT * FROM PaymentReceiptCommand WHERE refTypeID = :refTypeID";
 			lst= session.createSQLQuery(sql).addEntity(PaymentReceiptCommand.class).setParameter("refTypeID", refTypeID).getResultList();
 			//tx.commit();
 		} catch (Exception e) {
@@ -83,7 +83,7 @@ public class PaymentReceiptCommandRepository {
 		List<PaymentReceiptCommand> lst=new ArrayList<>();
 		try {
 //			 tx = session.beginTransaction();
-			String sql = "SELECT * FROM PaymentReceipt WHERE keyCompany = :keyCompany";
+			String sql = "SELECT * FROM PaymentReceiptCommand WHERE keyCompany = :keyCompany";
 			lst= session.createSQLQuery(sql).addEntity(PaymentReceiptCommand.class).setParameter("keyCompany", keyCompany).getResultList();
 			//tx.commit();
 		} catch (Exception e) {
@@ -102,7 +102,7 @@ public class PaymentReceiptCommandRepository {
 		long result=0;
 		try {
 			 tx = session.beginTransaction();
-			Object  obj= (Object) session.createQuery("select count(refID) from PaymentReceipt where keyCompany=:keyCompany")
+			Object  obj= (Object) session.createQuery("select count(refID) from PaymentReceiptCommand where keyCompany=:keyCompany")
 					.setParameter("keyCompany", keyCompany).uniqueResult(); 
 			if(obj!=null)result=((Long)obj).longValue();
 			//tx.commit();
@@ -221,7 +221,7 @@ public class PaymentReceiptCommandRepository {
 		try {
 			 tx = session.beginTransaction();
 			 //phai xoa ca lien ket nua
-			 session.createQuery("delete from InvoiceDetail where payment.refID=:refID")
+			 session.createQuery("delete from InvoiceDetailCommand where payment.refID=:refID")
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
 			 session.delete(paymentReceipt);
 			
@@ -240,7 +240,7 @@ public class PaymentReceiptCommandRepository {
 		// TODO Auto-generated method stub
 		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		try {
-			return session.createSQLQuery("select * from PaymentReceipt").getResultList().size();
+			return session.createSQLQuery("select * from PaymentReceiptCommand").getResultList().size();
 		}
 		catch(NullPointerException e) {
 			return 0;
@@ -251,7 +251,7 @@ public class PaymentReceiptCommandRepository {
 		// TODO Auto-generated method stub
 		Session session=TenantInfo.getConnect(keydatabase).openSession();
 		try {
-			if(session.createQuery("from PaymentReceipt where refNoFinance = :refNoFinance_gen")
+			if(session.createQuery("from PaymentReceiptCommand where refNoFinance = :refNoFinance_gen")
 					.setParameter("refNoFinance_gen", refNoFinance_gen).getResultList().size() != 0) {
 				return true;
 			}
