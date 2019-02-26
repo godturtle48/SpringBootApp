@@ -70,7 +70,7 @@ public class PaymentReceiptQueryController {
 		
 	}
 	
-	@RequestMapping("/generateRefNoFinance:{refTypeID}")
+	@RequestMapping("/generateRefNoFinance/{refTypeID}")
 	public String generateRefNoFinance(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		
 		String keyCompany= httpServletRequest.getHeader("keycompany");
