@@ -29,6 +29,16 @@ $(document).ready(function(){
                 $('#addtr').trigger('click');
             }
         })
+        /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
+        $('.btn-select-filter').click(function() {
+            debugger
+            if ($(this).html() == "&gt;=") {
+                $(this).html("&lt;=");
+            } else $(this).html("&gt;=");
+        })
         $('#addtr').on('click', function(){
             //them moi status =3
             $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
@@ -315,7 +325,7 @@ class ReceiptsAndExpensesJS {
         /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown);
+        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown.bind(this));
         // $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
         // $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
         // $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
@@ -437,6 +447,7 @@ class ReceiptsAndExpensesJS {
      */
     beforeOpenDetail() {
         $(document).off('keydown', this.keyDownRowSelect);
+        $(document).off('keydown', this.dialog_OnKeyDown);
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');
@@ -497,7 +508,7 @@ class ReceiptsAndExpensesJS {
         //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
         invoices.forEach(function(invoice,index){
             var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
-                        <td style="display:inline-flex;">
+                        <td style="display:flex;">
                             <button role="removeInvoice" class="btn btn-danger">x</button>
                             <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
@@ -581,7 +592,7 @@ class ReceiptsAndExpensesJS {
             invoicesGlobal=invoices;
             invoices.forEach(function(invoice,index){
                 var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
-                            <td style="display:inline-flex;">
+                            <td style="display:flex;">
                                 <button role="removeInvoice" class="btn btn-danger">x</button>
                                 <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                             </td>
@@ -1275,7 +1286,10 @@ class ReceiptsAndExpensesJS {
             return false;
             case 13:
             event.preventDefault();
-            $(".rowSelected").trigger('dblclick');
+            debugger
+            if (!$('#currentPage').is(":focus")) {
+                $(".rowSelected").trigger('dblclick');
+            } else return false;
         }
     }
     /* -------------------------------------------------------------------
@@ -1288,7 +1302,6 @@ class ReceiptsAndExpensesJS {
         getPage();
         this.buildDataIntoTable(fakeData);
     }
-
     accountObjectItem_OnSelect() {
         // Lấy thông tin đối tượng được chọn:
         var accountObjectCode = $(event.target).attr('item-value');
@@ -1326,6 +1339,7 @@ class ReceiptsAndExpensesJS {
      * Created by NVLAM (15/02/2019)
      */
     dialog_OnKeyDown(sender) {
+        debugger
         if(sender.keyCode === 37){
             $('#btnPrevious').trigger('click');
         };
@@ -1335,7 +1349,7 @@ class ReceiptsAndExpensesJS {
     }
     /* ------------------------------------------------------------------------
      * Tính năng chọn dòng
-     * Created bt: NVLAM (16/02/2019)
+     * Created by: NVLAM (16/02/2019)
      */
     selectRow(newRow) {
         newRow = $(newRow);
@@ -1351,7 +1365,6 @@ class ReceiptsAndExpensesJS {
  
         // Chọn một dòng mới
         newRow.addClass('rowSelected');
-        debugger
         var rowTop = newRow.position().top;
         var rowBottom = rowTop + newRow.height();
         var $table = $('.cls-gridPanel');
@@ -1371,6 +1384,10 @@ class ReceiptsAndExpensesJS {
 }
 
 var raeJS = new ReceiptsAndExpensesJS();
+    /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
     ///////ham convertData de hien thi chuan theo nguoi dung
     function convertDate(date) {
         date = new Date(date);
