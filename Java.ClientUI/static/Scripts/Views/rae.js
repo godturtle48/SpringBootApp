@@ -447,7 +447,7 @@ class ReceiptsAndExpensesJS {
      */
     beforeOpenDetail() {
         $(document).off('keydown', this.keyDownRowSelect);
-        $(document).off('keydown', this.dialog_OnKeyDown);
+        
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');

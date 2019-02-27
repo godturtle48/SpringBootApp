@@ -11,8 +11,10 @@
     <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
     <link href="./static/CSS/Views/login.css" rel="stylesheet" />
     <link href="./static/CSS/Views/header.css" rel="stylesheet" />
-    <link href="./static/CSS/Views/control.css" rel="stylesheet" />
     <link href="./static/CSS/Views/home.css" rel="stylesheet" />
+    <link href="./static/CSS/common/main.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
+    <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="loading-page"></div>
@@ -73,45 +75,6 @@
                     <button class="btn btn-success" id="btnAdd">
                         Thêm công ty mới
                     </button>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-section" id="popupAdd">
-                            <h3 class="label-default text-center add-title"><strong>Thêm công ty</strong></h3>
-                            <table class="table-striped"id="tb-company-add">
-                                <thead>
-                                    <tr>
-                                        <td style="min-width: 100px">Danh mục</td>
-                                        <td>Thông tin</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tên công ty</td>
-                                        <td><input type="text" id="companyName" placeholder="VD: Công ty cổ phần MISA" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mã số thuế</td>
-                                        <td><input type="text" id="companyTaxNumber" placeholder="VD: 0123456" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Địa chỉ</td>
-                                        <td><input type="text" id="companyAddress" placeholder="VD: Hà Nội" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Chi nhánh</td>
-                                        <td><input type="text" placeholder="VD: Trụ sở chính"required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Số điện thoại</td>
-                                        <td><input type="text" placeholder="VD: 024 3762 7891" required></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="text-center button-add-section">
-                                <button class="btn btn-success" id="addBtn">Thêm</button>
-                                <button class="btn btn-danger" id="cancelBtn">Hủy bỏ</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 info-section">
                     <div class="info-header">
@@ -148,7 +111,75 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 add-section" id="popupAdd">
+                        <h3 class="label-default text-left add-title"><strong>Thêm công ty</strong></h3>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="group">
+                                    <input type="text" id="companyName" placeholder="" class="input-add-company" required>
+                                    <span class="icon-add-company">
+                                        <i class="far fa-building"></i>
+                                    </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label">Tên công ty</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="group">
+                                    <input type="text" id="companyTaxNumber" placeholder="" class="input-add-company" required>
+                                    <span class="icon-add-company">
+                                        <i class="fas fa-barcode"></i>
+                                    </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label">Mã số thuế</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="group">
+                                    <input type="text" id="companyTelNumber" placeholder="" class="input-add-company" required>
+                                    <span class="icon-add-company">
+                                        <i class="fas fa-phone"></i>
+                                    </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label">Số điện thoại</label>
+                                </div>
+                            </div>             
+                            <div class="col-md-6 col-xs-12">
+                                <div class="group">
+                                    <input type="text" required>
+                                    <span class="icon-add-company">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label">Địa chỉ</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="group">
+                                    <input type="text" name="" id="companyBranch" class="input-add-company" required>
+                                    <span class="icon-add-company">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label">Chi nhánh</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                    <div class="text-center button-add-section">
+                                        <button class="btn btn-success" id="addBtn">Thêm</button>
+                                        <button class="btn btn-danger" id="cancelBtn">Hủy bỏ</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -231,14 +262,6 @@
             </div>
         </div>
     </div>
-
-    <div  id="statusField" style="display:none;
-    		min-width: 250px; padding-top:10px;
-    		padding-left: 10px;
-			height: 60px; border-radius: 30%; 
-			opacity: 0.5; background-color: green; 
-			position: absolute; right: 20px; top: 30px; font-size: 15px;">
-	</div>
 
     <script src="./static/Scripts/lib/jquery-3.2.1.min.js"></script>
     <script src="./static/Scripts/lib/bootstrap.min.js"></script>

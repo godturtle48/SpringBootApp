@@ -551,7 +551,12 @@ table#tblRAEDetail {
     border-collapse: collapse;
     width: 100%;
 }
-
+    .cls-gridPanel th, #tblDetail th{
+        position: sticky;
+        top: 0px;
+        background-color: #ededed;
+        z-index: 99;
+    }
     table#tblRAEDetail td, table#tblDetail td {
         border: 1px solid #ccc;
         padding: 0px 5px
