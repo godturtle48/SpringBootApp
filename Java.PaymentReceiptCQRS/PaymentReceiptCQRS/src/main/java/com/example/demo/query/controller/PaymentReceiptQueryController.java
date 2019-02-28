@@ -78,8 +78,18 @@ public class PaymentReceiptQueryController {
 	}
 	
 	@PostMapping("/filterPaymentReceipt")
-	public List<PaymentReceiptView> filterPaymentReceipt(List<FilterModel> filterData, HttpServletRequest httpServletRequest){
+	public Map<String, Object> filterPaymentReceipt(@RequestBody List<FilterModel> filterData, HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
-		return paymentService.getFilterPaymentReceipt(keyCompany, filterData);
+		Map<String, Object> filterMap = new HashMap<>();
+		filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
+		filterMap.put("totalRecord", paymentService.getFilterPaymentReceipt(keyCompany, filterData).size());
+		return filterMap;
 	}
+	
+	@PostMapping("/testDate")
+	public List<PaymentReceiptView> getListByDate(@RequestBody Map<String, String> data, HttpServletRequest httpServletRequest){
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		return paymentService.getListByDate(keyCompany, data);
+	}
+	
 }

@@ -1,0 +1,1 @@
+[INFO ] 2019-02-27 08:21:55.696 [http-nio-1002-exec-1] TestController - INFO: Create database server info --> success: {"password":"misasme","port":"3306","host":"localhost","username":"root"}

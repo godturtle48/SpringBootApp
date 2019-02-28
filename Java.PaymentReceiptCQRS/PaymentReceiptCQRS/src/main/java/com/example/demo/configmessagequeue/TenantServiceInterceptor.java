@@ -28,7 +28,8 @@ public class TenantServiceInterceptor implements HandlerInterceptor{
 		  Sender sender=(Sender)request.getAttribute("sender");
 		  long userId=sender.getId();
 		  if (!TenantInfo.validateKeycompany(keycompany,String.valueOf(userId)) ) {
-			  response.sendError(401,"UNAUTHORIZED REQUEST");	 
+//			  response.sendError(401,"UNAUTHORIZED REQUEST");	 
+			  response.sendError(401,"UNWORK FOR THIS COMPANY!");	 
 		      return true;
 		  };	
 		  

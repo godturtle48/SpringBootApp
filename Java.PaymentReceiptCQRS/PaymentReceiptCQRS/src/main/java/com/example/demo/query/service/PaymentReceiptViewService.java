@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.websocket.server.ServerEndpoint;
 
@@ -105,13 +106,15 @@ public class PaymentReceiptViewService {
 		for(int i = 0; i < numFieldFilter; i++) {
 			if(filterData.get(i).getDataType().equals("date")) {
 				try {
-					if(filterData.get(i).getArrange() == 1) {
+					if(filterData.get(i).getArrange() == 1) {//
 						query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 								.gte(dateFormatter.parse(filterData.get(i).getDataFilter())));
+						query.with(new Sort(Sort.Direction.ASC, filterData.get(i).getColumnName()));
 					}
 					else {
 						query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 								.lte(dateFormatter.parse(filterData.get(i).getDataFilter())));
+						query.with(new Sort(Sort.Direction.DESC, filterData.get(i).getColumnName()));
 					}
 					
 				} catch (ParseException e) {
@@ -119,18 +122,33 @@ public class PaymentReceiptViewService {
 					e.printStackTrace();
 				}
 			}
-			else if(filterData.get(i).getDataType().equals("String")){
+			else if(filterData.get(i).getDataType().equals("string")){
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
-										.regex("/" + filterData.get(i).getDataFilter() + "/"));
+										.regex(filterData.get(i).getDataFilter()));
 			}
-			else {
+			else if(filterData.get(i).getDataType().equals("int")){
+				query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+							.is(Integer.parseInt(filterData.get(i).getDataFilter())));
+		}
+			else if(filterData.get(i).getDataType().equals("long")){
 				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
-								.gte(filterData.get(i).getDataFilter()));
+							.gte(Integer.parseInt(filterData.get(i).getDataFilter())));
 				}
 				else {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
-							.lte(filterData.get(i).getDataFilter()));
+							.lte(Integer.parseInt(filterData.get(i).getDataFilter())));
+				}
+					
+			}
+			else if(filterData.get(i).getDataType().equals("other")){
+				if(filterData.get(i).getArrange() == 1) {
+					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+								.is(filterData.get(i).getDataFilter()));
+				}
+				else {
+					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
+							.is(filterData.get(i).getDataFilter()));
 				}
 			}
 		}
@@ -203,7 +221,17 @@ public class PaymentReceiptViewService {
 		}
 		return true;
 	}
-	
+
+
+	public List<PaymentReceiptView> getListByDate(String keyCompany, Map<String, String> data) {
+		// TODO Auto-generated method stub
+		Query query = new Query();
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		query.addCriteria(Criteria.where("ref.refTypeID")
+				.is(1));
+		List<PaymentReceiptView> filterResult = mongoTemplate.find(query, PaymentReceiptView.class);
+		return filterResult;
+	}	
 	
 	
 }

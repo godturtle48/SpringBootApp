@@ -3,6 +3,12 @@ package com.example.demo.command.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.repository.PaymentReceiptCommandRepository;
 
@@ -38,6 +44,10 @@ public class PaymentReceiptCommandService {
 	
 	public PaymentReceiptCommand findByID(String id,String keydatabase) {
 		return paymentReceiptRepository.getPaymentReceiptById(id, keydatabase);
+	}
+	public List<GeneralDetailCommand> getGeneralDetailAddPay_Re(int refTypeID, String keyCompany) {
+		// TODO Auto-generated method stub
+		return paymentReceiptRepository.getGeneralDetailAddPay_Re(keyCompany, refTypeID);
 	}
 
 

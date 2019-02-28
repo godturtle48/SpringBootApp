@@ -25,7 +25,7 @@ public class ConfigDatabaseForThisService {
 			  configuration.setProperty("hibernate.connection.username", "root");
 			  configuration.setProperty("hibernate.connection.password", "misasme");
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-			  configuration.setProperty("hibernate.hbm2ddl.auto","create");
+			  configuration.setProperty("hibernate.hbm2ddl.auto","update");
 			  configuration.setProperty("hibernate.show_sql", "false");
 			  configuration.setProperty("hibernate.connection.pool_size", "100");
 			  configuration.setProperty("hibernate.connection.characterEncoding", "utf8");

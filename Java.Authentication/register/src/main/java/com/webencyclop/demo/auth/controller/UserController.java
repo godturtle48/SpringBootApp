@@ -155,6 +155,14 @@ public class UserController<E> {
 		JSONObject obj = new JSONObject();
 		obj.put("status", "success");
 		obj.put("email", email);
+		try {
+			int userId = userRepository.findByContactEmail(email).getId(); 
+			String keyCompany = companyRepository.findByCompanyTaxNumber(userId).get(0).getCompanyTaxNumber();
+			obj.put("keycompany", keyCompany);
+		}catch(NullPointerException e) {
+			System.out.println("No Company found!");
+		}
+		
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 	

@@ -10,11 +10,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.model.RefTypeCommand;
@@ -251,6 +254,11 @@ public class PaymentReceiptController {
 			else map.put("error", "fail!");
 			return map;
 		}
-		
-	
+		//Get data to add PaymentReceipt
+		@GetMapping("/getGeneralDetailAddCombobox/{refTypeID}")
+		public List<GeneralDetailCommand> getGeneralDetailAddPay_Re(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest){
+			String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
+			String keyCompany = httpServletRequest.getHeader("keycompany");
+			return paymentService.getGeneralDetailAddPay_Re(refTypeID, keyCompany);
+		}
 }

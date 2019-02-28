@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.config.SimpleCorsFilter;
@@ -262,7 +263,20 @@ public class PaymentReceiptCommandRepository {
 		}
 		return false;
 	}
-	
-	
+
+	public List<GeneralDetailCommand> getGeneralDetailAddPay_Re(String keyCompany, int refTypeID) {
+		String keydatabase=TenantInfo.getKeydatabase(keyCompany);
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
+		try {
+			return session.createSQLQuery("select distinct accountObjectID, accountObjectName, accountObjectAddress, "
+					+ "accountObjectContactName, journalMemo, description createdBy"
+					+ " from PaymentReceiptCommand where refTypeID = :refTypeID  LIMIT 6")
+					.setParameter("refTypeID", refTypeID)
+					.addEntity(GeneralDetailCommand.class).getResultList();
+		}
+		catch(NullPointerException e) {
+			return null;
+		}
+	}
 	
 }
