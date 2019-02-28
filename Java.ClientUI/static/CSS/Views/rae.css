@@ -127,14 +127,13 @@ tbody {
     /*overflow-y: auto;*/
     overflow: auto;
 }
-.gridHeader th {
-    position: sticky;
-    top: 0px;
-}
 #filterElement th {
     position: sticky;
     top: 28px;
 }
+    #filterElement .date-filter {
+        text-align: center;
+    }
 .gridPanel-header {
     position: absolute;
     right: 0px;
@@ -552,7 +551,12 @@ table#tblRAEDetail {
     border-collapse: collapse;
     width: 100%;
 }
-
+    .cls-gridPanel th, #tblDetail th{
+        position: sticky;
+        top: 0px;
+        background-color: #ededed;
+        z-index: 99;
+    }
     table#tblRAEDetail td, table#tblDetail td {
         border: 1px solid #ccc;
         padding: 0px 5px
@@ -640,7 +644,9 @@ input[controltype="inputCombobox"]{
     width: 100%;
     border: none;
 }
-
+    #tblDetail #tbodyRAEDetail-popup td {
+        padding: 0px;
+    }
 .fa-calendar-alt {
     position: absolute;
     right: 5px;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.WebUtils;
 
+import com.webencyclop.demo.ConfigMessageQueue.ConfigMessageQueue;
 import com.webencyclop.demo.auth.exception.InvalidRequestException;
 import com.webencyclop.demo.auth.middlewares.Authenticate;
 import com.webencyclop.demo.auth.util.JwtUtil;
@@ -154,6 +155,14 @@ public class UserController<E> {
 		JSONObject obj = new JSONObject();
 		obj.put("status", "success");
 		obj.put("email", email);
+		try {
+			int userId = userRepository.findByContactEmail(email).getId(); 
+			String keyCompany = companyRepository.findByCompanyTaxNumber(userId).get(0).getCompanyTaxNumber();
+			obj.put("keycompany", keyCompany);
+		}catch(Exception e) {
+			System.out.println("No Company found!");
+		}
+		
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 	
@@ -211,7 +220,10 @@ public class UserController<E> {
 					userRepository.save(user);				}
 				else {
 					userService.saveCompany(company,user);	
+					user.setCompanies(new HashSet<Company>(Arrays.asList(company)));
 					userRepository.save(user);
+					System.out.println("user:" + user.getId());
+					ConfigMessageQueue.produceMsg(String.valueOf(user.getId()), company.getCompanyTaxNumber());
 				}				
 			}
 		} catch (Exception e) {

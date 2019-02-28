@@ -1,24 +1,26 @@
 
 $(document).ready(function(){
-    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-    //     $.ajax({
-    //         method: "GET",
-    //         url:MISA.Config.loginUrl+"/api/home",
-    //         beforeSend: function(xhr) {
-    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-    //         },
-    //         success: function(data, status, xhr){
-    //             $('.user-info').text((data.email).split("@")[0]);
-    //             //ajax goi company
-    //         },
-    //         error: function(err, stt, xhr){
-    //             window.location.href="/";
-    //         }
-    //     })  
-    // }
-    // else{
-        //     window.location.href="/";
-        // }
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend:function(xhr){
+                    xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                },
+            success: function(data, status, xhr){
+                $('.user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+                localStorage.setItem("workCompanyID", data.keycompany);
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+            window.location.href="/";
+        }
         
     })
     $(document).ready(function () {  
@@ -164,8 +166,8 @@ var getPageHome = function() {
 		method : "GET",
 		url : MISA.Config.paymentUrl + "/getAllPage_Size:" + size,
 		beforeSend : function(xhr) {
-			xhr.setRequestHeader('authorization', localStorage
-					.getItem("authenCookie"));
+			xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
+            xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
@@ -243,7 +245,9 @@ var getPage = function() {
 		url : MISA.Config.paymentUrl + "/getPage/page:" + page + "_size:" + size,
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader('authorization', localStorage
-					.getItem("authenCookie"));
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader('keycompany', localStorage
+					.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
@@ -667,10 +671,6 @@ class ReceiptsAndExpensesJS {
         if($('#tbodyRAE').children().last().hasClass('rowSelected') && $('#currentPage').val() == $('#totalPage').html()) {
             $('#btnPrevious').attr('disabled',true);
         }
-        if (args[0].data.refType !== undefined) {
-            var refType = args[0].data.refType;
-            this.RefType = refType;
-        }
         if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
@@ -746,15 +746,16 @@ class ReceiptsAndExpensesJS {
         $('#PostedDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         $('#RefDate').datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
         //Ajax lấy số chứng từ tự sinh để thêm hoặc nhân bản 
-        var infix = "PC"
-        if(this.RefType == 1){
-            infix = "PT";
-        }
+        var refType_selected = this.RefType;
         $.ajax({
             method:"get",
-            url: MISA.Config.paymentUrl + "/getRefNoFinance",
+            url: MISA.Config.paymentUrl + "/generateRefNoFinance/" + refType_selected,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("keycompany",localStorage.getItem("workCompanyID"));
+                xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
             success: function(data){
-                $('input[dataindex="RefNo"]').val(infix + data);  
+                $('input[dataindex="RefNo"]').val(data);  
             }
         });
         indexInvoiceGlobal=0;
@@ -846,9 +847,10 @@ class ReceiptsAndExpensesJS {
                     method:"post",
                     url: MISA.Config.paymentUrl + "/addRef",
                     contentType: "application/json; charset=utf-8",
-                    // beforeSend:function(xhr){
-                    //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                    // },
+                    beforeSend:function(xhr){
+                        xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                        xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                    },
                     data: JSON.stringify(data),
                     success: function(result, txtStatus, xhr){
                         console.log(result);
@@ -971,9 +973,10 @@ class ReceiptsAndExpensesJS {
                 method:"post",
                 url: MISA.Config.paymentUrl + "/updateRef",
                 contentType: "application/json; charset=utf-8",
-                // beforeSend:function(xhr){
-                //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                // },
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                },
                 data: JSON.stringify(RefUpdate),
                 async:false,
                 success: function(result, txtStatus, xhr){
@@ -1059,9 +1062,10 @@ class ReceiptsAndExpensesJS {
                 method:"post",
                 url: MISA.Config.paymentUrl + "/addRef",
                 contentType: "application/json; charset=utf-8",
-                // beforeSend:function(xhr){
-                //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                // },
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                },
                 data: JSON.stringify(RefUpdate),
                 async:false,
                 success: function(result, txtStatus, xhr){
@@ -1137,9 +1141,10 @@ class ReceiptsAndExpensesJS {
             method:"post",
             url: MISA.Config.paymentUrl + "/addRef",
             contentType: "application/json; charset=utf-8",
-            // beforeSend:function(xhr){
-            //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-            // },
+            beforeSend:function(xhr){
+                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+            },
             data: JSON.stringify(data),
             success: function(result, txtStatus, xhr){
                 console.log(result);
@@ -1244,18 +1249,19 @@ class ReceiptsAndExpensesJS {
         var refType_selected = this.RefType;
         $.ajax({
             method:"get",
-            url: MISA.Config.paymentUrl + "/getRefNoFinance",
+            url: MISA.Config.paymentUrl + "/generateRefNoFinance/" + refType_selected,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("keycompany",localStorage.getItem("workCompanyID"));
+                xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
             success: function(data){
-                if(refType_selected == 1)
-                $('input[dataindex="RefNo"]').val("PT"+data);    
-                else
-                $('input[dataindex="RefNo"]').val("PC"+data);          
+                $('input[dataindex="RefNo"]').val(data);  
             }
-        });  
+        }); 
         this.DetailForm.Show();
         this.detailFormOnBeforeOpen(refType_selected);
         $('#btnQuickEdit').attr('disabled',true);
-    } 
+    }  
     /*------------------------------------------------
      * Di chuyển lên xuống dòng bằng phím mũi tên và chọn dòng bằng enter
      * Created bt: NVLAM (21/02/2019)
@@ -1400,9 +1406,10 @@ var raeJS = new ReceiptsAndExpensesJS();
                 method:"post",
                 url: MISA.Config.paymentUrl + "/deleteRef",
                 contentType: "application/json; charset=utf-8",
-                // beforeSend:function(xhr){
-                //     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                // },
+                beforeSend:function(xhr){
+                    xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                },
                 data: JSON.stringify(data),
                 success: function(result, txtStatus, xhr){
                     if(result.message){
@@ -1426,67 +1433,107 @@ var raeJS = new ReceiptsAndExpensesJS();
     */
     //filter multi input
     //byQuan
-    $('input[elementtype="filterInput"]').blur(function(){
-        var dataFilter=[];
-        $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
-            if($(this).val() != ""){
-                var columnName = $(this).attr("fieldname");
-                var dataToFilter = $(this).val();
-                if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
-                    var dateRevert = dataToFilter.split("/");
-                    dataToFilter = dateRevert[2] + "-" + dateRevert[1] + "-" + dateRevert[0];
-                }
-                else if(columnName == "refTypeName"){
-                    columnName = "reftypeID";
-                    dataToFilter = (dataToFilter == "thu") ? 1 : 2;
-                }
-                dataFilter.push({columnName: columnName, dataToFilter: dataToFilter});
-            }
-        })
-        console.log(dataFilter);
-        if(dataFilter!=null && dataFilter !=""){
-                $.ajax({
-                        method: "post",
-                        url: MISA.Config.paymentUrl + "/filter",
-                        contentType:"application/json; charset:utf-8;",
-                        dataType: 'text',
-                        beforeSend: function(xhr){
-                            xhr.setRequestHeader("keyCompany", "company2");
-                        },
-                        data: JSON.stringify(dataFilter),
-                        success: function(response, status, xhr){
-                            var res = JSON.parse(response);
-                                var payment=res.result;
-                                fakeData = [];
-                                var total = $('#inputTotalRecord').val();
-                                $('#totalRecord').text(res.totalRecord);
-                                for(i = 0; i < total; i++){
-                                    if(payment[i] == null) break;
-                                    fakeData.push({ID : payment[i].refID,
-                                                    PostedDate : convertDate(payment[i].postedDate),
-                                                    RefDate : convertDate(payment[i].refDate),
-                                                    RefNo : payment[i].refNoFinance,
-                                                    JournalMemo : payment[i].journalMemo,
-                                                    RefTypeName : payment[i].ref.refTypeName,
-                                                    TotalAmount : payment[i].totalAmountOC,
-                                                    AccountObjectName : payment[i].accountObjectName,
-                                                    ReasonTypeName : payment[i].journalMemo,
-                                                    CashBookPostedDate : convertDate(payment[i].createdDate),
-                                                    RefNoFiance : payment[i].refNoFinance,
-                                                    DepartmentName : payment[i].accountObjectName
-                                            });
-                                }
-                                raeJS.buildDataIntoTable(fakeData);
-                        },
-                        error: function(xhr){
-                            console.log("server error!");
-                        }
-                })
-        }
-        else{
-            $('#btnRefresh').trigger('click');
-        }
+    /* Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
+    $('.btn-select-filter').click(function() {
+        if ($(this).html() == "&gt;=") {
+            $(this).html("&lt;=");
+        } else $(this).html("&gt;=");
+        filterInput();
     })
+    /*
+    *do filter
+    * create by Quan
+    */
+    $('input[elementtype="filterInput"]').blur(function(){
+        filterInput();
+    })
+    function filterInput(){
+            var dataFilter=[];
+            $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
+                if($(this).val() != ""){
+                    var columnName = $(this).attr("fieldname");
+                    var dataToFilter = $(this).val();
+                    var dataType;
+
+                    var arrangSelect;
+                    if($(this).parents(".gridPanel-header-item-filter").children(".btn-select-filter").html()=="&gt;="){
+                        arrangSelect=1;
+                    }
+                    else {
+                        arrangSelect = 0;
+                    }
+                    if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
+                        var dateRevert = dataToFilter.split("/");
+                        var dd = (dateRevert[0].length == 1) ? ("0" + dateRevert[0]) : dateRevert[0];
+                        var mm = (dateRevert[1].length == 1) ? ("0" + dateRevert[1]) : dateRevert[1];
+                        var yyyy = (dateRevert[2].length == 1) ? ("0" + dateRevert[2]) : dateRevert[2];
+                        dataToFilter = yyyy + "-" + mm + "-" + dd;
+                        dataType = "date";
+                    }
+                    else if(columnName == "refTypeName" ){
+                        columnName = "ref.refTypeID";
+                        dataToFilter = (dataToFilter.toLowerCase() == "thu") ? 1 : 2;
+                        dataType = "int";
+                    }
+                    else if(columnName == "totalAmountOC"){
+                        dataType = "long";
+                    }
+                    else if(columnName == "refNoFinance"){
+                        dataType="other";
+                    }
+                    else{
+                        dataType = "string";
+                    }
+                    dataFilter.push({columnName: columnName, dataFilter: dataToFilter, dataType: dataType, arrange: arrangSelect});
+                }
+            })
+            console.log(dataFilter);
+            if(dataFilter!=null && dataFilter !=""){
+                    $.ajax({
+                            method: "post",
+                            url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
+                            contentType:"application/json; charset:utf-8;",
+                            beforeSend: function(xhr){
+                                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+                            },
+                            data: JSON.stringify(dataFilter),
+                            success: function(response, status, xhr){
+                                // var res = JSON.parse(response);
+                                var res = response;
+                                    var payment=res.result;
+                                    fakeData = [];
+                                    var total = $('#inputTotalRecord').val();
+                                    $('#totalRecord').text(res.totalRecord);
+                                    for(i = 0; i < total; i++){
+                                        if(payment[i] == null) break;
+                                        fakeData.push({ID : payment[i].ID,
+                                                        PostedDate : convertDate(payment[i].postedDate),
+                                                        RefDate : convertDate(payment[i].refDate),
+                                                        RefNo : payment[i].refNoFinance,
+                                                        JournalMemo : payment[i].journalMemo,
+                                                        RefTypeName : payment[i].ref.refTypeName,
+                                                        TotalAmount : payment[i].totalAmountOC,
+                                                        AccountObjectName : payment[i].accountObjectName,
+                                                        ReasonTypeName : payment[i].journalMemo,
+                                                        CashBookPostedDate : convertDate(payment[i].createdDate),
+                                                        RefNoFiance : payment[i].refNoFinance,
+                                                        DepartmentName : payment[i].accountObjectName
+                                                });
+                                    }
+                                    raeJS.buildDataIntoTable(fakeData);
+                            },
+                            error: function(xhr){
+                                console.log("server error!");
+                            }
+                    })
+            }
+            else{
+                $('#btnRefresh').trigger('click');
+            }
+    }
 
     /*------------------------------------------------------------
      *  Tính năng chuyển trang
