@@ -1,5 +1,4 @@
 ﻿$(document).ready(function(){
-	//	debugger
 		if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
 			$.ajax({
 				method:"GET",

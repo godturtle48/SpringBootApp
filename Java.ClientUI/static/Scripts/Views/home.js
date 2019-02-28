@@ -1,7 +1,5 @@
 $(document).ready(function(){
-<<<<<<< HEAD:Java.ClientUI/static/Scripts/Views/home.js
 	if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-		debugger;
 		$.ajax({
 			method: "GET",
 			url:MISA.Config.loginUrl+"/api/home",
@@ -36,46 +34,8 @@ $(document).ready(function(){
 		})	
 	}
 	else{
-		debugger;
 		window.location.href="/";
 	}
-=======
-	// if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-	// 	$.ajax({
-	// 		method: "GET",
-	// 		url:MISA.Config.loginUrl+"/api/home",
-	// 		beforeSend: function(xhr) {
-	// 		      xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-	// 		},
-	// 		success: function(data, status, xhr){
-	// 			$('#user-info').text((data.email).split("@")[0]);
-	// 			//ajax goi company
-	// 			$.ajax({
-	// 				method:"GET",
-	// 				url:MISA.Config.loginUrlServer+"/api/getCompanyUser",
-	// 				beforeSend: function(xhr){
-	// 					xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-	// 				},
-	// 				success: function(data){
-	// 					console.log(data);	
-	// 					appendCompany(data);
-	// 					initGoToWorkspaceOncClickEvent();
-						
-	// 				},
-	// 				error: function(err){
-	// 					console.log("chua co cong ty nao");
-	// 				}
-	// 			})
-	// 		},
-	// 		error: function(err, stt, xhr){
-	// 			window.location.href="/";
-	// 		}
-	// 	})	
-	// }
-	// else{
-	// 	window.location.href="/";
-	// }
->>>>>>> 19ddb984549343c7fed510ef1924454d98a3f3c2:Java.ClientUI/Java.ClientUI/static/Scripts/Views/home.js
 	//get Enter addBtn
 	$('#tb-company-add').keypress(function (e) {
 		if (e.which == 13 || e.keyCode == 13)  // the enter key code
@@ -96,7 +56,7 @@ $('#addBtn').click(function(){
 	let totalCompany = Number(localStorage.getItem("totalCompany"));
 	$.ajax({
 		method: "POST",
-		url: MISA.Config.loginUrlServer+"/api/addCompany",
+		url: MISA.Config.loginUrl+"/api/addCompany",
 		contentType:"application/json",
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));

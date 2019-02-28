@@ -15,6 +15,6 @@ MISA.Config={
 	// paymentUrl:"http://10.0.6.27:9003"
 	loginUrl:"http://localhost:9001",
 	paymentUrl:"http://localhost:9003",
-	loginUrlServer:"http://localhost:9001",
-	 paymentUrlServer:"http://localhost:9003"
+	// loginUrlServer:"http://localhost:9001",
+	//  paymentUrlServer:"http://localhost:9003"
 }

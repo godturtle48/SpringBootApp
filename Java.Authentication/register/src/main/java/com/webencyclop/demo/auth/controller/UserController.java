@@ -159,7 +159,7 @@ public class UserController<E> {
 			int userId = userRepository.findByContactEmail(email).getId(); 
 			String keyCompany = companyRepository.findByCompanyTaxNumber(userId).get(0).getCompanyTaxNumber();
 			obj.put("keycompany", keyCompany);
-		}catch(NullPointerException e) {
+		}catch(Exception e) {
 			System.out.println("No Company found!");
 		}
 		
