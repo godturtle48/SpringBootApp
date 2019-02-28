@@ -1284,9 +1284,9 @@ class ReceiptsAndExpensesJS {
             raeJS.selectRow(currentRow.prev());
             $(".rowSelected").trigger("click");
             return false;
+            //Phim Enter
             case 13:
-            event.preventDefault();
-            debugger
+            // event.preventDefault();
             if (!$('#currentPage').is(":focus")) {
                 $(".rowSelected").trigger('dblclick');
             } else return false;

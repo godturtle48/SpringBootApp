@@ -84,8 +84,10 @@ var commonJS = {
                 msg +
                 '</div >';
             $('body').append(html);
+            
         }
         $(function () {
+            $(document).off('keydown',raeJS.keyDownRowSelect());
             $("#message-box").dialog({
                 modal: true,
                 resizable: false,
@@ -105,9 +107,11 @@ var commonJS = {
                         })()
                         
                         $(this).dialog("close");
+                        
                     },
                     "Hủy bỏ": function () {
                         $(this).dialog("close");
+                        $(document).on('keydown',keyDownRowSelect());
                     }
                 }
             });
