@@ -41,7 +41,6 @@ td {
 .btn-primary {
 	background-color: #2baaed;
 	border-color: #2baaed;
-	color: #fff !important;
 }
 
 .btn-warning {
@@ -53,7 +52,6 @@ td {
 .btn-success {
 	background-color: #31CC54;
 	border-color: #31CC54;
-	color: #fff !important;
 }
 .add-section {
 	padding-top: 20px;
@@ -67,20 +65,95 @@ td {
 	.info-section .info-title {
 		padding-top: 10px;
 	}
-input {
-	width: 100%;
-	padding-left: 10px;
-	border: none;
-	border-bottom: 1px solid black;
-	background-color: transparent;
-}
-	::placeholder {
-		font-style: italic;
-		font-size: 12px;
-		color: #A8A8A8;
-	}
-
 .button-add-section {
 	margin-top: 10px;
 }
-
+	.button-add-section button {
+		width: 100px;
+		height: 40px;
+		font-size: 15px;
+	}
+.group {
+	margin-bottom: 30px;
+}
+input{
+	font-size:14px;
+	padding:10px 10px 10px 5px;
+	display:block;
+	width: 400px;
+	border:none;
+	border-bottom:1px solid #757575;
+	background-color: #F5F5F5;
+  }
+  input:focus 		{ outline:none; }
+  
+  /* LABEL ======================================= */
+  label 				 {
+	color:#999; 
+	font-size:14px;
+	font-weight:normal;
+	position:absolute;
+	pointer-events:none;
+	top:10px;
+	transition:0.2s ease all; 
+	-moz-transition:0.2s ease all; 
+	-webkit-transition:0.2s ease all;
+  }
+  
+  /* active state */
+  input:focus ~ label, input:valid ~ label {
+	top:-20px;
+	font-size:14px;
+	color:#5264AE;
+  }
+  .icon-add-company {
+	  position: absolute;
+	  bottom: 40px;
+	  left: -10px;
+  }
+  input:focus ~ .icon-add-company,input:valid ~ .icon-add-company {
+	color:#5264AE;
+	left: -15px;
+	font-size: 15px;
+	transition:0.2s ease all; 
+	-moz-transition:0.2s ease all; 
+	-webkit-transition:0.2s ease all;
+  }
+  /* BOTTOM BARS ================================= */
+  .bar 	{ position:relative; display:block; width:400px; }
+  .bar:before, .bar:after 	{
+	content:'';
+	height:2px; 
+	width:0;
+	bottom:1px; 
+	position:absolute;
+	background:#5264AE; 
+	transition:0.2s ease all; 
+	-moz-transition:0.2s ease all; 
+	-webkit-transition:0.2s ease all;
+  }
+  .bar:before {
+	left:50%;
+  }
+  .bar:after {
+	right:50%; 
+  }
+  
+  /* active state */
+  input:focus ~ .bar:before, input:focus ~ .bar:after {
+	width:50%;
+  }
+  
+  /* HIGHLIGHTER ================================== */
+  .highlight {
+	position:absolute;
+	height:60%; 
+	width:100px; 
+	top:25%; 
+	left:0;
+	pointer-events:none;
+	opacity:0.5;
+  }
+.label-default {
+	margin-bottom: 20px;
+}
