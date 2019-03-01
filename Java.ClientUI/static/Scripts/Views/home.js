@@ -5,7 +5,6 @@ $(document).ready(function(){
 			url:MISA.Config.loginUrl+"/api/home",
 			beforeSend: function(xhr) {
 				  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-				  xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
 			},
 			success: function(data, status, xhr){
 				$('#user-info').text((data.email).split("@")[0]);
@@ -15,7 +14,6 @@ $(document).ready(function(){
 					url:MISA.Config.loginUrl+"/api/getCompanyUser",
 					beforeSend: function(xhr){
 						xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-						xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
 					},
 					success: function(data){
 						console.log(data);	
