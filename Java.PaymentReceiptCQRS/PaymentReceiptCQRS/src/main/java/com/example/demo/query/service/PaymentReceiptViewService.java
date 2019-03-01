@@ -69,7 +69,7 @@ public class PaymentReceiptViewService {
 			  Query query = new Query();
 			   query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
 			   query.with(new Sort(Sort.Direction.ASC, "modifiedDate"));
-			   query.skip(index * size);
+			   query.skip(index);
 			   query.limit(size);
 			   lst=mongoTemplate.find(query, PaymentReceiptView.class);
 		} catch (Exception e) {
