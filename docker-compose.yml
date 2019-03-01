@@ -121,7 +121,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:5.3
+    image: 10.0.6.27:50000/javateam/java_ui:5.5
     restart: always
     container_name: ui_container
     build: ./Java.ClientUI

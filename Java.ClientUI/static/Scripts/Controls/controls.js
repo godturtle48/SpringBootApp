@@ -260,62 +260,62 @@ class Button {
     constructor(scope, width, commandName, eventHandler) {
         var eventName = 'btn{0}_OnClick'.format(commandName),
             id = 'btn{0}'.format(commandName),
-            html = '<div class="btn-customer-16-body"><i class="btn-customer-icon-16 {0} {1}"></i><div class="btn-customer-text">{2}</div></div>';
+            html = '<div class="btn-customer-16-body"><i class="btn-customer-{1} {2}"></i><div class="btn-customer-text">{0}</div></div>';
         if (eventHandler) {
             eventName = eventName;
         }
         switch (commandName) {
             case 'Previous':
-                html = html = html.format('fas', 'fa-arrow-left', 'Trước');
+                html = html = html.format('Trước','prev-icon','btn-customer-icon-16');
                 break;
             case 'Next':
-                html = html = html.format('fas', 'fa-arrow-right', 'Sau');
+                html = html = html.format('Sau','next-icon','btn-customer-icon-16');
                 break;
             case 'Save':
-                html = html.format('far','fa-save', 'Cất');
+                html = html.format('Cất','save-icon','btn-customer-icon-16');
                 break;
             case 'SaveAdd':
-                html = html.format('fas',' fa-file-medical', 'Cất và thêm');
+                html = html.format('Cất và thêm','saveadd-icon','btn-customer-icon-16');
                 break;
             case 'QuickEdit':
-                html = html.format('fas','fa-edit','Sửa nhanh')
+                html = html.format('Sửa nhanh','quickedit-icon','btn-customer-icon-16')
             case 'Cancel':
-                html = html.format('fas','fa-ban', 'Hủy bỏ');
+                html = html.format('Hủy bỏ','cancel-icon','btn-customer-icon-16');
                 break;
             case 'Help':
-                html = html.format('far','fa-question-circle', 'Giúp');
+                html = html.format('Giúp','help-icon','btn-customer-icon-16');
                 break;
-            case 'Pause':
-                html = html.format('fas','fa-pause', 'Hoãn');
-                break;
+            // case 'Pause':
+            //     html = html.format('Hoãn','pause-icon','btn-customer-icon-16');
+            //     break;
             default:
                 break;
         }
         this.id = id;
         if (commandName === 'Previous') {
-            this.class = 'btn btn-primary';
+            this.class = 'btn-customer  background-button-white';
         }
         if (commandName === 'Next') {
-            this.class = 'btn btn-primary';
+            this.class = 'btn-customer background-button-white';
         }
         if (commandName === 'Save') {
-            this.class = 'btn btn-success';
+            this.class = 'btn-customer background-button-white';
         }
         if (commandName === 'SaveAdd') {
-            this.class = 'btn btn-success';
+            this.class = 'btn-customer background-button-white';
         }
         if (commandName === 'QuickEdit') {
-            this.class = 'btn btn-primary';
+            this.class = 'btn-customer background-button-white';
         }
         if (commandName === 'Cancel') {
-            this.class = 'btn btn-danger';
+            this.class = 'btn-customer background-button-white';
         }
         if (commandName === 'Help') {
-            this.class = 'btn btn-info';
+            this.class = 'btn-customer background-button-white';
         }
-        if (commandName === 'Pause') {
-            this.class = 'btn btn-warning';
-        }
+        // if (commandName === 'Pause') {
+        //     this.class = 'btn-customer background-button-white';
+        // }
         // this.class = (commandName === 'Help' ? 'btn-customer btnHelp' : 'btn-customer');
         this.width = width + 'px';
         this.html = html;
@@ -355,9 +355,9 @@ class FormPopup {
                 new Button(me, 75, 'Save'),
                 new Button(me, 120, 'SaveAdd'),
                 new Button(me, 110, 'QuickEdit'),
-                new Button(me, 75, 'Cancel'),
+                // new Button(me, 75, 'Pause'),
                 new Button(me, 75, 'Help'),
-                new Button(me, 75, 'Pause')
+                new Button(me, 75, 'Cancel'),
                 ]
         }
         this.Form = $(selectorDetailHTML).dialog({

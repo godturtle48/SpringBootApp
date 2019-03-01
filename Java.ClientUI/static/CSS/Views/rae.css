@@ -367,7 +367,7 @@ tbody {
 }
 
     .tbar-item-disabled:hover {
-        border: none;
+        /* border: none; */
         background-color: none;
     }
 

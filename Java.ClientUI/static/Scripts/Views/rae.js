@@ -4,14 +4,12 @@ $(document).ready(function(){
         $.ajax({
             method: "GET",
             url:MISA.Config.loginUrl+"/api/home",
-            beforeSend:function(xhr){
-                    xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
-                },
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
             success: function(data, status, xhr){
                 $('.user-info').text((data.email).split("@")[0]);
                 //ajax goi company
-                localStorage.setItem("workCompanyID", data.keycompany);
             },
             error: function(err, stt, xhr){
                 window.location.href="/";
@@ -23,76 +21,85 @@ $(document).ready(function(){
         }
         
     })
-    $(document).ready(function () {  
-        //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
-        //raeJS.btnAdd_OnClick();
-        $('#addtr').on('keydown', function() {
-            if (event.keyCode === 13) {
-                $('#addtr').trigger('click');
+    //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
+    //raeJS.btnAdd_OnClick();
+    $('#addtr').on('keydown', function() {
+        if (event.keyCode === 13) {
+            $('#addtr').trigger('click');
             }
-        })
-        $('#addtr').on('click', function(){
-            //them moi status =3
-            $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
-            +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td class="text-right"><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'</tr>');
-            $('button[role="removeInvoice"]').on('click', function(){
-                //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
-                var index=$(this).parents('tr').attr("indexInvoice");
-            invoicesGlobal[index].status=2;//danh dau bi xoa
-            $(this).parents('tr').remove();
-        });
+    })
+    /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
+    $('.btn-select-filter').click(function() {
+        if ($(this).html() == "&gt;=") {
+            $(this).html("&lt;=");
+        } else $(this).html("&gt;=");
+    })
+    $('#addtr').on('click', function(){
+        //them moi status =3
+        $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
+        +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td class="text-right"><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'</tr>');
+        $('button[role="removeInvoice"]').on('click', function(){
+            //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
+            var index=$(this).parents('tr').attr("indexInvoice");
+        invoicesGlobal[index].status=2;//danh dau bi xoa
+        $(this).parents('tr').remove();
+    });
         $('#tbodyRAEDetail-popup').children().last().children().first().children().last().focus();
         //them moi vao 
         indexInvoiceGlobal++;
-        var voiceNew={
+        var voiceNew = {
             "refDetailID": "",
             "discription": "",
             "amountOC": 0,
             "amount": 0,
             "accountObjectID": "",
             "sortOrder": 0,
-            "status": 3}
-            invoicesGlobal.push(voiceNew);
-            var addtrPosition = $('#addtr').position().top + $('#addtr').height() + 27;
-            var $table = $('#frmRAEDetail .rae-detail-box');
-            var tableHeight = $table.height();
-            var currentScroll = $table.scrollTop();
-            if (addtrPosition > tableHeight) {
-                var scrollAmount = addtrPosition - tableHeight + 27;
-                $('#frmRAEDetail .rae-detail-box').scrollTop(currentScroll + scrollAmount);
-            }
-        })
-        $('.fa-calendar-alt').click(function(){ 
-            $(this).siblings().first().focus();
-        })
+            "status": 3
+        }
+        invoicesGlobal.push(voiceNew);
+        var addtrPosition = $('#addtr').position().top + $('#addtr').height() + 27;
+        var $table = $('#frmRAEDetail .rae-detail-box');
+        var tableHeight = $table.height();
+        var currentScroll = $table.scrollTop();
+        if (addtrPosition > tableHeight) {
+            var scrollAmount = addtrPosition - tableHeight + 27;
+            $('#frmRAEDetail .rae-detail-box').scrollTop(currentScroll + scrollAmount);
+        }
+    })
+    $('.fa-calendar-alt').click(function(){ 
+        $(this).siblings().first().focus();
+    })
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
-        })
-        var fakeData = [];
-        var totalRecord = 0;
-        var totalPage = 0;
-        var endRecord = 0;
-        var startRecord = 1;
-        var indexInvoiceGlobal=0;
-        //invoicesGlobal chứa dữ liệu của server
-        var invoicesGlobal=[];
-        var RefUpdate={};
+       
+    var fakeData = [];
+    var totalRecord = 0;
+    var totalPage = 0;
+    var endRecord = 0;
+    var startRecord = 1;
+    var indexInvoiceGlobal=0;
+    //invoicesGlobal chứa dữ liệu của server
+    var invoicesGlobal=[];
+    var RefUpdate={};
 
 
-/////////////
-/*
-    showDetail()
-    This function show Detail box for add, edit, duplicate Expense or Receipt Ref
-*/
+    /////////////
+    /*
+        showDetail()
+        This function show Detail box for add, edit, duplicate Expense or Receipt Ref
+    */
 
 var showDetail=function(){
     var RAEDetail=[];
@@ -166,8 +173,9 @@ var getPageHome = function() {
 		method : "GET",
 		url : MISA.Config.paymentUrl + "/getAllPage_Size:" + size,
 		beforeSend : function(xhr) {
-			xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
-            xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
+			xhr.setRequestHeader('authorization', localStorage
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
@@ -199,7 +207,6 @@ var getPageHome = function() {
 					DepartmentName : payment[i].accountObjectAddress
 				})
             }
-        
 			endRecord = 0;
 			startRecord = 1;
 			if (totalRecord == 0) {
@@ -246,12 +253,10 @@ var getPage = function() {
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader('authorization', localStorage
                     .getItem("authenCookie"));
-            xhr.setRequestHeader('keycompany', localStorage
-					.getItem("workCompanyID"));
+            xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
         },
         async:false,
 		success : function(result, txtStatus) {
-
 			var payment = result;
             sessionStorage.setItem("detailRef", JSON.stringify(payment));
 			for (var i = 0; i < result.length; i++) {
@@ -270,13 +275,11 @@ var getPage = function() {
 					DepartmentName : payment[i].accountObjectName
 				})
 			}
-		
-			 startRecord = size * (page - 1) + 1;
+			startRecord = size * (page - 1) + 1;
 			if (size * page >= totalRecord) {
 				endRecord = totalRecord;
 			} else
 				endRecord = size * (page);
-
 			$('#startRecord').html(startRecord);
             $('#endRecord').html(endRecord);
             setTimeout(function () {
@@ -319,7 +322,7 @@ class ReceiptsAndExpensesJS {
         /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown);
+        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown.bind(this));
         // $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
         // $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
         // $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
@@ -441,6 +444,7 @@ class ReceiptsAndExpensesJS {
      */
     beforeOpenDetail() {
         $(document).off('keydown', this.keyDownRowSelect);
+        
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');
@@ -501,7 +505,7 @@ class ReceiptsAndExpensesJS {
         //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
         invoices.forEach(function(invoice,index){
             var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
-                        <td style="display:inline-flex;">
+                        <td style="display:flex;">
                             <button role="removeInvoice" class="btn btn-danger">x</button>
                             <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                         </td>
@@ -585,7 +589,7 @@ class ReceiptsAndExpensesJS {
             invoicesGlobal=invoices;
             invoices.forEach(function(invoice,index){
                 var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
-                            <td style="display:inline-flex;">
+                            <td style="display:flex;">
                                 <button role="removeInvoice" class="btn btn-danger">x</button>
                                 <input fileDataInvoice="journalMemo" value="${invoice.discription}">
                             </td>
@@ -671,6 +675,10 @@ class ReceiptsAndExpensesJS {
         if($('#tbodyRAE').children().last().hasClass('rowSelected') && $('#currentPage').val() == $('#totalPage').html()) {
             $('#btnPrevious').attr('disabled',true);
         }
+        // if (args[0].data.refType !== undefined) {
+        //     var refType = args[0].data.refType;
+        //     this.RefType = refType;
+        // }
         if (this.RefType == enumeration.RefType.Receipt) {
             $("span.ui-dialog-title").text('Phiếu thu');
             $('.title-form-detail').text('Phiếu thu');
@@ -849,7 +857,7 @@ class ReceiptsAndExpensesJS {
                     contentType: "application/json; charset=utf-8",
                     beforeSend:function(xhr){
                         xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                        xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                        xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                     },
                     data: JSON.stringify(data),
                     success: function(result, txtStatus, xhr){
@@ -975,7 +983,7 @@ class ReceiptsAndExpensesJS {
                 contentType: "application/json; charset=utf-8",
                 beforeSend:function(xhr){
                     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                    xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                 },
                 data: JSON.stringify(RefUpdate),
                 async:false,
@@ -1064,7 +1072,7 @@ class ReceiptsAndExpensesJS {
                 contentType: "application/json; charset=utf-8",
                 beforeSend:function(xhr){
                     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                    xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                 },
                 data: JSON.stringify(RefUpdate),
                 async:false,
@@ -1143,7 +1151,7 @@ class ReceiptsAndExpensesJS {
             contentType: "application/json; charset=utf-8",
             beforeSend:function(xhr){
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
             data: JSON.stringify(data),
             success: function(result, txtStatus, xhr){
@@ -1261,7 +1269,7 @@ class ReceiptsAndExpensesJS {
         this.DetailForm.Show();
         this.detailFormOnBeforeOpen(refType_selected);
         $('#btnQuickEdit').attr('disabled',true);
-    }  
+    } 
     /*------------------------------------------------
      * Di chuyển lên xuống dòng bằng phím mũi tên và chọn dòng bằng enter
      * Created bt: NVLAM (21/02/2019)
@@ -1279,9 +1287,12 @@ class ReceiptsAndExpensesJS {
             raeJS.selectRow(currentRow.prev());
             $(".rowSelected").trigger("click");
             return false;
+            //Phim Enter
             case 13:
-            event.preventDefault();
-            $(".rowSelected").trigger('dblclick');
+            // event.preventDefault();
+            if (!$('#currentPage').is(":focus")) {
+                $(".rowSelected").trigger('dblclick');
+            } else return false;
         }
     }
     /* -------------------------------------------------------------------
@@ -1294,7 +1305,6 @@ class ReceiptsAndExpensesJS {
         getPage();
         this.buildDataIntoTable(fakeData);
     }
-
     accountObjectItem_OnSelect() {
         // Lấy thông tin đối tượng được chọn:
         var accountObjectCode = $(event.target).attr('item-value');
@@ -1332,6 +1342,7 @@ class ReceiptsAndExpensesJS {
      * Created by NVLAM (15/02/2019)
      */
     dialog_OnKeyDown(sender) {
+        debugger
         if(sender.keyCode === 37){
             $('#btnPrevious').trigger('click');
         };
@@ -1341,7 +1352,7 @@ class ReceiptsAndExpensesJS {
     }
     /* ------------------------------------------------------------------------
      * Tính năng chọn dòng
-     * Created bt: NVLAM (16/02/2019)
+     * Created by: NVLAM (16/02/2019)
      */
     selectRow(newRow) {
         newRow = $(newRow);
@@ -1357,7 +1368,6 @@ class ReceiptsAndExpensesJS {
  
         // Chọn một dòng mới
         newRow.addClass('rowSelected');
-        debugger
         var rowTop = newRow.position().top;
         var rowBottom = rowTop + newRow.height();
         var $table = $('.cls-gridPanel');
@@ -1377,6 +1387,10 @@ class ReceiptsAndExpensesJS {
 }
 
 var raeJS = new ReceiptsAndExpensesJS();
+    /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
     ///////ham convertData de hien thi chuan theo nguoi dung
     function convertDate(date) {
         date = new Date(date);
@@ -1408,7 +1422,7 @@ var raeJS = new ReceiptsAndExpensesJS();
                 contentType: "application/json; charset=utf-8",
                 beforeSend:function(xhr){
                     xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                    xhr.setRequestHeader("keycompny", localStorage.getItem("workCompanyID"));
+                    xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                 },
                 data: JSON.stringify(data),
                 success: function(result, txtStatus, xhr){
@@ -1433,107 +1447,67 @@ var raeJS = new ReceiptsAndExpensesJS();
     */
     //filter multi input
     //byQuan
-    /* Tính năng thay đổi cách filter
-     * Created by NVLAM (27/02/2019)
-     */
-    $('.btn-select-filter').click(function() {
-        if ($(this).html() == "&gt;=") {
-            $(this).html("&lt;=");
-        } else $(this).html("&gt;=");
-        filterInput();
-    })
-    /*
-    *do filter
-    * create by Quan
-    */
     $('input[elementtype="filterInput"]').blur(function(){
-        filterInput();
-    })
-    function filterInput(){
-            var dataFilter=[];
-            $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
-                if($(this).val() != ""){
-                    var columnName = $(this).attr("fieldname");
-                    var dataToFilter = $(this).val();
-                    var dataType;
-
-                    var arrangSelect;
-                    if($(this).parents(".gridPanel-header-item-filter").children(".btn-select-filter").html()=="&gt;="){
-                        arrangSelect=1;
-                    }
-                    else {
-                        arrangSelect = 0;
-                    }
-                    if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
-                        var dateRevert = dataToFilter.split("/");
-                        var dd = (dateRevert[0].length == 1) ? ("0" + dateRevert[0]) : dateRevert[0];
-                        var mm = (dateRevert[1].length == 1) ? ("0" + dateRevert[1]) : dateRevert[1];
-                        var yyyy = (dateRevert[2].length == 1) ? ("0" + dateRevert[2]) : dateRevert[2];
-                        dataToFilter = yyyy + "-" + mm + "-" + dd;
-                        dataType = "date";
-                    }
-                    else if(columnName == "refTypeName" ){
-                        columnName = "ref.refTypeID";
-                        dataToFilter = (dataToFilter.toLowerCase() == "thu") ? 1 : 2;
-                        dataType = "int";
-                    }
-                    else if(columnName == "totalAmountOC"){
-                        dataType = "long";
-                    }
-                    else if(columnName == "refNoFinance"){
-                        dataType="other";
-                    }
-                    else{
-                        dataType = "string";
-                    }
-                    dataFilter.push({columnName: columnName, dataFilter: dataToFilter, dataType: dataType, arrange: arrangSelect});
+        var dataFilter=[];
+        $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
+            if($(this).val() != ""){
+                var columnName = $(this).attr("fieldname");
+                var dataToFilter = $(this).val();
+                if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
+                    var dateRevert = dataToFilter.split("/");
+                    dataToFilter = dateRevert[2] + "-" + dateRevert[1] + "-" + dateRevert[0];
                 }
-            })
-            console.log(dataFilter);
-            if(dataFilter!=null && dataFilter !=""){
-                    $.ajax({
-                            method: "post",
-                            url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
-                            contentType:"application/json; charset:utf-8;",
-                            beforeSend: function(xhr){
-                                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-                                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
-                            },
-                            data: JSON.stringify(dataFilter),
-                            success: function(response, status, xhr){
-                                // var res = JSON.parse(response);
-                                var res = response;
-                                    var payment=res.result;
-                                    fakeData = [];
-                                    var total = $('#inputTotalRecord').val();
-                                    $('#totalRecord').text(res.totalRecord);
-                                    for(i = 0; i < total; i++){
-                                        if(payment[i] == null) break;
-                                        fakeData.push({ID : payment[i].ID,
-                                                        PostedDate : convertDate(payment[i].postedDate),
-                                                        RefDate : convertDate(payment[i].refDate),
-                                                        RefNo : payment[i].refNoFinance,
-                                                        JournalMemo : payment[i].journalMemo,
-                                                        RefTypeName : payment[i].ref.refTypeName,
-                                                        TotalAmount : payment[i].totalAmountOC,
-                                                        AccountObjectName : payment[i].accountObjectName,
-                                                        ReasonTypeName : payment[i].journalMemo,
-                                                        CashBookPostedDate : convertDate(payment[i].createdDate),
-                                                        RefNoFiance : payment[i].refNoFinance,
-                                                        DepartmentName : payment[i].accountObjectName
-                                                });
-                                    }
-                                    raeJS.buildDataIntoTable(fakeData);
-                            },
-                            error: function(xhr){
-                                console.log("server error!");
-                            }
-                    })
+                else if(columnName == "refTypeName"){
+                    columnName = "reftypeID";
+                    dataToFilter = (dataToFilter == "thu") ? 1 : 2;
+                }
+                dataFilter.push({columnName: columnName, dataToFilter: dataToFilter});
             }
-            else{
-                $('#btnRefresh').trigger('click');
-            }
-    }
+        })
+        console.log(dataFilter);
+        if(dataFilter!=null && dataFilter !=""){
+                $.ajax({
+                        method: "post",
+                        url: MISA.Config.paymentUrl + "/filter",
+                        contentType:"application/json; charset:utf-8;",
+                        dataType: 'text',
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader("keyCompany", "company2");
+                        },
+                        data: JSON.stringify(dataFilter),
+                        success: function(response, status, xhr){
+                            var res = JSON.parse(response);
+                                var payment=res.result;
+                                fakeData = [];
+                                var total = $('#inputTotalRecord').val();
+                                $('#totalRecord').text(res.totalRecord);
+                                for(i = 0; i < total; i++){
+                                    if(payment[i] == null) break;
+                                    fakeData.push({ID : payment[i].refID,
+                                                    PostedDate : convertDate(payment[i].postedDate),
+                                                    RefDate : convertDate(payment[i].refDate),
+                                                    RefNo : payment[i].refNoFinance,
+                                                    JournalMemo : payment[i].journalMemo,
+                                                    RefTypeName : payment[i].ref.refTypeName,
+                                                    TotalAmount : payment[i].totalAmountOC,
+                                                    AccountObjectName : payment[i].accountObjectName,
+                                                    ReasonTypeName : payment[i].journalMemo,
+                                                    CashBookPostedDate : convertDate(payment[i].createdDate),
+                                                    RefNoFiance : payment[i].refNoFinance,
+                                                    DepartmentName : payment[i].accountObjectName
+                                            });
+                                }
+                                raeJS.buildDataIntoTable(fakeData);
+                        },
+                        error: function(xhr){
+                            console.log("server error!");
+                        }
+                })
+        }
+        else{
+            $('#btnRefresh').trigger('click');
+        }
+    })
 
     /*------------------------------------------------------------
      *  Tính năng chuyển trang
