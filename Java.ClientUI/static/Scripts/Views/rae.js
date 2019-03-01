@@ -21,86 +21,85 @@ $(document).ready(function(){
         // }
         
     })
-    $(document).ready(function () {  
-        //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
-        //raeJS.btnAdd_OnClick();
-        $('#addtr').on('keydown', function() {
-            if (event.keyCode === 13) {
-                $('#addtr').trigger('click');
+    //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
+    //raeJS.btnAdd_OnClick();
+    $('#addtr').on('keydown', function() {
+        if (event.keyCode === 13) {
+            $('#addtr').trigger('click');
             }
-        })
-        /*----------------------------------------------------------------------
+    })
+    /*----------------------------------------------------------------------
      * Tính năng thay đổi cách filter
      * Created by NVLAM (27/02/2019)
      */
-        $('.btn-select-filter').click(function() {
-            debugger
-            if ($(this).html() == "&gt;=") {
-                $(this).html("&lt;=");
-            } else $(this).html("&gt;=");
-        })
-        $('#addtr').on('click', function(){
-            //them moi status =3
-            $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
-            +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td class="text-right"><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'<td><input></td>'
-            +'</tr>');
-            $('button[role="removeInvoice"]').on('click', function(){
-                //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
-                var index=$(this).parents('tr').attr("indexInvoice");
-            invoicesGlobal[index].status=2;//danh dau bi xoa
-            $(this).parents('tr').remove();
-        });
+    $('.btn-select-filter').click(function() {
+        if ($(this).html() == "&gt;=") {
+            $(this).html("&lt;=");
+        } else $(this).html("&gt;=");
+    })
+    $('#addtr').on('click', function(){
+        //them moi status =3
+        $('#tbodyRAEDetail-popup').append(`<tr indexInvoice="${indexInvoiceGlobal}" statusInvoice="3">`
+        +'<td style="display:flex"><button style="" role="removeInvoice" class="btn btn-danger">x</button><input style="margin-left: 5px;"></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td class="text-right"><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'<td><input></td>'
+        +'</tr>');
+        $('button[role="removeInvoice"]').on('click', function(){
+            //danh dau xoa phan biệt với invoice từ server xóa bằng cách xem xet refID và status=2 
+            var index=$(this).parents('tr').attr("indexInvoice");
+        invoicesGlobal[index].status=2;//danh dau bi xoa
+        $(this).parents('tr').remove();
+    });
         $('#tbodyRAEDetail-popup').children().last().children().first().children().last().focus();
         //them moi vao 
         indexInvoiceGlobal++;
-        var voiceNew={
+        var voiceNew = {
             "refDetailID": "",
             "discription": "",
             "amountOC": 0,
             "amount": 0,
             "accountObjectID": "",
             "sortOrder": 0,
-            "status": 3}
-            invoicesGlobal.push(voiceNew);
-            var addtrPosition = $('#addtr').position().top + $('#addtr').height() + 27;
-            var $table = $('#frmRAEDetail .rae-detail-box');
-            var tableHeight = $table.height();
-            var currentScroll = $table.scrollTop();
-            if (addtrPosition > tableHeight) {
-                var scrollAmount = addtrPosition - tableHeight + 27;
-                $('#frmRAEDetail .rae-detail-box').scrollTop(currentScroll + scrollAmount);
-            }
-        })
-        $('.fa-calendar-alt').click(function(){ 
-            $(this).siblings().first().focus();
-        })
+            "status": 3
+        }
+        invoicesGlobal.push(voiceNew);
+        var addtrPosition = $('#addtr').position().top + $('#addtr').height() + 27;
+        var $table = $('#frmRAEDetail .rae-detail-box');
+        var tableHeight = $table.height();
+        var currentScroll = $table.scrollTop();
+        if (addtrPosition > tableHeight) {
+            var scrollAmount = addtrPosition - tableHeight + 27;
+            $('#frmRAEDetail .rae-detail-box').scrollTop(currentScroll + scrollAmount);
+        }
+    })
+    $('.fa-calendar-alt').click(function(){ 
+        $(this).siblings().first().focus();
+    })
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
-        })
-        var fakeData = [];
-        var totalRecord = 0;
-        var totalPage = 0;
-        var endRecord = 0;
-        var startRecord = 1;
-        var indexInvoiceGlobal=0;
-        //invoicesGlobal chứa dữ liệu của server
-        var invoicesGlobal=[];
-        var RefUpdate={};
+       
+    var fakeData = [];
+    var totalRecord = 0;
+    var totalPage = 0;
+    var endRecord = 0;
+    var startRecord = 1;
+    var indexInvoiceGlobal=0;
+    //invoicesGlobal chứa dữ liệu của server
+    var invoicesGlobal=[];
+    var RefUpdate={};
 
 
-/////////////
-/*
-    showDetail()
-    This function show Detail box for add, edit, duplicate Expense or Receipt Ref
-*/
+    /////////////
+    /*
+        showDetail()
+        This function show Detail box for add, edit, duplicate Expense or Receipt Ref
+    */
 
 var showDetail=function(){
     var RAEDetail=[];
@@ -207,7 +206,6 @@ var getPageHome = function() {
 					DepartmentName : payment[i].accountObjectAddress
 				})
             }
-        
 			endRecord = 0;
 			startRecord = 1;
 			if (totalRecord == 0) {
@@ -257,7 +255,6 @@ var getPage = function() {
         },
         async:false,
 		success : function(result, txtStatus) {
-
 			var payment = result;
             sessionStorage.setItem("detailRef", JSON.stringify(payment));
 			for (var i = 0; i < result.length; i++) {
@@ -276,13 +273,11 @@ var getPage = function() {
 					DepartmentName : payment[i].accountObjectName
 				})
 			}
-		
-			 startRecord = size * (page - 1) + 1;
+			startRecord = size * (page - 1) + 1;
 			if (size * page >= totalRecord) {
 				endRecord = totalRecord;
 			} else
 				endRecord = size * (page);
-
 			$('#startRecord').html(startRecord);
             $('#endRecord').html(endRecord);
             setTimeout(function () {

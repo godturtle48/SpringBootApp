@@ -1,6 +1,4 @@
-#header {
-	  box-shadow: 0 2px 20px -4px black;
-}
+
 .body-content {
 	min-height: calc(100vh - 227px);
 }
@@ -84,6 +82,7 @@ input{
 	border:none;
 	border-bottom:1px solid #757575;
 	background-color: #F5F5F5;
+	position: relative;
   }
   input:focus 		{ outline:none; }
   
@@ -156,4 +155,66 @@ input{
   }
 .label-default {
 	margin-bottom: 20px;
+}
+.footer-contact-content {
+	width: 100%;
+	background-color: #ffffff;
+	color: #666666;
+	/* height: 244px; */
+	overflow: hidden;
+}
+	.footer-contact-content .footer-wrapper {
+			padding: 15px 30px;
+			width: 100%;
+			float: left;
+	}
+			.footer-contact-content .footer-wrapper .misa-branch {
+					width: 20%;
+					padding-left: 8px;
+					padding-right: 8px;
+					float: left;
+					color: #666;
+			}
+					.footer-contact-content .footer-wrapper .misa-branch .branch-name {
+							padding-bottom: 8px;
+							font-size: 14px;
+							font-weight: bold;
+							color: #595858;
+					}
+					.branch-info ul {
+							padding-left: 0;
+							margin-bottom: 0;
+					}
+							.branch-info ul li {
+									font-size: 12px;
+									line-height: 18px;
+									list-style-type: none;
+									color: #757575;
+							}
+	.footer-contact-content .contact-item {
+			color: white;
+			padding-top: 15px;
+			padding-bottom: 15px;
+			margin: 0 auto;
+	}
+			.footer-contact-content .contact-item .row {
+					color: #fff;
+					font-size: 12px;
+					padding-bottom: 0 !important;
+			}
+			.copyright {
+					margin-bottom: 0;
+			}
+					.copyright #pcopyright {
+							text-transform: none;
+							font-size: 12px;
+					}
+					.copyright .a-footer {
+							font-size: 12px;
+							color: #fff;
+							padding-left: 40px;
+					}
+.bottom-bar {
+	background-color: #026b97;
+	width: 100%;
 }
