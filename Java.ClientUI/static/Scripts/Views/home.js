@@ -4,8 +4,7 @@ $(document).ready(function(){
 			method: "GET",
 			url:MISA.Config.loginUrl+"/api/home",
 			beforeSend: function(xhr) {
-				  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-				  xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
+			      xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
 			},
 			success: function(data, status, xhr){
 				$('#user-info').text((data.email).split("@")[0]);
@@ -15,7 +14,6 @@ $(document).ready(function(){
 					url:MISA.Config.loginUrl+"/api/getCompanyUser",
 					beforeSend: function(xhr){
 						xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-						xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
 					},
 					success: function(data){
 						console.log(data);	
@@ -29,7 +27,7 @@ $(document).ready(function(){
 				})
 			},
 			error: function(err, stt, xhr){
-				window.location.href="/index.html";
+				window.location.href="/";
 			}
 		})	
 	}
@@ -60,11 +58,9 @@ $('#addBtn').click(function(){
 		contentType:"application/json",
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
-			xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
 		},
 		data: JSON.stringify(comData),
 		success: function(data, txtStatus, xhr){
-			localStorage.setItem("keyCompany", comData.companyTaxNumber);
 			console.log(xhr.status);
 			if(xhr.status == 200){
 				localStorage.setItem("totalCompany", Number(totalCompany) + Number(1));
@@ -85,7 +81,6 @@ $('#addBtn').click(function(){
 	                    +'</tr>')
 	              initGoToWorkspaceOncClickEvent();
 			}
-
 		},
 		error: function(data, txtStatus, xhr){
 			if(data.status == 406){

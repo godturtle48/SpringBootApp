@@ -1,4 +1,5 @@
 ﻿$(document).ready(function(){
+	//	debugger
 		if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
 			$.ajax({
 				method:"GET",
@@ -20,7 +21,7 @@
 		}
 	
 		//Check Enter key is pressed
-		$('#formLogin').keypress(function (e) {
+		$('.login-form').keypress(function (e) {
 			if (e.which == 13 || e.keyCode == 13)  // the enter key code
 			{
 				$('#btnLogin').click();

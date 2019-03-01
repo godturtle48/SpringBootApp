@@ -5,6 +5,11 @@
 //     $.ajax({
 //         method: 'get',
 //         url: MISA.Config.paymentUrl + "/loadComboboxAddPayment",
+//         beforeSend : function(xhr) {
+// 			xhr.setRequestHeader('authorization', localStorage
+//                     .getItem("authenCookie"));
+//             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+//         },
 //         success: function(res){
 //             // AccountObjectData = res;
 //             // console.log(res);
@@ -35,6 +40,11 @@
 //     $.ajax({
 //         method: 'get',
 //         url: MISA.Config.paymentUrl + "/loadComboboxAddReceipt",
+//         beforeSend : function(xhr) {
+// 			xhr.setRequestHeader('authorization', localStorage
+//                     .getItem("authenCookie"));
+//             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+//         },
 //         success: function(res){
 //             AccountObjectData = res;
 //             // console.log(AccountObjectData);
