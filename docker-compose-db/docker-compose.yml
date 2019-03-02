@@ -47,7 +47,7 @@ services:
 ## MongoDB
 ########################################### 
   payment-receipt-db:
-    container_name: java_payment_receipt_db
+    container_name: java_mongodb
     image: mongo
     restart: always
     networks:
