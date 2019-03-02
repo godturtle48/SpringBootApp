@@ -21,7 +21,7 @@ services:
       - /var/data/mariadb:/var/lib/mariadb
     ports:
     - "13306:3306"
-    - "33060:33060"
+#    - "33060:33060"
 ###########################################
 ## RabbitMQ
 ########################################### 
@@ -38,16 +38,12 @@ services:
       # RABBITMQ_DEFAULT_VHOST: "/"
     ports:
       - "5672:5672"
-      - "15672:15672"
-    # labels:
-    #   NAME: "rabbitmq1"
-    # volumes:
-    #   - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+ #     - "15672:15672"
 ###########################################
 ## MongoDB
 ########################################### 
   payment-receipt-db:
-    container_name: java_mongodb
+    container_name: java_payment_receipt_db
     image: mongo
     restart: always
     networks:
