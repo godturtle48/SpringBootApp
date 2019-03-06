@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $('#printBtn').click(function(){
+        $('.main-nav').hide();
+        $('#header').hide();
+        $('.main-container').css('position','absolute');
+        $('.main-container').css('left','0');
+        window.print();
+    })
+})

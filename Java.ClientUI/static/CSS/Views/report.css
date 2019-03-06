@@ -47,20 +47,20 @@
     padding: 0 5px;
 }
 .main-content {
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     /* position: absolute;
     left: 10px;
     right: 10px; */
 }
-    .main-content , .header-report-section {
+    .report-section , .header-report-section {
         /* font-family: Lato; */
     }
-        .main-content .header-report-section .report-name {
+        .report-section .header-report-section .report-name {
             color: #444;
             font-size: 20px;
             text-transform: uppercase;
         }
-        .main-content .header-report-section #yearReport {
+        .report-section .header-report-section #yearReport {
             border: none;
             border-bottom: 1px solid #444;
             font-size: 20px;

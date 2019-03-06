@@ -21,6 +21,11 @@
     <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
     <link href="./static/CSS/Views/report.css" rel="stylesheet" />
     <title>Báo cáo</title>
+    <style type="text/css" media="print">
+        @media print {
+            table {page-break-inside: avoid;}
+            }
+    </style>
 </head>
 <body>
     <div class="loading-page"></div>
@@ -206,20 +211,18 @@
                     </li>
                 </ul>
             </div>
-            <div class="main-container">
-                <div class="report-section">
-                    <div class="cls-contenet-header">
-                        <div class="cls-navigation-breadcrumb cls-padding-8">
-                            <span class="breadcrumb-children-last">
-                                <i class="far fa-chart-bar"></i>
-                                <span>Báo cáo</span>
-                            </span>
+            <div class="container-fluid">
+                <div class="main-container">
+                    <div class="report-section">
+                        <div class="cls-contenet-header">
+                            <div class="cls-navigation-breadcrumb cls-padding-8">
+                                <span class="breadcrumb-children-last">
+                                    <i class="far fa-chart-bar"></i>
+                                    <span>Báo cáo</span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="main-content">
-                    <div class="container-fluid">
-                        <div class="row header-report-section" style="font-family: Lato;">
+                        <div class="row header-report-section" style="margin: 0">
                             <div class="col-6">
                                 <div class="report-name">Báo cáo thu chi</div>
                             </div>
@@ -229,89 +232,140 @@
                                 </select>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row top-section-report">
-                            <div class="col-6">
-                                <div class="company-info">
-                                    <div class="company-name">Công ty TNHH XYZ</div>
-                                    <div class="company-address">Tầng 9 Technosoft, Duy Tân, Cầu Giấy, Hà Nội</div>
-                                </div>
-                            </div>
-                            <div class="col-3"></div>
-                            <div class="col-3 text-right">
-                                <div class="report-example text-center">
-                                    <b>Mẫu số S04a-DNN</b><br>
-                                <i>(Ban hành theo Thông tư số 133/2016/TT-BTC<br>
-                                Ngày 26/08/2016 của Bộ Tài chính)</i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <div class="content-title">
-                                    Sổ kế toán chi tiết quỹ tiền mặt
-                                </div>
-                                <div class="description-title">
-                                    <div class="account">
-                                        <span>Tài khoản</span>
-                                        <span class="account-number">111</span>
+                    </div>
+                    <div class="main-content">
+                        <div class="container-fluid">
+                            <hr>
+                            <div class="main-report">
+                                <div class="row top-section-report">
+                                    <div class="col-6">
+                                        <div class="company-info">
+                                            <div class="company-name">Công ty TNHH XYZ</div>
+                                            <div class="company-address">Tầng 9 Technosoft, Duy Tân, Cầu Giấy, Hà Nội</div>
+                                        </div>
                                     </div>
-                                    <div class="currency">
-                                        <span>Loại tiền</span>
-                                        <span class="currency-type">VND</span>
+                                    <div class="col-3"></div>
+                                    <div class="col-3 text-right">
+                                        <div class="report-example text-center">
+                                            <b>Mẫu số S04a-DNN</b><br>
+                                        <i>(Ban hành theo Thông tư số 133/2016/TT-BTC<br>
+                                        Ngày 26/08/2016 của Bộ Tài chính)</i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="report-table table-responsive">
-                                    <table id="tblReportHeader" class="bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="gridPanel-header-item-title width-150 no-border-left" rowspan="2">Ngày ghi sổ</th>
-                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Ngày chứng từ</th>
-                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số phiếu thu</th>
-                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số phiếu chi</th>
-                                                <th class="gridPanel-header-item-title width-200" rowspan="2">Diễn giải</th>
-                                                <th class="gridPanel-header-item-title width-100" rowspan="2">Tài khoản</th>
-                                                <th class="gridPanel-header-item-title width-100" rowspan="2">TK đối ứng</th>
-                                                <th class="gridPanel-header-item-title" colspan="2">Số phát sinh</th>
-                                                <th class="gridPanel-header-item-title width-150" rowspan="2">Số tồn</th>
-                                                <th class="gridPanel-header-item-title width-200" rowspan="2">Người nhận/ Người nộp</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="gridPanel-header-item-title width-150" >Nợ</th>
-                                                <th class="gridPanel-header-item-title width-150" >Có</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr></tr>
-                                            <tr>
-                                                <td colspan="7" class="no-border-left text-right">Tổng cộng:</td>
-                                                <td class="total-earn width-150"></td>
-                                                <td class="total-pay width-150"></td>
-                                                <td class="total-money width-150"></td>
-                                                <td class="width-200"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- <table id="tblListPayment" class="bordered">
-                                        <tr>
-                                            <td colspan="7">Tổng cộng:</td>
-                                            <td class="total-earn width-150"></td>
-                                            <td class="total-pay width-150"></td>
-                                            <td class="total-money width-150"></td>
-                                            <td class="width-200"></td>
-                                        </tr>
-                                    </table> -->
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <div class="content-title">
+                                            Sổ kế toán chi tiết quỹ tiền mặt
+                                        </div>
+                                        <div class="description-title">
+                                            <div class="account">
+                                                <span>Tài khoản</span>
+                                                <span class="account-number">111</span>
+                                            </div>
+                                            <div class="currency">
+                                                <span>Loại tiền</span>
+                                                <span class="currency-type">VND</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="report-table table-responsive">
+                                            <table id="tblReportHeader" class="bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="gridPanel-header-item-title width-150 no-border-left" rowspan="2">Ngày ghi sổ</th>
+                                                        <th class="gridPanel-header-item-title width-150" rowspan="2">Ngày chứng từ</th>
+                                                        <th class="gridPanel-header-item-title width-150" colspan="2">Số hiệu chứng từ</th>
+                                                        <th class="gridPanel-header-item-title width-200" rowspan="2">Diễn giải</th>
+                                                        <!-- <th class="gridPanel-header-item-title width-100" rowspan="2">Tài khoản</th>
+                                                        <th class="gridPanel-header-item-title width-100" rowspan="2">TK đối ứng</th> -->
+                                                        <th class="gridPanel-header-item-title" colspan="3">Số tiền</th>
+                                                        <th class="gridPanel-header-item-title width-200" rowspan="2">Người nhận/ Người nộp</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="gridPanel-header-item-title width-150" >Thu</th>
+                                                        <th class="gridPanel-header-item-title width-150" >Chi</th>
+                                                        <th class="gridPanel-header-item-title width-150" >Thu</th>
+                                                        <th class="gridPanel-header-item-title width-150" >Chi</th>
+                                                        <th class="gridPanel-header-item-title width-150" >Tồn</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr></tr>
+                                                    <tr>
+                                                        <td colspan="5" class="no-border-left text-right">Tổng cộng:</td>
+                                                        <td class="total-earn width-150"></td>
+                                                        <td class="total-pay width-150"></td>
+                                                        <td class="total-money width-150"></td>
+                                                        <td class="width-200"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- <table id="tblListPayment" class="bordered">
+                                                <tr>
+                                                    <td colspan="7">Tổng cộng:</td>
+                                                    <td class="total-earn width-150"></td>
+                                                    <td class="total-pay width-150"></td>
+                                                    <td class="total-money width-150"></td>
+                                                    <td class="width-200"></td>
+                                                </tr>
+                                            </table> -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 text-right">
-                                <div id="printBtn">
-                                    <button class="btn btn-primary">In hóa đơn</button>
+                            <div class="report-page">
+                                <div class="">
+                                    - Sổ này có <span>...</span> trang, đánh số từ trang 01 đến trang <span>...</span>
+                                </div>
+                            </div>
+                            <div class="open-book-date">
+                                <div>
+                                    - Ngày mở sổ <span>...</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8"></div>
+                                <div class="col-md-4 text-center">
+                                    <div class="report-date">
+                                        Ngày... tháng ... năm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="report-label">
+                                        Người lập biểu
+                                    </div>
+                                    <div class="note">
+                                        (Ký, họ tên)
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="report-label">
+                                        Kế toán trưởng
+                                    </div>
+                                    <div class="note">
+                                        (Ký, họ tên)
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="report-label">
+                                        Người lập biểu
+                                    </div>
+                                    <div class="note">
+                                        (Ký, họ tên)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <div id="printBtn">
+                                        <button class="btn btn-primary">In hóa đơn</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -331,5 +385,6 @@
     <script src="./static/Scripts/Controls/controls.js"></script>
     <script src="./static/Scripts/common/header.js"></script>
     <script src="./static/Scripts/Views/config.js"></script>
+    <script src="./static/Scripts/Views/report.js"></script>
 </body>
 </html>
