@@ -15,17 +15,13 @@
     <link href="./static/CSS/common/control.css" rel="stylesheet" />
     <link href="./static/CSS/common/common.css" rel="stylesheet" />
     <link href="./static/CSS/common/combobox.css" rel="stylesheet" />
+    <link href="./static/CSS/common/print.css" rel="stylesheet" />
     <link href="./static/CSS/Views/header.css" rel="stylesheet" />
     <link href="./static/CSS/common/panelSubMenu.css" rel="stylesheet"/>
     <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
     <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
     <link href="./static/CSS/Views/report.css" rel="stylesheet" />
     <title>Báo cáo</title>
-    <style type="text/css" media="print">
-        @media print {
-            table {page-break-inside: avoid;}
-            }
-    </style>
 </head>
 <body>
     <div class="loading-page"></div>
@@ -276,31 +272,31 @@
                                             <table id="tblReportHeader" class="bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th class="gridPanel-header-item-title width-150 no-border-left" rowspan="2">Ngày ghi sổ</th>
-                                                        <th class="gridPanel-header-item-title width-150" rowspan="2">Ngày chứng từ</th>
+                                                        <th class="gridPanel-header-item-title width-100" rowspan="2">Ngày ghi sổ</th>
+                                                        <th class="gridPanel-header-item-title width-100" rowspan="2">Ngày chứng từ</th>
                                                         <th class="gridPanel-header-item-title width-150" colspan="2">Số hiệu chứng từ</th>
-                                                        <th class="gridPanel-header-item-title width-200" rowspan="2">Diễn giải</th>
+                                                        <th class="gridPanel-header-item-title width-150" rowspan="2">Diễn giải</th>
                                                         <!-- <th class="gridPanel-header-item-title width-100" rowspan="2">Tài khoản</th>
                                                         <th class="gridPanel-header-item-title width-100" rowspan="2">TK đối ứng</th> -->
                                                         <th class="gridPanel-header-item-title" colspan="3">Số tiền</th>
-                                                        <th class="gridPanel-header-item-title width-200" rowspan="2">Người nhận/ Người nộp</th>
+                                                        <th class="gridPanel-header-item-title width-150" rowspan="2">Người nhận/ Người nộp</th>
                                                     </tr>
                                                     <tr>
-                                                        <th class="gridPanel-header-item-title width-150" >Thu</th>
-                                                        <th class="gridPanel-header-item-title width-150" >Chi</th>
-                                                        <th class="gridPanel-header-item-title width-150" >Thu</th>
-                                                        <th class="gridPanel-header-item-title width-150" >Chi</th>
-                                                        <th class="gridPanel-header-item-title width-150" >Tồn</th>
+                                                        <th class="gridPanel-header-item-title width-100" >Thu</th>
+                                                        <th class="gridPanel-header-item-title width-100" >Chi</th>
+                                                        <th class="gridPanel-header-item-title width-100" >Thu</th>
+                                                        <th class="gridPanel-header-item-title width-100" >Chi</th>
+                                                        <th class="gridPanel-header-item-title width-100" >Tồn</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr></tr>
                                                     <tr>
-                                                        <td colspan="5" class="no-border-left text-right">Tổng cộng:</td>
-                                                        <td class="total-earn width-150"></td>
-                                                        <td class="total-pay width-150"></td>
-                                                        <td class="total-money width-150"></td>
-                                                        <td class="width-200"></td>
+                                                        <td colspan="5" class="text-right">Tổng cộng:</td>
+                                                        <td class="total-earn width-100"></td>
+                                                        <td class="total-pay width-100"></td>
+                                                        <td class="total-money width-100"></td>
+                                                        <td class="width-100"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

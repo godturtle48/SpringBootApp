@@ -394,7 +394,6 @@ class ReceiptsAndExpensesJS {
             })
             htmlItem.push('</tr>');
             table.append(htmlItem.join(""));
-
         });
 
         // Chọn dòng đầu tiên:

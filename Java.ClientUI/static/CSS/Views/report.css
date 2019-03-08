@@ -90,8 +90,9 @@
         /* position: absolute;
         right: 0;
         left: 0; */
-        border: 1px solid #ccc;
-        border-top: none;
+        border: none;
+        /* border: 1px solid #ccc; */
+        
     }
     #printBtn {
         margin-top: 10px;

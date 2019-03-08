@@ -1,0 +1,17 @@
+@media print {
+    .main-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-top: none;
+    }
+    .report-section, #header, #printBtn, hr {
+        display: none;
+    }
+    @page {
+        size: A4 landscape;
+    }
+    table {
+        page-break-before: avoid;
+    }
+}
