@@ -260,7 +260,7 @@ class Button {
     constructor(scope, width, commandName, eventHandler) {
         var eventName = 'btn{0}_OnClick'.format(commandName),
             id = 'btn{0}'.format(commandName),
-            html = '<div class="btn-customer-16-body"><i class="btn-customer-{1} {2}"></i><div class="btn-customer-text" title="{3}">{0}</div></div>';
+            html = '<div class="btn-customer-16-body" title="{3}"><i class="btn-customer-{1} {2}"></i><div class="btn-customer-text" >{0}</div></div>';
         if (eventHandler) {
             eventName = eventName;
         }
