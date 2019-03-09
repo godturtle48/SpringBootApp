@@ -87,7 +87,6 @@ var commonJS = {
             
         }
         $(function () {
-            $(document).off('keydown',raeJS.keyDownRowSelect());
             $("#message-box").dialog({
                 modal: true,
                 resizable: false,
