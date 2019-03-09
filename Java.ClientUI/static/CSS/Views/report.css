@@ -51,6 +51,7 @@
     /* position: absolute;
     left: 10px;
     right: 10px; */
+    /* font-family: sans-serif; */
 }
     .report-section , .header-report-section {
         /* font-family: Lato; */
@@ -59,6 +60,7 @@
             color: #444;
             font-size: 20px;
             text-transform: uppercase;
+            padding-top: 8px;
         }
         .report-section .header-report-section #yearReport {
             border: none;
@@ -77,12 +79,12 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 30px;
-        padding: 80px 0 10px 0;
+        padding: 60px 0 10px 0;
         color: #444; 
     }
     .main-content .description-title{
         font-style: italic;
-        font-size: 15px;
+        font-size: 14px;
         color: #444;
         padding: 10px 0px;
     }
@@ -93,6 +95,16 @@
         border: none;
         /* border: 1px solid #ccc; */
         
+    }
+    .report-page {
+        margin-top: 10px;
+    }
+    .main-content .report-label {
+        font-weight: 600;
+    }
+    .main-content .note, .description-title {
+        font-style: italic;
+        font-family: sans-serif;
     }
     #printBtn {
         margin-top: 10px;

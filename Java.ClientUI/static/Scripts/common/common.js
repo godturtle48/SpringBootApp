@@ -281,7 +281,7 @@ if (!String.prototype.format) {
 /* Định dạng hiển thị tiền tệ */
 if (!Number.prototype.formatMoney) {
     Number.prototype.formatMoney = function () {
-        return this.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        return this.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     };
 }
 
