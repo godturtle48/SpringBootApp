@@ -1,0 +1,1 @@
+docker-compose exec router sh -c "mongo < /scripts/updateZoneKeyRange.js"

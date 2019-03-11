@@ -1,0 +1,180 @@
+version: '2'
+
+networks: 
+  sme-network:
+    external: true
+
+services:
+
+  ## Config Servers
+  config01:
+    container_name: java_mongocfg1
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod --configsvr --replSet configserver --oplogSize 16 --storageEngine wiredTiger   #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/mongocfg1:/data/db
+  config02:
+    container_name: java_mongocfg2
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --configsvr --replSet configserver --oplogSize 16 --storageEngine wiredTiger #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/mongocfg2:/data/db
+  config03:
+    container_name: java_mongocfg3
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod --configsvr --replSet configserver --oplogSize 16 --storageEngine wiredTiger #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/mongocfg3:/data/db
+
+  ## Shards
+  shard01a:
+    container_name: java_shard01a
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard01 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard01a:/data/db
+  shard01b:
+    container_name: java_shard01b
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard01 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard01b:/data/db
+  shard01c:
+    container_name: java_shard01c
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard01 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard01c:/data/db
+  shard02a:
+    container_name: java_shard02a
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard02 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard02a:/data/db
+  shard02b:
+    container_name: java_shard02b
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard02 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard02b:/data/db
+  shard02c:
+    container_name: java_shard02c
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard02 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard02c:/data/db
+  shard03a:
+    container_name: java_shard03a
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard03 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard03a:/data/db
+  shard03b:
+    container_name: java_shard03b
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard03 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard03b:/data/db
+  shard03c:
+    container_name: java_shard03c
+    image: mongo
+    networks:
+      - sme-network
+    command: mongod  --shardsvr --replSet shard03 --oplogSize 16 --enableMajorityReadConcern false --storageEngine wiredTiger --wiredTigerCacheSizeGB 2 #--keyFile /mongodb.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/shard03c:/data/db 
+ 
+  ## Router
+  router:
+    container_name: java_mongos
+    image: mongo
+    networks:
+      - sme-network
+    command: mongos --configdb configserver/config01:27019,config02:27019,config03:27019 --bind_ip_all #--keyFile /mongoddb.getCollection('TT').getShardDistribution()b.key
+    # restart: always
+    volumes:
+      # - ./mongodb.key:/mongodb.key
+      - ./scripts:/scripts
+      - /var/data/mongoPSA/mongos:/data/db
+    # environment:
+      # MONGO_INITDB_ROOT_USERNAME: root
+      # MONGO_INITDB_ROOT_PASSWORD: 12345678
+    ports:
+      - "27067:27017"
+    depends_on:
+      - config01
+      - config02
+      - config03
+      - shard01a
+      - shard01b
+      - shard01c
+      - shard02a
+      - shard02b
+      - shard02c
+      - shard03a
+      - shard03b
+      - shard03c
+      # - shard04a
+      # - shard04b
+      # - shard04c
+      # - shard05a
+      # - shard05b
+      # - shard05c
