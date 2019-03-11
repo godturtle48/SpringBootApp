@@ -260,30 +260,30 @@ class Button {
     constructor(scope, width, commandName, eventHandler) {
         var eventName = 'btn{0}_OnClick'.format(commandName),
             id = 'btn{0}'.format(commandName),
-            html = '<div class="btn-customer-16-body"><i class="btn-customer-{1} {2}"></i><div class="btn-customer-text">{0}</div></div>';
+            html = '<div class="btn-customer-16-body" title="{3}"><i class="btn-customer-{1} {2}"></i><div class="btn-customer-text" >{0}</div></div>';
         if (eventHandler) {
             eventName = eventName;
         }
         switch (commandName) {
             case 'Previous':
-                html = html = html.format('Trước','prev-icon','btn-customer-icon-16');
+                html = html = html.format('Trước','prev-icon','btn-customer-icon-16','Mũi tên trái');
                 break;
             case 'Next':
-                html = html = html.format('Sau','next-icon','btn-customer-icon-16');
+                html = html = html.format('Sau','next-icon','btn-customer-icon-16','Mũi tên phải');
                 break;
             case 'Save':
-                html = html.format('Cất','save-icon','btn-customer-icon-16');
+                html = html.format('Cất','save-icon','btn-customer-icon-16','Ctrl + F8');
                 break;
             case 'SaveAdd':
-                html = html.format('Cất và thêm','saveadd-icon','btn-customer-icon-16');
+                html = html.format('Cất và thêm','saveadd-icon','btn-customer-icon-16','');
                 break;
             case 'QuickEdit':
-                html = html.format('Sửa nhanh','quickedit-icon','btn-customer-icon-16')
+                html = html.format('Sửa nhanh','quickedit-icon','btn-customer-icon-16','')
             case 'Cancel':
-                html = html.format('Hủy bỏ','cancel-icon','btn-customer-icon-16');
+                html = html.format('Hủy bỏ','cancel-icon','btn-customer-icon-16','Esc');
                 break;
             case 'Help':
-                html = html.format('Giúp','help-icon','btn-customer-icon-16');
+                html = html.format('Giúp','help-icon','btn-customer-icon-16','');
                 break;
             // case 'Pause':
             //     html = html.format('Hoãn','pause-icon','btn-customer-icon-16');

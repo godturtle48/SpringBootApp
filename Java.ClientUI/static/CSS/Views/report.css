@@ -47,20 +47,22 @@
     padding: 0 5px;
 }
 .main-content {
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     /* position: absolute;
     left: 10px;
     right: 10px; */
+    /* font-family: sans-serif; */
 }
-    .main-content , .header-report-section {
+    .report-section , .header-report-section {
         /* font-family: Lato; */
     }
-        .main-content .header-report-section .report-name {
+        .report-section .header-report-section .report-name {
             color: #444;
             font-size: 20px;
             text-transform: uppercase;
+            padding-top: 8px;
         }
-        .main-content .header-report-section #yearReport {
+        .report-section .header-report-section #yearReport {
             border: none;
             border-bottom: 1px solid #444;
             font-size: 20px;
@@ -77,12 +79,12 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 30px;
-        padding: 80px 0 10px 0;
+        padding: 60px 0 10px 0;
         color: #444; 
     }
     .main-content .description-title{
         font-style: italic;
-        font-size: 15px;
+        font-size: 14px;
         color: #444;
         padding: 10px 0px;
     }
@@ -90,8 +92,19 @@
         /* position: absolute;
         right: 0;
         left: 0; */
-        border: 1px solid #ccc;
-        border-top: none;
+        border: none;
+        /* border: 1px solid #ccc; */
+        
+    }
+    .report-page {
+        margin-top: 10px;
+    }
+    .main-content .report-label {
+        font-weight: 600;
+    }
+    .main-content .note, .description-title {
+        font-style: italic;
+        font-family: sans-serif;
     }
     #printBtn {
         margin-top: 10px;

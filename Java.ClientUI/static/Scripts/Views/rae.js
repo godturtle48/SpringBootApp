@@ -1,4 +1,4 @@
-
+/* Version 09/03/2019*/
 $(document).ready(function(){
     if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
         $.ajax({
@@ -322,7 +322,7 @@ class ReceiptsAndExpensesJS {
         /////handle button on toolbar-body (Toolbar on Table Master)
         $('#btnAddReceipt').on('click', { refType: enumeration.RefType.Receipt }, this.btnAdd_OnClick.bind(this));
         $('#btnAddEx').on('click', { refType: enumeration.RefType.Expense }, this.btnAdd_OnClick.bind(this));
-        $(document).on('keydown', '[aria-describedby="frmRAEDetail"]', this.dialog_OnKeyDown.bind(this));
+        $('#frmRAEDetail').on('keyup',this.dialog_OnKeyDown.bind(this));
         // $(document).on('click', '#btnPrevious', this.btnPrevious_OnClick.bind(this));
         // $(document).on('click', '#btnNext', this.btnNext_OnClick.bind(this));
         // $(document).on('click', '#btnSave', this.btnSave_OnClick.bind(this));
@@ -394,7 +394,6 @@ class ReceiptsAndExpensesJS {
             })
             htmlItem.push('</tr>');
             table.append(htmlItem.join(""));
-
         });
 
         // Chọn dòng đầu tiên:
@@ -432,7 +431,6 @@ class ReceiptsAndExpensesJS {
             htmlItem.push('</tr>');
             table.prepend(htmlItem.join(""));
         });
-
         // Chọn dòng đầu tiên:
         commonJS.setFirstRowSelected($('#tblCustomerList'))
       this.rowRAE_OnClick();
@@ -1277,6 +1275,18 @@ class ReceiptsAndExpensesJS {
     keyDownRowSelect() {
         var currentRow = $('.rowSelected');
         switch (event.keyCode) {
+            //Nút F2
+            case 113:
+            $('#btnEdit').trigger('click');
+            return false;
+            //Phím Delete
+            case 46:
+            $('#btnDelete').trigger('click');
+            return false;
+            //Phím Insert
+            case 45:
+            $('#btnEdit').trigger('click');
+            return false;
             //Mũi tên xuống
             case 40:
             raeJS.selectRow(currentRow.next());
@@ -1342,12 +1352,27 @@ class ReceiptsAndExpensesJS {
      * Created by NVLAM (15/02/2019)
      */
     dialog_OnKeyDown(sender) {
-        debugger
+        //Phím tắt nút trước
         if(sender.keyCode === 37){
             $('#btnPrevious').trigger('click');
         };
+        //Phím tắt nút trước
         if(sender.keyCode === 39){
             $('#btnNext').trigger('click');
+        }
+        //Phím tắt nút save
+        if(sender.keyCode === 119 && sender.ctrlKey) {
+            $('#btnSave').trigger('click');
+        }
+        //Phím tắt thêm dòng ở detail
+        if(sender.keyCode === 45 && sender.ctrlKey) {
+            $('#addtr').trigger('click');
+        }
+        //Phím tắt xóa dòng detail
+        if(sender.keyCode === 46 && sender.ctrlKey) {
+            if($('#tbodyRAEDetail-popup').children().hasClass('rowSelected')) {
+                $('#tbodyRAEDetail-popup .rowSelected button').trigger('click');
+            }
         }
     }
     /* ------------------------------------------------------------------------
