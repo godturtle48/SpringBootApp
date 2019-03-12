@@ -30,7 +30,7 @@ public class PaymentReceiptQueryController {
 		@Autowired
 	PaymentReceiptViewService paymentService;
 	
-	@RequestMapping("/getAllPage_Size:{size}")
+	@GetMapping("/getAllPage_Size:{size}")
 	public Map<String, Object> getAllPage(@PathVariable("size")int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 //		Authenticate.Auth(httpServletRequest, httpServletResponse); 
 		String keyCompany= httpServletRequest.getHeader("keycompany");
@@ -52,7 +52,7 @@ public class PaymentReceiptQueryController {
 	
 	
 
-	@RequestMapping("/getPage/page:{page}_size:{size}")
+	@GetMapping("/getPage/page:{page}_size:{size}")
 	public List<PaymentReceiptView> get(@PathVariable("page") long page,@PathVariable("size") int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		System.out.println(page);
 		System.out.println(size);
@@ -70,7 +70,7 @@ public class PaymentReceiptQueryController {
 		
 	}
 	
-	@RequestMapping("/generateRefNoFinance/{refTypeID}")
+	@GetMapping("/generateRefNoFinance/{refTypeID}")
 	public String generateRefNoFinance(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		
 		String keyCompany= httpServletRequest.getHeader("keycompany");
