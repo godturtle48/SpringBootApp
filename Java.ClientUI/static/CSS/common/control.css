@@ -80,6 +80,7 @@ textarea {
 }
 .btn-customer:disabled {
     background-color: #f5f5f5;
+    border-color: #ccc!important;
 }
 .btn-customer-text {
     display: inline-flex;
@@ -152,7 +153,12 @@ textarea {
     background-repeat: no-repeat;
     background-position: 0-1600px !important;
 }
-
+.btn-customer-record-icon {
+    background-image: url('../../Contents/Images/IconSprite.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-position: 0-1872px !important;
+}
 .btn-primary {
     color: #2baaed;
     background-color: #fff;
