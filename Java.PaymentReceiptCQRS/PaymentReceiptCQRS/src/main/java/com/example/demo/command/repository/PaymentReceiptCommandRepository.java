@@ -222,7 +222,7 @@ public class PaymentReceiptCommandRepository {
 		try {
 			 tx = session.beginTransaction();
 			 //phai xoa ca lien ket nua
-			 session.createQuery("delete from InvoiceDetail where payment.refID=:refID")
+			 session.createQuery("delete from InvoiceDetailCommand where payment.refID=:refID")
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
 			 session.delete(paymentReceipt);
 			

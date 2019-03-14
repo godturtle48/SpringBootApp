@@ -139,7 +139,7 @@ public class GenerateData {
 				"Chi khác"};
              
 			int length = GenerateData.accountObjectID.length;
-			for(int i=1;i<100000;++i) {
+			for(int i=1;i<100;++i) {
 				try {
 					int tmpIndex = rand.nextInt(length);
 				
