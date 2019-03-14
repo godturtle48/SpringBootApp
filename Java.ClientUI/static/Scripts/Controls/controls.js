@@ -285,9 +285,9 @@ class Button {
             case 'Help':
                 html = html.format('Giúp','help-icon','btn-customer-icon-16','');
                 break;
-            // case 'Pause':
-            //     html = html.format('Hoãn','pause-icon','btn-customer-icon-16');
-            //     break;
+            case 'Record':
+                html = html.format('Ghi Sổ','record-icon','btn-customer-icon-16','');
+                break;
             default:
                 break;
         }
@@ -313,9 +313,9 @@ class Button {
         if (commandName === 'Help') {
             this.class = 'btn-customer background-button-white';
         }
-        // if (commandName === 'Pause') {
-        //     this.class = 'btn-customer background-button-white';
-        // }
+        if (commandName === 'Record') {
+            this.class = 'btn-customer background-button-white';
+        }
         // this.class = (commandName === 'Help' ? 'btn-customer btnHelp' : 'btn-customer');
         this.width = width + 'px';
         this.html = html;
@@ -355,7 +355,7 @@ class FormPopup {
                 new Button(me, 75, 'Save'),
                 new Button(me, 120, 'SaveAdd'),
                 new Button(me, 110, 'QuickEdit'),
-                // new Button(me, 75, 'Pause'),
+                new Button(me, 75, 'Record'),
                 new Button(me, 75, 'Help'),
                 new Button(me, 75, 'Cancel'),
                 ]
@@ -406,7 +406,7 @@ class FormPopup {
     btnHelp_OnClick() {
         alert('Help');
     };
-    btnPause_OnClick() {
+    btnRecord_OnClick() {
         this.Form.dialog('close');
     }
 }
