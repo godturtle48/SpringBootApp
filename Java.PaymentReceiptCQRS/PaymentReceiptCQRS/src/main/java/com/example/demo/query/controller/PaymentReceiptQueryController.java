@@ -81,7 +81,14 @@ public class PaymentReceiptQueryController {
 	public Map<String, Object> filterPaymentReceipt(@RequestBody List<FilterModel> filterData, HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
 		Map<String, Object> filterMap = new HashMap<>();
-		filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
+		
+		try {
+			filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+//		filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
 		filterMap.put("totalRecord", paymentService.getFilterPaymentReceipt(keyCompany, filterData).size());
 		return filterMap;
 	}

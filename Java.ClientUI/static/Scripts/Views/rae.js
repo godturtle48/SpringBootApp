@@ -1500,11 +1500,12 @@ var raeJS = new ReceiptsAndExpensesJS();
         if(dataFilter!=null && dataFilter !=""){
                 $.ajax({
                         method: "post",
-                        url: MISA.Config.paymentUrl + "/filter",
+                        url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
                         contentType:"application/json; charset:utf-8;",
                         dataType: 'text',
                         beforeSend: function(xhr){
-                            xhr.setRequestHeader("keyCompany", "company2");
+                            xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
+                            xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                         },
                         data: JSON.stringify(dataFilter),
                         success: function(response, status, xhr){
