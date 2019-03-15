@@ -15,6 +15,7 @@ import com.rabbitmq.client.*;
 public class ConfigMessageQueue {
 	private static Connection connection;
 	private static Channel channel;
+	private static final String queueName="Payment.queue"+System.currentTimeMillis();
 	
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
@@ -24,9 +25,11 @@ public class ConfigMessageQueue {
 	    factory.setPassword("guest");
 		try {
 			connection =  factory.newConnection();
-		    channel =  connection.createChannel();
+		    channel =  connection.createChannel();			
+		    channel.queueDeclare(queueName,false,false,true,null);
+		    channel.queueBind(queueName, "Payment.exchange", ""); 
 		    boolean autoAck = false;
-		    channel.basicConsume("Payment.queue", autoAck, "myConsumerTag",
+		    channel.basicConsume(queueName, autoAck, "myConsumerTag",
 		         new DefaultConsumer(channel) {
 		             @Override
 		             public void handleDelivery(String consumerTag,
@@ -36,7 +39,7 @@ public class ConfigMessageQueue {
 		                 throws IOException
 		             {
 		                 long deliveryTag = envelope.getDeliveryTag();
-		                 String message = new String(body, "UTF-8");		                
+		                 String message = new String(body, "UTF-8");
 		                 try {
 			                JSONParser parser = new JSONParser();
 							JSONObject content = (JSONObject) parser.parse(message);							

@@ -59,12 +59,12 @@ public class PaymentReceiptQueryController {
 
 		String keyCompany= httpServletRequest.getHeader("keycompany");
 
-		long countRecord =  paymentService.countByKeyCompany(keyCompany);
-		
+//		long countRecord =  paymentService.countByKeyCompany(keyCompany);
+//		
 		long index=(page-1)*size;
-		if(index>countRecord) {
-			return null;
-		}
+//		if(index>countRecord) {
+//			return null;
+//		}
 		List<PaymentReceiptView> lst=paymentService.getPaymentReceiptOfCompanyPage(keyCompany, index, size);
 		return lst;
 		

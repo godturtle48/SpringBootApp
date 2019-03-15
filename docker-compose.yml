@@ -37,7 +37,7 @@ services:
 # ################ Payment
 # ######################################### 
   payment-api:
-    image: 10.0.6.27:50000/javateam/java_payment_api:5.4
+    image: 10.0.6.27:50000/javateam/java_payment_api:5.8
     container_name: payment_container
     build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
     restart: always

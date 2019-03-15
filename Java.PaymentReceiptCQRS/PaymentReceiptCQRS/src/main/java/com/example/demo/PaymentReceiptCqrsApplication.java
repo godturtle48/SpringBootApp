@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
 import com.example.demo.configmessagequeue.ConfigMessageQueue;
+import com.example.demo.configmessagequeue.RemoteMessageQueue;
 import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.rabbitmq.client.Command;
@@ -22,10 +23,17 @@ import com.rabbitmq.client.Command;
 public class PaymentReceiptCqrsApplication {
 
 	public static void main(String[] args) {
+		try {		
 		SpringApplication.run(PaymentReceiptCqrsApplication.class, args);
-		ConfigMessageQueue.init();
 		CreateMessageQueue.init();
 		CommandMessageQueue.init();
+		RemoteMessageQueue.init();
+		ConfigMessageQueue.init();
+		RemoteMessageQueue.produceMsg("SEND_PAYMENT_CONFIG");
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 
