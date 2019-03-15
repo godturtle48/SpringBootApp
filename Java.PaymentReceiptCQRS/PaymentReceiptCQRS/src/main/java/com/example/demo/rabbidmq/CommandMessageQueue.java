@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.repository.PaymentReceiptCommandRepository;

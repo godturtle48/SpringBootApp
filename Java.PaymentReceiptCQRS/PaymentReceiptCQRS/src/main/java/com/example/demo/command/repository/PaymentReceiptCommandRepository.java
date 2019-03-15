@@ -224,8 +224,8 @@ public class PaymentReceiptCommandRepository {
 			 //phai xoa ca lien ket nua
 			 session.createQuery("delete from InvoiceDetailCommand where payment.refID=:refID")
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
-			 session.delete(paymentReceipt);
-			
+			 session.createQuery("delete from PaymentReceiptCommand where refID=:refID")
+			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate();
 			 tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
