@@ -1,3 +1,4 @@
+
 package com.example.demo.rabbidmq;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.repository.PaymentReceiptCommandRepository;
@@ -18,7 +20,7 @@ import com.example.demo.query.repository.PaymentReceiptViewRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.*;
-
+@Component
 public class CommandMessageQueue {
 	public static Map<String, Integer> mapErrMessage = new HashMap<>();
 	private static Connection connection;

@@ -117,7 +117,8 @@ public class PaymentReceiptController {
 		}
 		
 		//Xét version cho payment la trang thai them =0;
-		payment.setVersion(Integer.valueOf(0));
+	
+		payment.setVersion(new Integer(0));
 		int status=paymentService.save(payment, keydatabase);
 		if(status==1) {
 		
@@ -175,9 +176,11 @@ public class PaymentReceiptController {
 				}
 				
 				if(payment.getInvoices()==null) {
+					System.out.println("xuly");
 					payment.setTotalAmount(Double.valueOf(0));
 					payment.setTotalAmountOC(Double.valueOf(0));
 				}else {
+					System.out.println("invoice");
 					double amount=0;
 					List<InvoiceDetailCommand> invoices=payment.getInvoices();
 					for(int i=0;i<payment.getInvoices().size();i++) {
@@ -212,10 +215,10 @@ public class PaymentReceiptController {
 					}
 				}
 				
-				
+				System.out.println("Truoc update");
 				//set tăng version lên
 				payment.setVersion(Integer.valueOf(paymentOld.getVersion().intValue()+1));
-				
+				System.out.println(payment.getVersion().intValue()+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++===");
 			int status=paymentService.update(payment,keydatabase);
 			if(status==1) {
 				

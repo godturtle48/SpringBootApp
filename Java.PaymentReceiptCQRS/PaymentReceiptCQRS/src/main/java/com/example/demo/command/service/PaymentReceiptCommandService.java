@@ -39,6 +39,7 @@ public class PaymentReceiptCommandService {
 //	}
 	
 	public int update(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		System.out.println("updateing");
 		return paymentReceiptRepository.update(paymentReceipt, keydatabase);
 	}
 	
