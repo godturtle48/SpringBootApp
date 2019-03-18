@@ -117,7 +117,6 @@ public class PaymentReceiptController {
 		}
 		
 		//Xét version cho payment la trang thai them =0;
-	
 		payment.setVersion(new Integer(0));
 		int status=paymentService.save(payment, keydatabase);
 		if(status==1) {
