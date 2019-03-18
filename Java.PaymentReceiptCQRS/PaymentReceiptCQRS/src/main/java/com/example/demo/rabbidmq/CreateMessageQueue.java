@@ -53,20 +53,22 @@ public class CreateMessageQueue {
 						byte[] body) throws IOException {
 					long deliveryTag = envelope.getDeliveryTag();
 					String message = new String(body, "UTF-8");
+					System.out.println("Create-write side recieved message: " + message);
+					channel.basicAck(deliveryTag, false);
 					// process message
 					PaymentReceiptCommand paymentReceipt;
-
+					
 					/*
 					 * phan gia message sang json
 					 */
 					try {
-
 						Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 						MessageFormat messageFormat = gson.fromJson(message, MessageFormat.class);
 						paymentReceipt = messageFormat.getData();
 
 					} catch (Exception e) {
 						// TODO: handle exceptione
+						produceMsg(message);
 						e.printStackTrace();
 						return;
 					}
@@ -79,11 +81,11 @@ public class CreateMessageQueue {
 					try {
 						paymentRepository.insert(paymentView);
 					} catch (Exception e) { // Yêu cầu gửi lại mesage do lỗi
+						produceMsg(message);
 						e.printStackTrace();
 						return;
 					}
-					System.out.println("Create-write side recieved message: " + message);
-					channel.basicAck(deliveryTag, false);
+					
 				}
 			});
 

@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.RefTypeCommand;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /*
@@ -35,9 +36,9 @@ public class PaymentReceiptView {
 		this.id = id;
 	}
 
-	@Indexed
+//	@Indexed
 	private String refID;
-	@Indexed
+//	@Indexed
 	private String keyCompany;
 
 	private RefTypeCommand ref;
@@ -76,7 +77,7 @@ public class PaymentReceiptView {
 	private Date createdDate;
 	private String createdBy;
 
-	@Indexed
+//	@Indexed
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date modifiedDate;
 	private String modifiedBy;
@@ -98,6 +99,7 @@ public class PaymentReceiptView {
 	public void setRef(RefTypeCommand ref) {
 		this.ref = ref;
 	}
+	@JsonIgnore
 	public List<InvoiceDetailCommand> getInvoices() {
 		return invoices;
 	}

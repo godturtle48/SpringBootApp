@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 import com.misa.sme.config.messagequeue.PaymentMessageQueue;
 import com.misa.sme.config.messagequeue.RegisterMessageQueue;
+import com.misa.sme.config.messagequeue.RemoteMessageQueue;
 import com.misa.sme.config.model.PaymentDatabaseServerInfo;
 
 @SpringBootApplication
@@ -15,10 +16,12 @@ import com.misa.sme.config.model.PaymentDatabaseServerInfo;
 public class ConfigApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigApplication.class, args);		
+		SpringApplication.run(ConfigApplication.class, args);	
+		RemoteMessageQueue.init();
 		PaymentMessageQueue.init();
 		RegisterMessageQueue.init();
-		ConfigDatabaseForThisService.getInstance();		
+		ConfigDatabaseForThisService.getInstance();	
+		RemoteMessageQueue.genaratePaymentDatabaseServerInfo();
 	}
 
 }

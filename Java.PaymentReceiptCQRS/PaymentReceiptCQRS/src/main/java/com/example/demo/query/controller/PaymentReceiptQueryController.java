@@ -30,7 +30,7 @@ public class PaymentReceiptQueryController {
 		@Autowired
 	PaymentReceiptViewService paymentService;
 	
-	@RequestMapping("/getAllPage_Size:{size}")
+	@GetMapping("/getAllPage_Size:{size}")
 	public Map<String, Object> getAllPage(@PathVariable("size")int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 //		Authenticate.Auth(httpServletRequest, httpServletResponse); 
 		String keyCompany= httpServletRequest.getHeader("keycompany");
@@ -52,25 +52,25 @@ public class PaymentReceiptQueryController {
 	
 	
 
-	@RequestMapping("/getPage/page:{page}_size:{size}")
+	@GetMapping("/getPage/page:{page}_size:{size}")
 	public List<PaymentReceiptView> get(@PathVariable("page") long page,@PathVariable("size") int size,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		System.out.println(page);
 		System.out.println(size);
 
 		String keyCompany= httpServletRequest.getHeader("keycompany");
 
-		long countRecord =  paymentService.countByKeyCompany(keyCompany);
-		
+//		long countRecord =  paymentService.countByKeyCompany(keyCompany);
+//		
 		long index=(page-1)*size;
-		if(index>countRecord) {
-			return null;
-		}
+//		if(index>countRecord) {
+//			return null;
+//		}
 		List<PaymentReceiptView> lst=paymentService.getPaymentReceiptOfCompanyPage(keyCompany, index, size);
 		return lst;
 		
 	}
 	
-	@RequestMapping("/generateRefNoFinance/{refTypeID}")
+	@GetMapping("/generateRefNoFinance/{refTypeID}")
 	public String generateRefNoFinance(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		
 		String keyCompany= httpServletRequest.getHeader("keycompany");
@@ -81,7 +81,14 @@ public class PaymentReceiptQueryController {
 	public Map<String, Object> filterPaymentReceipt(@RequestBody List<FilterModel> filterData, HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
 		Map<String, Object> filterMap = new HashMap<>();
-		filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
+		
+		try {
+			filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+//		filterMap.put("result", paymentService.getFilterPaymentReceipt(keyCompany, filterData));
 		filterMap.put("totalRecord", paymentService.getFilterPaymentReceipt(keyCompany, filterData).size());
 		return filterMap;
 	}

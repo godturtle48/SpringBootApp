@@ -1,15 +1,16 @@
-package com.misa.sme.config.messagequeue;
+package com.example.demo.configmessagequeue;
 
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+
 import org.springframework.stereotype.Component;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
-//cmd :rabbitmq-plugins enable rabbitmq_management --online
 @Component
-public class PaymentMessageQueue {
+public class RemoteMessageQueue {
 	private static Connection connection;
 	private static Channel channel;
 	
@@ -22,25 +23,19 @@ public class PaymentMessageQueue {
 		try {
 			connection =  factory.newConnection();
 		    channel =  connection.createChannel();
-		    channel.exchangeDeclare("Payment.exchange", "fanout",true);			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		  }						 
+        catch(Exception e) {
+       	 e.printStackTrace();
+        }	
 	}
-	
 	public static void produceMsg(String msg){
 	    try {
-			channel.basicPublish("Payment.exchange", "", null, msg.getBytes("UTF-8"));
-			System.out.println("Config Service send message: " + msg);
+			channel.basicPublish("Remote.exchange", "Remote.routingkey", null, msg.getBytes("UTF-8"));
+			System.out.println("Payment Service send message: " + msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		    	   			 
 	}	
-	
-	
+
 }

@@ -177,6 +177,7 @@ public class GenerateData {
 					payment.setRef(ref.get(i%2));
 					payment.setPostedFinance(Integer.valueOf(1));
 					payment.setInvoices(invoices);
+					payment.setVersion(Integer.valueOf(0));
 					paymentService.save(payment,keydatabase);
 					
 					

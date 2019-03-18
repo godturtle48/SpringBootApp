@@ -43,10 +43,9 @@ services:
 ## MongoDB
 ########################################### 
   payment-receipt-db:
-    container_name: java_payment_receipt_db
+    container_name: jav
     image: mongo
     restart: always
-    command: mongod --storageEngine wiredTiger --wiredTigerCacheSizeGB 1
     networks:
       - sme-network
     ports:
