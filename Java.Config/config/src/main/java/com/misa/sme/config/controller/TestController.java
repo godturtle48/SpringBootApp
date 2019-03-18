@@ -33,21 +33,6 @@ public class TestController {
 	PaymentDatabaseScale paymentDatabaseScale;
 	private final Logger logger = LoggerFactory.getLogger(TestController.class);
 	
-	@RequestMapping("/genarate-server")
-	public String genarate(){
-		int numServer=1;
-		for (int i=0;i<numServer;i++) {
-			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("db_container",""+(3306+i),"root","misasme");
-			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) {
-				logger.error("ERROR: Can't create database server info");
-				return "FAIL";
-			}else {
-				logger.info("INFO: Create database server info --> success: "+paymentDatabaseServerInfo1);
-			}
-		}
-		return "OK";
-	}
-	
 	@RequestMapping("/genarate-company")
 	public String genarateScale(){
 		try {
@@ -64,48 +49,43 @@ public class TestController {
 		}
 		return "OK" ;
 	}
-	
-	@RequestMapping("/sendPaymentConfig")
-	public String sendPaymentConfig(){
-		try{
-			List<PaymentDatabaseInfo> listDb=paymentDatabaseInfoService.getAll();
-			if(listDb==null) 
-				throw new Exception("There is no payment database info");
-			else {
-				for (int i=0;i<listDb.size();i++) {
-					String msg=new PaymentMessageContent(
-						2,
-						null,
-						listDb.get(i)
-					).toString();
-					PaymentMessageQueue.produceMsg(msg);
-				}
-			}
-			
-			List<PaymentDatabaseOfUser> listDbOfUser=paymentDatabaseOfUserService.getAll();
-			if(listDbOfUser==null) 
-				throw new Exception("There is no database info of user");
-			else {
-				for (int i=0;i<listDbOfUser.size();i++) {
-					String msg=new PaymentMessageContent(
-						1,
-						listDbOfUser.get(i),
-						null
-					).toString();
-					PaymentMessageQueue.produceMsg(msg);
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			return "WARNNING";
-		}
-		
-		return "OK";		
-	}
-	
-	@RequestMapping("/test")
-	public String test(){
-		System.out.println(paymentDatabaseScale.createCompany("testuser", "testcompany"+System.currentTimeMillis()));
-		return "OK";
-	}
+//	
+//	@RequestMapping("/sendPaymentConfig")
+//	public String sendPaymentConfig(){
+//		try{
+//			List<PaymentDatabaseInfo> listDb=paymentDatabaseInfoService.getAll();
+//			if(listDb==null) 
+//				throw new Exception("There is no payment database info");
+//			else {
+//				for (int i=0;i<listDb.size();i++) {
+//					String msg=new PaymentMessageContent(
+//						2,
+//						null,
+//						listDb.get(i)
+//					).toString();
+//					PaymentMessageQueue.produceMsg(msg);
+//				}
+//			}
+//			
+//			List<PaymentDatabaseOfUser> listDbOfUser=paymentDatabaseOfUserService.getAll();
+//			if(listDbOfUser==null) 
+//				throw new Exception("There is no database info of user");
+//			else {
+//				for (int i=0;i<listDbOfUser.size();i++) {
+//					String msg=new PaymentMessageContent(
+//						1,
+//						listDbOfUser.get(i),
+//						null
+//					).toString();
+//					PaymentMessageQueue.produceMsg(msg);
+//				}
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			return "WARNNING";
+//		}
+//		
+//		return "OK";		
+//	}
+
 }

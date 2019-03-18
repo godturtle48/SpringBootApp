@@ -40,7 +40,7 @@ public class RemoteMessageQueue {
 	}
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("localhost");	
+	    factory.setHost("rabbit1");	
 	    factory.setPort(5672);
 	    factory.setUsername("guest");
 	    factory.setPassword("guest");
@@ -128,9 +128,10 @@ public class RemoteMessageQueue {
 	public static boolean genaratePaymentDatabaseServerInfo(){
 		int numServer=1;
 		for (int i=0;i<numServer;i++) {
-			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("localhost",""+(3306+i),"root","12345");
+			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("db_container",""+(3306+i),"root","misasme");
 			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) return false;
 		}
 		return true;
 	}
 }
+	

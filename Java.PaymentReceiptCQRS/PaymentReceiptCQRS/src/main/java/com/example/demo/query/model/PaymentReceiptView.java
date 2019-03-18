@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.RefTypeCommand;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /*
@@ -98,6 +99,7 @@ public class PaymentReceiptView {
 	public void setRef(RefTypeCommand ref) {
 		this.ref = ref;
 	}
+	@JsonIgnore
 	public List<InvoiceDetailCommand> getInvoices() {
 		return invoices;
 	}

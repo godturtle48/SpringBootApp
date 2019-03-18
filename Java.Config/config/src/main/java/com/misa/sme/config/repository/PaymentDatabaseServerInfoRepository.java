@@ -18,8 +18,7 @@ public class PaymentDatabaseServerInfoRepository {
 			session.beginTransaction();
 			session.save(paymentDatabaseServerInfo);
 			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {			
 			return false;
 		}
 		finally{

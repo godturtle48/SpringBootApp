@@ -22,10 +22,7 @@ public class PaymentMessageQueue {
 		try {
 			connection =  factory.newConnection();
 		    channel =  connection.createChannel();
-		    channel.exchangeDeclare("Payment.exchange", "direct",true);			
-			
-		    channel.queueDeclare("Payment.queue",true,false,false,null);
-		    channel.queueBind("Payment.queue", "Payment.exchange", "Payment.routingkey"); 
+		    channel.exchangeDeclare("Payment.exchange", "fanout",true);			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,8 +34,8 @@ public class PaymentMessageQueue {
 	
 	public static void produceMsg(String msg){
 	    try {
-			channel.basicPublish("Payment.exchange", "Payment.routingkey", null, msg.getBytes("UTF-8"));
-//			System.out.println("Config Service send message: " + msg);
+			channel.basicPublish("Payment.exchange", "", null, msg.getBytes("UTF-8"));
+			System.out.println("Config Service send message: " + msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
