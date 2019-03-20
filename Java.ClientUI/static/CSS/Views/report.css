@@ -24,15 +24,15 @@
 }
 
 .width-100 {
-    min-width: 100px;
+    width: 100px;
 }
 
 .width-150 {
-    min-width: 150px;
+    width: 150px;
 }
 
 .width-200 {
-    min-width: 200px;
+    width: 200px;
 }
 
 .width-300 {
@@ -44,7 +44,7 @@
 }
 #tblReportHeader td{
     white-space: nowrap;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 .main-content {
     /* padding: 10px 0px; */
@@ -96,6 +96,16 @@
         /* border: 1px solid #ccc; */
         
     }
+        .main-content .report-table .has-scroll {
+            max-height: 450px;
+            overflow-y: overlay;
+        }
+            #tbodyReport tr td.tbodyReport-content {
+                padding: 0 ;
+            }
+            .main-content .report-table .has-scroll #tbl-detail-report{
+                width: 100%;
+            }
     .report-page {
         margin-top: 10px;
     }

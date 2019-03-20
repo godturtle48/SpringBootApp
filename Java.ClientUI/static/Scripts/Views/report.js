@@ -2,6 +2,7 @@ $(document).ready(function(){
     $('#printBtn .btn').click(function(){
         window.print();
     })
+    $(document).off('click', 'table tbody tr', commonJS.rowTable_OnClick);
 })
 var dataReport=[];
 class ReportJS {
@@ -58,7 +59,7 @@ class ReportJS {
         //         commonJS.hideMask($('#tblReport'));
         //     }
         // })
-        for (var i=0; i<10; i++) {
+        for (var i=0; i<100; i++) {
             dataReport.push({
                 ID: '123123123',
                 PostedDate : '08/03/2019',                    
@@ -74,9 +75,9 @@ class ReportJS {
     }
 
     buildDataIntoTable(data) {
-        var table = $('#tbodyReport');
+        var table = $('#tbody-detail-report');
         table.html('');
-        var column = $('#tblReport tr th');
+        var column = $('#tbody-detail-report tr th');
         var rowTemplate = [];
         var fieldData = [];
         var totalAmount = Number(data[0].TotalAmount);
@@ -84,13 +85,27 @@ class ReportJS {
         // column.each(function (index, item) {
         //     fieldData.push($(item).attr('fieldData'));
         // })
+        table.append('<tr>'
+        + '<td class="width-100 no-border-left no-border-top "></td>'
+        + '<td class="width-100 no-border-top"></td>'
+        + '<td class="width-100 no-border-top"></td>'
+        + '<td class="width-100 no-border-top"></td>'
+        + '<td class="text-left font-weight-bold width-150 no-border-top">Số tồn đầu kì:</td>'
+        + '<td class="width-100 no-border-top"></td>'
+        + '<td class="width-100 no-border-top"></td>'
+        + '<td class="text-right width-100 no-border-top"></td>'.format()
+        + '<td class="text-right width-100 no-border-top"></td>'.format()
+        + '<td class="text-right width-100 no-border-top">{0}</td>'.format(Number(0))
+        + '<td class="width-150  no-border-top"></td>');
         $.each(data, function (key, value) {
-            $('#tbodyReport').append('<tr>'
-                + '<td class="text-center">{0}</td>'.format(data[key].PostedDate)
+            table.append('<tr>'
+                + '<td class="text-center no-border-left">{0}</td>'.format(data[key].PostedDate)
                 + '<td class="text-center">{0}</td>'.format(data[key].RefDate)
                 + '<td>{0}</td>'.format(data[key].RefNo)
                 + '<td></td>'
                 + '<td>{0}</td>'.format(data[key].JournalMemo)
+                + '<td></td>'
+                + '<td></td>'
                 + '<td class="text-right">{0}</td>'.format(Number(data[key].TotalAmount).formatMoney())
                 + '<td class="text-right"></td>'
                 + '<td class="text-right">{0}</td>'.format(Number(totalAmount).formatMoney())
@@ -99,11 +114,11 @@ class ReportJS {
             totalAmount += new Number(value.TotalAmount);
         });
         totalAmount -= Number(data[0].TotalAmount);
-        $('#tbodyReport').append('<tr id = "sum">'
-            + '<td colspan="5" class="bold-font text-right">Tổng cộng:</td>'
-            + '<td class="bold-font text-right">' + Number(totalAmount).formatMoney() + '</td>'
-            + '<td class="bold-font text-right"></td>'
-            + '<td class="bold-font text-right">' + Number(totalAmount).formatMoney() + '</td>'
+        table.append('<tr id = "sum">'
+            + '<td colspan="7" class="font-weight-bold text-left no-border-left">Tổng cộng:</td>'
+            + '<td class="font-weight-bold text-right">' + Number(totalAmount).formatMoney() + '</td>'
+            + '<td class="font-weight-bold text-right"></td>'
+            + '<td class="font-weight-bold text-right">' + Number(totalAmount).formatMoney() + '</td>'
             + '<td></td>'
         + '</tr>');
     }

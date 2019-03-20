@@ -624,9 +624,6 @@ table tr {
     max-width: 912px;
     top: 0px;
 }
-.no-border-left {
-    border-left: none !important;
-}
 table.cellspacing-0 {
     border-spacing: 0;
     border-collapse: collapse;

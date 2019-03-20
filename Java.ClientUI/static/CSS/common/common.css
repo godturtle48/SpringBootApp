@@ -29,7 +29,7 @@ table.loading tbody:after, *.loading:after {
     content: "";
 }
 
-tbody tr:hover {
+tbody:not(#tbodyReport) tr:hover {
     background-color: #c1ddf1;
 }
 
@@ -84,4 +84,12 @@ td{
 }
 .li-menu-table tr:hover {
     background-color: #0072bc;
+}
+
+.no-border-left {
+    border-left: none !important;
+}
+
+.no-border-top {
+    border-top: none !important;
 }

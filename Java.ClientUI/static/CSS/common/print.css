@@ -9,9 +9,12 @@
         display: none;
     }
     @page {
-        size: A4 landscape;
+        size: A3 landscape;
     }
     table {
         page-break-before: avoid;
+    }
+    .main-content .report-table .has-scroll {
+        min-height: 100%;
     }
 }
