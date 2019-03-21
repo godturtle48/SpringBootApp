@@ -1,4 +1,4 @@
-﻿.icon-btnFilenew, .icon-btnClock, .icon-btnDuplicate, .icon-btnView, .icon-btnDelete, .icon-btnHelp, .icon-btnSave, .icon-btnCancel, .icon-btnClose, .icon-btnUtility, .icon-btnFeedback, .icon-undo, .icon-link-undo, .misa-icon-print, .icon-link-Print, .icon-refresh, .icon-btnHelp {
+﻿.icon-btnFilenew, .icon-btnClock, .icon-btnDuplicate, .icon-btnView, .icon-btnDelete, .icon-btnHelp, .icon-btnSave, .icon-btnCancel, .icon-btnClose, .icon-btnUtility, .icon-btnFeedback, .icon-undo, .icon-link-undo, .misa-icon-print, .icon-link-Print, .icon-refresh, .icon-btnHelp, .icon-btnStartDate {
     background-image: url('../../Contents/Images/IconSprite.png') !important;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -110,4 +110,10 @@
 
 .toolbar-item-icon{
     padding-left:20px;
+}
+
+.icon-btnStartDate {
+    background-position: 0-496px !important;
+    height: 16px;
+    width: 16px;
 }

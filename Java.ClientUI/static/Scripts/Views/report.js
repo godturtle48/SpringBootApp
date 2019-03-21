@@ -86,17 +86,17 @@ class ReportJS {
         //     fieldData.push($(item).attr('fieldData'));
         // })
         table.append('<tr>'
-        + '<td class="width-100 no-border-left no-border-top "></td>'
+        + '<td class="width-150 no-border-left no-border-top "></td>'
+        + '<td class="width-150 no-border-top"></td>'
         + '<td class="width-100 no-border-top"></td>'
         + '<td class="width-100 no-border-top"></td>'
+        + '<td class="text-left font-weight-bold no-border-top fieldData="JournalMemo">Số tồn đầu kì:</td>'
         + '<td class="width-100 no-border-top"></td>'
-        + '<td class="text-left font-weight-bold width-150 no-border-top">Số tồn đầu kì:</td>'
         + '<td class="width-100 no-border-top"></td>'
-        + '<td class="width-100 no-border-top"></td>'
-        + '<td class="text-right width-100 no-border-top"></td>'.format()
-        + '<td class="text-right width-100 no-border-top"></td>'.format()
-        + '<td class="text-right width-100 no-border-top">{0}</td>'.format(Number(0))
-        + '<td class="width-150  no-border-top"></td>');
+        + '<td class="text-right width-150 no-border-top"></td>'.format()
+        + '<td class="text-right width-150 no-border-top"></td>'.format()
+        + '<td class="text-right width-150 no-border-top">{0}</td>'.format(Number(0))
+        + '<td class="width-200  no-border-top"></td>');
         $.each(data, function (key, value) {
             table.append('<tr>'
                 + '<td class="text-center no-border-left">{0}</td>'.format(data[key].PostedDate)
