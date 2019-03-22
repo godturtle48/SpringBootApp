@@ -136,11 +136,7 @@ public class PaymentReceiptViewService {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 										.regex(filterData.get(i).getDataFilter()));
 			}
-			else if(filterData.get(i).getDataType().equals("exactly")){
-				query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
-							.is(Integer.parseInt(filterData.get(i).getDataFilter())));
-			}
-			else if(filterData.get(i).getDataType().equals("notExactly")){
+			else if(filterData.get(i).getDataType().equals("double")){
 				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 							.gte(Integer.parseInt(filterData.get(i).getDataFilter())));
@@ -152,14 +148,8 @@ public class PaymentReceiptViewService {
 					
 			}
 			else if(filterData.get(i).getDataType().equals("stringExactly")){
-				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 								.is(filterData.get(i).getDataFilter()));
-				}
-				else {
-					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
-							.is(filterData.get(i).getDataFilter()));
-				}
 			}
 		}
 		List<PaymentReceiptView> filterResult = mongoTemplate.find(query, PaymentReceiptView.class);
