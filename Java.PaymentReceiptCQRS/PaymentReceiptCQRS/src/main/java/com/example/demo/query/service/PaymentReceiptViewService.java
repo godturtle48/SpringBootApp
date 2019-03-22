@@ -139,7 +139,7 @@ public class PaymentReceiptViewService {
 			else if(filterData.get(i).getDataType().equals("int")){
 				query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 							.is(Integer.parseInt(filterData.get(i).getDataFilter())));
-		}
+			}
 			else if(filterData.get(i).getDataType().equals("long")){
 				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
