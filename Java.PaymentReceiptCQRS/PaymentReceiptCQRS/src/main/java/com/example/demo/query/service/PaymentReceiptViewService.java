@@ -103,16 +103,7 @@ public class PaymentReceiptViewService {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
 		int numFieldFilter = filterData.size();
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================");
-		System.out.println("==========================work here=========================" + keyCompany);
+	
 		for(int i = 0; i < numFieldFilter; i++) {
 			if(filterData.get(i).getDataType().equals("date")) {
 				try {
