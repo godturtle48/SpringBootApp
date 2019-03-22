@@ -36,6 +36,7 @@ $(document).ready(function(){
         if ($(this).html() == "&gt;=") {
             $(this).html("&lt;=");
         } else $(this).html("&gt;=");
+        filterFunc();
     })
     $('#addtr').on('click', function(){
         //them moi status =3
@@ -1475,29 +1476,54 @@ var raeJS = new ReceiptsAndExpensesJS();
     }
 
     /*
-    *filter ========================
+    * multifield filter
+    * create by Quan Nguyen
+    * 22/3/2019
     */
-    //filter multi input
-    //byQuan
+
     $('input[elementtype="filterInput"]').blur(function(){
-        var dataFilter=[];
+        filterFunc();
+    })
+
+    function filterFunc(){
+        var dataToFilter=[];
         $('#filterElement').find('input[elementtype="filterInput"]').each(function(){
             if($(this).val() != ""){
                 var columnName = $(this).attr("fieldname");
-                var dataToFilter = $(this).val();
+                var dataFilter = $(this).val();
+                var dataType;
+                var typeArrange = $(this).parents('.gridPanel-header-item-filter').children('a').html();
+                //arrange = 1 thi sap xep tang dan
+                var arrange = (typeArrange == "&gt;=") ? 1 : 0;
                 if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
+                    //định dạng lại ngày tháng để chuyển về back-end
                     var dateRevert = dataToFilter.split("/");
-                    dataToFilter = dateRevert[2] + "-" + dateRevert[1] + "-" + dateRevert[0];
+                    var dd = (dateRevert[0].length == 1) ? ('0' + dateRevert[0]) : (dateRevert[0]);
+                    var mm = (dateRevert[1].length == 1) ? ('0' + dateRevert[1]) : (dateRevert[1]);
+                    var yyyy = dateRevert[2];
+                    dataFilter=yyyy + mm + dd;
+                    dataType = "date";
+                }
+                else if(columnName == 'refNoFinance'){
+                    dataType = 'stringExactly';
                 }
                 else if(columnName == "refTypeName"){
-                    columnName = "reftypeID";
-                    dataToFilter = (dataToFilter == "thu") ? 1 : 2;
+                    columnName = "ref.refTypeName";
+                    dataType = "stringExactly";
                 }
-                dataFilter.push({columnName: columnName, dataToFilter: dataToFilter});
+                else if(columnName == "totalAmount"){
+                    columnName = "totalAmountOC";
+                    dataType = "double";
+                }
+                else{//string  columnName == 'journalMemo' || columnName == 'accountObjectName' || columnName == 'reasonTypeID'
+                    dataType = "string";
+                }
+                dataToFilter.push({columnName: columnName, dataFilter: dataFilter, 
+                                    dataType: dataType, arrange: arrange});
             }
         })
-        console.log(dataFilter);
-        if(dataFilter!=null && dataFilter !=""){
+        console.log(dataToFilter);
+        if(dataToFilter!=null && dataToFilter !=""){
                 $.ajax({
                         method: "post",
                         url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
@@ -1507,7 +1533,7 @@ var raeJS = new ReceiptsAndExpensesJS();
                             xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
                             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                         },
-                        data: JSON.stringify(dataFilter),
+                        data: JSON.stringify(dataToFilter),
                         success: function(response, status, xhr){
                             var res = JSON.parse(response);
                                 var payment=res.result;
@@ -1540,8 +1566,7 @@ var raeJS = new ReceiptsAndExpensesJS();
         else{
             $('#btnRefresh').trigger('click');
         }
-    })
-
+    }
     /*------------------------------------------------------------
      *  Tính năng chuyển trang
      *  Created by: NVLAM (28/01/2019)
