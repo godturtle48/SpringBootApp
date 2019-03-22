@@ -15,6 +15,12 @@
         top: 0;
         left: 0;
     }
+    .register-content  .main-section {
+        height: 100%;
+    }
+    .register-content  .main-section .inner-section {
+        height: 100%;
+    }
     .register-content .product-images {
         padding: 70px 0px;
     }
@@ -29,7 +35,12 @@
         .register-content .login-form .login-title {
             font-size: 24px;
             font-weight: 400;
+            margin: 10px 0px 30px 0px;
         }
+            .logo-img {
+                height: 50px;
+                width: 50px;
+            }
         .register-content .login-form .username-area {
             margin-bottom: 30px;
         }
