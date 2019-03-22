@@ -1497,11 +1497,11 @@ var raeJS = new ReceiptsAndExpensesJS();
                 var arrange = (typeArrange == "&gt;=") ? 1 : 0;
                 if(columnName == "createdDate" || columnName == "postedDate" || columnName == "modifiedDate" || columnName == "refDate"){
                     //định dạng lại ngày tháng để chuyển về back-end
-                    var dateRevert = dataToFilter.split("/");
+                    var dateRevert = dataFilter.split("/");
                     var dd = (dateRevert[0].length == 1) ? ('0' + dateRevert[0]) : (dateRevert[0]);
                     var mm = (dateRevert[1].length == 1) ? ('0' + dateRevert[1]) : (dateRevert[1]);
                     var yyyy = dateRevert[2];
-                    dataFilter=yyyy + mm + dd;
+                    dataFilter=yyyy + "-" + mm + "-" + dd;
                     dataType = "date";
                 }
                 else if(columnName == 'refNoFinance'){
@@ -1516,6 +1516,7 @@ var raeJS = new ReceiptsAndExpensesJS();
                     dataType = "double";
                 }
                 else{//string  columnName == 'journalMemo' || columnName == 'accountObjectName' || columnName == 'reasonTypeID'
+                    if(columnName == "reasonTypeID") columnName = "journalMemo";
                     dataType = "string";
                 }
                 dataToFilter.push({columnName: columnName, dataFilter: dataFilter, 
@@ -1528,7 +1529,7 @@ var raeJS = new ReceiptsAndExpensesJS();
                         method: "post",
                         url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
                         contentType:"application/json; charset:utf-8;",
-                        dataType: 'text',
+                        dataType: 'json/application',
                         beforeSend: function(xhr){
                             xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
                             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
