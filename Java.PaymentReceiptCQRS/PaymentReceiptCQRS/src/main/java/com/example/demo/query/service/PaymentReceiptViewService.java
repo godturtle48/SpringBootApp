@@ -151,7 +151,7 @@ public class PaymentReceiptViewService {
 				}
 					
 			}
-			else if(filterData.get(i).getDataType().equals("other")){
+			else if(filterData.get(i).getDataType().equals("stringExactly")){
 				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 								.is(filterData.get(i).getDataFilter()));
