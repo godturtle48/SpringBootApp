@@ -1,4 +1,4 @@
-﻿.icon-btnFilenew, .icon-btnClock, .icon-btnDuplicate, .icon-btnView, .icon-btnDelete, .icon-btnHelp, .icon-btnSave, .icon-btnCancel, .icon-btnClose, .icon-btnUtility, .icon-btnFeedback, .icon-undo, .icon-link-undo, .misa-icon-print, .icon-link-Print, .icon-refresh, .icon-btnHelp, .icon-btnStartDate {
+﻿.icon-btnFilenew, .icon-btnClock, .icon-btnDuplicate, .icon-btnView, .icon-btnDelete, .icon-btnHelp, .icon-btnSave, .icon-btnCancel, .icon-btnClose, .icon-btnUtility, .icon-btnFeedback, .icon-undo, .icon-link-undo, .misa-icon-print, .icon-link-Print, .icon-refresh, .icon-btnHelp, .icon-btnStartDate, .icon-btn-choose {
     background-image: url('../../Contents/Images/IconSprite.png') !important;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -117,3 +117,32 @@
     height: 16px;
     width: 16px;
 }
+.icon-btn-choose {
+    background-position: 0-672px !important;
+    height: 16px;
+    width: 16px;
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }

@@ -90,7 +90,7 @@ class ReportJS {
         + '<td class="width-150 no-border-top"></td>'
         + '<td class="width-100 no-border-top"></td>'
         + '<td class="width-100 no-border-top"></td>'
-        + '<td class="text-left font-weight-bold no-border-top fieldData="JournalMemo">Số tồn đầu kì:</td>'
+        + '<td class="text-left font-weight-bold no-border-top" fieldData="JournalMemo">Số tồn đầu kì:</td>'
         + '<td class="width-100 no-border-top"></td>'
         + '<td class="width-100 no-border-top"></td>'
         + '<td class="text-right width-150 no-border-top"></td>'.format()

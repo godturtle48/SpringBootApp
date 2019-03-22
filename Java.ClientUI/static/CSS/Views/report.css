@@ -52,6 +52,9 @@
     white-space: nowrap;
     padding: 0 10px;
 }
+    table.bordered th:last-child, table.bordered td:last-child {
+        border-right: none;
+    }
 .main-content {
     /* padding: 10px 0px; */
     /* position: absolute;

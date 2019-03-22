@@ -21,6 +21,8 @@
     <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
     <link href="./static/CSS/Views/rae.css" rel="stylesheet" />
     <link href="./static/CSS/Views/general-ledger.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <title>Báo cáo</title>
 </head>
 <body>
@@ -43,6 +45,42 @@
                     </div>
                 </div>
             </div>
+            <div class="main-nav">
+                <ul class="menu-parent">
+                    <li class="nav-item">
+                        <a href="./home.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">dashboard</i>
+                            </div>
+                            <div class="label-item">Bàn làm việc</div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./rae.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <div class="label-item">Chứng từ gốc</div>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-active">
+                        <a href="#">
+                            <div class="icon-nav">
+                                <i class="material-icons">book</i>
+                            </div>
+                            <div class="label-item">Sổ quỹ tiền mặt</div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./report.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="label-item">Báo cáo</div>
+                        </a>
+                    </li>                   
+                </ul>
+            </div>
             <div class="main-container">
                     <div>
                         <form id="frmMain" runat="server">
@@ -59,16 +97,18 @@
                                     <div class="toolbar">
                                         <div class="toolbar-body">                                          
                                             <a id="btnAddReceipt" class="toolbar-item">
-                                                <span class="cls-btnWrap"><span class="toolbar-item-icon icon-btnFilenew"></span><span class="toolbar-item-text">Chọn tham số</span></span>
+                                                <span class="cls-btnWrap"><span class="toolbar-item-icon icon-btn-choose"></span><span class="toolbar-item-text">Chọn tham số</span></span>
                                             </a>
                                             <span><span class="toolbar-item-icon icon-btnStartDate"></span>
                                             <span>Bắt đầu từ:</span>
                                             <input type="text" id="start-date" data-type="Date">
                                             <span>đến</span>
                                             <input type="text" id="end-date" data-type="Date">
+                                            <a id="btnWatch" class="toolbar-item">
+                                                <span class="cls-btnWrap"><span class="toolbar-item-icon icon-btnView"></span><span class="toolbar-item-text">Xem</span></span>
+                                            </a>
                                         </div>
-                                    </div>
-    
+                                    </div>  
                                     <!--Bảng danh sách chứng từ thu/chi-->
                                     <div class="cls-gridPanel">
                                         <table id="tblCustomerList" class="bordered cellpadding-0 cellspacing-0">
@@ -98,6 +138,9 @@
                                                     <th id='column-header-5' fieldData="TotalAmount" DataType="Money" class="gridPanel-header-item-title width-200" colspan="2">
                                                         Số tiền<div id='column-header-5-sizer'></div>
                                                     </th>
+                                                    <th id='column-header-3' fieldData="RefNo" DataType="Text" class="gridPanel-header-item-title width-150" rowspan="2">
+                                                        Số tồn<div id='column-header-3-sizer'></div>
+                                                    </th>
                                                     <th id='column-header-11' fieldData="DepartmentName" DataType="Text" class="gridPanel-header-item-title width-200" rowspan="2">
                                                         Người nộp<div id='column-header-11-sizer'></div>
                                                     </th>
@@ -109,10 +152,10 @@
                                                     </th>-->
                                                 </tr>
                                                 <tr>
-                                                    <th id='column-header-3' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                                                    <th id='column-header-3' fieldData="DebitAmount" DataType="Text" class="gridPanel-header-item-title width-150">
                                                         Nợ<div id='column-header-3-sizer'></div>
                                                     </th>
-                                                    <th id='column-header-3' fieldData="TotalAmount" DataType="Text" class="gridPanel-header-item-title width-150">
+                                                    <th id='column-header-3' fieldData="CreditAmount" DataType="Text" class="gridPanel-header-item-title width-150">
                                                         Có<div id='column-header-3-sizer'></div>
                                                     </th>
                                                 </tr>
@@ -198,7 +241,7 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    <!--<th>
+                                                    <th>
                                                         <div class="gridPanel-header-item-filter">
                                                             <a class="btn-select-filter" style="font-weight: normal">∗</a>
                                                             <div class="input-filter">
@@ -206,14 +249,14 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    <th>
+                                                    <!-- <th>
                                                         <div class="gridPanel-header-item-filter">
                                                             <a class="btn-select-filter" style="font-weight: normal">∗</a>
                                                             <div class="input-filter">
                                                                 <input elementtype="filterInput" fieldname="StopFollow" />
                                                             </div>
                                                         </div>
-                                                    </th>-->
+                                                    </th> -->
                                                 </tr>
                                             </thead>
                                             <tbody id="tbodyRAE"></tbody>

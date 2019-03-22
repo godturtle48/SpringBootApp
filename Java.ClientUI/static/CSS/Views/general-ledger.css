@@ -7,11 +7,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.icon-btnStartDate {
-    background-position: 0-496px !important;
-    height: 16px;
-    width: 16px;
-}
 .toolbar .toolbar-body {
     height: 28px;
     overflow: hidden;
@@ -19,4 +14,13 @@
     left: 0;
     top: 0;
     z-index: 99;
+}
+#filterElement th {
+    position: sticky;
+    top: 55px;
+}
+
+th[fieldData="DebitAmount"], th[fieldData="CreditAmount"] {
+    top: 28px;
+    position: sticky;
 }

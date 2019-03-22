@@ -20,6 +20,8 @@
     <link href="./static/CSS/Views/rae.css" rel="stylesheet" />
     <link href="./static/CSS/lib/icons.css" rel="stylesheet" />
     <link href="./static/CSS/lib/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <div class="loading-page"></div>
@@ -46,163 +48,38 @@
         <div class="register-content">
             <div class="main-nav">
                 <ul class="menu-parent">
-                    <li class="menu-parent-li-first">
-                        <a href="./home.html" title="Tổng quan" class="">
-                            <table class="li-menu-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-index">
-                                                <i class="fas fa-tachometer-alt"></i>
-                                            </div>
-                                        </td>
-                                        <td class="cls-text-menu-right">Bàn làm việc</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <li class="nav-item">
+                        <a href="./home.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">dashboard</i>
+                            </div>
+                            <div class="label-item">Bàn làm việc</div>
                         </a>
                     </li>
-                    <li class="menu-has-children-close">
-                        <a href="#index" title="Tổng quan" class="">
-                            <table class="li-menu-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-report">
-                                                <i class="fas fa-money-check-alt"></i>
-                                            </div>
-                                        </td>
-                                        <td class="cls-text-menu-right">Quỹ</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </a>
-                        <div class="wrap-menu-children" style="display: none;">
-                            <ul class="menu-children">
-                                <li class="menu-children-li-first" id="menu-item-report-revenue">
-                                    <a href="#report-revenue" title="Bán hàng">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
-                                                    <td class="cls-text-menu-right">Bán hàng</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                                <li class="" id="menu-item-report-purchase">
-                                    <a href="#report-purchase" title="Mua hàng">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
-                                                    <td class="cls-text-menu-right">Mua hàng</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                                <li class=""  id="menu-item-report-stock">
-                                    <a href="#report-stock" title="Kho">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
-                                                    <td class="cls-text-menu-right">Kho</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                                <li class=""  id="menu-item-report-dept">
-                                    <a href="#report-dept" title="Công nợ">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent">                                                      
-                                                    </td>
-                                                    <td class="cls-text-menu-right">Hóa đơn điện tử</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                                <li class=""  id="menu-item-report-monetaryflow">
-                                    <a href="#report-monetaryflow" title="Quỹ tiền">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
-                                                    <td class="cls-text-menu-right">Quỹ tiền</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                                <li class="" id="menu-item-report-profit">
-                                    <a href="#report-profit" title="Lợi nhuận">
-                                        <table class="li-menu-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="cls-icon-menu-parent"></td>
-                                                    <td class="cls-text-menu-right">Tiền lương</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#index" title="Tổng quan" class="">
-                            <table class="li-menu-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-discount">
-                                                <i class="fas fa-receipt"></i>
-                                            </div>
-                                        </td>
-                                        <td class="cls-text-menu-right">Hóa đơn điện tử</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <li class="nav-item  menu-active">
+                        <a href="#">
+                            <div class="icon-nav">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <div class="label-item">Chứng từ gốc</div>
                         </a>
                     </li>
-                    <li id="menu-item-dictionary">
-                        <a title="Danh mục" class="">
-                            <table class="li-menu-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-dictionary">
-                                                <i class="fas fa-file-alt"></i>
-                                            </div>
-                                        </td>
-                                        <td class="cls-text-menu-right">Quản lý hóa đơn</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <li class="nav-item">
+                        <a href="./general-ledger.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">book</i>
+                            </div>
+                            <div class="label-item">Sổ quỹ tiền mặt</div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#index" title="Tổng quan" class="">
-                            <table class="li-menu-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="cls-icon-menu-parent">
-                                            <div class="cls-icon-menu cls-setting">
-                                                <i class="fas fa-tools"></i>
-                                            </div>
-                                        </td>
-                                        <td class="cls-text-menu-right">Công cụ, dụng cụ</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <li class="nav-item">
+                        <a href="./report.html">
+                            <div class="icon-nav">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="label-item">Báo cáo</div>
                         </a>
-                    </li>
+                    </li>                   
                 </ul>
             </div>
             <div class="main-container">
