@@ -136,11 +136,11 @@ public class PaymentReceiptViewService {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 										.regex(filterData.get(i).getDataFilter()));
 			}
-			else if(filterData.get(i).getDataType().equals("int")){
+			else if(filterData.get(i).getDataType().equals("exactly")){
 				query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 							.is(Integer.parseInt(filterData.get(i).getDataFilter())));
 			}
-			else if(filterData.get(i).getDataType().equals("long")){
+			else if(filterData.get(i).getDataType().equals("notExactly")){
 				if(filterData.get(i).getArrange() == 1) {
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 							.gte(Integer.parseInt(filterData.get(i).getDataFilter())));
