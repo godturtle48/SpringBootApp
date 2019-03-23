@@ -99,7 +99,7 @@ public class PaymentReceiptView {
 	public void setRef(RefTypeCommand ref) {
 		this.ref = ref;
 	}
-	@JsonIgnore
+//	@JsonIgnore
 	public List<InvoiceDetailCommand> getInvoices() {
 		return invoices;
 	}

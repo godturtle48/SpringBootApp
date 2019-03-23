@@ -24,7 +24,7 @@ public class TenantConfig {
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 			  configuration.setProperty("hibernate.hbm2ddl.auto","update");
 			  configuration.setProperty("hibernate.show_sql", "false");
-			  configuration.setProperty("hibernate.connection.pool_size", "10");
+			  configuration.setProperty("hibernate.connection.pool_size", "100");
 			  configuration.setProperty("hibernate.connection.characterEncoding", "utf8");
 			  configuration.setProperty("hibernate.connection.useUnicode", "true");
 			  configuration.setProperty("hibernate.enable_lazy_load_no_trans", "true");

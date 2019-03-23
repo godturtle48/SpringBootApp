@@ -1,24 +1,24 @@
 /* Version 09/03/2019*/
 $(document).ready(function(){
-    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-    //     $.ajax({
-    //         method: "GET",
-    //         url:MISA.Config.loginUrl+"/api/home",
-    //         beforeSend: function(xhr) {
-    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-    //         },
-    //         success: function(data, status, xhr){
-    //             $('.user-info').text((data.email).split("@")[0]);
-    //             //ajax goi company
-    //         },
-    //         error: function(err, stt, xhr){
-    //             window.location.href="/";
-    //         }
-    //     })  
-    // }
-    // else{
-    //         window.location.href="/";
-    //     }
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
+            success: function(data, status, xhr){
+                $('.user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+            window.location.href="/";
+        }
         
     })
     //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
@@ -1529,14 +1529,13 @@ var raeJS = new ReceiptsAndExpensesJS();
                         method: "post",
                         url: MISA.Config.paymentUrl + "/filterPaymentReceipt",
                         contentType:"application/json; charset:utf-8;",
-                        dataType: 'json/application',
                         beforeSend: function(xhr){
                             xhr.setRequestHeader('authorization', localStorage.getItem("authenCookie"));
                             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
                         },
                         data: JSON.stringify(dataToFilter),
                         success: function(response, status, xhr){
-                            var res = JSON.parse(response);
+                            var res = response;
                                 var payment=res.result;
                                 fakeData = [];
                                 var total = $('#inputTotalRecord').val();

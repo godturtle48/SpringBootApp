@@ -47,14 +47,14 @@ public class CreateMessageQueue {
 
 			// create consume. can put in other service
 			boolean autoAck = false;
-			channel.basicConsume("Create.queue", autoAck, "myConsumerTag", new DefaultConsumer(channel) {
+			channel.basicConsume("Create.queue", autoAck, "myCreateConsumerTag", new DefaultConsumer(channel) {
 				@Override
 				public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
 						byte[] body) throws IOException {
 					long deliveryTag = envelope.getDeliveryTag();
 					String message = new String(body, "UTF-8");
 					System.out.println("Create-write side recieved message: " + message);
-					channel.basicAck(deliveryTag, false);
+					channel.basicAck(deliveryTag, true);
 					// process message
 					PaymentReceiptCommand paymentReceipt;
 					

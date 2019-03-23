@@ -100,12 +100,24 @@ public class PaymentReceiptViewService {
 	//filter By any column
 	public List<PaymentReceiptView> getFilterPaymentReceipt(String keyCompany, List<FilterModel> filterData ){
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("keyCompany: " + keyCompany );
+		System.out.println("============================get - here============================");
+		System.out.println("============================get - here============================");
+		System.out.println("============================get here============================");
+		System.out.println("============================get here============================");
+		System.out.println("============================get here============================");
+		System.out.println("============================get here============================");
+		System.out.println("============================get here============================");
+		System.out.println("============================get here============================");
 		Query query = new Query();
 		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		System.out.println("keyCompany: " + keyCompany );
 		int numFieldFilter = filterData.size();
 	
 		for(int i = 0; i < numFieldFilter; i++) {
+			System.out.println(filterData.get(i).getColumnName());
 			if(filterData.get(i).getDataType().equals("date")) {
+				System.out.println("date");
 				try {
 					if(filterData.get(i).getArrange() == 1) {//
 						query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
@@ -139,6 +151,7 @@ public class PaymentReceiptViewService {
 					
 			}
 			else if(filterData.get(i).getDataType().equals("stringExactly")){
+				System.out.println("data" + filterData.get(i).getColumnName() + filterData.get(i).getDataFilter());
 					query.addCriteria(Criteria.where(filterData.get(i).getColumnName())
 								.is(filterData.get(i).getDataFilter()));
 			}

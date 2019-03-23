@@ -28,7 +28,7 @@ import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.example.demo.rabbidmq.EventType;
 import com.example.demo.rabbidmq.MessageFormat;
-import com.example.demo.rabbidmq.MessageQueue;
+
 
 
 @RestController

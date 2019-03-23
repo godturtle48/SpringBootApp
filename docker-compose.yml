@@ -24,6 +24,15 @@ services:
     container_name: authent_container
     build: ./Java.Authentication/register
     restart: always
+    mem_limit: 500000000
+    mem_reservation: 300m
+    # cpu_count: 2
+    # cpu_percent: 50
+    # cpus: 0.5
+    # cpu_shares: 73
+    # cpu_quota: 50000
+    # cpu_period: 20ms
+    # cpuset: 0,1
     networks:
       - sme-network
     # depends_on:
@@ -37,7 +46,7 @@ services:
 # ################ Payment
 # ######################################### 
   payment-api:
-    image: 10.0.6.27:50000/javateam/java_payment_api:5.91
+    image: 10.0.6.27:50000/javateam/java_payment_api:5.94
     container_name: payment_container
     build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
     restart: always
@@ -54,7 +63,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:5.5
+    image: 10.0.6.27:50000/javateam/java_ui:5.7
     restart: always
     container_name: ui_container
     build: ./Java.ClientUI

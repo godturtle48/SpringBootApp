@@ -52,7 +52,7 @@ public class CommandMessageQueue {
 
 			// create consume. can put in other service
 			boolean autoAck = false;
-			channel.basicConsume("Command.queue", autoAck, "myConsumerTag", new DefaultConsumer(channel) {
+			channel.basicConsume("Command.queue", autoAck, "myCommandConsumerTag", new DefaultConsumer(channel) {
 				@Override
 				public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
 						byte[] body) throws IOException {
@@ -60,7 +60,7 @@ public class CommandMessageQueue {
 					String message = new String(body, "UTF-8");
 					// process message
 					System.out.println("Create-write side recieved message: " + message);
-					channel.basicAck(deliveryTag, false);
+					channel.basicAck(deliveryTag, true);
 
 					// su ly du lieu tu message nhan duoc trong queue chua du lieu xoa va sua
 					PaymentReceiptCommand paymentReceipt;
