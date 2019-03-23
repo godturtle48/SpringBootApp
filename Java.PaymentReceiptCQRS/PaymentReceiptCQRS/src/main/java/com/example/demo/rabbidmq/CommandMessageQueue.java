@@ -20,7 +20,7 @@ import com.example.demo.query.repository.PaymentReceiptViewRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.*;
-@Component
+//@Component
 public class CommandMessageQueue {
 	public static Map<String, Integer> mapErrMessage = new HashMap<>();
 	private static Connection connection;

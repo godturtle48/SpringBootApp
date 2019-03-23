@@ -17,16 +17,21 @@ import com.example.demo.configmessagequeue.ConfigMessageQueue;
 import com.example.demo.configmessagequeue.RemoteMessageQueue;
 import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.rabbitmq.client.Command;
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 public class PaymentReceiptCqrsApplication {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(PaymentReceiptCqrsApplication.class);
 
 	public static void main(String[] args) {
 		try {		
 		SpringApplication.run(PaymentReceiptCqrsApplication.class, args);
 		CreateMessageQueue.init();
-		CommandMessageQueue.init();
+//		CommandMessageQueue.init();
 		RemoteMessageQueue.init();
 		ConfigMessageQueue.init();
 		RemoteMessageQueue.produceMsg("SEND_PAYMENT_CONFIG");

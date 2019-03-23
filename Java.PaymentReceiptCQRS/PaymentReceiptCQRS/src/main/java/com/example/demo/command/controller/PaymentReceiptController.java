@@ -222,8 +222,6 @@ public class PaymentReceiptController {
 			if(status==1) {
 				
 				//send sang rabbitmq
-				MessageFormat command=new MessageFormat(EventType.UPDATE,payment);
-				CommandMessageQueue.produceMsg(command.toString());
 				map.put("message", "success!");
 			}
 			else map.put("error", "fail!");
@@ -249,8 +247,7 @@ public class PaymentReceiptController {
 				
 			int status=paymentService.delete(payment,keydatabase);
 			if(status==1) {
-				MessageFormat command=new MessageFormat(EventType.DELETE,paymentOld);
-				CommandMessageQueue.produceMsg(command.toString());
+
 				map.put("message", "success!");
 			}
 			else map.put("error", "fail!");

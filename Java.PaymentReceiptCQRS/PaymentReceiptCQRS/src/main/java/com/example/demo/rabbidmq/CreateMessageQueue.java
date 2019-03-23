@@ -1,13 +1,18 @@
 package com.example.demo.rabbidmq;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.PaymentReceiptCqrsApplication;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.common.ConvertModelCommandToView;
 import com.example.demo.query.model.PaymentReceiptView;
@@ -22,12 +27,13 @@ public class CreateMessageQueue {
 	private static Channel channel;
 
 	private static PaymentReceiptViewRepository paymentRepository;
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CreateMessageQueue.class);
 	@Autowired
 	public CreateMessageQueue(PaymentReceiptViewRepository paymentRepository) {
 		CreateMessageQueue.paymentRepository = paymentRepository;
 	}
 	
+	public static Map<String, Integer> mapErrMessage = new HashMap<>();
 	public static void init() {
 		ConnectionFactory factory = new ConnectionFactory();
 		// config rabbitmq address
@@ -54,10 +60,10 @@ public class CreateMessageQueue {
 					long deliveryTag = envelope.getDeliveryTag();
 					String message = new String(body, "UTF-8");
 					System.out.println("Create-write side recieved message: " + message);
-					channel.basicAck(deliveryTag, true);
+					channel.basicAck(deliveryTag, false);
 					// process message
 					PaymentReceiptCommand paymentReceipt;
-					
+					EventType evenType;
 					/*
 					 * phan gia message sang json
 					 */
@@ -65,10 +71,11 @@ public class CreateMessageQueue {
 						Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 						MessageFormat messageFormat = gson.fromJson(message, MessageFormat.class);
 						paymentReceipt = messageFormat.getData();
-
+						evenType=messageFormat.getType();
 					} catch (Exception e) {
 						// TODO: handle exceptione
 						produceMsg(message);
+						LOGGER.error(e.getMessage());
 						e.printStackTrace();
 						return;
 					}
@@ -78,22 +85,107 @@ public class CreateMessageQueue {
 					 */
 
 					PaymentReceiptView paymentView = ConvertModelCommandToView.convert(paymentReceipt);
-					try {
-						paymentRepository.insert(paymentView);
-					} catch (Exception e) { // Yêu cầu gửi lại mesage do lỗi
-						produceMsg(message);
-						e.printStackTrace();
-						return;
-					}
 					
+					if(evenType.equals(EventType.CREATE)) {
+
+						try {
+							paymentRepository.insert(paymentView);
+						} catch (Exception e) { // Yêu cầu gửi lại mesage do lỗi
+							produceMsg(message);
+							LOGGER.error(e.getMessage());
+							e.printStackTrace();
+							return;
+						}
+					}
+					else if (evenType.equals(EventType.UPDATE)) {
+
+						/*
+						 * Kiêm tra xem có bản update trong map hay ko
+						 */
+						if (mapErrMessage.get(paymentReceipt.getRefID()) == null) {
+							// không có bản version trước bị gửi lại
+							PaymentReceiptView paymentOld = paymentRepository.findByRefID(paymentReceipt.getRefID());
+							if (paymentOld == null) {
+								// không tồn tại bản ghi==>lưu vào map yêu cầu gửi lại
+								produceMsg(message);
+								mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion());
+								return;
+							}
+							paymentView.setId(paymentOld.getId());
+							try {
+								paymentRepository.save(paymentView);
+							} catch (Exception e) {
+								// Lỗi sảy ra khi lưu==>lưu vào map yêu cầu gửi lại
+								produceMsg(message);
+								LOGGER.error(e.getMessage());
+								mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion());
+							}
+							// thành công
+							return;
+						} else {
+							/*
+							 * //có bản version trước bị lỗi vào lưu lại trong map mesage.version ==
+							 * map.version ==> chính là gói tin đã được gửi trc đó=> lưu vào database,xóa
+							 * trong map mesage.version< map.version ==> gói tin này ko có ý nghĩa nữa =>
+							 * hủy gói tin mesage.version>map.version ==>cập nhật lại map và yêu cầu gửi lại
+							 * 
+							 */
+							Integer vesion = mapErrMessage.get(paymentReceipt.getRefID());
+							if (paymentReceipt.getVersion() < vesion) {
+								// Hủy gói tin không ý nghía
+								return;
+							} else if (paymentReceipt.getVersion() == vesion) {
+								try {
+									paymentRepository.save(paymentView);
+								} catch (Exception e) {
+									// Lỗi sảy ra khi lưu==>lưu vào map yêu cầu gửi lại
+									LOGGER.error(e.getMessage());
+									produceMsg(message);
+//				                			 mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion());
+									return;
+								}
+								// thành công và xoa trong map
+								mapErrMessage.remove(paymentReceipt.getRefID());
+								return;
+							} else {
+								// goi tin co y nghia hon
+								mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion());
+							}
+						}
+
+					} else if (evenType.equals(EventType.DELETE)) {
+						if (mapErrMessage.get(paymentReceipt.getRefID()) == null) {
+							/*
+							 * Khong map khong co==> thuc hien xoa
+							 */
+							PaymentReceiptView paymentOld = paymentRepository.findByRefID(paymentReceipt.getRefID());
+							if (paymentOld != null) {
+								try {
+									paymentRepository.deleteByRefID(paymentReceipt.getRefID());
+									channel.basicAck(deliveryTag, false);
+								} catch (Exception e) {
+									// bi loi gui lai goi tin
+									produceMsg(message);
+									LOGGER.error(e.getMessage());
+									e.printStackTrace();
+								}
+								return;
+							} else {
+								// gui lai
+								produceMsg(message);
+							}
+						}
+					}
 				}
 			});
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
 		} catch (TimeoutException e) {
 			// TODO Auto-generated catch block
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -104,6 +196,7 @@ public class CreateMessageQueue {
 			System.out.println("Create-read side send message: " + msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}

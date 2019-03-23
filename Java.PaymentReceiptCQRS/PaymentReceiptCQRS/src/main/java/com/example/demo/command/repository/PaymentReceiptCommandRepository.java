@@ -5,13 +5,17 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.PaymentReceiptCqrsApplication;
 import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.config.SimpleCorsFilter;
 import com.example.demo.configmessagequeue.TenantInfo;
+import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.example.demo.rabbidmq.EventType;
 import com.example.demo.rabbidmq.MessageFormat;
@@ -21,7 +25,7 @@ import com.example.demo.rabbidmq.MessageFormat;
 @Repository
 public class PaymentReceiptCommandRepository {
 
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(PaymentReceiptCommandRepository.class);
 
 
 	public PaymentReceiptCommand getPaymentReceiptById(String id, String keydatabase) {
@@ -35,6 +39,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return payment;
@@ -52,6 +57,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return lst;
@@ -71,6 +77,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return lst;
@@ -90,6 +97,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return lst;
@@ -110,6 +118,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return result;
@@ -132,6 +141,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			//if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		  session.close(); 
 		return lst;
@@ -163,6 +173,7 @@ public class PaymentReceiptCommandRepository {
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			 session.close();
 			 return 0;
 		}
@@ -202,11 +213,13 @@ public class PaymentReceiptCommandRepository {
 					 }
 				 } 
 			 }
-			  
+			 MessageFormat command=new MessageFormat(EventType.UPDATE,paymentReceipt);
+			 CreateMessageQueue.produceMsg(command.toString());
 			tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			 session.close();
 			 return 0;
 		}
@@ -228,10 +241,13 @@ public class PaymentReceiptCommandRepository {
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
 			 session.createQuery("delete from PaymentReceiptCommand where refID=:refID")
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
+				MessageFormat command=new MessageFormat(EventType.DELETE,paymentReceipt);
+				CreateMessageQueue.produceMsg(command.toString());
 			 tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			 session.close();
 			 return 0;
 		}
@@ -249,6 +265,7 @@ public class PaymentReceiptCommandRepository {
 			return session.createSQLQuery("select * from PaymentReceiptCommand").getResultList().size();
 		}
 		catch(NullPointerException e) {
+			LOGGER.error(e.getMessage());
 			return 0;
 		}
 	}
@@ -264,6 +281,7 @@ public class PaymentReceiptCommandRepository {
 		}
 		catch (NullPointerException e) {
 			// TODO: handle exception
+			LOGGER.error(e.getMessage());
 			return true;
 		}
 		return false;
@@ -280,6 +298,7 @@ public class PaymentReceiptCommandRepository {
 					.addEntity(GeneralDetailCommand.class).getResultList();
 		}
 		catch(NullPointerException e) {
+			LOGGER.error(e.getMessage());
 			return null;
 		}
 	}
