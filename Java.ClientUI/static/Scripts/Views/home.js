@@ -52,6 +52,7 @@ $('#addBtn').click(function(){
 					"companyTaxNumber":$('#companyTaxNumber').val()};
 	console.log(comData.companyName);
 	let totalCompany = Number(localStorage.getItem("totalCompany"));
+	$
 	$.ajax({
 		method: "POST",
 		url: MISA.Config.loginUrl+"/api/addCompany",
@@ -128,12 +129,12 @@ $(document).ready(function () {
 });
 
 $('#btnAdd').click(function(){
-	$('.add-section').show();
+	$('.add-section').show('fast');
 	$('#btnAdd').hide();
 })
 
 $('#cancelBtn').click(function(){
-	$('.add-section').hide();
+	$('.add-section').hide('slow');
 	$('#btnAdd').show();
 })
 //alert

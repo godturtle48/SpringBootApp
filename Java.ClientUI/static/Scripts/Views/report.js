@@ -59,7 +59,7 @@ class ReportJS {
         //         commonJS.hideMask($('#tblReport'));
         //     }
         // })
-        for (var i=0; i<100; i++) {
+        for (var i=0; i<1000; i++) {
             dataReport.push({
                 ID: '123123123',
                 PostedDate : '08/03/2019',                    
@@ -67,7 +67,7 @@ class ReportJS {
                 RefNo : 'PT' + i,
                 JournalMemo : "Phiếu thu nhân viên",                               
                 RefTypeName : "Phiếu thu",
-                TotalAmount : "123456",                             
+                TotalAmount : Math.floor(Math.random() * 10000001),                             
                 CashBookPostedDate : '08/03/2019',
                 EmployeeName : 'Nguyễn Văn Lâm',
             })
