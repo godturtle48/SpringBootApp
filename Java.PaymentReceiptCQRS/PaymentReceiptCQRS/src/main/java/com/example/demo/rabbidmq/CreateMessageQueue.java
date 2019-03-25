@@ -162,7 +162,7 @@ public class CreateMessageQueue {
 							if (paymentOld != null) {
 								try {
 									paymentRepository.deleteByRefID(paymentReceipt.getRefID());
-									channel.basicAck(deliveryTag, false);
+									// channel.basicAck(deliveryTag, false);
 								} catch (Exception e) {
 									// bi loi gui lai goi tin
 									produceMsg(message);
