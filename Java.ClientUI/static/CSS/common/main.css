@@ -477,6 +477,7 @@ table tr {
 
 .menu-active {
     border-left: 3px solid #fff !important;
+    background-color: #02609c !important;
 }
 
 .menu-parent-li-first {
