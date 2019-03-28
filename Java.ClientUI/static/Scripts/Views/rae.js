@@ -1,24 +1,24 @@
 /* Version 09/03/2019*/
 $(document).ready(function(){
-    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-        $.ajax({
-            method: "GET",
-            url:MISA.Config.loginUrl+"/api/home",
-            beforeSend: function(xhr) {
-                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-            },
-            success: function(data, status, xhr){
-                $('.user-info').text((data.email).split("@")[0]);
-                //ajax goi company
-            },
-            error: function(err, stt, xhr){
-                window.location.href="/";
-            }
-        })  
-    }
-    else{
-            window.location.href="/";
-        }
+    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+    //     $.ajax({
+    //         method: "GET",
+    //         url:MISA.Config.loginUrl+"/api/home",
+    //         beforeSend: function(xhr) {
+    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+    //         },
+    //         success: function(data, status, xhr){
+    //             $('.user-info').text((data.email).split("@")[0]);
+    //             //ajax goi company
+    //         },
+    //         error: function(err, stt, xhr){
+    //             window.location.href="/";
+    //         }
+    //     })  
+    // }
+    // else{
+    //         window.location.href="/";
+    //     }
         
     })
     //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
@@ -442,8 +442,7 @@ class ReceiptsAndExpensesJS {
      * Created by: NVMANH (22/01/2019)
      */
     beforeOpenDetail() {
-        $(document).off('keydown', this.keyDownRowSelect);
-        
+        $(document).off('keydown', this.keyDownRowSelect);      
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
         $('.combobox').removeClass('border-red');
@@ -494,46 +493,42 @@ class ReceiptsAndExpensesJS {
                 });
             }
         // Bind thông tin dữ liệu detail (for editing mode)
-        var invoices=raeRef.invoices;
-        indexInvoiceGlobal=0;
-        if(invoices==null){
-           
-            return;
-        }
-        invoicesGlobal=invoices;
-        //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
-        invoices.forEach(function(invoice,index){
-            var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
-                        <td style="display:flex;">
-                            <button role="removeInvoice" class="btn btn-danger">x</button>
-                            <input fileDataInvoice="journalMemo" value="${invoice.discription}">
-                        </td>
-                        <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.amount}"></td>
-                        <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectName}"></td>
-                        <td><input fileDataInvoice="" value="${invoice.accountObjectAddress}"></td>
-                        <td><input fileDataInvoice="" value=""></td>
-                        </tr>`;
-            $('#tbodyRAEDetail-popup').append(div);
-            $('button[role="removeInvoice"]').on('click', function(){
-                //set trang thai cua invoice tuong ung trong invoicesGlobal
-                var index=$(this).parents('tr').attr("indexInvoice");
-                invoicesGlobal[index].status=2;//danh dau bi xoa
-                $(this).parents('tr').remove();
-            });
-            var x=$("tr[indexinvoice='"+index+"']");
-            $("tr[indexInvoice='"+index+"']").on('keyup',function(){
-                
-                invoicesGlobal[index].status=1;//danh dau bi thay đổi;
+            var invoices=raeRef.invoices;
+            indexInvoiceGlobal=0;
+            if(invoices==null){         
+                return;
+            }
+            invoicesGlobal=invoices;
+            //Diễn giải -  TK Nợ  - TK Có - Số tiền - Đối tượng - Tên đối tượng - Đơn vị - Mã thống kê
+            invoices.forEach(function(invoice,index){
+                var div=`<tr indexInvoice="${index}" statusInvoice="${invoice.status}" >
+                            <td style="display:flex;">
+                                <button role="removeInvoice" class="btn btn-danger">x</button>
+                                <input fileDataInvoice="journalMemo" value="${invoice.discription}">
+                            </td>
+                            <td><input fileDataInvoice=""  value="${invoice.amount}"></td>
+                            <td><input fileDataInvoice="" value="${invoice.amount}"></td>
+                            <td><input fileDataInvoice="" value="${Number(invoice.amountOC).formatMoney()}" class="text-right"></td>
+                            <td><input fileDataInvoice="" value="${invoice.accountObjectID}"></td>
+                            <td><input fileDataInvoice="" value="${invoice.accountObjectName}"></td>
+                            <td><input fileDataInvoice="" value="${invoice.accountObjectAddress}"></td>
+                            <td><input fileDataInvoice="" value=""></td>
+                            </tr>`;
+                $('#tbodyRAEDetail-popup').append(div);
+                $('button[role="removeInvoice"]').on('click', function(){
+                    //set trang thai cua invoice tuong ung trong invoicesGlobal
+                    var index=$(this).parents('tr').attr("indexInvoice");
+                    invoicesGlobal[index].status=2;//danh dau bi xoa
+                    $(this).parents('tr').remove();
+                });
+                var x=$("tr[indexinvoice='"+index+"']");
+                $("tr[indexInvoice='"+index+"']").on('keyup',function(){      
+                    invoicesGlobal[index].status=1;//danh dau bi thay đổi;
+                })
+                indexInvoiceGlobal++;
+            
             })
-            indexInvoiceGlobal++;
-        
-        })
-        
-
-        }else if(raeJS.editMode == 3){
+        } else if(raeJS.editMode == 3){
             //Thực hiện bind dữ liệu để nhân bản
             //nhân bản
             RefUpdate={};
@@ -582,7 +577,6 @@ class ReceiptsAndExpensesJS {
             var invoices=raeRef.invoices;
             indexInvoiceGlobal=0;
             if(invoices==null){
-            
                 return;
             }
             invoicesGlobal=invoices;
@@ -639,7 +633,7 @@ class ReceiptsAndExpensesJS {
      * Event double click a row in tbodyRAE  ---- Viewing Mode
     */
 
-     rowRAE_OnDblClick() {
+    rowRAE_OnDblClick() {
         this.editMode = 2;
         //identify receipt or expense
         if ($('.rowSelected').attr('refTypeName') == "Thu") {
@@ -807,7 +801,7 @@ class ReceiptsAndExpensesJS {
      */
     btnSave_OnClick() {
         /// Editing Mode
-        if(this.editMode ==1){
+        if (this.editMode ==1){
             var invoices = [];
             $('#tbodyRAEDetail-popup').find('tr').each(function(){
                 invoices.push({
@@ -826,7 +820,7 @@ class ReceiptsAndExpensesJS {
             //        "sortOrder": 425
             var refTypeID = this.RefType;
             var refTypeName = "Thu";
-            if(refTypeID == 2) refTypeName = "Chi";
+            if (refTypeID == 2) refTypeName = "Chi";
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
             var data = {"ref":ref,
                 "invoices":invoices,
@@ -897,7 +891,6 @@ class ReceiptsAndExpensesJS {
                         }
                         
                     },
-
                     error: function(err){
                         console.log(err);
                         commonJS.showFailMsg("Thêm hóa đơn không thành công");
@@ -907,7 +900,7 @@ class ReceiptsAndExpensesJS {
                 $('.text-required').trigger('blur');
                 commonJS.showFailMsg("Thêm hóa đơn không thành công");
             }
-        }else if(this.editMode == 2){                 ///////btnSave for edit
+        } else if(this.editMode == 2){                 ///////btnSave for edit
             //che do sửa
             //xet du  lieu tu bien chua invoicesGlobal
             //invoicesData dữ liệu đc gửi lên
@@ -999,7 +992,7 @@ class ReceiptsAndExpensesJS {
                     commonJS.showFailMsg("Sửa hóa đơn không thành công");
                 }
             })
-        }else if(this.editMode ==3){                ///////btnSave for duplicate
+        } else if(this.editMode ==3){                ///////btnSave for duplicate
             var invoicesData=[]; 
             var sortOrder=0;
             if(RefUpdate==null){
@@ -1194,7 +1187,34 @@ class ReceiptsAndExpensesJS {
             }
         })
     };
+    /* --------------------------------------------------------------------
+     * Nút ghi sổ
+     * Created by NVLAM (28/03/2018)
+     */
+    btnCharge_OnClick(event) {
+        var data = {};
+        $.ajax({
+            method:"GET",
+            url: MISA.Config.paymentUrl +"",
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+            },
+            data: JSON.stringify(data),
+            success: function(result, txtStatus, xhr){
+                console.log(result);
 
+            },
+            error: function(err){
+                console.log(err);
+                commonJS.showFailMsg("Ghi sổ không thành công");
+            }
+        })
+    }
+    btnDiscard_OnClick(event) {
+        
+    }
     btnCancel_OnClick(event) {
         $('.text-required').removeClass('required-border');	
         $('.text-required').next('.error-box').remove();
@@ -1245,7 +1265,7 @@ class ReceiptsAndExpensesJS {
         $('#currentPage').val(1);
        this.buildDataIntoTable(fakeData);
     }
- /* -------------------------------------------------------------------
+    /* -------------------------------------------------------------------
      * Nhấn button nhân bản
      * Created by: NVMANH (20/05/2018)
      */
