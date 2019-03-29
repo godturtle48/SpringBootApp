@@ -510,3 +510,67 @@ Caused by: java.net.UnknownHostException: java_payment_receipt_db: Temporary fai
 2019-03-28 10:36:04 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2019-03-28 10:36:06 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - Started PaymentReceiptCqrsApplicationTests in 15.743 seconds (JVM running for 20.226)
 2019-03-28 10:36:07 [Thread-3] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-29 14:15:59 [main] ERROR o.s.b.c.l.LoggingApplicationListener - Cannot set level '=info' for 'com.root'
+2019-03-29 14:16:00 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - Starting PaymentReceiptCqrsApplicationTests on misa-H61M-S2PV with PID 11033 (started by misa in /home/misa/TFS/MISA.SME.Tested/Java.PaymentReceiptCQRS/PaymentReceiptCQRS)
+2019-03-29 14:16:00 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - No active profile set, falling back to default profiles: default
+2019-03-29 14:16:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-29 14:16:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-29 14:16:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 361ms. Found 3 repository interfaces.
+2019-03-29 14:16:06 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$b8c3b84f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-29 14:16:07 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[java_payment_receipt_db:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-29 14:16:07 [main] INFO  org.mongodb.driver.cluster - Adding discovered server java_payment_receipt_db:27017 to client view of cluster
+2019-03-29 14:16:07 [cluster-ClusterId{value='5c9dc637832c132b196bf889', description='null'}-java_payment_receipt_db:27017] INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server java_payment_receipt_db:27017
+com.mongodb.MongoSocketException: java_payment_receipt_db: Temporary failure in name resolution
+	at com.mongodb.ServerAddress.getSocketAddress(ServerAddress.java:188)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:64)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:62)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:126)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.UnknownHostException: java_payment_receipt_db: Temporary failure in name resolution
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(InetAddress.java:929)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1324)
+	at java.net.InetAddress.getAllByName0(InetAddress.java:1277)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1193)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1127)
+	at java.net.InetAddress.getByName(InetAddress.java:1077)
+	at com.mongodb.ServerAddress.getSocketAddress(ServerAddress.java:186)
+	... 5 common frames omitted
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payments -> ref -> payments'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payments -> invoices -> payment -> ref -> payments'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refDetailID' in type 'InvoiceDetailCommand' for path 'invoices -> payment -> invoices'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refTypeID' in type 'RefTypeCommand' for path 'ref -> payments -> ref'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payment -> ref -> payments -> invoices -> payment'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payment -> invoices -> payment'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payments' in type 'RefTypeCommand' for path 'payments -> ref -> payments'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payments' in type 'RefTypeCommand' for path 'payments -> invoices -> payment -> ref -> payments'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'invoices' in type 'PaymentReceiptCommand' for path 'invoices -> payment -> invoices'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'ref' in type 'PaymentReceiptCommand' for path 'ref -> payments -> ref'
+2019-03-29 14:16:08 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payment' in type 'InvoiceDetailCommand' for path 'payment -> invoices -> payment'
+2019-03-29 14:16:09 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-29 14:16:10 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - Started PaymentReceiptCqrsApplicationTests in 11.813 seconds (JVM running for 15.152)
+2019-03-29 14:16:11 [Thread-3] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-29 14:52:21 [main] ERROR o.s.b.c.l.LoggingApplicationListener - Cannot set level '=info' for 'com.root'
+2019-03-29 14:52:21 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - Starting PaymentReceiptCqrsApplicationTests on misa-H61M-S2PV with PID 17073 (started by misa in /home/misa/TFS/MISA.SME.Tested/Java.PaymentReceiptCQRS/PaymentReceiptCQRS)
+2019-03-29 14:52:21 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - No active profile set, falling back to default profiles: default
+2019-03-29 14:52:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-29 14:52:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-29 14:52:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 297ms. Found 3 repository interfaces.
+2019-03-29 14:52:32 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$883468db] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-29 14:52:33 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[java_payment_receipt_db:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-29 14:52:33 [main] INFO  org.mongodb.driver.cluster - Adding discovered server java_payment_receipt_db:27017 to client view of cluster
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payments -> ref -> payments'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payments -> invoices -> payment -> ref -> payments'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refDetailID' in type 'InvoiceDetailCommand' for path 'invoices -> payment -> invoices'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refTypeID' in type 'RefTypeCommand' for path 'ref -> payments -> ref'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payment -> ref -> payments -> invoices -> payment'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'refID' in type 'PaymentReceiptCommand' for path 'payment -> invoices -> payment'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payments' in type 'RefTypeCommand' for path 'payments -> ref -> payments'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payments' in type 'RefTypeCommand' for path 'payments -> invoices -> payment -> ref -> payments'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'invoices' in type 'PaymentReceiptCommand' for path 'invoices -> payment -> invoices'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'ref' in type 'PaymentReceiptCommand' for path 'ref -> payments -> ref'
+2019-03-29 14:52:37 [main] INFO  o.s.d.m.c.i.MongoPersistentEntityIndexResolver - Found cycle for field 'payment' in type 'InvoiceDetailCommand' for path 'payment -> invoices -> payment'
+2019-03-29 14:52:39 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-29 14:52:41 [main] INFO  c.e.d.PaymentReceiptCqrsApplicationTests - Started PaymentReceiptCqrsApplicationTests in 20.289 seconds (JVM running for 23.24)
+2019-03-29 14:52:43 [Thread-3] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'

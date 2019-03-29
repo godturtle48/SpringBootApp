@@ -105,7 +105,9 @@ public class GeneralLedgerService {
 
 			Query query = new Query();
 			query.addCriteria(Criteria.where("keyCompany").is(keyCompany).and("postedDate").gte(parameter.getFromDate()).lte(parameter.getToDate()));
+			query.limit(100);
 			generalLedger=mongoTemplate.find(query, GeneralLedger.class);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("error", "Lỗi lấy báo cáo");
