@@ -1,24 +1,24 @@
 /* Version 09/03/2019*/
 $(document).ready(function(){
-    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-    //     $.ajax({
-    //         method: "GET",
-    //         url:MISA.Config.loginUrl+"/api/home",
-    //         beforeSend: function(xhr) {
-    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-    //         },
-    //         success: function(data, status, xhr){
-    //             $('.user-info').text((data.email).split("@")[0]);
-    //             //ajax goi company
-    //         },
-    //         error: function(err, stt, xhr){
-    //             window.location.href="/";
-    //         }
-    //     })  
-    // }
-    // else{
-    //         window.location.href="/";
-    //     }
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
+            success: function(data, status, xhr){
+                $('.user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+            window.location.href="/";
+        }
         
     })
     //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
@@ -195,15 +195,15 @@ var getPageHome = function() {
 			for (var i = 0; i < payment.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : convertDate(payment[i].postedDate),                    
-					RefDate : convertDate(payment[i].refDate),
+					PostedDate : raeJS.convertDate(payment[i].postedDate),                    
+					RefDate : raeJS.convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
 					JournalMemo : payment[i].journalMemo,                               //Diễn giải   ??? What JournalMemo
 					RefTypeName : payment[i].ref.refTypeName,
 					TotalAmount : payment[i].totalAmountOC,                             //Số tiền    
 					AccountObjectName : payment[i].accountObjectName,
 					ReasonTypeName : payment[i].journalMemo,                            //Lý do thu/chi
-					CashBookPostedDate : convertDate(payment[i].createdDate),
+					CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
 					DepartmentName : payment[i].accountObjectAddress
 				})
@@ -263,15 +263,15 @@ var getPage = function() {
 			for (var i = 0; i < result.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : convertDate(payment[i].postedDate),
-					RefDate : convertDate(payment[i].refDate),
+					PostedDate : raeJS.convertDate(payment[i].postedDate),
+					RefDate : raeJS.convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
 					JournalMemo : payment[i].journalMemo,
 					RefTypeName : payment[i].ref.refTypeName,
 					TotalAmount : payment[i].totalAmountOC,
 					AccountObjectName : payment[i].accountObjectName,
 					ReasonTypeName : payment[i].journalMemo,
-					CashBookPostedDate : convertDate(payment[i].createdDate),
+					CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
 					DepartmentName : payment[i].accountObjectName
 				})
