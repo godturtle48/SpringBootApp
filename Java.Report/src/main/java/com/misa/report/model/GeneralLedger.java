@@ -1,150 +1,216 @@
 package com.misa.report.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="GeneralLedger")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Document(collection="generalLedger")
 public class GeneralLedger {
+	// Sổ chi tiết tiền mặt
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="GeneralLedgerID")
-	private int GeneralLedgerID;
+	private String generalLedgerID;
 	@NotNull
-	private int RefID;
-	private int RefDetailID;
-	private int RefType;
-	private String RefNo;
+	private String keyCompany;
 	@NotNull
-	private Date RefDate;
+	private String refID;
 	@NotNull
-	private Date PostedDate;
-	private String CurrencyID;
-	private Double ExchangeRate;
+	private String refDetailID;
 	@NotNull
-	private Double AmountOC;
+	private Integer refType;
 	@NotNull
-	private Double Amount;
-	private String JournalMemo;
-	private String Description;
-	private String ContactName;
-	private Integer AccountObjectID;
-	private String AccountObjectName;
+	private String refNo; // số chứng từ
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date refDate;	// ngày chứng từ
+	@NotNull
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date postedDate;	// ngày hạch toán
+	private String currencyID;	// loại tiền
+	private Double exchangeRate;	//tỉ số đối hoái
+	private Double debitAmountOC;	// nợ, tiền gốc VNĐ, USD,...
+	private Double debitAmount;	//nợ, tiền việt= tiền gốc* tỷ số đối hoái
+	private Double creditAmountOC;	//có , tiền gốc VNĐ, USD,...
+	private Double creditAmount;	//có, tiền việt= tiền gốc* tỷ số đối hoái
+	private String description;		// diễn giải chi tiết
+	private String contactName;		//người nhận hoặc người nộp
+	private Integer accountNumber;	// số tài khoản
+	private Integer correspondingAccountNumber; // số tài khoản đối ứng	
 	
+	public String getKeyCompany() {
+		return keyCompany;
+	}
+
+	public void setKeyCompany(String keyCompany) {
+		this.keyCompany = keyCompany;
+	}
+
+	public void setRefType(Integer refType) {
+		this.refType = refType;
+	}
+
+	public GeneralLedger() {}
 	
-	public int getGeneralLedgerID() {
-		return GeneralLedgerID;
+	public GeneralLedger(String generalLedgerID, @NotNull String keycompany, @NotNull String refID, String refDetailID,
+			int refType, String refNo, Date refDate, Date postedDate, String currencyID, Double exchangeRate,
+			Double debitAmountOC, Double debitAmount, Double creditAmountOC, Double creditAmount, String description,
+			String contactName, Integer accountNumber, Integer correspondingAccountNumber) {
+		this.generalLedgerID = generalLedgerID;
+		this.keyCompany = keycompany;
+		this.refID = refID;
+		this.refDetailID = refDetailID;
+		this.refType = refType;
+		this.refNo = refNo;
+		this.refDate = refDate;
+		this.postedDate = postedDate;
+		this.currencyID = currencyID;
+		this.exchangeRate = exchangeRate;
+		this.debitAmountOC = debitAmountOC;
+		this.debitAmount = debitAmount;
+		this.creditAmountOC = creditAmountOC;
+		this.creditAmount = creditAmount;
+		this.description = description;
+		this.contactName = contactName;
+		this.accountNumber = accountNumber;
+		this.correspondingAccountNumber = correspondingAccountNumber;
 	}
-	public void setGeneralLedgerID(int generalLedgerID) {
-		GeneralLedgerID = generalLedgerID;
+
+	public String getGeneralLedgerID() {
+		return generalLedgerID;
 	}
-	public int getRefID() {
-		return RefID;
+	public void setGeneralLedgerID(String generalLedgerID) {
+		this.generalLedgerID = generalLedgerID;
 	}
-	public void setRefID(int refID) {
-		RefID = refID;
+	public String getKeycompany() {
+		return keyCompany;
 	}
-	public int getRefDetailID() {
-		return RefDetailID;
+	public void setKeycompany(String keycompany) {
+		this.keyCompany = keycompany;
 	}
-	public void setRefDetailID(int refDetailID) {
-		RefDetailID = refDetailID;
+	public String getRefID() {
+		return refID;
 	}
-	public int getRefType() {
-		return RefType;
+	public void setRefID(String refID) {
+		this.refID = refID;
 	}
-	public void setRefType(int refType) {
-		RefType = refType;
+	public String getRefDetailID() {
+		return refDetailID;
 	}
+	public void setRefDetailID(String string) {
+		this.refDetailID = string;
+	}
+	
+
 	public String getRefNo() {
-		return RefNo;
+		return refNo;
 	}
 	public void setRefNo(String refNo) {
-		RefNo = refNo;
+		this.refNo = refNo;
 	}
 	public Date getRefDate() {
-		return RefDate;
+		return refDate;
 	}
 	public void setRefDate(Date refDate) {
-		RefDate = refDate;
+		this.refDate = refDate;
 	}
 	public Date getPostedDate() {
-		return PostedDate;
+		return postedDate;
 	}
 	public void setPostedDate(Date postedDate) {
-		PostedDate = postedDate;
+		this.postedDate = postedDate;
 	}
 	public String getCurrencyID() {
-		return CurrencyID;
+		return currencyID;
 	}
 	public void setCurrencyID(String currencyID) {
-		CurrencyID = currencyID;
+		this.currencyID = currencyID;
 	}
 	public Double getExchangeRate() {
-		return ExchangeRate;
+		return exchangeRate;
 	}
 	public void setExchangeRate(Double exchangeRate) {
-		ExchangeRate = exchangeRate;
+		this.exchangeRate = exchangeRate;
 	}
-	public Double getAmountOC() {
-		return AmountOC;
+	public Double getDebitAmountOC() {
+		return debitAmountOC;
 	}
-	public void setAmountOC(Double amountOC) {
-		AmountOC = amountOC;
+	public void setDebitAmountOC(Double debitAmountOC) {
+		this.debitAmountOC = debitAmountOC;
 	}
-	public Double getAmount() {
-		return Amount;
+	public Double getDebitAmount() {
+		return debitAmount;
 	}
-	public void setAmount(Double amount) {
-		Amount = amount;
+	public void setDebitAmount(Double debitAmount) {
+		this.debitAmount = debitAmount;
 	}
-	public String getJournalMemo() {
-		return JournalMemo;
+	public Double getCreditAmountOC() {
+		return creditAmountOC;
 	}
-	public void setJournalMemo(String journalMemo) {
-		JournalMemo = journalMemo;
+	public void setCreditAmountOC(Double creditAmountOC) {
+		this.creditAmountOC = creditAmountOC;
+	}
+	public Double getCreditAmount() {
+		return creditAmount;
+	}
+	public void setCreditAmount(Double creditAmount) {
+		this.creditAmount = creditAmount;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public String getContactName() {
-		return ContactName;
+		return contactName;
 	}
 	public void setContactName(String contactName) {
-		ContactName = contactName;
+		this.contactName = contactName;
 	}
-	public Integer getAccountObjectID() {
-		return AccountObjectID;
+	public Integer getAccountNumber() {
+		return accountNumber;
 	}
-	public void setAccountObjectID(Integer accountObjectID) {
-		AccountObjectID = accountObjectID;
+	public void setAccountNumber(Integer accountNumber) {
+		this.accountNumber = accountNumber;
 	}
-	public String getAccountObjectName() {
-		return AccountObjectName;
+	public Integer getCorrespondingAccountNumber() {
+		return correspondingAccountNumber;
 	}
-	public void setAccountObjectName(String accountObjectName) {
-		AccountObjectName = accountObjectName;
+	public void setCorrespondingAccountNumber(Integer correspondingAccountNumber) {
+		correspondingAccountNumber = correspondingAccountNumber;
 	}
+
 	
 	@Override
 	public String toString() {
-		return "GeneralLedger [GeneralLedgerID=" + GeneralLedgerID + ", RefID=" + RefID + ", RefDetailID=" + RefDetailID
-				+ ", RefType=" + RefType + ", RefNo=" + RefNo + ", RefDate=" + RefDate + ", PostedDate=" + PostedDate
-				+ ", CurrencyID=" + CurrencyID + ", ExchangeRate=" + ExchangeRate + ", AmountOC=" + AmountOC
-				+ ", Amount=" + Amount + ", JournalMemo=" + JournalMemo + ", Description=" + Description
-				+ ", ContactName=" + ContactName + ", AccountObjectID=" + AccountObjectID + ", AccountObjectName="
-				+ AccountObjectName + "]";
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("generalLedgerID", generalLedgerID);
+		map.put("keycompany", keyCompany);
+		map.put("refID", refID);
+		map.put("refDetailID", refDetailID);
+		map.put("refType", refType);
+		map.put("refNo", refNo);
+		map.put("refDate", refDate);
+		map.put("postedDate", postedDate);
+		map.put("currencyID", currencyID);
+		map.put("exchangeRate", exchangeRate);
+		map.put("debitAmountOC", debitAmountOC);
+		map.put("debitAmount", debitAmount);
+		map.put("creditAmountOC", creditAmountOC);
+		map.put("creditAmount", creditAmount);
+		map.put("description", description);
+		map.put("contactName", contactName);
+		map.put("accountNumber", accountNumber);
+		map.put("correspondingAccountNumber", correspondingAccountNumber);	
+		return map.toString();
 	}
-	
-	
+
 }

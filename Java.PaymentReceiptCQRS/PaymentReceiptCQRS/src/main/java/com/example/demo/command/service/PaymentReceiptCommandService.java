@@ -51,6 +51,16 @@ public class PaymentReceiptCommandService {
 		return paymentReceiptRepository.getGeneralDetailAddPay_Re(keyCompany, refTypeID);
 	}
 
+	public boolean updateWriteCashBook(PaymentReceiptCommand paymentReceiptCommand,String keydatabase) {
+		return paymentReceiptRepository.updateWriteCashBook(paymentReceiptCommand,keydatabase);
+		
+	}
+	public boolean deleteWriteCashBook(PaymentReceiptCommand paymentReceiptCommand,String keydatabase) {
+		return paymentReceiptRepository.deleteWriteCashBook(paymentReceiptCommand,keydatabase);
+		
+	}
+
+	
 
 //    public int dayConChungLonNhat(String Patterm, String subStr)
 //    {

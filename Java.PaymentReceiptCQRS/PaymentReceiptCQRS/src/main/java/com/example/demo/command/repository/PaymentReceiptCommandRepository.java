@@ -19,6 +19,7 @@ import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.example.demo.rabbidmq.EventType;
 import com.example.demo.rabbidmq.MessageFormat;
+import com.example.demo.rabbidmq.ReportMessageQueue;
 
 
 
@@ -168,7 +169,8 @@ public class PaymentReceiptCommandRepository {
 			 
 				//send sang rabbitmq
 				MessageFormat command=new MessageFormat(EventType.CREATE,paymentReceipt);
-				CreateMessageQueue.produceMsg(command.toString());
+				if( !CreateMessageQueue.produceMsg(command.toString()))
+					tx.rollback();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
@@ -214,7 +216,8 @@ public class PaymentReceiptCommandRepository {
 				 } 
 			 }
 			 MessageFormat command=new MessageFormat(EventType.UPDATE,paymentReceipt);
-			 CreateMessageQueue.produceMsg(command.toString());
+			if( !CreateMessageQueue.produceMsg(command.toString()))
+				tx.rollback();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
@@ -242,8 +245,10 @@ public class PaymentReceiptCommandRepository {
 			 session.createQuery("delete from PaymentReceiptCommand where refID=:refID")
 			 .setParameter("refID", paymentReceipt.getRefID()).executeUpdate(); 
 				MessageFormat command=new MessageFormat(EventType.DELETE,paymentReceipt);
-				CreateMessageQueue.produceMsg(command.toString());
-			 tx.commit();
+				if( !CreateMessageQueue.produceMsg(command.toString()))
+					tx.rollback();
+			
+				tx.commit();
 		} catch (Exception e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
@@ -301,6 +306,55 @@ public class PaymentReceiptCommandRepository {
 			LOGGER.error(e.getMessage());
 			return null;
 		}
+	}
+	public boolean updateWriteCashBook(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
+		Transaction tx=null;
+		int result=0;
+		try {
+			 tx = session.beginTransaction();
+			
+			 session.update(paymentReceipt);
+			//gửi payment sang service Report để ghi vào database
+			  MessageFormat messageForm=new MessageFormat(EventType.CREATE, paymentReceipt);
+			  if(!ReportMessageQueue.produceMsg(messageForm.toString())) {
+				  tx.rollback();
+			  }
+			tx.commit();
+		} catch (Exception e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace();
+			 session.close();
+			 return false;
+		}
+		 session.close();
+		 return true;
+		
+	}
+	
+	public boolean deleteWriteCashBook(PaymentReceiptCommand paymentReceipt,String keydatabase) {
+		Session session=TenantInfo.getConnect(keydatabase).openSession();
+		Transaction tx=null;
+		int result=0;
+		try {
+			 tx = session.beginTransaction();
+			
+			 session.update(paymentReceipt);
+			//gửi payment sang service Report bỏ ghi vào database
+			  MessageFormat messageForm=new MessageFormat(EventType.DELETE, paymentReceipt);
+			  if(!ReportMessageQueue.produceMsg(messageForm.toString())) {
+				  tx.rollback();
+			  }
+			tx.commit();
+		} catch (Exception e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace();
+			 session.close();
+			 return false;
+		}
+		 session.close();
+		 return true;
+		
 	}
 	
 }

@@ -3,9 +3,10 @@ package com.example.demo.query.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Id;
+
 
 import org.hibernate.annotations.Index;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -77,7 +78,6 @@ public class PaymentReceiptView {
 	private Date createdDate;
 	private String createdBy;
 
-//	@Indexed
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date modifiedDate;
 	private String modifiedBy;

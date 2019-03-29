@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.PaymentReceiptCqrsApplication;
 import com.example.demo.command.model.PaymentReceiptCommand;
+import com.example.demo.command.service.ErrMessageService;
 import com.example.demo.common.ConvertModelCommandToView;
 import com.example.demo.query.model.PaymentReceiptView;
 import com.example.demo.query.repository.PaymentReceiptViewRepository;
@@ -27,13 +28,14 @@ public class CreateMessageQueue {
 	private static Channel channel;
 
 	private static PaymentReceiptViewRepository paymentRepository;
+	public static ErrMessageService mapErrMessage;
 	private static final Logger LOGGER = LoggerFactory.getLogger(CreateMessageQueue.class);
 	@Autowired
 	public CreateMessageQueue(PaymentReceiptViewRepository paymentRepository) {
 		CreateMessageQueue.paymentRepository = paymentRepository;
+		CreateMessageQueue.mapErrMessage=mapErrMessage;
 	}
-	
-	public static Map<String, Integer> mapErrMessage = new HashMap<>();
+
 	public static void init() {
 		ConnectionFactory factory = new ConnectionFactory();
 		// config rabbitmq address
@@ -108,7 +110,7 @@ public class CreateMessageQueue {
 							if (paymentOld == null) {
 								// không tồn tại bản ghi==>lưu vào map yêu cầu gửi lại
 								produceMsg(message);
-								mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion());
+								mapErrMessage.put(paymentReceipt.getRefID(), paymentReceipt.getVersion(),evenType);
 								return;
 							}
 							paymentView.setId(paymentOld.getId());
@@ -130,7 +132,7 @@ public class CreateMessageQueue {
 							 * hủy gói tin mesage.version>map.version ==>cập nhật lại map và yêu cầu gửi lại
 							 * 
 							 */
-							Integer vesion = mapErrMessage.get(paymentReceipt.getRefID());
+							Integer vesion = mapErrMessage.getVersion(paymentReceipt.getRefID());
 							if (paymentReceipt.getVersion() < vesion) {
 								// Hủy gói tin không ý nghía
 								return;
@@ -162,7 +164,7 @@ public class CreateMessageQueue {
 							if (paymentOld != null) {
 								try {
 									paymentRepository.deleteByRefID(paymentReceipt.getRefID());
-									// channel.basicAck(deliveryTag, false);
+									channel.basicAck(deliveryTag, false);
 								} catch (Exception e) {
 									// bi loi gui lai goi tin
 									produceMsg(message);
@@ -190,15 +192,16 @@ public class CreateMessageQueue {
 		}
 	}
 
-	public static void produceMsg(String msg) {
+	public static boolean produceMsg(String msg) {
 		try {
 			channel.basicPublish("Create.exchange", "Create.routingkey", null, msg.getBytes("UTF-8"));
 			System.out.println("Create-read side send message: " + msg);
+			return true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			LOGGER.error(e.getMessage());
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 }

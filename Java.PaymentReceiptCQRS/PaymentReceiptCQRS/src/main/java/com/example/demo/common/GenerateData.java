@@ -55,7 +55,7 @@ public class GenerateData {
 										"HNMAI"};
 	
 	@RequestMapping("/payment")
-	public String paymnet(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+	public String payment(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
 		
 		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
 		String keyCompany= httpServletRequest.getHeader("keycompany");
@@ -97,24 +97,8 @@ public class GenerateData {
 								"Nguyễn Văn Lâm",
 								"Trần Thị Huyền",
 								"Nguyễn Thế Chí Dũng"};	
-		//year
-		ArrayList<Integer> year = new ArrayList<Integer>();
-		year.add(2017);
-		year.add(2018);
-		year.add(2019);
-		//month
-		ArrayList<Date> date = new ArrayList<>();
-		Date date1=new Date( new GregorianCalendar(2018, 12, 03).getTime().getTime());
-		Date date2=new Date( new GregorianCalendar(2018, 10, 03).getTime().getTime());
-		Date date3=new Date( new GregorianCalendar(2018, 6, 03).getTime().getTime());
-		Date date4=new Date( new GregorianCalendar(2018, 5, 03).getTime().getTime());
-		Date date5=new Date( new GregorianCalendar(2018, 2, 03).getTime().getTime());
-		
-		date.add(date1);
-		date.add(date2);
-		date.add(date3);
-		date.add(date4);
-		date.add(date5);
+
+
 		String[]	jornalMemoArrPayment= {"Chi thu tiền điện",
 									"Chi phí đào tạo",
 									"Mua thiết bị mới",
@@ -139,56 +123,79 @@ public class GenerateData {
 				"Chi khác"};
              
 			int length = GenerateData.accountObjectID.length;
-			for(int i=1;i<100000;++i) {
-				try {
-					int tmpIndex = rand.nextInt(length);
+		
+			
+			for(int i=1;i<=5;i++) {
+				for(int j=1;j<=12;j++) {
+					for(int k=1;k<=5000;k++) {
+						try {
+			
+						int tmpIndex = rand.nextInt(length);
+						
+						PaymentReceiptCommand payment=new PaymentReceiptCommand();
+						List<InvoiceDetailCommand> invoices=new ArrayList<>();
+						
+						payment.setAccountObjectAddress(accountObjectAddresss[tmpIndex]);
+						payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
+						payment.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
+						payment.setAccountObjectName(accountObjectNames[tmpIndex]);
+						payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
 				
-					PaymentReceiptCommand payment=new PaymentReceiptCommand();
-					List<InvoiceDetailCommand> invoices=new ArrayList<>();
-					for (int j = 1; j <= 5; j++) {
-						InvoiceDetailCommand invoice=new InvoiceDetailCommand();
-//						invoice.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
-						invoice.setAmount(Double.valueOf(1000+i/100));
-						invoice.setAmountOC(Double.valueOf(1000+i/1000));
-						invoice.setDiscription(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
-						invoice.setPayment(payment);
-						invoice.setSortOrder(i);
-						invoices.add(invoice);
+						payment.setDocumentInclude("documentInclude"+k%100+".doc");
+				
+						payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
+						payment.setDescription(descriptionArr[rand.nextInt(descriptionArr.length)]);
+						payment.setKeyCompany(keyCompany);
+						payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
+					
+						payment.setRefNoFinance("CT"+i);
+						payment.setRefOrdef(i);
+						payment.setTotalAmount(Double.valueOf(0.0));
+						payment.setTotalAmountOC(Double.valueOf(2000.0 + rand.nextInt(1000)));
+						payment.setRef(ref.get(i%2));
+						payment.setPostedFinance(Integer.valueOf(0));
+						payment.setInvoices(invoices);
+						payment.setVersion(Integer.valueOf(0));
+						
+						Date date1=new Date( new GregorianCalendar(2019-i, 12-j, rand.nextInt(28)+1).getTime().getTime());
+						payment.setCreatedDate(date1);
+						payment.setEditVersion(date1);
+						payment.setModifiedDate(date1);
+						payment.setPostedDate(date1);
+						payment.setRefDate(date1);
+						
+						for (int n = 1; n <= 5; n++) {
+							InvoiceDetailCommand invoice=new InvoiceDetailCommand();
+							invoice.setAmount(Double.valueOf(100000+k));
+							invoice.setAmountOC(Double.valueOf(100000+k));
+							invoice.setDiscription(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
+							invoice.setPayment(payment);
+							invoice.setSortOrder(n);
+							invoices.add(invoice);
+						}
+						try {
+							paymentService.save(payment,keydatabase);
+							payment.setPostedFinance(Integer.valueOf(1));
+							paymentService.updateWriteCashBook(payment,keydatabase);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					payment.setAccountObjectAddress(accountObjectAddresss[tmpIndex]);
-					payment.setAccountObjectContactName(accountObjectContactNames[rand.nextInt(accountObjectContactNames.length)]);
-					payment.setAccountObjectID(GenerateData.accountObjectID[tmpIndex]);
-					payment.setAccountObjectName(accountObjectNames[tmpIndex]);
-					payment.setCreatedBy(createdBys[rand.nextInt(createdBys.length)]);
-					payment.setCreatedDate(date.get(rand.nextInt(date.size())));
-					payment.setDocumentInclude("documentInclude"+i%100+".doc");
-					payment.setEditVersion(date.get(rand.nextInt(date.size())));
-					payment.setJournalMemo(jornalMemoArrPayment[rand.nextInt(jornalMemoArrPayment.length)]);
-					payment.setDescription(descriptionArr[rand.nextInt(descriptionArr.length)]);
-					payment.setKeyCompany(keyCompany);
-					payment.setModifiedBy(createdBys[rand.nextInt(createdBys.length)]);
-					payment.setModifiedDate(date.get(rand.nextInt(date.size())));
-					payment.setPostedDate(date.get(rand.nextInt(date.size())));
-					payment.setRefDate(date.get(rand.nextInt(date.size())));
-					payment.setRefNoFinance("CT"+i);
-					payment.setRefOrdef(i);
-					payment.setTotalAmount(Double.valueOf(0.0));
-					payment.setTotalAmountOC(Double.valueOf(2000.0 + rand.nextInt(1000)));
-					payment.setRef(ref.get(i%2));
-					payment.setPostedFinance(Integer.valueOf(1));
-					payment.setInvoices(invoices);
-					payment.setVersion(Integer.valueOf(0));
-					paymentService.save(payment,keydatabase);
-					
-					
-					Thread.sleep(2);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					}
 				}
 			}
+			
+			
 		return "payment";
 
 	}
 	
+	
+
 }

@@ -17,6 +17,7 @@ import com.example.demo.configmessagequeue.ConfigMessageQueue;
 import com.example.demo.configmessagequeue.RemoteMessageQueue;
 import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
+import com.example.demo.rabbidmq.ReportMessageQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class PaymentReceiptCqrsApplication {
 //		CommandMessageQueue.init();
 		RemoteMessageQueue.init();
 		ConfigMessageQueue.init();
+		ReportMessageQueue.init();
 		RemoteMessageQueue.produceMsg("SEND_PAYMENT_CONFIG");
 		}
 		catch(Exception e){

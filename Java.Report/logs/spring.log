@@ -1,0 +1,377 @@
+2019-03-25 21:25:40 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 6888 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 21:25:40 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 21:25:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 21:25:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 21:25:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 194ms. Found 2 repository interfaces.
+2019-03-25 21:25:42 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$2a31d7e1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 21:25:43 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 21:25:43 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 21:25:43 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 21:25:43 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 21:25:43 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 21:25:43 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 3036 ms
+2019-03-25 21:25:44 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 21:25:44 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 21:25:44 [cluster-ClusterId{value='5c98e4e852095b1ae858eb18', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:3}] to localhost:27017
+2019-03-25 21:25:44 [cluster-ClusterId{value='5c98e4e852095b1ae858eb18', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3565600}
+2019-03-25 21:25:44 [cluster-ClusterId{value='5c98e4e852095b1ae858eb18', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 21:25:45 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:25:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 99 (http) with context path ''
+2019-03-25 21:25:45 [main] INFO  com.misa.report.Application - Started Application in 5.882 seconds (JVM running for 7.645)
+2019-03-25 21:31:59 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 9200 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 21:31:59 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 21:32:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 21:32:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 21:32:01 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 90ms. Found 2 repository interfaces.
+2019-03-25 21:32:01 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$d5dfcaa9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 21:32:01 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 21:32:01 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 21:32:01 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 21:32:01 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 21:32:02 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 21:32:02 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2583 ms
+2019-03-25 21:32:03 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 21:32:03 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 21:32:03 [cluster-ClusterId{value='5c98e66352095b23f05a12cc', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:5}] to localhost:27017
+2019-03-25 21:32:03 [cluster-ClusterId{value='5c98e66352095b23f05a12cc', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4503400}
+2019-03-25 21:32:03 [cluster-ClusterId{value='5c98e66352095b23f05a12cc', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 21:32:04 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:32:04 [main] ERROR o.apache.catalina.util.LifecycleBase - Failed to start component [Connector[HTTP/1.1-99]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:226)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:259)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:197)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:311)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:164)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.misa.report.Application.main(Application.java:23)
+Caused by: java.net.BindException: Address already in use: bind
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:461)
+	at java.base/sun.nio.ch.Net.bind(Net.java:453)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:80)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1171)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:568)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 14 common frames omitted
+2019-03-25 21:32:04 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2019-03-25 21:32:04 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-03-25 21:32:04 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 99 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 99, or configure this application to listen on another port.
+
+2019-03-25 21:32:04 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:32:26 [RMI TCP Connection(5)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2019-03-25 21:32:26 [RMI TCP Connection(5)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:33:32 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 3024 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 21:33:32 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 21:33:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 21:33:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 21:33:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 137ms. Found 2 repository interfaces.
+2019-03-25 21:33:33 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$1e86bf97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 21:33:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 21:33:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 21:33:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 21:33:34 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 21:33:34 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 21:33:34 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1772 ms
+2019-03-25 21:33:37 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 21:33:37 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 21:33:37 [cluster-ClusterId{value='5c98e6c152095b0bd071339c', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:6}] to localhost:27017
+2019-03-25 21:33:37 [cluster-ClusterId{value='5c98e6c152095b0bd071339c', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3419700}
+2019-03-25 21:33:37 [cluster-ClusterId{value='5c98e6c152095b0bd071339c', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 21:33:38 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:33:39 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 99 (http) with context path ''
+2019-03-25 21:33:39 [main] INFO  com.misa.report.Application - Started Application in 6.893 seconds (JVM running for 8.288)
+2019-03-25 21:57:13 [RMI TCP Connection(5)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2019-03-25 21:57:14 [RMI TCP Connection(5)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:57:27 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 11124 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 21:57:27 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 21:57:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 21:57:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 21:57:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 93ms. Found 2 repository interfaces.
+2019-03-25 21:57:29 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$483e4e0c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 21:57:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 21:57:30 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 21:57:30 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 21:57:30 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 21:57:30 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 21:57:30 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2279 ms
+2019-03-25 21:57:31 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 21:57:31 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 21:57:31 [cluster-ClusterId{value='5c98ec5b52095b2b74733102', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:11}] to localhost:27017
+2019-03-25 21:57:31 [cluster-ClusterId{value='5c98ec5b52095b2b74733102', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4376000}
+2019-03-25 21:57:31 [cluster-ClusterId{value='5c98ec5b52095b2b74733102', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 21:57:32 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:57:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 99 (http) with context path ''
+2019-03-25 21:57:32 [main] INFO  com.misa.report.Application - Started Application in 5.555 seconds (JVM running for 7.322)
+2019-03-25 21:57:56 [main] ERROR c.m.r.rabbitmq.ReportMessageQueue - Connection timed out: connect
+2019-03-25 21:58:29 [RMI TCP Connection(4)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2019-03-25 21:58:29 [RMI TCP Connection(4)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:58:42 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 7176 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 21:58:42 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 21:58:43 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 21:58:43 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 21:58:43 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 96ms. Found 2 repository interfaces.
+2019-03-25 21:58:43 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$c9373afa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 21:58:44 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 21:58:44 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 21:58:44 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 21:58:44 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 21:58:44 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 21:58:44 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2286 ms
+2019-03-25 21:58:47 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 21:58:47 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 21:58:47 [cluster-ClusterId{value='5c98eca652095b1c0885d02d', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:12}] to localhost:27017
+2019-03-25 21:58:47 [cluster-ClusterId{value='5c98eca652095b1c0885d02d', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3555100}
+2019-03-25 21:58:47 [cluster-ClusterId{value='5c98eca652095b1c0885d02d', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 21:58:47 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 21:58:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 99 (http) with context path ''
+2019-03-25 21:58:48 [main] INFO  com.misa.report.Application - Started Application in 6.221 seconds (JVM running for 7.976)
+2019-03-25 22:06:17 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2019-03-25 22:06:17 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-25 22:07:43 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 7668 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-25 22:07:43 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-25 22:07:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-25 22:07:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-25 22:07:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 108ms. Found 2 repository interfaces.
+2019-03-25 22:07:44 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$6e5f0cd8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-25 22:07:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 99 (http)
+2019-03-25 22:07:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-25 22:07:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-25 22:07:45 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-25 22:07:45 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-25 22:07:45 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2014 ms
+2019-03-25 22:07:46 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-25 22:07:46 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-25 22:07:46 [cluster-ClusterId{value='5c98eec252095b1df4af961e', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:13}] to localhost:27017
+2019-03-25 22:07:46 [cluster-ClusterId{value='5c98eec252095b1df4af961e', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4035500}
+2019-03-25 22:07:46 [cluster-ClusterId{value='5c98eec252095b1df4af961e', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-25 22:07:47 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-25 22:07:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 99 (http) with context path ''
+2019-03-25 22:07:48 [main] INFO  com.misa.report.Application - Started Application in 5.535 seconds (JVM running for 7.29)
+2019-03-26 17:05:23 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 9548 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:05:23 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:05:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:05:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:05:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102ms. Found 2 repository interfaces.
+2019-03-26 17:05:26 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$45ed7ddd] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:05:27 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:05:27 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:05:27 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:05:27 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:05:27 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:05:27 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4601 ms
+2019-03-26 17:05:30 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[java_payment_receipt_db:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:05:30 [main] INFO  org.mongodb.driver.cluster - Adding discovered server java_payment_receipt_db:27017 to client view of cluster
+2019-03-26 17:05:31 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static methods: public static void com.misa.report.rabbitmq.ReportMessageQueue.setGeneralRepository(com.misa.report.repository.GeneralLedgerRepository)
+2019-03-26 17:05:31 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static methods: public static void com.misa.report.rabbitmq.ReportMessageQueue.setCashbookReposirory(com.misa.report.repository.CACashbookRepository)
+2019-03-26 17:05:31 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:05:32 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:05:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:05:32 [main] INFO  com.misa.report.Application - Started Application in 11.225 seconds (JVM running for 16.081)
+2019-03-26 17:05:51 [cluster-ClusterId{value='5c99f96a52095b254c833f44', description='null'}-java_payment_receipt_db:27017] INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server java_payment_receipt_db:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:67)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:126)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403)
+	at java.base/java.net.Socket.connect(Socket.java:591)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:64)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:62)
+	... 3 common frames omitted
+2019-03-26 17:05:56 [main] ERROR c.m.r.rabbitmq.ReportMessageQueue - Connection timed out: connect
+2019-03-26 17:06:27 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 4392 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:06:27 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:06:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:06:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:06:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64ms. Found 2 repository interfaces.
+2019-03-26 17:06:29 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$2fe7d93e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:06:29 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:06:29 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:06:29 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:06:29 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:06:29 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:06:29 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2306 ms
+2019-03-26 17:06:31 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:06:31 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:06:31 [cluster-ClusterId{value='5c99f9a752095b11284a429b', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:15}] to localhost:27017
+2019-03-26 17:06:31 [cluster-ClusterId{value='5c99f9a752095b11284a429b', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3967900}
+2019-03-26 17:06:31 [cluster-ClusterId{value='5c99f9a752095b11284a429b', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:06:31 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static methods: public static void com.misa.report.rabbitmq.ReportMessageQueue.setGeneralRepository(com.misa.report.repository.GeneralLedgerRepository)
+2019-03-26 17:06:31 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static methods: public static void com.misa.report.rabbitmq.ReportMessageQueue.setCashbookReposirory(com.misa.report.repository.CACashbookRepository)
+2019-03-26 17:06:32 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:06:32 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:06:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:06:32 [main] INFO  com.misa.report.Application - Started Application in 6.011 seconds (JVM running for 7.931)
+2019-03-26 17:08:18 [pool-2-thread-4] ERROR c.m.r.rabbitmq.ReportMessageQueue - null
+2019-03-26 17:08:18 [pool-2-thread-4] ERROR c.m.r.rabbitmq.ReportMessageQueue - null
+2019-03-26 17:13:28 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 2096 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:13:28 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:13:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:13:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:13:30 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 77ms. Found 2 repository interfaces.
+2019-03-26 17:13:30 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$a128f781] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:13:31 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:13:31 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:13:31 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:13:31 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:13:31 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:13:31 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2393 ms
+2019-03-26 17:13:32 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:13:32 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:13:32 [cluster-ClusterId{value='5c99fb4c52095b0830169626', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:16}] to localhost:27017
+2019-03-26 17:13:32 [cluster-ClusterId{value='5c99fb4c52095b0830169626', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=13708600}
+2019-03-26 17:13:32 [cluster-ClusterId{value='5c99fb4c52095b0830169626', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:13:33 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:13:33 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:13:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:13:34 [main] INFO  com.misa.report.Application - Started Application in 5.758 seconds (JVM running for 7.373)
+2019-03-26 17:13:34 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:17}] to localhost:27017
+2019-03-26 17:13:34 [pool-2-thread-4] ERROR c.m.r.rabbitmq.ReportMessageQueue - null
+2019-03-26 17:14:19 [RMI TCP Connection(11)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2019-03-26 17:14:19 [RMI TCP Connection(11)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:14:19 [RMI TCP Connection(11)-127.0.0.1] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:17}] to localhost:27017 because the pool has been closed.
+2019-03-26 17:14:37 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 10352 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:14:37 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:14:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:14:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:14:39 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74ms. Found 2 repository interfaces.
+2019-03-26 17:14:39 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$6a539f54] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:14:39 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:14:39 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:14:39 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:14:39 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:14:39 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:14:39 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2030 ms
+2019-03-26 17:14:41 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:14:41 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:14:41 [cluster-ClusterId{value='5c99fb9152095b28700d2259', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:18}] to localhost:27017
+2019-03-26 17:14:41 [cluster-ClusterId{value='5c99fb9152095b28700d2259', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2663600}
+2019-03-26 17:14:41 [cluster-ClusterId{value='5c99fb9152095b28700d2259', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:14:42 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:14:42 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:14:42 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:14:42 [main] INFO  com.misa.report.Application - Started Application in 5.41 seconds (JVM running for 7.152)
+2019-03-26 17:14:54 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:19}] to localhost:27017
+2019-03-26 17:27:43 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 8588 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:27:43 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:27:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:27:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:27:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68ms. Found 2 repository interfaces.
+2019-03-26 17:27:44 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$d632cd2c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:27:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:27:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:27:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:27:45 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:27:45 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:27:45 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2098 ms
+2019-03-26 17:27:46 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:27:46 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:27:46 [cluster-ClusterId{value='5c99fea252095b218cd9fbfb', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:20}] to localhost:27017
+2019-03-26 17:27:46 [cluster-ClusterId{value='5c99fea252095b218cd9fbfb', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2598500}
+2019-03-26 17:27:46 [cluster-ClusterId{value='5c99fea252095b218cd9fbfb', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:27:47 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:27:47 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:27:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:27:48 [main] INFO  com.misa.report.Application - Started Application in 5.541 seconds (JVM running for 7.875)
+2019-03-26 17:27:56 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:21}] to localhost:27017
+2019-03-26 17:28:16 [pool-2-thread-4] ERROR c.m.r.rabbitmq.ReportMessageQueue - null
+2019-03-26 17:32:27 [pool-2-thread-5] ERROR c.m.r.rabbitmq.ReportMessageQueue - null
+2019-03-26 17:33:20 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 9276 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:33:20 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:33:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:33:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:33:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71ms. Found 2 repository interfaces.
+2019-03-26 17:33:21 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$ade9c9ad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:33:22 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:33:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:33:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:33:22 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:33:22 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:33:22 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2048 ms
+2019-03-26 17:33:23 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:33:23 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:33:23 [cluster-ClusterId{value='5c99fff352095b243c8b7f11', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:22}] to localhost:27017
+2019-03-26 17:33:23 [cluster-ClusterId{value='5c99fff352095b243c8b7f11', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2420100}
+2019-03-26 17:33:23 [cluster-ClusterId{value='5c99fff352095b243c8b7f11', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:33:24 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:33:24 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:33:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:33:25 [main] INFO  com.misa.report.Application - Started Application in 5.282 seconds (JVM running for 7.005)
+2019-03-26 17:34:12 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:23}] to localhost:27017
+2019-03-26 17:35:53 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 10996 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:35:53 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:35:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:35:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:35:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61ms. Found 2 repository interfaces.
+2019-03-26 17:35:55 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$902365a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:35:58 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:35:58 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:35:58 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:35:58 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:35:58 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:35:58 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 5217 ms
+2019-03-26 17:36:00 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:36:00 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:36:00 [cluster-ClusterId{value='5c9a009052095b2af46e5a02', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:24}] to localhost:27017
+2019-03-26 17:36:00 [cluster-ClusterId{value='5c9a009052095b2af46e5a02', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3614100}
+2019-03-26 17:36:00 [cluster-ClusterId{value='5c9a009052095b2af46e5a02', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:36:01 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:36:02 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:36:02 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:36:02 [main] INFO  com.misa.report.Application - Started Application in 9.192 seconds (JVM running for 10.879)
+2019-03-26 17:36:29 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:25}] to localhost:27017
+2019-03-26 17:41:03 [main] INFO  com.misa.report.Application - Starting Application on DESKTOP-8PT3G6R with PID 12928 (started by Admin in C:\Users\Admin\Desktop\Code project\MISA.SME.Tested\Java.Report)
+2019-03-26 17:41:03 [main] INFO  com.misa.report.Application - No active profile set, falling back to default profiles: default
+2019-03-26 17:41:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-26 17:41:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 17:41:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 73ms. Found 2 repository interfaces.
+2019-03-26 17:41:04 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$a1f62381] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 17:41:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 80 (http)
+2019-03-26 17:41:05 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-26 17:41:05 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-26 17:41:05 [main] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-11.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk-11.0.2/bin/server;C:/Program Files/Java/jdk-11.0.2/bin;C:\Program Files\Java\jdk-11.0.2\bin;";C:\WINDOWS\system32;C:\WINDOWS;C:\windows\system32\wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\app\zookeeper-3.4.12\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\Wbem;c:\Windows\System32\wbem;C:\WINDOWS\System32\;SystemRoot%C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Program Files\Docker Toolbox;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\Downloads\spring-tool-suite-4-4.1.1.RELEASE-e4.10.0-win32.win32.x86_64\sts-4.1.1.RELEASE;;.]
+2019-03-26 17:41:05 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-03-26 17:41:05 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2116 ms
+2019-03-26 17:41:06 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-03-26 17:41:06 [main] INFO  org.mongodb.driver.cluster - Adding discovered server localhost:27017 to client view of cluster
+2019-03-26 17:41:06 [cluster-ClusterId{value='5c9a01c252095b32804bceb9', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:31}] to localhost:27017
+2019-03-26 17:41:06 [cluster-ClusterId{value='5c9a01c252095b32804bceb9', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 6]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2279200}
+2019-03-26 17:41:06 [cluster-ClusterId{value='5c9a01c252095b32804bceb9', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+2019-03-26 17:41:07 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 17:41:07 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 17:41:07 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 80 (http) with context path ''
+2019-03-26 17:41:07 [main] INFO  com.misa.report.Application - Started Application in 5.203 seconds (JVM running for 6.585)
+2019-03-26 17:41:45 [pool-2-thread-4] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:32}] to localhost:27017

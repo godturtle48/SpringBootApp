@@ -48,12 +48,11 @@ public class PaymentReceiptController {
 	@PostMapping("/addRef")
 	public Map<String, Object> addRef(@RequestBody PaymentReceiptCommand payment,HttpServletRequest httpServletRequest){
 		Map<String, Object> map=new HashMap<String, Object>();
-		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
-		String keyCompany= httpServletRequest.getHeader("keycompany");
-		double totalAmountReturn = 0;
+	
+		
 		if(payment.getRef()==null) {
 			
-			map.put("error", "RefType not empty!");
+			map.put("error", "RefType không được để trống");
 			return map;
 		}
 		if(payment.getPostedDate()==null) {
@@ -66,9 +65,10 @@ public class PaymentReceiptController {
 			map.put("error", "RefDate không được để trống");
 			return map;
 		}
-		if(payment.isPostedFinance()==null) {
+		String keydatabase=(String) httpServletRequest.getAttribute("keydatabase");
+		String keyCompany= httpServletRequest.getHeader("keycompany");
 			payment.setPostedFinance(Integer.valueOf(0));
-		}
+			double totalAmountReturn = 0;
 		
 		payment.setKeyCompany(keyCompany);
 		payment.setCreatedDate(new Date(new java.util.Date().getTime()));
@@ -147,18 +147,16 @@ public class PaymentReceiptController {
 				
 				if(payment.getPostedDate()==null) {
 
-					map.put("error", "PostedDate khong duoc de trong");
+					map.put("error", "PostedDate không được để trống");
 					return map;
 				}
 				if(payment.getRefDate()==null) {
 
-					map.put("error", "RefDate khong duoc de trong");
+					map.put("error", "RefDate không được để trống");
 					return map;
 				}
 				
-				if(payment.isPostedFinance()==null) {
-					payment.setPostedFinance(Integer.valueOf(0));
-				}
+				
 				
 				RefTypeCommand ref=refTypeService.findByID(payment.getRef().getRefTypeID(),keydatabase);
 				if(ref==null) {
@@ -174,12 +172,12 @@ public class PaymentReceiptController {
 					return map;
 				}
 				
+				payment.setPostedFinance(paymentOld.getIsPostedFinance());
+				
 				if(payment.getInvoices()==null) {
-					System.out.println("xuly");
 					payment.setTotalAmount(Double.valueOf(0));
 					payment.setTotalAmountOC(Double.valueOf(0));
 				}else {
-					System.out.println("invoice");
 					double amount=0;
 					List<InvoiceDetailCommand> invoices=payment.getInvoices();
 					for(int i=0;i<payment.getInvoices().size();i++) {
@@ -213,8 +211,7 @@ public class PaymentReceiptController {
 						payment.setTotalAmount(Double.valueOf(totalAmount));
 					}
 				}
-				
-				System.out.println("Truoc update");
+				                      
 				//set tăng version lên
 				payment.setVersion(Integer.valueOf(paymentOld.getVersion().intValue()+1));
 				System.out.println(payment.getVersion().intValue()+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++===");
@@ -247,7 +244,6 @@ public class PaymentReceiptController {
 				
 			int status=paymentService.delete(payment,keydatabase);
 			if(status==1) {
-
 				map.put("message", "success!");
 			}
 			else map.put("error", "fail!");
