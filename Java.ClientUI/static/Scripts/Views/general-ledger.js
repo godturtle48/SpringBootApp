@@ -47,17 +47,17 @@ class GeneralLedgerJS {
                     commonJS.hideMask($('#tblReport'));
                 }, 300);
                 debugger;
-                var report = result.data;
+                var report = result;
                 for (var i = 0; i < report.length; i++) {
                     dataReport.push({
                         ID: report[i].refID,
-                        PostedDate : convertDate(report[i].postedDate),                    
-                        RefDate : convertDate(report[i].refDate),
+                        PostedDate : raeJS.convertDate(report[i].postedDate),                    
+                        RefDate : raeJS.convertDate(report[i].refDate),
                         RefNo : report[i].refNoFinance,
                         JournalMemo : report[i].journalMemo,                               
                         RefTypeName : report[i].ref.refTypeName,
                         TotalAmount : report[i].totalAmountOC,                             
-                        CashBookPostedDate : convertDate(payment[i].createdDate),
+                        CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
                         EmployeeName : report[i].modifiedBy,
                     })
                 }

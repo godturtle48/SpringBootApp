@@ -1437,15 +1437,8 @@ class ReceiptsAndExpensesJS {
             $('.cls-gridPanel').scrollTop(currentScroll + scrollAmount);
         }
     }
-}
-
-var raeJS = new ReceiptsAndExpensesJS();
-    /*----------------------------------------------------------------------
-     * Tính năng thay đổi cách filter
-     * Created by NVLAM (27/02/2019)
-     */
     ///////ham convertData de hien thi chuan theo nguoi dung
-    function convertDate(date) {
+    convertDate(date) {
         date = new Date(date);
         day = date.getDate();
         month = date.getMonth()+1;
@@ -1455,12 +1448,19 @@ var raeJS = new ReceiptsAndExpensesJS();
         return day + "/" + month + "/" + year;
     };
 
-    function convertDateToAdd(dateToAdd) {
-    var  strdateToAdd=dateToAdd+"";
-        var dateArray=strdateToAdd.split('/');
-        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-        return dateArray;
+    convertDateToAdd(dateToAdd) {
+        var  strdateToAdd=dateToAdd+"";
+            var dateArray=strdateToAdd.split('/');
+            dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
+            return dateArray;
     };
+}
+
+var raeJS = new ReceiptsAndExpensesJS();
+    /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
 
     function deleteRef(){
         $('tbodyRAEDetail').empty();
