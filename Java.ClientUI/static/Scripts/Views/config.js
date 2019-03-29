@@ -9,4 +9,5 @@ MISA.Config={
 	//   paymentUrl:"http://testsmeapi.misa.com.vn/java",
 	loginUrl:"http://localhost:9001",
 	paymentUrl:"http://localhost:9003",
+	reportUrl:"http://localhost:9005",
 }

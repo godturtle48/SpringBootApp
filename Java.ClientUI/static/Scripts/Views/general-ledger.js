@@ -1,10 +1,6 @@
-$(document).ready(function(){
-    
+$(document).ready(function(){   
         $('#start-date').datepicker({dateFormat:"dd/mm/yy"}).datepicker();
-    
-    
-        $('#end-date').datepicker({dateFormat:"dd/mm/yy"}).datepicker();
-    
+        $('#end-date').datepicker({dateFormat:"dd/mm/yy"}).datepicker();  
 })
 var dataReport=[];
 class GeneralLedgerJS {
@@ -14,7 +10,6 @@ class GeneralLedgerJS {
         this.me = this;
     }
     initEvents() {
-
     }
     /*-----------------------------------------
      * Thực hiện load dữ liệu
@@ -27,53 +22,64 @@ class GeneralLedgerJS {
     }
     getData() {
         dataReport = [];
-        var size = 100;
+        // var startDate = $('#start-date').val();
+        // var endDate = $('#end-date').val();
+        var startDate = new Date('2018-12-01');
+        var endDate = new Date('2018-12-25');
+        var data={
+            "fromDate":startDate,
+            "toDate":endDate,
+        };
         commonJS.showMask($('#tblReport'));
-        // $.ajax({
-        //     method : "GET",
-        //     url : MediaSource.Config.paymentUrl + "/getAllPage_Size:" + size,
-        //     beforeSend: function(xhr) {
-        //         xhr.setRequestHeader('authorization', localStorage.getItem('authenCookie'));
-        //         xhr.setRequestHeader('keycompany', localStorage.getItem('workcompany'));
-        //     },
-        //     async: false,
-        //     success : function(result, txtStatus) {
-        //         setTimeout(function () {
-        //             commonJS.hideMask($('.#tblReport'));
-        //         }, 300);
-        //         var report = result.data;
-        //         sessionStorage.setItem('detailReport', JSON.stringify(report));
-        //         for (var i = 0; i < report.length; i++) {
-        //             dataReport.push({
-        //                 ID: report[i].refID,
-        //                 PostedDate : convertDate(report[i].postedDate),                    
-        //                 RefDate : convertDate(report[i].refDate),
-        //                 RefNo : report[i].refNoFinance,
-        //                 JournalMemo : report[i].journalMemo,                               
-        //                 RefTypeName : report[i].ref.refTypeName,
-        //                 TotalAmount : report[i].totalAmountOC,                             
-        //                 CashBookPostedDate : convertDate(payment[i].createdDate),
-        //                 EmployeeName : report[i].modifiedBy,
-        //             })
-        //         }
-        //     },
-        //     error: function() {
-        //         commonJS.hideMask($('#tblReport'));
-        //     }
-        // })
-        for (var i=0; i<100; i++) {
-            dataReport.push({
-                ID: '123123123',
-                PostedDate : '08/03/2019',                    
-                RefDate : '08/03/2019',
-                RefNo : 'PT' + i,
-                JournalMemo : "Phiếu thu nhân viên",                               
-                RefTypeName : "Phiếu thu",
-                TotalAmount : "123456",                             
-                CashBookPostedDate : '08/03/2019',
-                EmployeeName : 'Nguyễn Văn Lâm',
-            })
-        }
+        console.log('abc');
+        $.ajax({
+            method : "POST",
+            url : MISA.Config.reportUrl + "/report",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('authorization', localStorage.getItem('authenCookie'));
+                xhr.setRequestHeader('keycompany', "report");
+            },
+            data: JSON.stringify(data),
+            contentType:"application/json; charset:utf-8;",
+            async: false,
+            success : function(result, txtStatus) {
+                setTimeout(function () {
+                    commonJS.hideMask($('#tblReport'));
+                }, 300);
+                debugger;
+                var report = result.data;
+                for (var i = 0; i < report.length; i++) {
+                    dataReport.push({
+                        ID: report[i].refID,
+                        PostedDate : convertDate(report[i].postedDate),                    
+                        RefDate : convertDate(report[i].refDate),
+                        RefNo : report[i].refNoFinance,
+                        JournalMemo : report[i].journalMemo,                               
+                        RefTypeName : report[i].ref.refTypeName,
+                        TotalAmount : report[i].totalAmountOC,                             
+                        CashBookPostedDate : convertDate(payment[i].createdDate),
+                        EmployeeName : report[i].modifiedBy,
+                    })
+                }
+                // generalLedgerJS.buildDataIntoTable(dataReport);                
+            },
+            error: function() {
+                commonJS.hideMask($('#tblReport'));
+            }
+        })
+        // for (var i=0; i<100; i++) {
+        //     dataReport.push({
+        //         ID: '123123123',
+        //         PostedDate : '08/03/2019',                    
+        //         RefDate : '08/03/2019',
+        //         RefNo : 'PT' + i,
+        //         JournalMemo : "Phiếu thu nhân viên",                               
+        //         RefTypeName : "Phiếu thu",
+        //         TotalAmount : "123456",                             
+        //         CashBookPostedDate : '08/03/2019',
+        //         EmployeeName : 'Nguyễn Văn Lâm',
+        //     })
+        // }
     }
 
     buildDataIntoTable(data) {
@@ -82,7 +88,6 @@ class GeneralLedgerJS {
         var column = $('#tbodyRAE tr th');
         var rowTemplate = [];
         var fieldData = [];
-        var totalAmount = Number(data[0].TotalAmount);
         rowTemplate.push('<tr class="{0}">');
         // column.each(function (index, item) {
         //     fieldData.push($(item).attr('fieldData'));
