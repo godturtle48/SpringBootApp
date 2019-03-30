@@ -125,7 +125,12 @@ textarea {
     background-position: center center;
     background-repeat: no-repeat;
 }
-
+.btn-customer-erase-icon {
+    background-image: url('../../Contents/Icons/IconSprite.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-position: 0-2568px !important
+}
 .btn-customer-help-icon {
     background-image: url('../../Contents/Icons/iconHelp.png');
     background-position: center center;

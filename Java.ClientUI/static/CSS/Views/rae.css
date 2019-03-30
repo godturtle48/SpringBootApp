@@ -653,3 +653,7 @@ input[controltype="inputCombobox"]{
     top: 5px;
     cursor: pointer;
 }
+
+.delete-write {
+    color: green !important;
+}

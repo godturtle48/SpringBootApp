@@ -282,11 +282,14 @@ class Button {
             case 'Cancel':
                 html = html.format('Hủy bỏ','cancel-icon','btn-customer-icon-16','Esc');
                 break;
-            case 'Help':
-                html = html.format('Giúp','help-icon','btn-customer-icon-16','');
-                break;
+            // case 'Help':
+            //     html = html.format('Giúp','help-icon','btn-customer-icon-16','');
+            //     break;
             case 'Record':
                 html = html.format('Ghi Sổ','record-icon','btn-customer-icon-16','');
+                break;
+            case 'Erase':
+                html = html.format('Bỏ ghi','erase-icon','btn-customer-icon-16','');
                 break;
             default:
                 break;
@@ -310,10 +313,13 @@ class Button {
         if (commandName === 'Cancel') {
             this.class = 'btn-customer background-button-white';
         }
-        if (commandName === 'Help') {
+        // if (commandName === 'Help') {
+        //     this.class = 'btn-customer background-button-white';
+        // }
+        if (commandName === 'Record') {
             this.class = 'btn-customer background-button-white';
         }
-        if (commandName === 'Record') {
+        if (commandName === 'Erase') {
             this.class = 'btn-customer background-button-white';
         }
         // this.class = (commandName === 'Help' ? 'btn-customer btnHelp' : 'btn-customer');
@@ -356,7 +362,8 @@ class FormPopup {
                 new Button(me, 120, 'SaveAdd'),
                 new Button(me, 110, 'QuickEdit'),
                 new Button(me, 75, 'Record'),
-                new Button(me, 75, 'Help'),
+                new Button(me, 75, 'Erase'),
+                // new Button(me, 75, 'Help'),
                 new Button(me, 75, 'Cancel'),
                 ]
         }
@@ -403,11 +410,14 @@ class FormPopup {
     btnCancel_OnClick() {
         this.Form.dialog('close');
     };
-    btnHelp_OnClick() {
-        alert('Help');
-    };
+    // btnHelp_OnClick() {
+    //     alert('Help');
+    // };
     btnRecord_OnClick() {
-        this.Form.dialog('close');
+        alert('record');
+    }
+    btnRecord_OnClick() {
+        alert('erase');
     }
 }
 
