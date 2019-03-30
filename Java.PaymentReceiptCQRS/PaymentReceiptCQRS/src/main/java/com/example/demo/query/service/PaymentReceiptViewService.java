@@ -32,6 +32,8 @@ public class PaymentReceiptViewService {
 	PaymentReceiptViewRepository  paymentRepository;
 	
 	@Autowired
+	CustomerDetailsService customerDetailSv;
+	@Autowired
 	MongoTemplate mongoTemplate;
 	public long countByKeyCompany(String keyCompany) {
 		return paymentRepository.countByKeyCompany(keyCompany);
@@ -42,6 +44,12 @@ public class PaymentReceiptViewService {
 		int result=0;
 		try {
 			paymentRepository.insert(paymentReceipt);
+			try {
+				customerDetailSv.insertCustomerDetails(paymentReceipt);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 			result=1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,15 +108,6 @@ public class PaymentReceiptViewService {
 	//filter By any column
 	public List<PaymentReceiptView> getFilterPaymentReceipt(String keyCompany, List<FilterModel> filterData ){
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println("keyCompany: " + keyCompany );
-		System.out.println("============================get - here============================");
-		System.out.println("============================get - here============================");
-		System.out.println("============================get here============================");
-		System.out.println("============================get here============================");
-		System.out.println("============================get here============================");
-		System.out.println("============================get here============================");
-		System.out.println("============================get here============================");
-		System.out.println("============================get here============================");
 		Query query = new Query();
 		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
 		System.out.println("keyCompany: " + keyCompany );

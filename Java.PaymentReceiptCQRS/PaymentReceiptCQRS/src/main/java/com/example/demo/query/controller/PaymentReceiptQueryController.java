@@ -18,16 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.command.model.PaymentReceiptCommand;
+import com.example.demo.query.model.CustomerDetails;
 import com.example.demo.query.model.FilterModel;
 import com.example.demo.query.model.PaymentReceiptView;
+import com.example.demo.query.service.CustomerDetailsService;
 import com.example.demo.query.service.PaymentReceiptViewService;
 
 @RestController
 public class PaymentReceiptQueryController {
 
+	@Autowired
+	CustomerDetailsService customerDetailSv;
 	
-	
-		@Autowired
+	@Autowired
 	PaymentReceiptViewService paymentService;
 	
 	@GetMapping("/getAllPage_Size:{size}")
@@ -93,10 +96,23 @@ public class PaymentReceiptQueryController {
 		return filterMap;
 	}
 	
-	@PostMapping("/testDate")
-	public List<PaymentReceiptView> getListByDate(@RequestBody Map<String, String> data, HttpServletRequest httpServletRequest){
+	//load data to combobox
+	@GetMapping("/getCustomerDetail")
+	public List<CustomerDetails> getCustomerDetail(HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
-		return paymentService.getListByDate(keyCompany, data);
+		return customerDetailSv.getGeneralDetails(keyCompany);
 	}
 	
+	//load data to combobox by input and display by autocomplete
+	@GetMapping("/getCustomerDetailByInput:{input}")
+	public List<CustomerDetails> getCustomerDetailByInput(@PathVariable("input") String input, HttpServletRequest httpServletRequest){
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		return customerDetailSv.getGeneralDetails(keyCompany);
+	}
+	
+	public String generateCustomerDetail(HttpServletRequest httpServletRequest) {
+		String keyCompany= httpServletRequest.getHeader("keycompany");
+		customerDetailSv.generateCustomerDetail(keyCompany);
+		return "ok";
+	}
 }
