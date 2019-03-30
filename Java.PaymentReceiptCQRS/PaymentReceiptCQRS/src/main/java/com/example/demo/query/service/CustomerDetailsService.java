@@ -1,5 +1,6 @@
 package com.example.demo.query.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,18 @@ public class CustomerDetailsService {
 	String[] accountObjectNames = { "Công ty cổ phần MISA", "Công ty điện lực Hà Nội", "Công ty TNHH Hồng Hà",
 			"Công ty TNHH Lan Tân", "Công ty TNHH Minh Anh", "Công ty TNHH Minh Hương", "Công ty TNHH Phú Vinh",
 			"Công ty vận tải Sông Công", "Công ty cổ phần Thiên Tân", "Hoàng Ngọc Mai" };
-	String[] employeeID = { "Nguyễn Đình Quân", "Nguyễn Công Thành", "Nguyễn Công Thành", "Đoàn Văn Quân",
+	String[] employeeName = { "Nguyễn Đình Quân", "Nguyễn Công Thành", "Nguyễn Công Thành", "Đoàn Văn Quân",
 			"Đoàn Văn Quân", "Nguyễn Văn Lâm", "Trần Thị Huyền", "Trần Thị Huyền", "Nguyễn Thế Chí Dũng",
 			"Nguyễn Thế Chí Dũng" };
-	
+	int[] reasonTypeID= {1, 2, 3,4,5,6,7,8,9};
+	String[] journalMemo1 = {"Thu phí đào tạo phần mềm", "Thu tiền gửi", "thu thuế", "Thu tiền điện", "Thu phí gửi xe", 
+			"thu phí mặt bằng", "thu tiền nước", "thu thuế GTGT", "Thu khác"};
+	String[] journalMemo2 = {"Chi tiền điện", "Mua thiết bị mới", "Mua máy tính đào tạo", "Suất ăn trưa", "Chi tiền điện",
+			"Lì xì nhân viên", "Tạm ứng tháng lương", "Du lịch cho fresher", "Chi khác"};
+	String[] description1 = {"Thu phí đào tạo phần mềm", "Thu tiền gửi ngân hàng", "thu thuế", "Thu tiền điện", "Thu phí gửi xe", 
+			"thu phí mặt bằng", "thu tiền nước", "thu thuế GTGT", "Thu các khoản khác"};
+	String[] description2 = {"Chi tiền điện", "Mua thiết bị mới", "Mua máy tính đào tạo", "Suất ăn trưa", "Chi tiền điện",
+			"Lì xì nhân viên", "Tạm ứng tháng lương", "Du lịch cho fresher", "Chi các khoản khác"};
 	public int generateCustomerDetail(String keyCompany) {
 		try {
 			CustomerDetails customerDetails = new CustomerDetails();
@@ -48,8 +57,24 @@ public class CustomerDetailsService {
 				customerDetails.setAccountObjectAddress(accountObjectAddress[i]);
 				customerDetails.setAccountObjectID(accountObjectID[i]);
 				customerDetails.setAccountObjectContactName(accountObjectContactNames[i]);
-				customerDetails.setEmployeeID(employeeID[i]);
+				customerDetails.setEmployeeName(employeeName[i]);
 				customerDetails.setKeyCompany(keyCompany);
+				customerDetails.setAccountObjectName(accountObjectNames[i]);
+				customerDetails.setRefTypeID(1);
+				customerDetails.setJournalMemo(journalMemo1[i]);
+				customerDetails.setDescription(description1[i]);
+				customerRepo.insert(customerDetails);
+			}
+			for(int i = 0; i < 9; i++) {
+				customerDetails.setAccountObjectAddress(accountObjectAddress[i]);
+				customerDetails.setAccountObjectID(accountObjectID[i]);
+				customerDetails.setAccountObjectContactName(accountObjectContactNames[i]);
+				customerDetails.setEmployeeName(employeeName[i]);
+				customerDetails.setKeyCompany(keyCompany);
+				customerDetails.setAccountObjectName(accountObjectNames[i]);
+				customerDetails.setRefTypeID(2);
+				customerDetails.setJournalMemo(journalMemo2[i]);
+				customerDetails.setDescription(description2[i]);
 				customerRepo.insert(customerDetails);
 			}
 		}
@@ -66,16 +91,20 @@ public class CustomerDetailsService {
 		CustomerDetails customerDetails = new CustomerDetails();
 		try {
 			Query query = new Query();
-			query.addCriteria(Criteria.where("keycompany").is(payment.getKeyCompany()));
+			query.addCriteria(Criteria.where("keyCompany").is(payment.getKeyCompany()));
+			query.addCriteria(Criteria.where("accountObjectID").is(payment.getAccountObjectID()));
+			query.addCriteria(Criteria.where("refTypeID").is(payment.getRef().getRefTypeID()));
 			customerDetails = mongoTemplate.findOne(query, CustomerDetails.class);
 			if(customerDetails != null) {
 				customerDetails.setAccountObjectAddress(payment.getAccountObjectAddress());
 				customerDetails.setAccountObjectContactName(payment.getAccountObjectContactName());
 				customerDetails.setAccountObjectID(payment.getAccountObjectID());
 				customerDetails.setAccountObjectName(payment.getAccountObjectName());
-				customerDetails.setEmployeeID(payment.getCreatedBy());
+				customerDetails.setEmployeeName(payment.getCreatedBy());
 				customerDetails.setJournalMemo(payment.getJournalMemo());
-				customerDetails.setReasonTypeID(payment.getReasonTypeID());
+				customerDetails.setDescription(payment.getDescription());
+				customerDetails.setRefTypeID(payment.getRef().getRefTypeID());
+				customerDetails.setReasonTypeID(2);
 				customerRepo.save(customerDetails);
 			}
 			else {
@@ -83,10 +112,12 @@ public class CustomerDetailsService {
 				customerDetails.setAccountObjectContactName(payment.getAccountObjectContactName());
 				customerDetails.setAccountObjectID(payment.getAccountObjectID());
 				customerDetails.setAccountObjectName(payment.getAccountObjectName());
-				customerDetails.setEmployeeID(payment.getCreatedBy());
+				customerDetails.setEmployeeName(payment.getCreatedBy());
 				customerDetails.setJournalMemo(payment.getJournalMemo());
 				customerDetails.setKeyCompany(payment.getKeyCompany());
-				customerDetails.setReasonTypeID(payment.getReasonTypeID());
+				customerDetails.setReasonTypeID(2);
+				customerDetails.setRefTypeID(payment.getRef().getRefTypeID());
+				customerDetails.setDescription(payment.getDescription());
 				customerRepo.insert(customerDetails);
 			}	
 		}
@@ -95,23 +126,27 @@ public class CustomerDetailsService {
 		}
 	}
 	//detail for combobox
-	public List<CustomerDetails> getGeneralDetails(String keyCompany){
+	public List<CustomerDetails> getGeneralDetails(String keyCompany, int refTypeID){
 		Query query = new Query();
-		query.addCriteria(Criteria.where("keycompany").is(keyCompany));
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		query.addCriteria(Criteria.where("refTypeID").is(refTypeID));
 		query.limit(6);
-		List<CustomerDetails> cd = null;
+		List<CustomerDetails> cd = new ArrayList<>();
 		try {
 			cd = mongoTemplate.find(query, CustomerDetails.class);
+			return cd;
 		}
 		catch(Exception e){
-			
+			e.printStackTrace();
+			return null;
 		}
-		return cd;
+		
 	}
 	
-	public List<CustomerDetails> getGeneralDetailByInput(String keyCompany, String input){
+	public List<CustomerDetails> getGeneralDetailByInput(String keyCompany, String input, String refTypeID){
 		Query query = new Query();
-		query.addCriteria(Criteria.where("keycompany").is(keyCompany));
+		query.addCriteria(Criteria.where("keyCompany").is(keyCompany));
+		query.addCriteria(Criteria.where("refTypeID").is(refTypeID));
 		query.addCriteria(Criteria.where("accountObjectID").regex("^" + input));
 		query.limit(6);
 		List<CustomerDetails> cd = null;

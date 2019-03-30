@@ -46,6 +46,12 @@ services:
     container_name: java_payment_receipt_db
     image: mongo
     restart: always
+#
+    environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+    volumes:
+          - ./data/db:/data/db
     command: mongod --storageEngine wiredTiger --wiredTigerCacheSizeGB 1
     networks:
       - sme-network

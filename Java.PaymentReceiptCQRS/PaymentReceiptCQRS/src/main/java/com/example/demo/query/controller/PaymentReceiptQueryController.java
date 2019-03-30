@@ -97,22 +97,26 @@ public class PaymentReceiptQueryController {
 	}
 	
 	//load data to combobox
-	@GetMapping("/getCustomerDetail")
-	public List<CustomerDetails> getCustomerDetail(HttpServletRequest httpServletRequest){
+	@GetMapping("/getCustomerDetail:{refTypeID}")
+	public List<CustomerDetails> getCustomerDetail(@PathVariable("refTypeID") int refTypeID, HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
-		return customerDetailSv.getGeneralDetails(keyCompany);
+		System.out.println("reftypeID" + refTypeID);
+		return customerDetailSv.getGeneralDetails(keyCompany, refTypeID);
 	}
 	
 	//load data to combobox by input and display by autocomplete
-	@GetMapping("/getCustomerDetailByInput:{input}")
-	public List<CustomerDetails> getCustomerDetailByInput(@PathVariable("input") String input, HttpServletRequest httpServletRequest){
+	@GetMapping("/getCustomerDetailByInput:{input}_{refTypeID}")
+	public List<CustomerDetails> getCustomerDetailByInput(@PathVariable("input") String input,
+										@PathVariable("refTypeID") String refTypeID,
+										HttpServletRequest httpServletRequest){
 		String keyCompany= httpServletRequest.getHeader("keycompany");
-		return customerDetailSv.getGeneralDetails(keyCompany);
+		return customerDetailSv.getGeneralDetailByInput(keyCompany, input, refTypeID);
 	}
-	
+	@GetMapping("/generateCustomerDetail")
 	public String generateCustomerDetail(HttpServletRequest httpServletRequest) {
 		String keyCompany= httpServletRequest.getHeader("keycompany");
 		customerDetailSv.generateCustomerDetail(keyCompany);
+		System.out.println("gen");
 		return "ok";
 	}
 }

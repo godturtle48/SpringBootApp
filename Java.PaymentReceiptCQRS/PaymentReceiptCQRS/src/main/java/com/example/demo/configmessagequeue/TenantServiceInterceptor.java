@@ -19,6 +19,7 @@ public class TenantServiceInterceptor implements HandlerInterceptor{
 		 
 		 //authen
 		  if(JwtParser.getSubject(request,response)==null) {
+			  System.out.println("unauthoried");
 			  response.sendError(401,"UNAUTHORIZED REQUEST");	 
 		      return false;
 		  }

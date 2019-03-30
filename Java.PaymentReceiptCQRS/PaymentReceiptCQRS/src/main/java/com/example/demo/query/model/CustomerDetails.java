@@ -12,12 +12,20 @@ public class CustomerDetails {
 	private String accountObjectName;
 	private String accountObjectAddress;
 	private String accountObjectContactName;
-	private String reasonTypeID;
+	private int reasonTypeID;
 	private String journalMemo;
-	private String employeeID;
+	private String employeeName;
 	private String description;
+	private int refTypeID;
 	
 	
+	
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 	public String getKeyCompany() {
 		return keyCompany;
 	}
@@ -48,10 +56,11 @@ public class CustomerDetails {
 	public void setAccountObjectContactName(String accountObjectContactName) {
 		this.accountObjectContactName = accountObjectContactName;
 	}
-	public String getReasonTypeID() {
+	
+	public int getReasonTypeID() {
 		return reasonTypeID;
 	}
-	public void setReasonTypeID(String reasonTypeID) {
+	public void setReasonTypeID(int reasonTypeID) {
 		this.reasonTypeID = reasonTypeID;
 	}
 	public String getJournalMemo() {
@@ -60,17 +69,19 @@ public class CustomerDetails {
 	public void setJournalMemo(String journalMemo) {
 		this.journalMemo = journalMemo;
 	}
-	public String getEmployeeID() {
-		return employeeID;
-	}
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public int getRefTypeID() {
+		return refTypeID;
+	}
+	public void setRefTypeID(int refTypeID) {
+		this.refTypeID = refTypeID;
+	}
+	
 	
 }
