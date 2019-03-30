@@ -107,9 +107,9 @@ var showDetail=function(){
     //vị trí bản ghi trong sessionStorage
     var indexRef= $('.rowSelected').attr("indexref");
     var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
-    if(indexRef==null) return;
     var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
     var invoices=raeRef.invoices;
+    if(indexRef==null) return;
     // Lấy Detail từ Service:
     invoices.forEach(function(invoice){
         var detail = {
@@ -448,8 +448,9 @@ class ReceiptsAndExpensesJS {
         $('.combobox').removeClass('border-red');
         $('.mcombobox').removeClass('error-box');
         $('.combobox').removeAttr('title');
-        if (raeJS.editMode == 2) {
+
         //sua
+        if (raeJS.editMode == 2) {
             RefUpdate={};
             invoicesGlobal=[];
             $('#tbodyRAEDetail-popup').empty();
@@ -492,7 +493,7 @@ class ReceiptsAndExpensesJS {
                     }
                 });
             }
-        // Bind thông tin dữ liệu detail (for editing mode)
+            // Bind thông tin dữ liệu detail (for editing mode)
             var invoices=raeRef.invoices;
             indexInvoiceGlobal=0;
             if(invoices==null){         
@@ -526,9 +527,8 @@ class ReceiptsAndExpensesJS {
                     invoicesGlobal[index].status=1;//danh dau bi thay đổi;
                 })
                 indexInvoiceGlobal++;
-            
             })
-        } else if(raeJS.editMode == 3){
+        } else if(raeJS.editMode == 3) {
             //Thực hiện bind dữ liệu để nhân bản
             //nhân bản
             RefUpdate={};
@@ -800,8 +800,8 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
-        /// Editing Mode
         if (this.editMode ==1){
+            /// Chế độ thêm mới 
             var invoices = [];
             $('#tbodyRAEDetail-popup').find('tr').each(function(){
                 invoices.push({
@@ -812,12 +812,6 @@ class ReceiptsAndExpensesJS {
                 })
             });
             console.log(invoices);
-            //example
-            // "discription": "Huyen",
-            //        "amountOC": 1000,
-            //        "amount": 1004,
-            //        "accountObjectID": "accountObjectID5",
-            //        "sortOrder": 425
             var refTypeID = this.RefType;
             var refTypeName = "Thu";
             if (refTypeID == 2) refTypeName = "Chi";
@@ -876,7 +870,7 @@ class ReceiptsAndExpensesJS {
                             // ReceiptsAndExpensesJS.initEvents();  
 
                             commonJS.setFirstRowSelected($('#tblCustomerList'));
-                            
+                            $('.rowSelected').addClass('delete-write');
                             commonJS.showSuccessMsg('Thêm hóa đơn thành công');
                             setTimeout(function(){
                                 $('.ui-dialog-titlebar-close').trigger('click');
@@ -1166,6 +1160,7 @@ class ReceiptsAndExpensesJS {
                         +'</tr>');            
                     $('#tbodyRAE').find('tr:eq(1)').removeClass("rowSelected");  
                     commonJS.setFirstRowSelected($('#tblCustomerList'));
+                    $('.rowSelected').addClass('delete-write');
                     $('.btnRefresh').trigger('click');
                     commonJS.showSuccessMsg('Thêm hóa đơn thành công');
                     $('.text-required').removeClass('required-border');	
@@ -1192,10 +1187,12 @@ class ReceiptsAndExpensesJS {
      * Created by NVLAM (28/03/2018)
      */
     btnCharge_OnClick(event) {
-        var data = {};
+        var indexRef= $('.rowSelected').attr("indexref");
+        var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+        var refID=refData[parseInt(indexRef)].refID;
         $.ajax({
-            method:"GET",
-            url: MISA.Config.paymentUrl +"",
+            method:"POST",
+            url: MISA.Config.paymentUrl + "/write:{" + refID + "}",
             contentType: "application/json; charset=utf-8",
             beforeSend: function(xhr){
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
@@ -1204,7 +1201,8 @@ class ReceiptsAndExpensesJS {
             data: JSON.stringify(data),
             success: function(result, txtStatus, xhr){
                 console.log(result);
-
+                $('.rowSelected').removeClass('.delete-write');
+                commonJS.showSuccessMsg("Ghi sổ thành công ")
             },
             error: function(err){
                 console.log(err);
@@ -1212,8 +1210,89 @@ class ReceiptsAndExpensesJS {
             }
         })
     }
+    /* ----------------------------------------------------------------------
+     * Nút bỏ ghi sổ
+     * Created by NVLAM (30/03/2018)
+     */
     btnDiscard_OnClick(event) {
-        
+        var indexRef= $('.rowSelected').attr("indexref");
+        var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+        var refID=refData[parseInt(indexRef)].refID;
+        $.ajax({
+            method:"POST",
+            url: MISA.Config.paymentUrl + "/deleteWrite:{" + refID + "}",
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+            },
+            data: JSON.stringify(data),
+            success: function(result, txtStatus, xhr){
+                console.log(result);
+                $('.rowSelected').addClass('.delete-write');
+                commonJS.showSuccessMsg("Bỏ ghi sổ thành công ")
+            },
+            error: function(err){
+                console.log(err);
+                commonJS.showFailMsg("Bỏ ghi sổ không thành công");
+            }
+        })
+    }
+    /*-------------------------------------------------------------------
+     * Nhấn button Ghi sổ trong form
+     * Created by: NVLAM (13/03/2019)
+     */
+    btnRecord_OnClick(){
+        var indexRef= $('.rowSelected').attr("indexref");
+        var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+        var refID=refData[parseInt(indexRef)].refID;
+        $.ajax({
+            method:"POST",
+            url: MISA.Config.paymentUrl + "/write:{" + refID + "}",
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+            },
+            data: JSON.stringify(data),
+            success: function(result, txtStatus, xhr){
+                console.log(result);
+                $('.rowSelected').removeClass('.delete-write');
+                commonJS.showSuccessMsg("Ghi sổ thành công ")
+            },
+            error: function(err){
+                console.log(err);
+                commonJS.showFailMsg("Ghi sổ không thành công");
+            }
+        })
+    }
+    /*-------------------------------------------------------------------
+     * Nhấn bút button bỏ ghi trong form
+     * Created by: NVLAM (30/03/2019)
+     */
+    btnErase_OnClick() {
+        var indexRef= $('.rowSelected').attr("indexref");
+        var refData=JSON.parse(sessionStorage.getItem("detailRef"));
+        var refID=refData[parseInt(indexRef)].refID;
+        $.ajax({
+            method:"POST",
+            url: MISA.Config.paymentUrl + "/deleteWrite:{" + refID + "}",
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+            },
+            data: JSON.stringify(data),
+            success: function(result, txtStatus, xhr){
+                console.log(result);
+                $('.rowSelected').addClass('.delete-write');
+                commonJS.showSuccessMsg("Bỏ ghi sổ thành công ")
+            },
+            error: function(err){
+                console.log(err);
+                commonJS.showFailMsg("Bỏ ghi sổ không thành công");
+            }
+        })
     }
     btnCancel_OnClick(event) {
         $('.text-required').removeClass('required-border');	
@@ -1251,13 +1330,6 @@ class ReceiptsAndExpensesJS {
             $('.combobox-arrow-select').show();
             $('#btnPause .btn-customer-text').text('Hoãn');
         }
-    }
-    /*-------------------------------------------------------------------
-     * Nhấn button Ghi sổ
-     * Created by: NVLAM (13/03/2019)
-     */
-    btnRecord_Onclick(){
-         
     }
     btnRefresh_OnClick(event){
         fakeData = [];
@@ -1454,15 +1526,9 @@ class ReceiptsAndExpensesJS {
             dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
             return dateArray;
     };
-}
 
-var raeJS = new ReceiptsAndExpensesJS();
-    /*----------------------------------------------------------------------
-     * Tính năng thay đổi cách filter
-     * Created by NVLAM (27/02/2019)
-     */
-
-    function deleteRef(){
+    /* Xoa chung tu*/
+    deleteRef(){
         $('tbodyRAEDetail').empty();
         var indexRef= $('.rowSelected').attr("indexref");
         var refData=JSON.parse(sessionStorage.getItem("detailRef"));
@@ -1494,6 +1560,13 @@ var raeJS = new ReceiptsAndExpensesJS();
                 }
             })
     }
+}
+
+var raeJS = new ReceiptsAndExpensesJS();
+    /*----------------------------------------------------------------------
+     * Tính năng thay đổi cách filter
+     * Created by NVLAM (27/02/2019)
+     */
 
     /*
     * multifield filter
@@ -1650,7 +1723,7 @@ var raeJS = new ReceiptsAndExpensesJS();
         if(+recentPage > 1){
             $('#currentPage').val(Number(recentPage)-Number(1));
             getPage();
-             raeJS.buildDataIntoTable(fakeData);
+            raeJS.buildDataIntoTable(fakeData);
             checkTbar();
         }
     })
@@ -1675,7 +1748,7 @@ var raeJS = new ReceiptsAndExpensesJS();
         if(+recentPage > 1){
             $('#currentPage').val(Number(1));
             getPage();
-             raeJS.buildDataIntoTable(fakeData);
+            raeJS.buildDataIntoTable(fakeData);
             checkTbar();
         }
     })
