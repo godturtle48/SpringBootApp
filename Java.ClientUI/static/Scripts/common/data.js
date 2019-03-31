@@ -1,7 +1,9 @@
 ﻿﻿var AccountObjectData = [];
 var Reason = [];
 
-$(document).ready(function(){
+//get data for conbobox
+var getCustomerDetail = function(){
+    dataResource.AccountObject = [];
     $.ajax({
         method: 'get',
         url: MISA.Config.paymentUrl + "/getCustomerDetail:2",
@@ -11,7 +13,6 @@ $(document).ready(function(){
             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
         },
         success: function(res){
-            // AccountObjectData = res;
             console.log(res);
             for (var i = 0; i < res.length; i++) {
                  if(res[i] == null) break;                    
@@ -31,7 +32,8 @@ $(document).ready(function(){
                             EmployeeName: res[i].employeeName                      
                     });                   
                 })(i)                 
-            }            
+            }
+                        
         },
         error: function(){
 
@@ -70,10 +72,8 @@ $(document).ready(function(){
         error: function(){
 
         }
-    })
-
-
-})
+    });
+}
 
 
 var dataResource = Object.create({

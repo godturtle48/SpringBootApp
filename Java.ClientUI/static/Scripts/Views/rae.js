@@ -21,8 +21,10 @@ $(document).ready(function(){
         }
         
     })
-    //$('#tblCustomerList').on('click', { scope: '#btnAdd' }, raeJS.btnAdd_OnClick().call());
-    //raeJS.btnAdd_OnClick();
+    $('.toolbar-item').click(function(){
+        getCustomerDetail();
+    });
+   
     $('#addtr').on('keydown', function() {
         if (event.keyCode === 13) {
             $('#addtr').trigger('click');
