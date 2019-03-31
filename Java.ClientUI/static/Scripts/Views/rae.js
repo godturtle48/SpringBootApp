@@ -107,6 +107,7 @@ var showDetail=function(){
     //vị trí bản ghi trong sessionStorage
     var indexRef= $('.rowSelected').attr("indexref");
     var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
+    if(indexRef == null) return;
     var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
     var invoices=raeRef.invoices;
     if(indexRef==null) return;
@@ -166,6 +167,7 @@ var showDetail=function(){
 
 var getPageHome = function() {
     // code ajax
+    var raeDate = new DateControll();
     fakeData=[];
 	var page = $('#currentPage').val();
     var size = $('#inputTotalRecord').val();
@@ -195,15 +197,15 @@ var getPageHome = function() {
 			for (var i = 0; i < payment.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : raeJS.convertDate(payment[i].postedDate),                    
-					RefDate : raeJS.convertDate(payment[i].refDate),
+					PostedDate : raeDate.convertDate(payment[i].postedDate),                    
+					RefDate : raeDate.convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
 					JournalMemo : payment[i].journalMemo,                               //Diễn giải   ??? What JournalMemo
 					RefTypeName : payment[i].ref.refTypeName,
 					TotalAmount : payment[i].totalAmountOC,                             //Số tiền    
 					AccountObjectName : payment[i].accountObjectName,
 					ReasonTypeName : payment[i].journalMemo,                            //Lý do thu/chi
-					CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
+					CashBookPostedDate : raeDate.convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
 					DepartmentName : payment[i].accountObjectAddress
 				})
@@ -242,6 +244,7 @@ var getPageHome = function() {
 */
 
 var getPage = function() {
+    
 	totalPage = 0;
 	// code ajax
 	fakeData = [];
@@ -263,15 +266,15 @@ var getPage = function() {
 			for (var i = 0; i < result.length; i++) {
 				fakeData.push({
 					ID : payment[i].refID,
-					PostedDate : raeJS.convertDate(payment[i].postedDate),
-					RefDate : raeJS.convertDate(payment[i].refDate),
+					PostedDate : raeDate.convertDate(payment[i].postedDate),
+					RefDate : raeDate.convertDate(payment[i].refDate),
 					RefNo : payment[i].refNoFinance,
 					JournalMemo : payment[i].journalMemo,
 					RefTypeName : payment[i].ref.refTypeName,
 					TotalAmount : payment[i].totalAmountOC,
 					AccountObjectName : payment[i].accountObjectName,
 					ReasonTypeName : payment[i].journalMemo,
-					CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
+					CashBookPostedDate : raeDate.convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
 					DepartmentName : payment[i].accountObjectName
 				})
@@ -305,6 +308,7 @@ class ReceiptsAndExpensesJS {
         this.loadData();
         this.me = this;
         this.editMode = null;
+        
     };
     /*
      * Thiết lập form chi tiết
@@ -800,6 +804,7 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
+        var raeDate = new DateControll();
         if (this.editMode ==1){
             /// Chế độ thêm mới 
             var invoices = [];
@@ -818,8 +823,8 @@ class ReceiptsAndExpensesJS {
             var ref = {"refTypeID": refTypeID, "refTypeName": refTypeName};
             var data = {"ref":ref,
                 "invoices":invoices,
-                "refDate": convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
-                "postedDate": convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
+                "refDate": raeDate.convertDateToAdd($('input[dataindex="RefDate"]').val()),             //Ngày chứng từ 
+                "postedDate": raeDate.convertDateToAdd($('input[dataindex="PostedDate"]').val()),       //Ngày hoạch toán
                 "refNoFinance": $('input[dataindex="RefNo"]').val(),                            //Số chứng từ
                 "accountObjectID": $('#txtAccountObjectCode').val(),                            //ID đối tượng (CTY MISA)
                 "accountObjectName": $('#txtAccountObjectName').val(),                          //Tên đối tượng (Công ty CP MISA)
@@ -853,14 +858,14 @@ class ReceiptsAndExpensesJS {
                         if(!result.error){
                             $('#tbodyRAE').prepend(
                                 '<tr indexref="" class="">'
-                                    +'<td class="no-border-left text-center">'+ convertDate(data.refDate)+'</td>'
-                                    +'<td class="text-center">' + convertDate(data.postedDate) + '</td>'
+                                    +'<td class="no-border-left text-center">'+ raeDate.convertDate(data.refDate)+'</td>'
+                                    +'<td class="text-center">' + raeDate.convertDate(data.postedDate) + '</td>'
                                     +'<td>' + data.refNoFinance + '</td>'
                                     +'<td>' + data.journalMemo + '</td>'
                                     +'<td class="text-right">' + result.totalAmount + '</td>'
                                     +'<td>' + data.accountObjectName + '</td>'
                                     +'<td>' + data.journalMemo + '</td>'
-                                    +'<td class="text-center">' + convertDate(data.createdDate)+ '</td>'
+                                    +'<td class="text-center">' + raeDate.convertDate(data.createdDate)+ '</td>'
                                     +'<td>' + data.ref.refTypeName + '</td>'
                                     +'<td>' + data.refNoFinance + '</td>'
                                     +'<td>' + data.accountObjectName +'</td>'   
@@ -1509,23 +1514,7 @@ class ReceiptsAndExpensesJS {
             $('.cls-gridPanel').scrollTop(currentScroll + scrollAmount);
         }
     }
-    ///////ham convertData de hien thi chuan theo nguoi dung
-    convertDate(date) {
-        date = new Date(date);
-        day = date.getDate();
-        month = date.getMonth()+1;
-        year = date.getFullYear();
-        if (day < 10) day = "0" + day;
-        if (month < 10) month = "0" + month;
-        return day + "/" + month + "/" + year;
-    };
-
-    convertDateToAdd(dateToAdd) {
-        var  strdateToAdd=dateToAdd+"";
-            var dateArray=strdateToAdd.split('/');
-            dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-            return dateArray;
-    };
+    
 
     /* Xoa chung tu*/
     deleteRef(){
@@ -1562,6 +1551,25 @@ class ReceiptsAndExpensesJS {
     }
 }
 
+class DateControll{
+    ///////ham convertData de hien thi chuan theo nguoi dung
+    convertDate(date) {
+        date = new Date(date);
+        var day = date.getDate();
+        var month = date.getMonth()+1;
+        var year = date.getFullYear();
+        if (day < 10) day = "0" + day;
+        if (month < 10) month = "0" + month;
+        return day + "/" + month + "/" + year;
+    };
+
+    convertDateToAdd(dateToAdd) {
+        var  strdateToAdd=dateToAdd+"";
+        var dateArray=strdateToAdd.split('/');
+        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
+        return dateArray;
+    };
+}
 var raeJS = new ReceiptsAndExpensesJS();
     /*----------------------------------------------------------------------
      * Tính năng thay đổi cách filter

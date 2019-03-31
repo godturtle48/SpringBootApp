@@ -1,88 +1,87 @@
-﻿// var AccountObjectData = [];
-// var Reason = [];
+﻿﻿var AccountObjectData = [];
+var Reason = [];
 
-// $(document).ready(function(){
-//     $.ajax({
-//         method: 'get',
-//         url: MISA.Config.paymentUrl + "/loadComboboxAddPayment",
-//         beforeSend : function(xhr) {
-// 			xhr.setRequestHeader('authorization', localStorage
-//                     .getItem("authenCookie"));
-//             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
-//         },
-//         success: function(res){
-//             // AccountObjectData = res;
-//             // console.log(res);
-//             for (var i = 0; i < res.length; i++) {                     
-//                 (function () {                        
-//                     dataResource.AccountObject.push({                            
-//                         AccountObjectNumber: 1,
-//                         AccountObjectCode: res[i][0],
-//                         AccountObjectName: res[i][1],
-//                         AccountObjectType:2,
-//                         Address: res[i][2],
-//                         ContactName:res[i][3]                       
-//                     });   
-//                      dataResource.Reason.push({                            
-//                             ReasonID: res[i][4],
-//                             RefType: 2,
-//                             ReasonName: res[i][5],
-//                             // Description: res[i][5],
-//                             EmployeeName: res[i][3]                      
-//                     });                   
-//                 })(i)                 
-//             }            
-//         },
-//         error: function(){
+$(document).ready(function(){
+    $.ajax({
+        method: 'get',
+        url: MISA.Config.paymentUrl + "/getCustomerDetail:2",
+        beforeSend : function(xhr) {
+			xhr.setRequestHeader('authorization', localStorage
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+        },
+        success: function(res){
+            // AccountObjectData = res;
+            console.log(res);
+            for (var i = 0; i < res.length; i++) {
+                 if(res[i] == null) break;                    
+                (function () {                        
+                    dataResource.AccountObject.push({                            
+                        AccountObjectNumber: 1,
+                        AccountObjectCode: res[i].accountObjectID,
+                        AccountObjectName: res[i].accountObjectName,
+                        AccountObjectType:2,
+                        Address: res[i].accountObjectAddress,
+                        ContactName:res[i].accountObjectContactName                       
+                    });   
+                     dataResource.Reason.push({                            
+                            ReasonID: res[i].journalMemo,
+                            RefType: 2,
+                            ReasonName: res[i].description,
+                            EmployeeName: res[i].employeeName                      
+                    });                   
+                })(i)                 
+            }            
+        },
+        error: function(){
 
-//         }
-//     });
-//     $.ajax({
-//         method: 'get',
-//         url: MISA.Config.paymentUrl + "/loadComboboxAddReceipt",
-//         beforeSend : function(xhr) {
-// 			xhr.setRequestHeader('authorization', localStorage
-//                     .getItem("authenCookie"));
-//             xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
-//         },
-//         success: function(res){
-//             AccountObjectData = res;
-//             // console.log(AccountObjectData);
-//             for (var i = 0; i < AccountObjectData.length; i++) {                     
-//                 (function () {                        
-//                     dataResource.AccountObject.push({                            
-//                         AccountObjectNumber: 1,
-//                         AccountObjectCode: res[i][0],
-//                         AccountObjectName: res[i][1],
-//                         AccountObjectType:1,
-//                         Address: res[i][2],
-//                         ContactName:res[i][3]                       
-//                     });    
-//                     dataResource.Reason.push({                            
-//                         ReasonID: res[i][4],
-//                         RefType: 1,
-//                         ReasonName: res[i][5],
-//                         // Description: res[i][5],
-//                         EmployeeName: res[i][3]                      
-//                     });                   
-//                 })(i)                 
-//             }            
-//         },
-//         error: function(){
+        }
+    });
+    $.ajax({
+        method: 'get',
+        url: MISA.Config.paymentUrl + "/getCustomerDetail:1",
+        beforeSend : function(xhr) {
+			xhr.setRequestHeader('authorization', localStorage
+                    .getItem("authenCookie"));
+            xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+        },
+        success: function(res){
+            AccountObjectData = res;
+            // console.log(AccountObjectData);
+            for (var i = 0; i < AccountObjectData.length; i++) {                     
+                (function () {                        
+                    dataResource.AccountObject.push({                            
+                        AccountObjectNumber: 1,
+                        AccountObjectCode: res[i].accountObjectID,
+                        AccountObjectName: res[i].accountObjectName,
+                        AccountObjectType:1,
+                        Address: res[i].accountObjectAddress,
+                        ContactName:res[i].accountObjectContactName                       
+                    });    
+                    dataResource.Reason.push({                            
+                        ReasonID: res[i].journalMemo,
+                        RefType: 1,
+                        ReasonName: res[i].description,
+                        EmployeeName: res[i].employeeName                    
+                    });                   
+                })(i)                 
+            }            
+        },
+        error: function(){
 
-//         }
-//     })
-
-
-// })
+        }
+    })
 
 
-// var dataResource = Object.create({
-//     AccountObject: [
+})
+
+
+var dataResource = Object.create({
+    AccountObject: [
 
        
-//     ],
-//     Reason: [
-//     ]
+    ],
+    Reason: [
+    ]
 
-// })
+})
