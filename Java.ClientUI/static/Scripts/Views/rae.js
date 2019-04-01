@@ -129,8 +129,8 @@ var showDetail=function(){
     var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
     if(indexRef == null) return;
     var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
+    if(raeRef.invoices==null) return;
     var invoices=raeRef.invoices;
-    if(indexRef==null) return;
     // Lấy Detail từ Service:
     invoices.forEach(function(invoice){
         var detail = {
@@ -429,8 +429,13 @@ class ReceiptsAndExpensesJS {
         //hiển thị chi tiết dòng đầy tiên
         
         this.rowRAE_OnClick();
-     
-
+        if ($(this).hasClass('delete-write')){
+            $('#btnDiscard').attr('disabled','disabled');
+            $('#btnCharge').removeAttr('disabled');
+        } else {
+            $('#btnCharge').attr('disabled','disabled');
+            $('#btnDiscard').removeAttr('disabled');
+        }
     };
     //append data vào đầu bảng
     prependDataIntoTable(data) {

@@ -46,7 +46,7 @@ services:
 # ######################################### 
   report-api:
     image: 10.0.6.27:50000/javateam/java_report_api:5.94
-    container_name: payment_container
+    container_name: report_container
     build: ./Java.Report
     restart: always
     networks:
