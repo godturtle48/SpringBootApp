@@ -1230,7 +1230,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').removeClass('.delete-write');
@@ -1258,7 +1258,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').addClass('.delete-write');
@@ -1286,7 +1286,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').removeClass('.delete-write');
@@ -1314,7 +1314,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').addClass('.delete-write');
