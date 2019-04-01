@@ -86,7 +86,25 @@ $(document).ready(function(){
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
-       
+class DateControll{
+    ///////ham convertData de hien thi chuan theo nguoi dung
+    convertDate(date) {
+        date = new Date(date);
+        var day = date.getDate();
+        var month = date.getMonth()+1;
+        var year = date.getFullYear();
+        if (day < 10) day = "0" + day;
+        if (month < 10) month = "0" + month;
+        return day + "/" + month + "/" + year;
+    };
+
+    convertDateToAdd(dateToAdd) {
+        var  strdateToAdd=dateToAdd+"";
+        var dateArray=strdateToAdd.split('/');
+        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
+        return dateArray;
+    };
+}  
     var fakeData = [];
     var totalRecord = 0;
     var totalPage = 0;
@@ -207,7 +225,8 @@ var getPageHome = function() {
 					AccountObjectName : payment[i].accountObjectName,
 					ReasonTypeName : payment[i].journalMemo,                            //Lý do thu/chi
 					CashBookPostedDate : raeDate.convertDate(payment[i].createdDate),
-					RefNoFiance : payment[i].refNoFinance,
+                    RefNoFiance : payment[i].refNoFinance,
+                    IsPostedFinance : payment[i].isPostedFinance,
 					DepartmentName : payment[i].accountObjectAddress
 				})
             }
@@ -273,7 +292,8 @@ var getPage = function() {
 					JournalMemo : payment[i].journalMemo,
 					RefTypeName : payment[i].ref.refTypeName,
 					TotalAmount : payment[i].totalAmountOC,
-					AccountObjectName : payment[i].accountObjectName,
+                    AccountObjectName : payment[i].accountObjectName,
+                    IsPostedFinance : payment[i].isPostedFinance,
 					ReasonTypeName : payment[i].journalMemo,
 					CashBookPostedDate : raeDate.convertDate(payment[i].createdDate),
 					RefNoFiance : payment[i].refNoFinance,
@@ -389,7 +409,7 @@ class ReceiptsAndExpensesJS {
         })
         data.forEach(function (item, index) {
             var htmlItem = [];
-            htmlItem.push('<tr indexRef="{0}" class="{1}" refTypeName={2}  >'.format(index, index % 2 === 0 ? '' : 'row-highlight', item.RefTypeName));
+            htmlItem.push('<tr indexRef="{0}" class="{1}" refTypeName={2}  isPostedFinance={3}>'.format(index, index % 2 === 0 ? '' : 'row-highlight', item.RefTypeName, item.isPostedFinance));
             fieldData.forEach(function (valueField, indexField) {
                 if (indexField === 7 || indexField === 1) htmlItem.push('<td class="{1}">{0}</td>'.format(item[valueField],"text-center"));
                 else if (indexField === 4) htmlItem.push('<td class="{1}">{0}</td>'.format(Number(item[valueField]).formatMoney(),"text-right"));
@@ -425,7 +445,7 @@ class ReceiptsAndExpensesJS {
         })
         data.forEach(function (item, index) {
             var htmlItem = [];
-            htmlItem.push('<tr indexRef=' + index + ' class="{0}">'.format(index % 2 === 0 ? '' : 'row-highlight'));
+            htmlItem.push('<tr indexRef=' + index + ' class="{0}" isPostedFinance={1}>'.format(index % 2 === 0 ? '' : 'row-highlight', Number(0)));
             fieldData.forEach(function (valueField, indexField) {
                 if (indexField === 3) {htmlItem.push('<td class="no-border-left {1}" >{0}</td>'.format(item[valueField], "text-right"));}
                 else
@@ -483,7 +503,8 @@ class ReceiptsAndExpensesJS {
                 PostedDate: raeDate.convertDate(raeRef.postedDate),
                 RefDate: raeDate.convertDate(raeRef.refDate),
                 RefNo: raeRef.refNoFinance,
-                modifiedDate: raeRef.modifiedDate
+                modifiedDate: raeRef.modifiedDate,
+                isPostedFinance: $('.rowSelected').attr('isPostedFinance')
             }
             
             // Bind thông tin dữ liệu master (for editing mode)
@@ -563,8 +584,8 @@ class ReceiptsAndExpensesJS {
                 PostedDate: raeDate.convertDate(raeRef.postedDate),
                 RefDate: raeDate.convertDate(raeRef.refDate),
                 RefNo: raeRef.refNoFinance,
-                modifiedDate: raeRef.modifiedDate
-
+                modifiedDate: raeRef.modifiedDate,
+                isPostedFinance: raeRef.isPostedFinance
             }
             // Bind thông tin dữ liệu master:
             var dataIndexs = $('input[dataindex]');
@@ -836,7 +857,8 @@ class ReceiptsAndExpensesJS {
                 "journalMemo": $('#txtReasonName').val(),                                       //Tên lý do
                 "documentInclude": "documentInclude3.doc",                                  //useless?
                 "exchangeRate": null,                                                       //useless?
-                "editVersion": new Date(),                                         //useless?
+                "editVersion": new Date(),                                                  //useless?
+                "isPostedFinance": Number(0),                              
                 "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
                 "createdDate": new Date(),                                                  //useless?
                 "createdBy": "created Person",                                              //useless?
@@ -859,7 +881,7 @@ class ReceiptsAndExpensesJS {
                         ////// prepend latest added record to master ---------- PROBLEM: must be refreshed
                         if(!result.error){
                             $('#tbodyRAE').prepend(
-                                '<tr indexref="" class="">'
+                                '<tr indexref="" class="" isPostedFinance ="{0}">'.format(data.isPostedFinance)
                                     +'<td class="no-border-left text-center">'+ raeDate.convertDate(data.refDate)+'</td>'
                                     +'<td class="text-center">' + raeDate.convertDate(data.postedDate) + '</td>'
                                     +'<td>' + data.refNoFinance + '</td>'
@@ -967,6 +989,7 @@ class ReceiptsAndExpensesJS {
             RefUpdate.journalMemo=$('#txtReasonName').val();
             RefUpdate.editVersion=new Date();
             RefUpdate.modifiedDate=new Date();
+            RefUpdate.isPostedFinance= Number(0);
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
             RefUpdate.invoices=invoicesData;
 
@@ -1054,6 +1077,7 @@ class ReceiptsAndExpensesJS {
             RefUpdate.journalMemo=$('#txtReasonName').val();
             RefUpdate.editVersion=new Date();
             RefUpdate.createdDate=new Date();
+            // RefUpdate.isPostFinance = 
             RefUpdate.createdBy=$('#txtEmployeeName').val();
             RefUpdate.modifiedDate=new Date();
             RefUpdate.modifiedBy=$('#txtEmployeeName').val();
@@ -1136,7 +1160,8 @@ class ReceiptsAndExpensesJS {
                 "createdDate": new Date(),                                                  //useless?
                 "createdBy": "created Person",                                              //useless?
                 "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
-                "modifiedBy": "modified Person"                                             //useless?
+                "modifiedBy": "modified Person",                                             //useless?
+                "isPostedFinance": Number(0)
             };
         $.ajax({
             method:"post",
@@ -1152,7 +1177,7 @@ class ReceiptsAndExpensesJS {
                 //prepend master
                 if(!result.error){
                     $('#tbodyRAE').prepend(
-                        '<tr indexref="" class="">'
+                        '<tr indexref="" class="" isPostedFinance="">'.format(data.isPostedFinance)
                             +'<td class="no-border-left text-center">'+ raeDate.convertDate(data.refDate) + '</td>'
                             +'<td class="text-center">'+ raeDate.convertDate(data.postedDate) + '</td>'
                             +'<td>' + data.refNoFinance + '</td>'
@@ -1516,26 +1541,6 @@ class ReceiptsAndExpensesJS {
             $('.cls-gridPanel').scrollTop(currentScroll + scrollAmount);
         }
     }
-}
-
-class DateControll{
-    ///////ham convertData de hien thi chuan theo nguoi dung
-    convertDate(date) {
-        date = new Date(date);
-        var day = date.getDate();
-        var month = date.getMonth()+1;
-        var year = date.getFullYear();
-        if (day < 10) day = "0" + day;
-        if (month < 10) month = "0" + month;
-        return day + "/" + month + "/" + year;
-    };
-
-    convertDateToAdd(dateToAdd) {
-        var  strdateToAdd=dateToAdd+"";
-        var dateArray=strdateToAdd.split('/');
-        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-        return dateArray;
-    };
 }
 var raeJS = new ReceiptsAndExpensesJS();
     /*----------------------------------------------------------------------
