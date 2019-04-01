@@ -126,7 +126,7 @@ textarea {
     background-repeat: no-repeat;
 }
 .btn-customer-erase-icon {
-    background-image: url('../../Contents/Icons/IconSprite.png');
+    background-image: url('../../Contents/Images/IconSprite.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-position: 0-2568px !important
@@ -162,7 +162,7 @@ textarea {
     background-image: url('../../Contents/Images/IconSprite.png');
     background-position: center center;
     background-repeat: no-repeat;
-    background-position: 0-1872px !important;
+    background-position: 0-1088px !important;
 }
 .btn-primary {
     color: #2baaed;
