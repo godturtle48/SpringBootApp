@@ -86,25 +86,7 @@ $(document).ready(function(){
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
-class DateControll{
-    ///////ham convertData de hien thi chuan theo nguoi dung
-    convertDate(date) {
-        date = new Date(date);
-        var day = date.getDate();
-        var month = date.getMonth()+1;
-        var year = date.getFullYear();
-        if (day < 10) day = "0" + day;
-        if (month < 10) month = "0" + month;
-        return day + "/" + month + "/" + year;
-    };
 
-    convertDateToAdd(dateToAdd) {
-        var  strdateToAdd=dateToAdd+"";
-        var dateArray=strdateToAdd.split('/');
-        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-        return dateArray;
-    };
-}  
     var fakeData = [];
     var totalRecord = 0;
     var totalPage = 0;
