@@ -127,8 +127,8 @@ public class GenerateData {
 			
 			for(int i=1;i<=8;i++) {
 				for(int j=1;j<=12;j++) {
-					//for(int k=1;k<=5210;k++) {
-					for(int k=1;k<=5;k++) {
+					for(int k=1;k<=5210;k++) {
+//					for(int k=1;k<=5;k++) {
 						try {
 			
 						int tmpIndex = rand.nextInt(length);

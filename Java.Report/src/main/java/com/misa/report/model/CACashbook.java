@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,6 +22,7 @@ public class CACashbook {
 	private Integer isPostedManagement;
 	@NotNull
 	private String keyCompany;
+	@Indexed
 	@NotNull
 	private String refID;	
 	private int refType;// ví dụ 1010 ,1020
