@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,8 +22,10 @@ public class GeneralLedger {
 	private String generalLedgerID;
 	@NotNull
 	private String keyCompany;
+	@Indexed
 	@NotNull
 	private String refID;
+	@Indexed
 	@NotNull
 	private String refDetailID;
 	@NotNull

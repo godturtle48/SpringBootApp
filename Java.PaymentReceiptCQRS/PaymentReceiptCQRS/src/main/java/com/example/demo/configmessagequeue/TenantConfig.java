@@ -18,7 +18,7 @@ public class TenantConfig {
 		  configuration.setProperty("hibernate.connection.driver_class",
 			      "org.mariadb.jdbc.Driver");
 			  configuration.setProperty("hibernate.connection.url",
-			      "jdbc:mariadb://"+host+":"+port+"/"+keydatabase+"?createDatabaseIfNotExist=" + traceWithActiveSpanOnly);
+			      "jdbc:mariadb://mariadb-payment:3306/"+keydatabase+"?createDatabaseIfNotExist=" + traceWithActiveSpanOnly);
 			  configuration.setProperty("hibernate.connection.username", username);
 			  configuration.setProperty("hibernate.connection.password", password);
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");

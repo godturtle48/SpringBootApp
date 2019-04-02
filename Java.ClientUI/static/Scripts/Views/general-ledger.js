@@ -37,7 +37,7 @@ class GeneralLedgerJS {
             url : MISA.Config.reportUrl + "/report",
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('authorization', localStorage.getItem('authenCookie'));
-                xhr.setRequestHeader('keycompany', "report");
+                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
             data: JSON.stringify(data),
             contentType:"application/json; charset:utf-8;",
