@@ -27,6 +27,7 @@ function checkPhone(sender, e) {
         return false;
     } else if (!filter_phone.test(phone)) {
         validationJS.showError(sender, "Số điện thoại không hợp lệ!");
+        
         return false;
     } else {
         validationJS.hideError(sender);
