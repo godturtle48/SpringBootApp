@@ -5,7 +5,7 @@
 var MISA=MISA || {}
 
 MISA.Config={
-	   loginUrl:"http://testsmeapi.misa.com.vn/java",
+	loginUrl:"http://testsmeapi.misa.com.vn/java",
 	  paymentUrl:"http://testsmeapi.misa.com.vn/java",
 	  reportUrl:"http://testsmeapi.misa.com.vn/java"
 	// loginUrl:"http://localhost:9001",

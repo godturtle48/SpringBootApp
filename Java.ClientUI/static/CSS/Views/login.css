@@ -20,15 +20,16 @@
     }
     .register-content  .main-section .inner-section {
         height: 100%;
+        background: #f7f8fb;
     }
     .register-content .product-images {
-        padding: 70px 0px;
+        padding: 90px 60px 65px 90px;
     }
     .register-content .login-form {
         border-radius: 4px;
-        border: 1px solid #ededed;
+        /* border: 1px solid #ededed; */
         padding: 50px;
-        min-width: 450px;
+        /* min-width: 450px; */
         height: 100%;
         background: #fff;
     }
@@ -36,6 +37,7 @@
             font-size: 24px;
             font-weight: 400;
             margin: 10px 0px 30px 0px;
+            text-transform: uppercase;
         }
             .logo-img {
                 height: 50px;
@@ -60,7 +62,7 @@
             position:absolute;
             pointer-events:none;
             top: 17px;
-            left: 90px;
+            left: 97px;
             transition:0.2s ease all;
             -moz-transition:0.2s ease all;
             background-color: #fff;
@@ -141,9 +143,11 @@
     background-color: #1a73e8;
     color: #fff;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 800;
     padding: 10px 40px;
     margin: 25px 0 5px 0;
+    text-transform: uppercase;
+    width: 70%;
 }
 
 @media screen and (max-width: 991px) {
