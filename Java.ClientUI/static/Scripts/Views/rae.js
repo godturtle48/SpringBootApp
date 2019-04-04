@@ -814,7 +814,6 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
-        var raeDate = new DateControll();
         if (this.editMode ==1){
             /// Chế độ thêm mới 
             var invoices = [];
