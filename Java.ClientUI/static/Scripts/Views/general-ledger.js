@@ -1,8 +1,31 @@
+$(document).ready(function(){
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
+            success: function(data, status, xhr){
+                $('.user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+            window.location.href="/";
+        }
+        
+    })
 $(document).ready(function(){   
         $('#start-date').datepicker({dateFormat:"dd/mm/yy"}).datepicker();
         $('#end-date').datepicker({dateFormat:"dd/mm/yy"}).datepicker();  
 })
 var dataReport=[];
+
 class GeneralLedgerJS {
     constructor() {
         this.initEvents();
@@ -16,7 +39,6 @@ class GeneralLedgerJS {
      * Created by: NVLAM (22/03/2019)
      */
     loadData() {
-        dataReport = [];
         this.getData();
         this.buildDataIntoTable(dataReport);
     }
@@ -24,7 +46,9 @@ class GeneralLedgerJS {
         dataReport = [];
         // var startDate = $('#start-date').val();
         // var endDate = $('#end-date').val();
-        var startDate = new Date('2018-12-01');
+        var raeDate = new DateControll();
+        
+        var startDate = new Date('2018-06-01');
         var endDate = new Date('2018-12-25');
         var data={
             "fromDate":startDate,
@@ -37,7 +61,8 @@ class GeneralLedgerJS {
             url : MISA.Config.reportUrl + "/report",
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('authorization', localStorage.getItem('authenCookie'));
-                xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
+                xhr.setRequestHeader('keycompany', localStorage.getItem("workCompanyID"));
+
             },
             data: JSON.stringify(data),
             contentType:"application/json; charset:utf-8;",
@@ -47,23 +72,24 @@ class GeneralLedgerJS {
                     commonJS.hideMask($('#tblReport'));
                 }, 300);
                 debugger;
-                var report = result;
+                var report = result.data;
                 for (var i = 0; i < report.length; i++) {
                     dataReport.push({
                         ID: report[i].refID,
-                        PostedDate : raeJS.convertDate(report[i].postedDate),                    
-                        RefDate : raeJS.convertDate(report[i].refDate),
-                        RefNo : report[i].refNoFinance,
-                        JournalMemo : report[i].journalMemo,                               
-                        RefTypeName : report[i].ref.refTypeName,
+                        PostedDate : raeDate.convertDate(report[i].postedDate),                    
+                        RefDate : raeDate.convertDate(report[i].refDate),
+                        RefNo : report[i].refNo,
+                        JournalMemo : report[i].description,                               
+                        // RefTypeName : report[i].ref.refTypeName,
                         TotalAmount : report[i].totalAmountOC,                             
-                        CashBookPostedDate : raeJS.convertDate(payment[i].createdDate),
-                        EmployeeName : report[i].modifiedBy,
+                        CashBookPostedDate : raeDate.convertDate(report[i].postedDate),
+                        EmployeeName : report[i].contactName
                     })
                 }
                 // generalLedgerJS.buildDataIntoTable(dataReport);                
             },
             error: function() {
+                debugger;
                 commonJS.hideMask($('#tblReport'));
             }
         })
@@ -115,7 +141,7 @@ class GeneralLedgerJS {
                 + '<td></td>'
                 + '<td class="text-right">{0}</td>'.format(Number(data[key].TotalAmount).formatMoney())
                 + '<td class="text-right"></td>'
-                + '<td class="text-right">{0}</td>'.format(Number(totalAmount).formatMoney())
+                + '<td class="text-right">{0}</td>'.format(Number(data[key].totalAmount).formatMoney())
                 + '<td>{0}</td>'.format(data[key].EmployeeName)
                 + '</tr>');
         });  

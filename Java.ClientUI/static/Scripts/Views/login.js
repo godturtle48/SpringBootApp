@@ -19,7 +19,6 @@
 				}
 			})	
 		}
-	
 		//Check Enter key is pressed
 		$('.login-form').keypress(function (e) {
 			if (e.which == 13 || e.keyCode == 13)  // the enter key code
