@@ -1,24 +1,24 @@
 /* Version 09/03/2019*/
 $(document).ready(function(){
-    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-    //     $.ajax({
-    //         method: "GET",
-    //         url:MISA.Config.loginUrl+"/api/home",
-    //         beforeSend: function(xhr) {
-    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-    //         },
-    //         success: function(data, status, xhr){
-    //             $('.user-info').text((data.email).split("@")[0]);
-    //             //ajax goi company
-    //         },
-    //         error: function(err, stt, xhr){
-    //             window.location.href="/";
-    //         }
-    //     })  
-    // }
-    // else{
-    //         window.location.href="/";
-    //     }
+    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+        $.ajax({
+            method: "GET",
+            url:MISA.Config.loginUrl+"/api/home",
+            beforeSend: function(xhr) {
+                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+            },
+            success: function(data, status, xhr){
+                $('.user-info').text((data.email).split("@")[0]);
+                //ajax goi company
+            },
+            error: function(err, stt, xhr){
+                window.location.href="/";
+            }
+        })  
+    }
+    else{
+            window.location.href="/";
+        }
         
     })
     $('.toolbar-item').click(function(){
