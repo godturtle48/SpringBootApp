@@ -46,7 +46,6 @@ services:
     container_name: mongo-java
     image: mongo
     restart: always
-#
     environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
