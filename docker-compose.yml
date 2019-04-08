@@ -4,7 +4,7 @@ networks:
   external: true    
 services:
   config-api:
-    image: 52.230.4.199:50000/javateam/java_config_api:v1.0
+    image: 52.230.4.199:50000/javateam/java_config_api:v5.0
     container_name: config_container
     build: ./Java.Config/config
     restart: always
@@ -16,7 +16,7 @@ services:
 ################ Authent
 ######################################### 
   authent-api:
-    image: 52.230.4.199:50000/javateam/java_authent_api:3.0
+    image: 52.230.4.199:50000/javateam/java_authent_api:v5.0
     container_name: authent_container
     build: ./Java.Authentication/register
     restart: always
@@ -33,7 +33,7 @@ services:
 # ################ Payment
 # ######################################### 
   payment-api:
-    image: 52.230.4.199:50000/javateam/java_payment_api:v1.0
+    image: 52.230.4.199:50000/javateam/java_payment_api:v5.0
     container_name: payment_container
     build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
     restart: always
@@ -45,7 +45,7 @@ services:
 # ################ Report
 # ######################################### 
   report-api:
-    image: 52.230.4.199:50000/javateam/java_report_api:v1.0
+    image: 52.230.4.199:50000/javateam/java_report_api:v5.0
     container_name: report_container
     build: ./Java.Report
     restart: always
@@ -57,7 +57,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 52.230.4.199:50000/javateam/java_ui:3.0
+    image: 52.230.4.199:50000/javateam/java_ui:v5.0
     restart: always
     container_name: ui_container
     build: ./Java.ClientUI
