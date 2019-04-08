@@ -39,7 +39,7 @@ public class CreateMessageQueue {
 	public static void init() {
 		ConnectionFactory factory = new ConnectionFactory();
 		// config rabbitmq address
-		factory.setHost("rabbit1");
+		factory.setHost("52.230.4.199");
 		factory.setPort(5672);
 		factory.setUsername("guest");
 		factory.setPassword("guest");
@@ -164,7 +164,7 @@ public class CreateMessageQueue {
 							if (paymentOld != null) {
 								try {
 									paymentRepository.deleteByRefID(paymentReceipt.getRefID());
-									channel.basicAck(deliveryTag, false);
+									// channel.basicAck(deliveryTag, false);
 								} catch (Exception e) {
 									// bi loi gui lai goi tin
 									produceMsg(message);

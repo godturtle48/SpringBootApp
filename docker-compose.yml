@@ -1,10 +1,10 @@
-version: "2"
+version: "3"
 networks: 
  sme-network:
   external: true    
 services:
   config-api:
-    image: 10.0.6.27:50000/javateam/java_config_api:5.3
+    image: 52.230.4.199:50000/javateam/java_config_api:v1.0
     container_name: config_container
     build: ./Java.Config/config
     restart: always
@@ -16,12 +16,12 @@ services:
 ################ Authent
 ######################################### 
   authent-api:
-    image: 10.0.6.27:50000/javateam/java_authent_api:5.1
+    image: 52.230.4.199:50000/javateam/java_authent_api:3.0
     container_name: authent_container
     build: ./Java.Authentication/register
     restart: always
-    mem_limit: 500000000
-    mem_reservation: 300m
+    #mem_limit: 500000000
+    #mem_reservation: 300m
     # cpus: 0.5
     # cpu_shares: 73
     # cpuset: 0,1
@@ -33,7 +33,7 @@ services:
 # ################ Payment
 # ######################################### 
   payment-api:
-    image: 10.0.6.27:50000/javateam/java_payment_api:5.9
+    image: 52.230.4.199:50000/javateam/java_payment_api:v1.0
     container_name: payment_container
     build: ./Java.PaymentReceiptCQRS/PaymentReceiptCQRS
     restart: always
@@ -45,8 +45,8 @@ services:
 # ################ Report
 # ######################################### 
   report-api:
-    image: 10.0.6.27:50000/javateam/java_report_api:5.94
-    container_name: payment_container
+    image: 52.230.4.199:50000/javateam/java_report_api:v1.0
+    container_name: report_container
     build: ./Java.Report
     restart: always
     networks:
@@ -57,7 +57,7 @@ services:
 ################ UI
 ######################################### 
   app-ui:
-    image: 10.0.6.27:50000/javateam/java_ui:5.93
+    image: 52.230.4.199:50000/javateam/java_ui:3.0
     restart: always
     container_name: ui_container
     build: ./Java.ClientUI

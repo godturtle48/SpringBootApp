@@ -5,7 +5,7 @@
     $('.check-password').on('blur', validationJS.checkPassword);
     $('.check-re-password').on('blur', validationJS.checkRePassword);
 })
-
+var errorSection = $('#boxValidationSummary');
 var validationJS = Object.create({
     requiredValidation: function (sender, e) {
         if (!$(this).val()) {
@@ -32,11 +32,15 @@ var validationJS = Object.create({
         if (!$(nextElement).hasClass('error-box')) {
             $(that).after('<div class="error-box"></div>');
         }
+        errorSection.show();
+        errorSection.html(err);
     }, 
     hideError: function(that) {
         $(that).removeClass('required-border');
         $(that).next('.error-box').remove();
         $(that).parent().removeAttr('title');
+        errorSection.hide();
+        errorSection.html('');
     },
     checkPhone: function (sender, e) {
         let phone = $(this).val();

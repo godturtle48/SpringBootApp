@@ -128,7 +128,7 @@ public class RemoteMessageQueue {
 	public static boolean genaratePaymentDatabaseServerInfo(){
 		int numServer=1;
 		for (int i=0;i<numServer;i++) {
-			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("db_container",""+(3306+i),"root","misasme");
+			PaymentDatabaseServerInfo paymentDatabaseServerInfo1 =new PaymentDatabaseServerInfo("mariadb-payment",""+(3306+i),"root","misasme");
 			if (!paymentDatabaseServerInfoService.save(paymentDatabaseServerInfo1)) return false;
 		}
 		return true;

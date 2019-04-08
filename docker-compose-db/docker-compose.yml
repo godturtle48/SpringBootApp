@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 networks:
   sme-network:
@@ -9,7 +9,7 @@ services:
 ## MySQL: The database used by SMEAuthenAPI
 ########################################### 
   authen-db:
-    container_name: db_container
+    container_name: mariadb-payment
     image: mariadb:10.4
     networks:
       - sme-network
@@ -18,7 +18,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: misasme
     volumes:
-      - /var/data/mariadb:/var/lib/mariadb
+      - /var/data/mysqlJAVA:/var/lib/mysql
     ports:
     - "13306:3306"
 #    - "33060:33060"
@@ -43,15 +43,14 @@ services:
 ## MongoDB
 ########################################### 
   payment-receipt-db:
-    container_name: java_payment_receipt_db
+    container_name: mongo-java
     image: mongo
     restart: always
-#
     environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
     volumes:
-          - ./data/db:/data/db
+          - /var/data/mongoJAVA:/data/db
     command: mongod --storageEngine wiredTiger --wiredTigerCacheSizeGB 1
     networks:
       - sme-network

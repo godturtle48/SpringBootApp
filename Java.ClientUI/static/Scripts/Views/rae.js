@@ -86,25 +86,7 @@ $(document).ready(function(){
         // $( "#txtAccountObjectCode").autocomplete({
             //     source: dataResource.AccountObject.AccountObjectCode
             // });
-class DateControll{
-    ///////ham convertData de hien thi chuan theo nguoi dung
-    convertDate(date) {
-        date = new Date(date);
-        var day = date.getDate();
-        var month = date.getMonth()+1;
-        var year = date.getFullYear();
-        if (day < 10) day = "0" + day;
-        if (month < 10) month = "0" + month;
-        return day + "/" + month + "/" + year;
-    };
 
-    convertDateToAdd(dateToAdd) {
-        var  strdateToAdd=dateToAdd+"";
-        var dateArray=strdateToAdd.split('/');
-        dateArray = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-        return dateArray;
-    };
-}  
     var fakeData = [];
     var totalRecord = 0;
     var totalPage = 0;
@@ -129,8 +111,8 @@ var showDetail=function(){
     var refData=JSON.parse(sessionStorage.getItem("detailRef"));            //get array of ref
     if(indexRef == null) return;
     var raeRef=refData[parseInt(indexRef)];                                 //get ref based on index
+    if(raeRef.invoices==null) return;
     var invoices=raeRef.invoices;
-    if(indexRef==null) return;
     // Lấy Detail từ Service:
     invoices.forEach(function(invoice){
         var detail = {
@@ -429,8 +411,13 @@ class ReceiptsAndExpensesJS {
         //hiển thị chi tiết dòng đầy tiên
         
         this.rowRAE_OnClick();
-     
-
+        if ($(this).hasClass('delete-write')){
+            $('#btnDiscard').attr('disabled','disabled');
+            $('#btnCharge').removeAttr('disabled');
+        } else {
+            $('#btnCharge').attr('disabled','disabled');
+            $('#btnDiscard').removeAttr('disabled');
+        }
     };
     //append data vào đầu bảng
     prependDataIntoTable(data) {
@@ -827,7 +814,6 @@ class ReceiptsAndExpensesJS {
      * Thực hiện CẤT:
      */
     btnSave_OnClick() {
-        var raeDate = new DateControll();
         if (this.editMode ==1){
             /// Chế độ thêm mới 
             var invoices = [];
@@ -1230,7 +1216,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').removeClass('.delete-write');
@@ -1258,7 +1244,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').addClass('.delete-write');
@@ -1286,7 +1272,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').removeClass('.delete-write');
@@ -1314,7 +1300,7 @@ class ReceiptsAndExpensesJS {
                 xhr.setRequestHeader("authorization", localStorage.getItem("authenCookie"));
                 xhr.setRequestHeader("keycompany", localStorage.getItem("workCompanyID"));
             },
-            data: JSON.stringify(data),
+            data: JSON.stringify(refData),
             success: function(result, txtStatus, xhr){
                 console.log(result);
                 $('.rowSelected').addClass('.delete-write');

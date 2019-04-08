@@ -254,3 +254,7 @@ button[role="removeInvoice"] {
 .msg-fail {
     color: red;
 }
+
+a[disabled="disabled"] {
+    pointer-events: none;
+}

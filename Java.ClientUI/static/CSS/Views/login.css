@@ -1,6 +1,6 @@
 ﻿.register-content {
     height: calc(100vh - 209px);
-    min-height: 589px;
+    min-height: 640px;
     padding: 60px 0px;
     background: url(../../Contents/Images/Untitled-2_nen.png);
     background-size: cover;
@@ -20,15 +20,16 @@
     }
     .register-content  .main-section .inner-section {
         height: 100%;
+        background: #f7f8fb;
     }
     .register-content .product-images {
-        padding: 70px 0px;
+        padding: 90px 60px 65px 90px;
     }
     .register-content .login-form {
         border-radius: 4px;
-        border: 1px solid #ededed;
+        /* border: 1px solid #ededed; */
         padding: 50px;
-        min-width: 450px;
+        /* min-width: 450px; */
         height: 100%;
         background: #fff;
     }
@@ -36,13 +37,14 @@
             font-size: 24px;
             font-weight: 400;
             margin: 10px 0px 30px 0px;
+            text-transform: uppercase;
         }
             .logo-img {
                 height: 50px;
                 width: 50px;
             }
         .register-content .login-form .username-area {
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
         .register-content .login-form input{
             display:block;
@@ -60,7 +62,7 @@
             position:absolute;
             pointer-events:none;
             top: 17px;
-            left: 100px;
+            left: 97px;
             transition:0.2s ease all;
             -moz-transition:0.2s ease all;
             background-color: #fff;
@@ -71,7 +73,7 @@
                 border: 2px solid #1a73e8;
             }
             .register-content .login-form input:focus ~ .label, .register-content .login-form input:valid ~ .label {
-                top: -10px;
+                transform: translateY(-28px);
                 font-size:12px;
                 color: #1a73e8;
             }
@@ -141,7 +143,15 @@
     background-color: #1a73e8;
     color: #fff;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 800;
     padding: 10px 40px;
     margin: 25px 0 5px 0;
+    text-transform: uppercase;
+    width: 70%;
+}
+
+@media screen and (max-width: 991px) {
+    .register-content .label {
+        left: 120px;
+    }
 }
