@@ -19,7 +19,7 @@ public class ConfigMessageQueue {
 	
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("rabbit1");	
+	    factory.setHost("10.108.179.29");	
 	    factory.setPort(5672);
 	    factory.setUsername("guest");
 	    factory.setPassword("guest");

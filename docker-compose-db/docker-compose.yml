@@ -9,7 +9,7 @@ services:
 ## MySQL: The database used by SMEAuthenAPI
 ########################################### 
   authen-db:
-    container_name: mariadb-payment
+    container_name: 10.111.188.10
     image: mariadb:10.4
     networks:
       - sme-network
@@ -29,7 +29,7 @@ services:
     image: "rabbitmq:3-management"
     networks:
       - sme-network
-    hostname: "rabbit1"
+    hostname: "10.108.179.29"
     restart: always
     environment:
       # RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
@@ -43,7 +43,7 @@ services:
 ## MongoDB
 ########################################### 
   payment-receipt-db:
-    container_name: mongo-java
+    container_name: 10.102.159.118
     image: mongo
     restart: always
     environment:
