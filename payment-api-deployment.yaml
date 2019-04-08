@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: payment-api
+  name: payment-api
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: payment-api
+    spec:
+      containers:
+      - image: 10.0.6.27:50000/javateam/java_payment_api:6.0
+        name: payment-container
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

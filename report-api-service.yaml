@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: report-api
+  name: report-api
+spec:
+  ports:
+  - name: "9005"
+    port: 9005
+    targetPort: 80
+  selector:
+    io.kompose.service: report-api
+status:
+  loadBalancer: {}

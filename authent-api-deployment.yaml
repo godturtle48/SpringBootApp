@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: authent-api
+  name: authent-api
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: authent-api
+    spec:
+      containers:
+      - image: 10.0.6.27:50000/javateam/java_authent_api:5.1
+        name: authent-container
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 500e6
+      restartPolicy: Always
+status: {}
