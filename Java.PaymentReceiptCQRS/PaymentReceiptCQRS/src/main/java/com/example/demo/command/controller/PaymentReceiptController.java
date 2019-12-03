@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.command.model.GeneralDetailCommand;
@@ -24,10 +23,6 @@ import com.example.demo.command.model.RefTypeCommand;
 import com.example.demo.command.service.InvoiceDetailCommandService;
 import com.example.demo.command.service.PaymentReceiptCommandService;
 import com.example.demo.command.service.RefTypeCommandService;
-import com.example.demo.rabbidmq.CommandMessageQueue;
-import com.example.demo.rabbidmq.CreateMessageQueue;
-import com.example.demo.rabbidmq.EventType;
-import com.example.demo.rabbidmq.MessageFormat;
 
 
 

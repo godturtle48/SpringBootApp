@@ -5,16 +5,12 @@ import java.util.List;
 
 
 
-import org.hibernate.annotations.Index;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.RefTypeCommand;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /*

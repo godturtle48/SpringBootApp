@@ -1,28 +1,28 @@
 /* Version 09/03/2019*/
 $(document).ready(function(){
-    if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
-        $.ajax({
-            method: "GET",
-            url:MISA.Config.loginUrl+"/api/home",
-            beforeSend: function(xhr) {
-                  xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
-            },
-            success: function(data, status, xhr){
-                $('.user-info').text((data.email).split("@")[0]);
-                //ajax goi company
-            },
-            error: function(err, stt, xhr){
-                window.location.href="/";
-            }
-        })  
-    }
-    else{
-            window.location.href="/";
-        }
+    // if(localStorage.getItem("authenCookie") != "" && localStorage.getItem("authenCookie") != null){
+    //     $.ajax({
+    //         method: "GET",
+    //         url:MISA.Config.loginUrl+"/api/home",
+    //         beforeSend: function(xhr) {
+    //               xhr.setRequestHeader('authorization',localStorage.getItem("authenCookie"));
+    //         },
+    //         success: function(data, status, xhr){
+    //             $('.user-info').text((data.email).split("@")[0]);
+    //             //ajax goi company
+    //         },
+    //         error: function(err, stt, xhr){
+    //             window.location.href="/";
+    //         }
+    //     })  
+    // }
+    // else{
+    //         window.location.href="/";
+    //     }
         
     })
     $('.toolbar-item').click(function(){
-        getCustomerDetail();
+        // getCustomerDetail();
     });
    
     $('#addtr').on('keydown', function() {
@@ -820,7 +820,7 @@ class ReceiptsAndExpensesJS {
             $('#tbodyRAEDetail-popup').find('tr').each(function(){
                 invoices.push({
                     "discription":$(this).children('td:eq(0)').children('input').val(),
-                    "amount":$(this).children('td:eq(2)').children('input').val(), 
+                    "amount":$(this).children('td:eq(3)').children('input').val(), 
                     "amountOC":$(this).children('td:eq(3)').children('input').val(),
                     "accountObjectID":$(this).children('td:eq(4)').children('input').val()
                 })
@@ -847,9 +847,9 @@ class ReceiptsAndExpensesJS {
                 "isPostedFinance": Number(0),                              
                 "refOrdef": totalRecord + 1,                                                    //Tổng số record (hiện thông tin)
                 "createdDate": new Date(),                                                  //useless?
-                "createdBy": "created Person",                                              //useless?
+                "createdBy": $('#txtEmployeeName').val(),                                              //useless?
                 "modifiedDate": new Date(),                                                        //modifiedDate for sorting record
-                "modifiedBy": "modified Person"                                             //useless?
+                "modifiedBy": $('#txtEmployeeName').val()                                             //useless?
             };
             console.log(data);
             if (data.refNoFinance != '') {
@@ -886,28 +886,32 @@ class ReceiptsAndExpensesJS {
 
                             commonJS.setFirstRowSelected($('#tblCustomerList'));
                             $('.rowSelected').addClass('delete-write');
-                            commonJS.showSuccessMsg('Thêm hóa đơn thành công');
+                            commonJS.showSuccessMsg('Thêm chứng từ thành công');
                             setTimeout(function(){
                                 $('.ui-dialog-titlebar-close').trigger('click');
                             }, 700)
                             
                         }
                         else{
-                            commonJS.showFailMsg("Thêm hóa đơn không thành công");
+                            if (result.message === 'payment is existed') {
+                                commonJS.showFailMsg("Chứng từ đã tồn tại")
+                            } else {
+                                commonJS.showFailMsg("Thêm chứng từ không thành công");
+                            }
                             $('.ui-dialog-titlebar-close').trigger('click');
                             $('.tbar-refresh').trigger('click');
-                            // commonJS.showSuccessMsg('Thêm hóa đơn thành công');
+                            // commonJS.showSuccessMsg('Thêm chứng từ thành công');
                         }
                         
                     },
                     error: function(err){
                         console.log(err);
-                        commonJS.showFailMsg("Thêm hóa đơn không thành công");
+                        commonJS.showFailMsg("Thêm chứng từ không thành công");
                     }
                 })
             } else {
                 $('.text-required').trigger('blur');
-                commonJS.showFailMsg("Thêm hóa đơn không thành công");
+                commonJS.showFailMsg("Thêm chứng từ không thành công");
             }
         } else if(this.editMode == 2){                 ///////btnSave for edit
             //che do sửa
@@ -994,12 +998,12 @@ class ReceiptsAndExpensesJS {
                     if(result.message){
                         $('.ui-dialog-titlebar-close').trigger('click');
                         $('.tbar-refresh').trigger('click');
-                        commonJS.showSuccessMsg("Sửa hóa đơn thành công");
+                        commonJS.showSuccessMsg("Sửa chứng từ thành công");
                     }
                 },
                 error: function(err){
                     console.log(err);
-                    commonJS.showFailMsg("Sửa hóa đơn không thành công");
+                    commonJS.showFailMsg("Sửa chứng từ không thành công");
                 }
             })
         } else if(this.editMode ==3){                ///////btnSave for duplicate
@@ -1081,14 +1085,14 @@ class ReceiptsAndExpensesJS {
                 async:false,
                 success: function(result, txtStatus, xhr){
                     if(result.message){
-                        commonJS.showSuccessMsg("Nhân bản hóa đơn thành công");                      
+                        commonJS.showSuccessMsg("Nhân bản chứng từ thành công");                      
                         $('.ui-dialog-titlebar-close').trigger('click');
                         $('.tbar-refresh').trigger('click');
                     }
                 },
                 error: function(err){
                     console.log(err);
-                    commonJS.showFailMsg("Nhân bản hóa đơn không thành công");
+                    commonJS.showFailMsg("Nhân bản chứng từ không thành công");
                 }
             })
         }
@@ -1180,7 +1184,7 @@ class ReceiptsAndExpensesJS {
                     commonJS.setFirstRowSelected($('#tblCustomerList'));
                     $('.rowSelected').addClass('delete-write');
                     $('.btnRefresh').trigger('click');
-                    commonJS.showSuccessMsg('Thêm hóa đơn thành công');
+                    commonJS.showSuccessMsg('Thêm chứng từ thành công');
                     $('.text-required').removeClass('required-border');	
                     $('.text-required').next('.error-box').remove();
                     
@@ -1192,7 +1196,7 @@ class ReceiptsAndExpensesJS {
                     editMode=1;//danh dau them mơi
                 }
                 else{
-                    commonJS.showFailMsg("Lỗi khi thêm hóa đơn");
+                    commonJS.showFailMsg("Lỗi khi thêm chứng từ");
                 }
             },
             error: function(err){
@@ -1562,17 +1566,17 @@ var raeJS = new ReceiptsAndExpensesJS();
                 data: JSON.stringify(data),
                 success: function(result, txtStatus, xhr){
                     if(result.message){
-                        commonJS.showSuccessMsg('Xóa hóa đơn thành công');
+                        commonJS.showSuccessMsg('Xóa chứng từ thành công');
                         $('.rowSelected').remove();
                         $('.tbar-refresh').trigger('click');
                     }else{
-                        commonJS.showFailMsg('Xóa hóa đơn không thành công');
+                        commonJS.showFailMsg('Xóa chứng từ không thành công');
                     }         
                 },
 
                 error: function(err){
                     console.log(err);
-                    // alert("Xóa hóa đơn không thành công");
+                    // alert("Xóa chứng từ không thành công");
                 }
             })
     }

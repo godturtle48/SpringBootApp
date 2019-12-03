@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
-import com.example.demo.config.SimpleCorsFilter;
 import com.example.demo.configmessagequeue.TenantInfo;
 
 @Repository
@@ -81,7 +80,7 @@ public class InvoiceDetailCommandRepository {
 			 session.update(invoice);
 			 //update lai payment
 			 Double amount=0.0;
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
 						.setParameter("refID",invoice.getPayment().getRefID()).uniqueResult(); 
 				if(obj!=null)
 					amount=((Double)obj).doubleValue();
@@ -110,7 +109,7 @@ public class InvoiceDetailCommandRepository {
 			 tx = session.beginTransaction();
 			 session.save(invoice);
 			 Double amount=0.0;
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
 						.setParameter("refID",invoice.getPayment().getRefID()).uniqueResult(); 
 				if(obj!=null)
 					amount=((Double)obj).doubleValue();
@@ -138,7 +137,7 @@ public class InvoiceDetailCommandRepository {
 			 session.delete(invoice);
 			 Double amount=0.0;
 			 PaymentReceiptCommand payment=session.get(PaymentReceiptCommand.class,paymentID);
-			  Object  obj= (Object) session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
+			  Object  obj= session.createQuery("select sum(amountOC) from InvoiceDetail where payment.refID=:refID")
 						.setParameter("refID",paymentID)
 						.uniqueResult(); 
 				if(obj!=null)

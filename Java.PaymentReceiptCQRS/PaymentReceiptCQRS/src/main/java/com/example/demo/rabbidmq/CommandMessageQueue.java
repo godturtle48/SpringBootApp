@@ -6,14 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.hibernate.SessionFactory;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.example.demo.command.model.PaymentReceiptCommand;
-import com.example.demo.command.repository.PaymentReceiptCommandRepository;
 import com.example.demo.common.ConvertModelCommandToView;
 import com.example.demo.query.model.PaymentReceiptView;
 import com.example.demo.query.repository.PaymentReceiptViewRepository;
@@ -30,7 +24,7 @@ public class CommandMessageQueue {
 
 	@Autowired
 	public void setTodoViewService(PaymentReceiptViewRepository paymentRepository) {
-		this.paymentRepository = paymentRepository;
+		CommandMessageQueue.paymentRepository = paymentRepository;
 	}
 
 	public static void init() {

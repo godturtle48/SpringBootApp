@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.command.model.RefTypeCommand;
-import com.example.demo.config.SimpleCorsFilter;
 import com.example.demo.configmessagequeue.TenantInfo;
 
 

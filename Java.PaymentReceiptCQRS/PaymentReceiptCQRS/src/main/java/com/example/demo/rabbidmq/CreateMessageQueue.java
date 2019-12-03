@@ -1,18 +1,13 @@
 package com.example.demo.rabbidmq;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.PaymentReceiptCqrsApplication;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.service.ErrMessageService;
 import com.example.demo.common.ConvertModelCommandToView;

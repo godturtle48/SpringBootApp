@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
 import com.example.demo.command.repository.PaymentReceiptCommandRepository;

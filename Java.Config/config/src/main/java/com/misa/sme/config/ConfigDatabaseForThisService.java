@@ -21,9 +21,9 @@ public class ConfigDatabaseForThisService {
 		  configuration.setProperty("hibernate.connection.driver_class",
 			      "org.mariadb.jdbc.Driver");
 			  configuration.setProperty("hibernate.connection.url",
-			      "jdbc:mariadb://10.111.188.10:3306/config?createDatabaseIfNotExist=true");
+			      "jdbc:mariadb://localhost:3306/config?createDatabaseIfNotExist=true");
 			  configuration.setProperty("hibernate.connection.username", "root");
-			  configuration.setProperty("hibernate.connection.password", "misasme");
+			  configuration.setProperty("hibernate.connection.password", "12345");
 			  configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 			  configuration.setProperty("hibernate.hbm2ddl.auto","update");
 			  configuration.setProperty("hibernate.show_sql", "false");

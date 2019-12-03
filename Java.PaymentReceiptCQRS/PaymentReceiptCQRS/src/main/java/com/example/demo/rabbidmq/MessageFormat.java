@@ -40,6 +40,7 @@ public class MessageFormat {
 	public MessageFormat() {
 		
 	}
+	@Override
 	public String toString() {
 		JSONObject message=new  JSONObject();
 		message.put("type", type);

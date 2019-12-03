@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
@@ -54,6 +52,7 @@ public class RefTypeCommand {
 		this.refTypeName = refTypeName;
 	}
 	
+	@Override
 	public String toString() {
 		JSONObject obj=new JSONObject();
 		obj.put("refTypeID",refTypeID);

@@ -9,13 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.PaymentReceiptCqrsApplication;
 import com.example.demo.command.model.GeneralDetailCommand;
 import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
-import com.example.demo.config.SimpleCorsFilter;
 import com.example.demo.configmessagequeue.TenantInfo;
-import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.example.demo.rabbidmq.EventType;
 import com.example.demo.rabbidmq.MessageFormat;
@@ -112,7 +109,7 @@ public class PaymentReceiptCommandRepository {
 		long result=0;
 		try {
 			 tx = session.beginTransaction();
-			Object  obj= (Object) session.createQuery("select count(refID) from PaymentReceiptCommand where keyCompany=:keyCompany")
+			Object  obj= session.createQuery("select count(refID) from PaymentReceiptCommand where keyCompany=:keyCompany")
 					.setParameter("keyCompany", keyCompany).uniqueResult(); 
 			if(obj!=null)result=((Long)obj).longValue();
 			//tx.commit();

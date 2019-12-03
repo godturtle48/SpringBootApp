@@ -15,7 +15,7 @@ public class PaymentMessageQueue {
 	
 	public static void init() {
 	    ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("10.108.179.29");	
+	    factory.setHost("localhost");	
 	    factory.setPort(5672);
 	    factory.setUsername("guest");
 	    factory.setPassword("guest");

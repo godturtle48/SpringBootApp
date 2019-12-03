@@ -15,13 +15,11 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
 import com.example.demo.configmessagequeue.ConfigMessageQueue;
 import com.example.demo.configmessagequeue.RemoteMessageQueue;
-import com.example.demo.rabbidmq.CommandMessageQueue;
 import com.example.demo.rabbidmq.CreateMessageQueue;
 import com.example.demo.rabbidmq.ReportMessageQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.rabbitmq.client.Command;
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 public class PaymentReceiptCqrsApplication {

@@ -1,10 +1,6 @@
 package com.example.demo.common;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.MongoTemplate;
-
-import com.mongodb.MongoClient;
 
 /**
  * Created by Edison Xu on 2017/3/7.

@@ -1,16 +1,9 @@
 package com.example.demo.common;
 
-import java.util.List;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.example.demo.command.model.InvoiceDetailCommand;
 import com.example.demo.command.model.PaymentReceiptCommand;
-import com.example.demo.query.model.InvoiceDetailView;
 import com.example.demo.query.model.PaymentReceiptView;
-import com.example.demo.query.model.RefTypeView;
-import com.google.gson.JsonObject;
 
 public class ConvertModelCommandToView {
 
